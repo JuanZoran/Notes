@@ -1,0 +1,5 @@
+{
+  "fcitxRemotePath_macOS": "/usr/local/bin/fcitx-remote",
+  "fcitxRemotePath_windows": "C:\\Program Files\\bin\\fcitx-remote",
+  "fcitxRemotePath_linux": "/usr/bin/fcitx5-remote"
+}

@@ -1,5 +1,6 @@
 [
   "obsidian-vimrc-support",
-  "obsidian-vim-im-switch-plugin",
-  "obsidian-git"
+  "obsidian-git",
+  "table-editor-obsidian",
+  "obsidian-vim-im-switch-plugin"
 ]
