@@ -1,0 +1,31 @@
+{
+  "editor:save-file": [],
+  "workspace:close": [],
+  "workspace:split-vertical": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
+  ],
+  "workspace:split-horizontal": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "U"
+    }
+  ],
+  "editor:focus": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "I"
+    }
+  ]
+}

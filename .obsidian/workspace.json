@@ -1,0 +1,148 @@
+{
+  "main": {
+    "id": "ccfaf1eca91fe9c5",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb1defb163e9b5f4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ec8da7d30af04b93",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2962ca68f2a3aaa4",
+    "type": "split",
+    "children": [
+      {
+        "id": "ab5ce785304c6d7d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9b6a4debbd291700",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "62171be7f0f70d19",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3c0d62da4a459e64",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "dc1a72d299c891b1",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ca0da97bec9df23",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6b55b3d6f7345e84",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d134eb871cee3a1d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "56b829e4ebc2eae0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c1d1143a7d21a575",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "workspaces:管理工作区布局": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "9b6a4debbd291700",
+  "lastOpenFiles": [
+    "note/小米平板5Pro配置",
+    "README.md",
+    "SUMMARY.md"
+  ]
+}
