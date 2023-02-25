@@ -47,5 +47,14 @@
     }
   ],
   "editor:delete-paragraph": [],
-  "editor:toggle-checklist-status": []
+  "editor:toggle-checklist-status": [],
+  "outline:open-for-current": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "E"
+    }
+  ]
 }
