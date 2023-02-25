@@ -25,7 +25,7 @@
               "state": {
                 "file": "note/小米平板5Pro配置/引导篇.md",
                 "mode": "source",
-                "source": false
+                "source": true
               }
             }
           }
@@ -80,7 +80,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "dc1a72d299c891b1",
@@ -161,6 +162,13 @@
   },
   "active": "df72bacf30c97fd8",
   "lastOpenFiles": [
+    "Pasted image 20230225122704.png",
+    "Pasted image 20230225120905.png",
+    "Pasted image 20230225120736.png",
+    "Pasted image 20230225120703.png",
+    "Pasted image 20230225120547.png",
+    "Pasted image 20230225120435.png",
+    "Pasted image 20230225120242.png",
     "note/小米平板5Pro配置/引导篇.md",
     "note/小米平板5Pro配置",
     "README.md",

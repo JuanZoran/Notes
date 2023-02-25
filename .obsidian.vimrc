@@ -1,8 +1,12 @@
 noremap j h
-noremap k j
-noremap i k
+noremap k gj
+noremap i gk
 noremap H I
 noremap h i
+
+nmap K <C-d>zz
+nmap I <C-u>zz
+
 
 map L $
 map J ^
@@ -11,7 +15,6 @@ nmap d<Cr> 'di
 nmap y<Cr> 'yi
 nmap v<Cr> 'vi
 nmap c<Cr> 'ci
-
 
 nmap dw diw
 nmap yw yiw
