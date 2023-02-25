@@ -1,3 +1,10 @@
 {
-  "vimMode": true
+  "vimMode": true,
+  "showFrontmatter": true,
+  "showLineNumber": true,
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "./",
+  "newFileLocation": "current",
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "relative"
 }

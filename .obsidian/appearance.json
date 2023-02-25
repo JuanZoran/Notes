@@ -1,4 +1,7 @@
 {
   "accentColor": "",
-  "cssTheme": "Obsidianite"
+  "cssTheme": "Obsidianite",
+  "interfaceFontFamily": "JetBrainsMono Nerd Font Mono,得意黑",
+  "textFontFamily": "JetBrainsMono Nerd Font Mono,得意黑",
+  "monospaceFontFamily": "JetBrainsMono Nerd Font Mono"
 }
