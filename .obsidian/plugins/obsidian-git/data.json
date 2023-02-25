@@ -1,6 +1,6 @@
 {
   "commitMessage": "vault backup: {{date}}",
-  "autoCommitMessage": "[{{data}} : {{hostname}}]Auto Push: {{numFiles}} update!",
+  "autoCommitMessage": "[{{date}} : {{hostname}}]Auto Push: {{numFiles}} update!",
   "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
   "autoSaveInterval": 30,
   "autoPushInterval": 120,
