@@ -8,8 +8,8 @@ nmap K <C-d>zz
 nmap I <C-u>zz
 
 
-map L $
-map J ^
+map L g$
+map J g^
 
 nmap d<Cr> 'di
 nmap y<Cr> 'yi
