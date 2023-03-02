@@ -31,8 +31,22 @@
   
 		**字体不一定需要是Termux字体**, 上篇说到任意字体文件以ttf后缀结尾, 理论上Termux都是支持的
   
-		> 小技巧: 官方的Termux:Style在github上可以搜索到, 由于这个项目很久没有更新, 有很多用户自己制作了很多优秀的主题, 可以在github的PR申请里找到, 
-		>  
+	 	**小技巧**: 官方的Termux:Style在github上可以搜索到, 由于这个项目很久没有更新, 有很多用户自己制作了很多优秀的主题, 可以在github的PR申请里找到, 
+
+	   > 我的主题就是从PR里看到的`tokyonight`(使用neovim的应该都知道这个主题吧)
+   
 	- 抄作业
- 
-		 如果你觉得我的主题配色还不错
+
+		我的配置是`tokyonight`主题 + `JetBrains Mono Nerd Font`字体 (支持连字)
+			TODO: Image for preview
+   
+		 如果你觉得我的主题配色还不错, 可以考虑直接克隆我的Termux主题配置:
+		1. 把我的配置克隆到`~/termux目录`
+			 `git clone https://github.com/JuanZoran/termux ~/termux`
+	
+		2. 将我配置`.termux`里的主题文件移动到`~/.termux`目录下
+			  `mv ~/termux/colors.properties ~/termux/font.ttf ~/.termux/`
+			 > 我的配置下的`colors-backup.properties`为`Dracula`配色
+			 喜欢的也可以自行设置
+		3. 删除刚刚克隆下来的`termux`文件夹(可选的)
+			  `rm -rf ~/termux`
