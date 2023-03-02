@@ -1,6 +1,8 @@
 noremap j h
-noremap k j
-noremap i k
+noremap k gj
+noremap i gk
+noremap gk j
+noremap gi k
 noremap H I
 noremap h i
 
