@@ -52,3 +52,57 @@
 # 正文开始
 
 ## Termux介绍
+Termux是一个**Android终端仿真应用程序**
+主要用于在Android手机上搭建一个完整的Linux环境
+你可以在Termux中使用bash, zsh, fish等shell，编辑文件，访问服务器，编译代码, 使用python等命令行工具Termux不需要root权限就可以正常运行
+Termux还有一些附加应用程序:
+	*Termux:Sytle*: 可以让你自定义终端的字体和颜色主题
+	*Termux:Api*: 调用手机的一些功能（如照相机、通知、音量等）
+
+Termux也支持git和subversion等版本控制工具，方便你查看项目
+
+> 参考链接
+> [知乎](https://zhuanlan.zhihu.com/p/360842276)。 
+> [Github](https://github.com/termux)。
+> [Wiki](https://wiki.termux.com/wiki/Getting_started)。
+
+## 主要优点
+1. **支持xterm-256color**
+	这一点基本和电脑上的终端模拟器的显示效果类似，对于像我这种大部分时间在使用终端模拟器的人来说，有一种熟悉感
+>  同样支持类似的效果的还有: Termius, 默认界面更加美观，不过自定义的效果不如Termux, 他的主要目标用户是SSH连接的用户，所以如果你是希望用于SSH连接，可以去试试Termius, 他支持全平台：IOS, Android, Mac, Win, Linux ..., 不过是收费的(学生免费，好像网上也有破解包)
+
+2. **使用的用户最多**
+	这意味着你遇到任何问题可以在各种搜索引擎找到可能的解决办法, 可以在交流群里和别人分享经验，而不是一个人默默承受所有
+ 
+3. **官方资源丰富**，镜像更新速度可观，**官方支援中国大陆换源**
+	这点我想懂得都懂，不懂得自己体会
+
+> 而相比Termux, 我还想再介绍一下后面我在使用的`ZeroTermux`
+> 这是Termux官方的一个Fork, 添加了很多自定义的元素，对新手用户更加友好，同时是**由中国开发者维护的**，你可以随时加入交流群向作者反馈，**作者是Termux官方组织的一员**， 所以不用担心版本和其他的问题，而且**支持自定义背景图**，（这可能是最打动我的， 毕竟我是用kitty一部分原因就是支持自定义背景图片
+
+## Termux(ZeroTermux)的安装
+[ZeroTermux的下载链接](https://blog.utermux.dev/ut/download.html "https://blog.utermux.dev/ut/download.html")
+
+![官方下载地址（直接bing搜索zerotermux也可以找到）](Pasted%20image%2020230302102930.png)
+*我这里使用了ZeroTermux，刚刚也介绍了原因， 同时他是完全兼容Termux的，下载方式对于中国用户也更加友好，如果你需要下载官方Termux, 你可以选择去github或者F-Droid上下载最新版本*
+
+下载完成之后打开， 你会看到一个弹窗告诉你一些ZeroTermux的帮助信息和一个终端界面，首先我想介绍一下Termux的配置
+
+---
+**你很可能想问的问题:**
+- 如何关闭下方的快捷键盘？
+	> 毕竟想使用这个方案的一般用的是蓝牙键盘连接，下方的那一片只会让人看着不舒服
+	我在设置中并没有找到(*官方版本*），经过搜索引擎查询之后了解到，你可以使用**音量上+输入k**, 来隐藏下方的快捷键栏
+	如果你需要他们，你可以按同样的方式打开，与ZeroTermux的全屏(或者官方配置文件里的全屏设置)不同的是， 这样的方式不会隐藏掉平板的状态栏 
+
+- Termux的配置文件夹在哪?
+	打开Termux，你将位于家目录(*/data/data/com.termux/files/home*), 在这个目录下存在一个`.termux`文件夹，这个文件夹含有以下特殊文件，用于自定义你的Termux:
+	 - `font.ttf`
+		**用于更改Termux的字体**
+		我习惯使用`JetBrains Mono Nerd Font`, 所以我下载了这个字体放在这个文件夹，来更改Termux的字体
+		经过使用我发现，**Termux是支持连字字体的**，所以你完全可以直接通过git或者其他工具下载你电脑上常用的字体(例如: 得意黑, JetBrains Mono ...)然后手动设置，官方包里提供的字体很有限, 很有可以没有提供你喜欢的
+	- `color.properties`
+		**Termux的主题配色**
+		一般不需要你自己配置，你可以使用后面介绍的`Termux官方提供的扩展包`来选择
+	- `shell`
+		 一般是一个会链接指向默认的shell, 如果没有则默认为bash, 这个一般不需要你设置，可以通过命令来做到
