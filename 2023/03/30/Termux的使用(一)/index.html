@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Termux的使用(一) | Hexo</title>
+        <meta name="author" content="John Doe" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+        <link rel="icon" href="/images/avatar.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存&ensp;浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <nav id="menu" ref="menu">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>HEXO</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" v-show="showMenu" @click="showMenu = !showMenu"></div>
+        <div class="title" @click="showMenu = !showMenu">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;HEXO</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="showMenu">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+                <div class="article">
+    <div>
+        <h1>Termux的使用(一)</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/3/30
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro%E9%85%8D%E7%BD%AE/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                小米平板5Pro配置
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Termux/" style="color: #00bcd4">Termux</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro/" style="color: #00a596">小米平板5Pro</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Linux/" style="color: #ffa2c4">Linux</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Neovim/" style="color: #ff7d73">Neovim</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%BE%8E%E5%8C%96/" style="color: #03a9f4">美化</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>上一篇文章中, 我向大家简单的介绍了一下Termux的概念, 并且说明了一下如何安装</p>
+<p>本篇文章, 主要想说明一下如何美化你的ZeroTermux以及Termux的简单使用</p>
+<ul>
+<li><p>美化前:<br>  TODO</p>
+</li>
+<li><p>美化后:<br>  TODO</p>
+</li>
+</ul>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="设置喜欢的主题和字体"><a href="#设置喜欢的主题和字体" class="headerlink" title="设置喜欢的主题和字体"></a>设置喜欢的主题和字体</h2><ul>
+<li>通过官方的扩展包<code>Termux:Style</code><br>  使用方法在上一节介绍过了, 这里再简单地介绍一下<ul>
+<li><p>下载</p>
+<ul>
+<li><p><strong>官方用户</strong>:</p>
+<p>  在F-Droid上下载Termux:Style, 或者其他你下载Termux的地方</p>
+</li>
+<li><p><strong>ZeroTermux</strong>:<br>   双击左侧显示选项栏 -&gt; 找到官方插件 -&gt; 选择Termux:Style -&gt; 确认下载</p>
+</li>
+</ul>
+</li>
+<li><p>使用</p>
+<p>  长按任意空白区域选择更多 -&gt; 样式 -&gt; 选择font | color</p>
+</li>
+<li><p>更多主题和字体</p>
+<p>  可以去<code>github</code>上搜索<code>Termux的主题</code>, <code>字体</code></p>
+<p>  <strong>字体不一定需要是Termux字体</strong>, 上篇说到任意字体文件以ttf后缀结尾, 理论上Termux都是支持的</p>
+<p>   <strong>小技巧</strong>: 官方的Termux:Style在github上可以搜索到, 由于这个项目很久没有更新, 有很多用户自己制作了很多优秀的主题, 可以在github的PR申请里找到, </p>
+<blockquote>
+<p>我的主题就是从PR里看到的<code>tokyonight</code>(使用neovim的应该都知道这个主题吧)</p>
+</blockquote>
+</li>
+<li><p>抄作业</p>
+<p>  我的配置是<code>tokyonight</code>主题 + <code>JetBrains Mono Nerd Font</code>字体 (支持连字)<br>  TODO: Image for preview<br>   如果你觉得我的主题配色还不错, 可以考虑直接克隆我的Termux主题配置:</p>
+<ol>
+<li><p>把我的配置克隆到<code>~/termux目录</code><br>  <code>git clone https://github.com/JuanZoran/termux ~/termux</code></p>
+</li>
+<li><p>将我配置<code>.termux</code>里的主题文件移动到<code>~/.termux</code>目录下<br>   <code>mv ~/termux/colors.properties ~/termux/font.ttf ~/.termux/</code></p>
+<blockquote>
+<p>我的配置下的<code>colors-backup.properties</code>为<code>Dracula</code>配色<br>  喜欢的也可以自行设置</p>
+</blockquote>
+</li>
+<li><p>删除刚刚克隆下来的<code>termux</code>文件夹(可选的)<br>   <code>rm -rf ~/termux</code></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 Hexo
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;John Doe
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>
