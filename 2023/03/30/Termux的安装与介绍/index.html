@@ -1,206 +1,299 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Termux的安装与介绍 | Hexo</title>
-        <meta name="author" content="John Doe" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-        <link rel="icon" href="/Notes/images/avatar.jpg" />
-        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
-<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
-<link rel="stylesheet" href="/Notes/css/fonts.min.css" />
-<script> const mixins = {}; </script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="Zoran">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://JuanZoran/Notes/2023/03/30/termux的安装与介绍/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="前言 正文开始 Termux 介绍 主要优点 Termux(ZeroTermux)的安装 你很可能想问的问题:    前言 作为一个拥有大把空闲时间的大学生, 平时少不了各种折腾  目前的情况是  使用设备:RedmiG, 小米平板 5Pro, 红米 k50Pro  平时主要使用电脑都是在终端下使用各种工具  neovim, ranger, lazygit…   有需要在床上，教室使用终端的需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Termux的安装与介绍">
+<meta property="og:url" content="http://juanzoran/Notes/2023/03/30/Termux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言 正文开始 Termux 介绍 主要优点 Termux(ZeroTermux)的安装 你很可能想问的问题:    前言 作为一个拥有大把空闲时间的大学生, 平时少不了各种折腾  目前的情况是  使用设备:RedmiG, 小米平板 5Pro, 红米 k50Pro  平时主要使用电脑都是在终端下使用各种工具  neovim, ranger, lazygit…   有需要在床上，教室使用终端的需">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://juanzoran/Notes/images/Pasted%20image%2020230302102930.png">
+<meta property="og:image" content="http://juanzoran/Notes/images/Pasted%20image%2020230302104651.png">
+<meta property="og:image" content="http://juanzoran/Notes/images/Pasted%20image%2020230302104711.png">
+<meta property="og:image" content="http://juanzoran/Notes/images/Pasted%20image%2020230302104721.png">
+<meta property="article:published_time" content="2023-03-30T09:37:00.000Z">
+<meta property="article:modified_time" content="2023-03-30T09:44:54.603Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Termux">
+<meta property="article:tag" content="小米平板5Pro">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Neovim">
+<meta property="article:tag" content="Zsh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://juanzoran/Notes/images/Pasted%20image%2020230302102930.png">
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/Notes/images/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Notes/images/favicon.ico">
+    <meta name="theme-color" content="#1E1E2D">
+    <link rel="shortcut icon" href="/Notes/Notes/images/favicon.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Termux的安装与介绍 -
+        
+        Zoran的个人笔记
+    </title>
+    
+<link rel="stylesheet" href="/Notes/css/style.css">
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    
+<link rel="stylesheet" href="/Notes/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"juanzoran","root":"/Notes/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center"},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#1E1E2D","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true},"home_banner":{"enable":true,"image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Zoran的个人笔记 💡","subtitle":{"text":["记录编程学习的个人心得","还有乱七八糟的想法","或者是折腾的日记"],"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"audios":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.0.3","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/Notes/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/Notes/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/Notes/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/Notes/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
-/>
-<script src="/Notes/js/lib/highlight.js"></script>
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
 
 
+<main class="page-container">
 
-<script src="/Notes/js/lib/preview.js"></script>
+    
 
+    <div class="main-content-container">
 
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Zoran的个人笔记
+                
+            </a>
+        </div>
 
-
-
-
-
-
-
-<link rel="stylesheet" href="/Notes/css/main.css" />
-
-    <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-        <div id="layout">
-            <transition name="fade">
-            <div id="loading" v-show="loading">
-                <div id="loading-circle">
-                    <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存&ensp;浏览器默认开启</p>
-                    <img src="/Notes/images/loading.gif" />
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/Notes/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
                 </div>
             </div>
-            </transition>
-            <transition name="into">
-            <div id="main" v-show="!loading">
-                <nav id="menu" ref="menu">
-    <div class="desktop-menu">
-        <a class="title" href="/Notes/">
-            <span>HEXO</span>
-        </a>
-        
-        <a href="/Notes/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/Notes/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/Notes/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/Notes/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/Notes/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
-        </a>
-        
-    </div>
-    <div id="mobile-menu">
-        <div class="curtain" v-show="showMenu" @click="showMenu = !showMenu"></div>
-        <div class="title" @click="showMenu = !showMenu">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;HEXO</span>
         </div>
-        <transition name="slide">
-        <div class="items" v-show="showMenu">
-            
-            <a href="/Notes/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
-                </div>
-            </a>
-            
-            <a href="/Notes/about">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                </div>
-            </a>
-            
-            <a href="/Notes/archives">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-box-archive fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                </div>
-            </a>
-            
-            <a href="/Notes/categories">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-bookmark fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                </div>
-            </a>
-            
-            <a href="/Notes/tags">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
     </div>
-</nav>
 
-                <div class="article">
-    <div>
-        <h1>Termux的安装与介绍</h1>
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/Notes/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
     </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/3/30
-        </span>
-        
-        <span class="category">
-            <a href="/Notes/categories/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro%E9%85%8D%E7%BD%AE/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                小米平板5Pro配置
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            <span class="tag">
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            <div class="main-content">
+
                 
-                <a href="/Notes/tags/Termux/" style="color: #00bcd4">Termux</a>
-            </span>
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
             
-            <span class="tag">
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">Termux的安装与介绍</h1>
+                </div>
+            
                 
-                <a href="/Notes/tags/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro/" style="color: #00a596">小米平板5Pro</a>
-            </span>
             
-            <span class="tag">
-                
-                <a href="/Notes/tags/Linux/" style="color: #00a596">Linux</a>
-            </span>
+
             
-            <span class="tag">
-                
-                <a href="/Notes/tags/Neovim/" style="color: #03a9f4">Neovim</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/Notes/tags/Zsh/" style="color: #ffa2c4">Zsh</a>
-            </span>
-            
-        </span>
-        
-    </div>
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="https://avatars.githubusercontent.com/u/107862700?v=4">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Zoran</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-03-30 17:37</span>
+        <span class="mobile">2023-03-30 17:37</span>
+        <span class="hover-info">Created</span>
+    </span>
     
-    <div class="content" v-pre>
-        <!--toc:start-->
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-03-30 17:44:54</span>
+            <span class="mobile">2023-03-30 17:44</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/Notes/categories/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro%E9%85%8D%E7%BD%AE/">小米平板5Pro配置</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/Notes/tags/Termux/">Termux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/Notes/tags/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro/">小米平板5Pro</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/Notes/tags/Linux/">Linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/Notes/tags/Neovim/">Neovim</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/Notes/tags/Zsh/">Zsh</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <!--toc:start-->
 <ul>
 <li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
 <li><a href="#%E6%AD%A3%E6%96%87%E5%BC%80%E5%A7%8B">正文开始</a><ul>
@@ -294,7 +387,7 @@
 </li>
 </ul>
 <blockquote>
-<p>参考链接:<br> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/360842276">知乎</a><br> <a target="_blank" rel="noopener" href="https://github.com/termux">Github</a><br> <a target="_blank" rel="noopener" href="https://wiki.termux.com/wiki/Getting_started">Wiki</a></p>
+<p>参考链接:<br> <a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/360842276" >知乎 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br> <a class="link"   target="_blank" rel="noopener" href="https://github.com/termux" >Github <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br> <a class="link"   target="_blank" rel="noopener" href="https://wiki.termux.com/wiki/Getting_started" >Wiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </blockquote>
 <h2 id="主要优点"><a href="#主要优点" class="headerlink" title="主要优点"></a>主要优点</h2><ol>
 <li><p><strong>支持 xterm-256color</strong><br>基本和电脑上的终端模拟器的显示效果类似，对于像我这种大部分时间在使用终端模拟器的人来说，有一种熟悉感</p>
@@ -323,8 +416,13 @@
 <li><p><strong>支持自定义背景图</strong>，（这可能是最打动我的， 毕竟我是用 kitty 一部分原因就是支持自定义背景图片</p>
 </li>
 </ul>
-<h2 id="Termux-ZeroTermux-的安装"><a href="#Termux-ZeroTermux-的安装" class="headerlink" title="Termux(ZeroTermux)的安装"></a>Termux(ZeroTermux)的安装</h2><p><a target="_blank" rel="noopener" href="https://blog.utermux.dev/ut/download.html" title="https://blog.utermux.dev/ut/download.html">ZeroTermux 的下载链接</a></p>
-<p><img src="/Notes/images/Pasted%20image%2020230302102930.png" alt="官方下载地址（直接bing搜索zerotermux也可以找到）"><br><em>我这里使用了 ZeroTermux，刚刚也介绍了原因， 同时他是完全兼容 Termux 的，下载方式对于中国用户也更加友好，如果你需要下载官方 Termux, 你可以选择去 github 或者 F-Droid 上下载最新版本</em></p>
+<h2 id="Termux-ZeroTermux-的安装"><a href="#Termux-ZeroTermux-的安装" class="headerlink" title="Termux(ZeroTermux)的安装"></a>Termux(ZeroTermux)的安装</h2><p><a class="link"   target="_blank" rel="noopener" href="https://blog.utermux.dev/ut/download.html"  title="https://blog.utermux.dev/ut/download.html">ZeroTermux 的下载链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Notes/images/Pasted%20image%2020230302102930.png"
+                      alt="官方下载地址（直接bing搜索zerotermux也可以找到）"
+                ><br><em>我这里使用了 ZeroTermux，刚刚也介绍了原因， 同时他是完全兼容 Termux 的，下载方式对于中国用户也更加友好，如果你需要下载官方 Termux, 你可以选择去 github 或者 F-Droid 上下载最新版本</em></p>
 <p>下载完成之后打开， 你会看到一个弹窗告诉你一些 ZeroTermux 的帮助信息和一个终端界面</p>
 <h2 id="你很可能想问的问题"><a href="#你很可能想问的问题" class="headerlink" title="你很可能想问的问题:"></a><strong>你很可能想问的问题:</strong></h2><ul>
 <li><p>如何关闭下方的快捷键盘？</p>
@@ -349,7 +447,7 @@
 </li>
 <li><p><code>termux.properties</code></p>
 <p><strong>Termux 的设置</strong></p>
-<p>涵盖了所有 Termux 官方提供的选项, 具体介绍可以<a target="_blank" rel="noopener" href="https://wiki.termux.com/wiki/Terminal_Settings">去这里</a></p>
+<p>涵盖了所有 Termux 官方提供的选项, 具体介绍可以<a class="link"   target="_blank" rel="noopener" href="https://wiki.termux.com/wiki/Terminal_Settings" >去这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </li>
 <li><p><code>~/.img</code> (仅 ZeroTermux 有效)<br>按照我的使用来看, 应该是<strong>ZeroTermux 背景图片的放置位置</strong></p>
 </li>
@@ -361,13 +459,28 @@
 <ul>
 <li>官方用户</li>
 </ul>
-<p><img src="/Notes/images/Pasted%20image%2020230302104651.png"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Notes/images/Pasted%20image%2020230302104651.png"
+                     
+                ></p>
 <p>在 F-Droid 上下载 Termux:Style 并安装， 然后打开 Termux 长按空白区域选择更多， 会有样式的选项， 点击后选择即可</p>
 <ul>
-<li><p>ZeroTermux 用户<br><img src="/Notes/images/Pasted%20image%2020230302104711.png" alt="ZeroTermux兼容Termux"></p>
+<li><p>ZeroTermux 用户<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Notes/images/Pasted%20image%2020230302104711.png"
+                      alt="ZeroTermux兼容Termux"
+                ></p>
 <pre><code>双击最左边区域打开ZeroTermux的工具栏, 找到官方插件, 然后下载
 </code></pre>
-<p><img src="/Notes/images/Pasted%20image%2020230302104721.png"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Notes/images/Pasted%20image%2020230302104721.png"
+                     
+                ></p>
 </li>
 </ul>
 <hr>
@@ -379,51 +492,415 @@
 <p>比如： bash 的.bashrc, zsh 的.zshrc, fish 的.config&#x2F;fish&#x2F;config.fish</p>
 </blockquote>
 
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Termux的安装与介绍</li>
+        <li><strong>Author:</strong> Zoran</li>
+        <li><strong>Created at:</strong> 2023-03-30 17:37:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2023-03-30 17:44:54
+            </li>
+        
+        <li>
+            <strong>Link:</strong> juanzoran.github.io/Notes/2023/03/30/Termux的安装与介绍/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/Notes/tags/Termux/">#Termux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/Notes/tags/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro/">#小米平板5Pro</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/Notes/tags/Linux/">#Linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/Notes/tags/Neovim/">#Neovim</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/Notes/tags/Zsh/">#Zsh</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/Notes/2023/03/30/Termux%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%80)/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Termux的使用(一)</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/Notes/2023/03/30/%E5%BC%95%E5%AF%BC%E7%AF%87/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">引导篇</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;Comments
     </div>
     
-    
-    
-    
-    
-    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
     
 </div>
 
-                <footer id="footer">
-    <div id="footer-wrap">
-        <div>
-            &copy;
-            2022 - 2023 Hexo
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;John Doe
+                </div>
+            
         </div>
-        <div>
-            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
-            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
-        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Termux的安装与介绍</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E6%96%87%E5%BC%80%E5%A7%8B"><span class="nav-text">正文开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Termux-%E4%BB%8B%E7%BB%8D"><span class="nav-text">Termux 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9"><span class="nav-text">主要优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Termux-ZeroTermux-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-text">Termux(ZeroTermux)的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E5%BE%88%E5%8F%AF%E8%83%BD%E6%83%B3%E9%97%AE%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">你很可能想问的问题:</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
         
     </div>
-</footer>
+</div>
+
+
+                
 
             </div>
-            </transition>
-            
-            <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-            </transition>
-            
+
+
+
         </div>
-        <script src="/Notes/js/main.js"></script>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zoran</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.0.3</a>
+        </div>
         
         
+        
+            <div id="start_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
 
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
 
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
 
         
-    </body>
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/Notes/js/utils.js"></script>
+
+<script src="/Notes/js/main.js"></script>
+
+<script src="/Notes/js/layouts/navbarShrink.js"></script>
+
+<script src="/Notes/js/tools/scrollTopBottom.js"></script>
+
+<script src="/Notes/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/Notes/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/Notes/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/Notes/js/tools/runtime.js"></script>
+
+    
+<script src="/Notes/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/Notes/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/Notes/js/libs/Typed.min.js"></script>
+
+  
+<script src="/Notes/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/Notes/js/tools/tocToggle.js"></script>
+
+<script src="/Notes/js/libs/anime.min.js"></script>
+
+<script src="/Notes/js/layouts/toc.js"></script>
+
+<script src="/Notes/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/Notes/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
 </html>
