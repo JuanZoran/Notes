@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>动态规划学习---01背包问题 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="动态规划学习—01 背包问题01 背包问题背景 拥有固定容量大小的背包 有 n 种物品, 每种物品只能取 1 次 需要返回背包能装下的最大价值  暴力解法 [dfs(深度优先搜索算法) &#x2F; 回溯] 列出所有情况, 最后返回最大价值   动态规划解法基础解法: 二维数组动规五部曲:   确定dp[i][j]数组下标含义   i 表示编号为**[0 - i]**的物品均判断过 j 表示容量为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划学习---01背包问题">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/03/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%AD%A6%E4%B9%A0---01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="动态规划学习—01 背包问题01 背包问题背景 拥有固定容量大小的背包 有 n 种物品, 每种物品只能取 1 次 需要返回背包能装下的最大价值  暴力解法 [dfs(深度优先搜索算法) &#x2F; 回溯] 列出所有情况, 最后返回最大价值   动态规划解法基础解法: 二维数组动规五部曲:   确定dp[i][j]数组下标含义   i 表示编号为**[0 - i]**的物品均判断过 j 表示容量为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://juanzoran.github.io/Notes/images/cover/back7.jpg">
+<meta property="article:published_time" content="2023-03-31T15:25:20.000Z">
+<meta property="article:modified_time" content="2023-03-31T15:37:19.176Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程学习">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://juanzoran.github.io/Notes/images/cover/back7.jpg"><link rel="shortcut icon" href="/Notes/images/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/03/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%AD%A6%E4%B9%A0---01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '动态规划学习---01背包问题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-31 23:37:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1E1E2E')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="https://codebyzach.github.io/pace/#"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/Notes/images/cover/back7.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">动态规划学习---01背包问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-31T15:25:20.000Z" title="发表于 2023-03-31 23:25:20">2023-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-31T15:37:19.176Z" title="更新于 2023-03-31 23:37:19">2023-03-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="动态规划学习---01背包问题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="动态规划学习—01-背包问题"><a href="#动态规划学习—01-背包问题" class="headerlink" title="动态规划学习—01 背包问题"></a>动态规划学习—01 背包问题</h1><h3 id="01-背包问题背景"><a href="#01-背包问题背景" class="headerlink" title="01 背包问题背景"></a>01 背包问题背景</h3><ul>
+<li>拥有固定容量大小的背包</li>
+<li>有 n 种物品, <strong>每种物品只能取 1 次</strong></li>
+<li>需要<em>返回背包能装下的最大价值</em></li>
+</ul>
+<h3 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h3><ul>
+<li><p><strong><em>[dfs(深度优先搜索算法) &#x2F; 回溯]</em></strong></p>
+<p>列出所有情况, 最后返回最大价值</p>
+</li>
+</ul>
+<h3 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h3><h4 id="基础解法-二维数组"><a href="#基础解法-二维数组" class="headerlink" title="基础解法: 二维数组"></a>基础解法: 二维数组</h4><p><strong>动规五部曲</strong>:</p>
+<ul>
+<li><ol>
+<li><strong><em>确定<code>dp[i][j]</code>数组下标含义</em></strong></li>
+</ol>
+<ul>
+<li>i 表示编号为**[0 - i]**的物品均判断过</li>
+<li>j 表示容量为 j 的背包</li>
+<li><strong><code>dp[i][j]</code>表示容量为 j 的背包, 在<code>[0 - i]</code>物品中能装下的最大价值</strong></li>
+</ul>
+</li>
+<li><ol start="2">
+<li><strong><em>递推公式</em></strong></li>
+</ol>
+<p><em>根据<code>dp[i][j]</code>的定义可以知道</em>:</p>
+<p>判断容量为 j 的背包最大值(即<code>dp[i][j]</code>)时</p>
+<p>只需要判断本次加入的物品**( i 物品)**是否需要放入背包</p>
+<p>那么只有两种情况 :</p>
+<ul>
+<li>放入 i 物品</li>
+</ul>
+<p>由于需要放入 i 物品, 那么当前背包的价值, 应该是 :</p>
+<p>​ 判断完了<code>[0 到 i - 1]</code>物品价值的容量 j 的背包<strong>容量减去 i 物品的重量, 价值加上 i 物品的价值</strong></p>
+<p>故背包价值为 : <code>dp[i - 1][j - weight[i]] + value[i]</code></p>
+<ul>
+<li><p>不放入 i 物品</p>
+<p>不放入 i 物品, 那么此时背包的价值容量应该都不变, 也就是<strong>和判断完了<code>[0 到 i - 1]</code>物品的背包最大价值相同</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​ 故背包价值为 : <code>dp[i - 1] - 1[j]</code></p>
+<p>​ <strong>要取得最大价值, 则此时背包的价值应该取两种情况的最大者</strong></p>
+<p>​ <em>想到这里, 递推公式也就出来了</em> :</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 放入物品   dp[i - 1][j - weight[j]] + value[i]</span></span><br><span class="line"><span class="comment"> * 不放入物品 dp[i - 1][j]</span></span><br><span class="line"><span class="comment"> * 原因可以参考上面的讲解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j - weight[i]] + value[i], dp[i - <span class="number">1</span>][j]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ol start="3">
+<li><strong><em>dp 数组的初始化</em></strong></li>
+</ol>
+<ul>
+<li><p>将容量为 0 的背包初始化为 0</p>
+</li>
+<li><p>第一种物品对应的<strong>容量满足</strong>的所有背包初始化成第一种物品的价值</p>
+</li>
+<li><p><em>其余部分的初始化无意义, 因为不会用到这些部分, 初始化任何数都可以</em></p>
+</li>
+</ul>
+</li>
+<li><ol start="4">
+<li><strong><em>确定遍历顺序</em></strong></li>
+</ol>
+<p><em>由于使用的是二维数组, 定义了两个变量 i 和 j 背包和物品的依赖关系被解耦了,所以遍历顺序并不会影响结果的正确性</em></p>
+<ul>
+<li><p>先遍历背包, 再遍历物品</p>
+<p>_由数组下标要大于零可知, 当 j - weight[i]小于 0 时, 只能选择不放入物品 i , 因为背包的容量不够 _</p>
+</li>
+<li><p>先遍历物品, 再遍历背包</p>
+</li>
+</ul>
+</li>
+<li><ol start="5">
+<li><strong><em>举例推导 dp 数组</em></strong></li>
+</ol>
+<ul>
+<li><strong>假设背包容量为 3</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center">所需容量</th>
+<th align="center">价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">物品 0</td>
+<td align="center">1</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="left">物品 1</td>
+<td align="center">2</td>
+<td align="center">20</td>
+</tr>
+<tr>
+<td align="left">物品 2</td>
+<td align="center">3</td>
+<td align="center">30</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">👇 为 i, 👉 为 j</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td><em>0</em></td>
+<td><em>15</em></td>
+<td><em>15</em></td>
+<td><em>15</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td><em>0</em></td>
+<td><strong>15</strong></td>
+<td><strong>20</strong></td>
+<td><strong>35</strong></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td><em>0</em></td>
+<td><strong>15</strong></td>
+<td><strong>20</strong></td>
+<td><strong>35</strong></td>
+</tr>
+</tbody></table>
+<p><em>斜体表示 : 初始化设置的值, <strong>粗体</strong>表示 dp 数组遍历得到的值</em></p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="进阶解法-一维数组"><a href="#进阶解法-一维数组" class="headerlink" title="进阶解法 : 一维数组"></a>进阶解法 : 一维数组</h4><h5 id="滚动数组理论基础"><a href="#滚动数组理论基础" class="headerlink" title="滚动数组理论基础"></a>滚动数组理论基础</h5><p>​ 观察基础解法的递推公式, 发现<strong>新一层都需要使用上一层的值结果</strong>, 那么我们是否可以<strong>从后往前更新</strong>, 由于后面的数据需要用到上一层的结果, <em>此时, 上一层的结果还未更新, 保留在对应位置, 按照<strong>逆序</strong>更新</em>, 就可以将二维数组压缩成一维数组</p>
+<p>​ 这种逆序更新的思想,就类似于一个滚筒(类似滚动转场)或者和翻页的感觉类似, 称为滚动数组的思想</p>
+<ul>
+<li><ol>
+<li><p>dp 数组的含义</p>
+<p> <code>dp[j]</code>,将数组下标变量定义为 j, 目的是为了和一维数组保持一致便于理解</p>
+<ul>
+<li>​ j 表示容量为 j 的背包</li>
+<li>dp[j] 表示容量为 j 的背包<strong>所能装载的最大价值</strong></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol start="2">
+<li><p>递推公式</p>
+<p> 同二维数组的思想相同, 根据滚动数组的定义则有 :</p>
+<p> <code>dp[j] = max(dp[j], dp[j - weight[i]] + value[i])	//i 表示遍历物品时的编号</code></p>
+<p> ​</p>
+</li>
+</ol>
+</li>
+<li><ol start="3">
+<li><p>dp 数组初始化</p>
+<p> 和二维数组的想法类似, 应该将<strong>容量为 0 的和小于物品[0]重量的背包</strong>初始化为 0</p>
+<p> <strong><em>(实际上应该初始化的值应该比最小的 value 还要小) : 防止 dp 数组的值被覆盖</em></strong></p>
+</li>
+</ol>
+</li>
+<li><ol start="4">
+<li><p>遍历顺序</p>
+<p> 由于使用了<em>滚动数组</em>, 所以遍历顺序需要注意:</p>
+<ul>
+<li><p>遍历顺序应该先遍历物品, 再遍历背包</p>
+<p>  递推的逻辑是,每次只判断当前该物品是否应该加入到 j 容量的背包</p>
+<p>  <em>如果先遍历背包再遍历物品, 则需要则得到的正确数据会被重复刷新, 恢复成为遍历状态</em></p>
+<p>  (描述的不是很清楚, 但是建议通过对二维数组的模拟来体会)</p>
+</li>
+<li><p>遍历背包时, 应该采用倒序</p>
+<p>  因为滚动数组需要<strong>借用当前行当作上一行的数据</strong>, 所以需要从后往前更新, 上一行的数据才不会被提前覆盖</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol start="5">
+<li><p>dp 数组的推导模拟</p>
+<p> <em>略</em></p>
+</li>
+</ol>
+</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a><a class="post-meta__tags" href="/Notes/tags/C/">C++</a><a class="post-meta__tags" href="/Notes/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post_share"><div class="social-share" data-image="/Notes/images/cover/back7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/03/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划"><img class="cover" src="/Notes/images/cover/back3.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">动态规划</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/03/31/%E7%AC%AC%E4%B8%80%E7%AB%A0--TCPIP%E5%8D%8F%E8%AE%AE%E6%97%8F/" title="第一章--TCPIP协议族"><img class="cover" src="/Notes/images/cover/back7.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第一章--TCPIP协议族</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划"><img class="cover" src="/Notes/images/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">动态规划</div></div></a></div><div><a href="/Notes/2023/03/31/Socket%E5%9F%BA%E6%9C%ACapi/" title="Socket基本api"><img class="cover" src="/Notes/images/cover/back6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">Socket基本api</div></div></a></div><div><a href="/Notes/2023/03/31/Variadic%20Templates(%E5%8F%AF%E5%8F%98%E6%A8%A1%E6%9D%BF)/" title="Variadic Templates(可变模板)"><img class="cover" src="/Notes/images/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">Variadic Templates(可变模板)</div></div></a></div><div><a href="/Notes/2023/03/31/lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="lambda表达式"><img class="cover" src="/Notes/images/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">lambda表达式</div></div></a></div><div><a href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img class="cover" src="/Notes/images/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">web项目--并发之[半同步半分应堆]</div></div></a></div><div><a href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架"><img class="cover" src="/Notes/images/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">web项目--服务器框架</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%AD%A6%E4%B9%A0%E2%80%9401-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">动态规划学习—01 背包问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-number">1.0.1.</span> <span class="toc-text">01 背包问题背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">暴力解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E6%B3%95"><span class="toc-number">1.0.3.</span> <span class="toc-text">动态规划解法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%B3%95-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">基础解法: 二维数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E8%A7%A3%E6%B3%95-%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">进阶解法 : 一维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.0.3.2.1.</span> <span class="toc-text">滚动数组理论基础</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img src="/Notes/images/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--并发之[半同步半分应堆]"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]">web项目--并发之[半同步半分应堆]</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架"><img src="/Notes/images/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--服务器框架"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架">web项目--服务器框架</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现"><img src="/Notes/images/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--线程池的设计和实现"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现">web项目--线程池的设计和实现</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制"><img src="/Notes/images/cover/back6.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--锁机制"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制">web项目--锁机制</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/OS-MemorySystem/" title="OS-内存系统"><img src="/Notes/images/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="OS-内存系统"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/OS-MemorySystem/" title="OS-内存系统">OS-内存系统</a><time datetime="2023-03-31T15:27:39.000Z" title="发表于 2023-03-31 23:27:39">2023-03-31</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/Notes/images/cover/back7.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

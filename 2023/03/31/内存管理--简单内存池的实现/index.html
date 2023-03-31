@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>内存管理--简单内存池的实现 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="内存管理–简单内存池的实现   内存管理–简单内存池的实现 内存池的作用 内存池 1.0 [1.0]实现细节(易踩坑) [1.0]成品代码 [1.0]缺点分析   内存池 2.0 union 联合体 [2.0]实现细节 [2.0]成品代码 [2.0]缺点分析   内存池 3.0 [3.0]实现细节 [3.0]成品代码 [3.0]缺点分析   内存池 4.0 - [4.0]实现细节 - [4.0]成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存管理--简单内存池的实现">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E7%AE%80%E5%8D%95%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="内存管理–简单内存池的实现   内存管理–简单内存池的实现 内存池的作用 内存池 1.0 [1.0]实现细节(易踩坑) [1.0]成品代码 [1.0]缺点分析   内存池 2.0 union 联合体 [2.0]实现细节 [2.0]成品代码 [2.0]缺点分析   内存池 3.0 [3.0]实现细节 [3.0]成品代码 [3.0]缺点分析   内存池 4.0 - [4.0]实现细节 - [4.0]成">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://juanzoran.github.io/Notes/images/cover/back3.jpg">
+<meta property="article:published_time" content="2023-03-31T12:03:27.000Z">
+<meta property="article:modified_time" content="2023-03-31T15:37:36.496Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程学习">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="内存管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://juanzoran.github.io/Notes/images/cover/back3.jpg"><link rel="shortcut icon" href="/Notes/images/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E7%AE%80%E5%8D%95%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '内存管理--简单内存池的实现',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-31 23:37:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1E1E2E')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="https://codebyzach.github.io/pace/#"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/Notes/images/cover/back3.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">内存管理--简单内存池的实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-31T12:03:27.000Z" title="发表于 2023-03-31 20:03:27">2023-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-31T15:37:36.496Z" title="更新于 2023-03-31 23:37:36">2023-03-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/%E4%BE%AF%E6%8D%B7C-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">侯捷C++内存管理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="内存管理--简单内存池的实现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="内存管理–简单内存池的实现"><a href="#内存管理–简单内存池的实现" class="headerlink" title="内存管理–简单内存池的实现"></a>内存管理–简单内存池的实现</h1><!--toc:start-->
+
+<ul>
+<li><a href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E7%AE%80%E5%8D%95%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0">内存管理–简单内存池的实现</a><ul>
+<li><a href="#%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8">内存池的作用</a></li>
+<li><a href="#%E5%86%85%E5%AD%98%E6%B1%A0-10">内存池 1.0</a><ul>
+<li><a href="#10%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E6%98%93%E8%B8%A9%E5%9D%91">[1.0]实现细节(易踩坑)</a></li>
+<li><a href="#10%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81">[1.0]成品代码</a></li>
+<li><a href="#10%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90">[1.0]缺点分析</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E5%AD%98%E6%B1%A0-20">内存池 2.0</a><ul>
+<li><a href="#union-%E8%81%94%E5%90%88%E4%BD%93">union 联合体</a></li>
+<li><a href="#20%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82">[2.0]实现细节</a></li>
+<li><a href="#20%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81">[2.0]成品代码</a></li>
+<li><a href="#20%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90">[2.0]缺点分析</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E5%AD%98%E6%B1%A0-30">内存池 3.0</a><ul>
+<li><a href="#30%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82">[3.0]实现细节</a></li>
+<li><a href="#30%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81">[3.0]成品代码</a></li>
+<li><a href="#30%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90">[3.0]缺点分析</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E5%AD%98%E6%B1%A0-40">内存池 4.0</a> - <a href="#40%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82">[4.0]实现细节</a> - <a href="#40%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81">[4.0]成品代码</a><!--toc:end--></li>
+</ul>
+</li>
+</ul>
+<h2 id="内存池的作用"><a href="#内存池的作用" class="headerlink" title="内存池的作用"></a>内存池的作用</h2><ul>
+<li><p><strong>减少空间占用</strong></p>
+<p>使用 malloc 分配内存时 , malloc 会多分配一部分空间作为 cookie</p>
+<p>cookie 的作用是记录分配的内存大小等信息, 方便 free 回收</p>
+<p><em>C++中的::operator new(全局中的 new)和::operator free</em>,其内部都是调用 malloc 或者 free</p>
+<p>使用内存池, 可以让多次 new 申请的内存, 只需要分配 malloc 内存池时的 cookie 就可以了, 大大减少了 cookie 导致的内存浪费</p>
+</li>
+<li><p><strong>减少<em>频繁分配内存时</em>的开销</strong></p>
+<p>自己实现内存池, 一次性分配较多的空间, 也就意味这多次 new 申请内存时, 只需要一次调用 malloc 就可,减少了 malloc 的开销</p>
+<p>同时 delete 时,将内存返回内存池, 也能提高内存的复用</p>
+</li>
+</ul>
+<hr>
+<h2 id="内存池-1-0"><a href="#内存池-1-0" class="headerlink" title="内存池 1.0"></a>内存池 1.0</h2><ul>
+<li>让类内含一个指针,在分配的时候方便链表使用</li>
+<li>重载 new 操作符和 delete 操作符</li>
+<li>含有静态成员内存池大小和当前头指针</li>
+</ul>
+<hr>
+<h3 id="1-0-实现细节-易踩坑"><a href="#1-0-实现细节-易踩坑" class="headerlink" title="[1.0]实现细节(易踩坑)"></a>[1.0]实现细节(易踩坑)</h3><ul>
+<li><p>类内创建的静态成员变量<strong>需要在类外初始化</strong></p>
+<p>初始化方式例如<code>int dog::num = 0;</code></p>
+</li>
+<li><p>重载 new 和 delete 的时候<strong>返回值类型和参数类型有要求</strong></p>
+<p>new : 返回值类型必须是<strong>*void**</strong>, 第一个参数必须是**<em>size_t</em>**</p>
+<p>delete: 返回值类型必须是**<em>void</em><strong>, 第一个参数必须是</strong>*void**<strong>,第二个参数必须是</strong><em>size_t</em>**</p>
+<p>重载 new 和 delete 都需要是静态方法(因为使用该方法的时候 , 成员还未初始化) 但编译器默认为静态,加不加无所谓</p>
+</li>
+<li><p>申请内存池的时候,需要**<em>转换成类指针类型</em>** , 转换会取其前几位地址</p>
+</li>
+<li><p>切块时**<em>利用指针++会增加一个类型的大小</em>**的特性,来填入链表</p>
+</li>
+<li><p><strong><em>到末尾时要将最后节点的 next 置为 nullptr!!!</em></strong></p>
+<p>否则当内存池为空时 , 继续进入下一个指针造成栈溢出(<strong><em>因为是通过判断指针是否为空来确定内存池是否为空</em></strong>)</p>
+</li>
+<li><p>delete 重载时 , 也需要注意转换成类的类型,否则**<em>可能会造成回收的内存大小出错</em>**</p>
+</li>
+<li><p>for 循环串成链表时**<em>条件中<code>cur != &amp;header[MAX_BLOCK - 1]</code>要记得使用&amp;取地址</em>**</p>
+<p>因为 cur 为指针,而 header[MAX_BLOCK - 1]为最后一个成员的内容</p>
+</li>
+</ul>
+<hr>
+<h3 id="1-0-成品代码"><a href="#1-0-成品代码" class="headerlink" title="[1.0]成品代码"></a>[1.0]成品代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">testMryCrl_1</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    testMryCrl_1* next;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> MAX_BLOCKS;</span><br><span class="line">    <span class="type">static</span> testMryCrl_1* header;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="built_in">testMryCrl_1</span>(<span class="type">int</span> data = <span class="number">0</span>) :<span class="built_in">data</span>(data) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        testMryCrl_1* ret;</span><br><span class="line">        <span class="comment">//建立内存池</span></span><br><span class="line">        <span class="comment">//判断当前内存池是否存在</span></span><br><span class="line">        <span class="keyword">if</span> (header) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//内存池不存在,申请分配内存池</span></span><br><span class="line">            ret = header = <span class="built_in">static_cast</span>&lt;testMryCrl_1*&gt;(::<span class="keyword">operator</span> <span class="built_in">new</span>(MAX_BLOCKS * <span class="built_in">sizeof</span>(testMryCrl_1)));</span><br><span class="line">            <span class="comment">//将申请的内存切块并串成链表</span></span><br><span class="line">            <span class="keyword">for</span> (; ret != &amp;header[MAX_BLOCKS - <span class="number">1</span>]; ret++) &#123;</span><br><span class="line">                ret-&gt;next = ret + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ret-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ret = header;</span><br><span class="line">        header = header-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* cur, <span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//回收内存</span></span><br><span class="line">        (<span class="built_in">static_cast</span>&lt;testMryCrl_1*&gt;(cur))-&gt;next = header;</span><br><span class="line">        header = <span class="built_in">static_cast</span>&lt;testMryCrl_1*&gt;(cur);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化类内静态成员</span></span><br><span class="line"><span class="type">int</span> testMryCrl_1::MAX_BLOCKS = <span class="number">20</span>;</span><br><span class="line">testMryCrl_1* testMryCrl_1::header;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-0-缺点分析"><a href="#1-0-缺点分析" class="headerlink" title="[1.0]缺点分析"></a>[1.0]缺点分析</h3><ul>
+<li><p><strong>类内维护一个指针,占用较大内存</strong></p>
+<p>一般实际操作中 , 类的大小都不会很大 , 维护一个指针 , 则会造成内存浪费</p>
+<p>尤其在类的内存占用比较小的时候, 效果尤其明显</p>
+</li>
+<li><p>代码实现较为复杂,<strong>代码复用性不高</strong></p>
+<p>每当有一个类需要使用该内存池时,都需要类声明的时候写上重载的部分, 违背软件工程的思想</p>
+</li>
+<li><p>当不断进行新的内存池扩充时,最后会**<em>导致内存池的容量越来越大</em>**</p>
+<p>初步想法是类似于哈希表中对哈希碰撞的处理 : 当内存池的数目超过一定大小,则全部回收,重新申请内存池</p>
+<p>暂时不考虑实现</p>
+</li>
+</ul>
+<hr>
+<h2 id="内存池-2-0"><a href="#内存池-2-0" class="headerlink" title="内存池 2.0"></a>内存池 2.0</h2><ul>
+<li><p>使用**<em>union 联合体</em>**来实现内存的复用性</p>
+<p>因为考虑到指针只有在 new 分配内存时才会有作用,与 data 部分不会同时使用</p>
+</li>
+</ul>
+<hr>
+<h3 id="union-联合体"><a href="#union-联合体" class="headerlink" title="union 联合体"></a>union 联合体</h3><ul>
+<li><p>一个结构存在多种身份,但是某一时刻下,只能会使用一种身份时, 为了节省内存而产生的结构</p>
+<p>又称共用体, 其 <em>内存占用以 union 中定义的变量最大者为准</em></p>
+</li>
+<li><p>联合体声明时,内部变量声明需要使用 <code>;</code></p>
+</li>
+<li><p><em>无名联合体和有名称的联合体表示含义不同</em></p>
+<ul>
+<li><p>无名联合体可以视为对成员变量的声明</p>
+<p>使用时可以直接使用声明的变量(同一时刻只能使用联合体内的一个成员,<strong><em>其他成员会视为未初始化</em></strong>)</p>
+</li>
+<li><p>有名称的联合体可以视为结构的声明</p>
+<p>使用时需要初始化结构, 将该联合体视为一种类型进行声明</p>
+</li>
+</ul>
+</li>
+<li><p>初始化其中一个成员, 其他成员则视为未初始化状态</p>
+</li>
+<li><p>本质是公用一个地址空间</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-0-实现细节"><a href="#2-0-实现细节" class="headerlink" title="[2.0]实现细节"></a>[2.0]实现细节</h3><ul>
+<li>如果有多个成员变量将内存池 1.0 中的成员变量,整合成一个结构体</li>
+<li>union 中定义该类的指针和数据的结构体</li>
+</ul>
+<hr>
+<h3 id="2-0-成品代码"><a href="#2-0-成品代码" class="headerlink" title="[2.0]成品代码"></a>[2.0]成品代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">testMryCrl_2</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> MAX_BLOCKS;</span><br><span class="line">    <span class="type">static</span> testMryCrl_2* header;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">testMryCrl_2</span>(<span class="type">int</span> data) :<span class="built_in">data</span>(data) &#123;&#125;</span><br><span class="line">    <span class="keyword">union</span> &#123;</span><br><span class="line">        <span class="type">int</span> data;</span><br><span class="line">        testMryCrl_2* next;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        testMryCrl_2* ret;</span><br><span class="line">        <span class="comment">//建立内存池</span></span><br><span class="line">        <span class="comment">//判断当前内存池是否存在</span></span><br><span class="line">        <span class="keyword">if</span> (header) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//内存池不存在,申请分配内存池</span></span><br><span class="line">            ret = header = <span class="built_in">static_cast</span>&lt;testMryCrl_2*&gt;(::<span class="keyword">operator</span> <span class="built_in">new</span>(MAX_BLOCKS * <span class="built_in">sizeof</span>(testMryCrl_2)));</span><br><span class="line">            <span class="comment">//将申请的内存切块并串成链表</span></span><br><span class="line">            <span class="keyword">for</span> (; ret != &amp;header[MAX_BLOCKS - <span class="number">1</span>]; ret++) &#123;</span><br><span class="line">                ret-&gt;next = ret + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ret-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ret = header;</span><br><span class="line">        header = header-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* cur, <span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//回收内存</span></span><br><span class="line">        (<span class="built_in">static_cast</span>&lt;testMryCrl_2*&gt;(cur))-&gt;next = header;</span><br><span class="line">        header = <span class="built_in">static_cast</span>&lt;testMryCrl_2*&gt;(cur);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化类内静态成员</span></span><br><span class="line"><span class="type">int</span> testMryCrl_2::MAX_BLOCKS = <span class="number">20</span>;</span><br><span class="line">testMryCrl_2* testMryCrl_2::header;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-0-缺点分析"><a href="#2-0-缺点分析" class="headerlink" title="[2.0]缺点分析"></a>[2.0]缺点分析</h3><ul>
+<li><strong>代码复用性不高</strong></li>
+<li><strong>回收机制有待优化</strong></li>
+</ul>
+<hr>
+<h2 id="内存池-3-0"><a href="#内存池-3-0" class="headerlink" title="内存池 3.0"></a>内存池 3.0</h2><ul>
+<li><p>通过面向对象思想 , <strong><em>将内存分配的动作封装成类</em></strong>,加以复用</p>
+</li>
+<li><p>使用时,让类内内含一个静态的分配器对象</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-0-实现细节"><a href="#3-0-实现细节" class="headerlink" title="[3.0]实现细节"></a>[3.0]实现细节</h3><ul>
+<li><p>了解指针真正的含义,理解**<em>为什么可以在另一个类内定义链表指针</em>**</p>
+<p><em>指针的指向的是该内存的第一个字节, 然后通过该指针的类型来确定需要取多少字节作为数据</em></p>
+</li>
+<li><p>**<em>指针类型不同</em>**的情况下 , 如何实现链表的切割和初始化</p>
+<p>将指针指针转换成 char*类型, <strong>因为 char 的大小为 1 字节</strong></p>
+</li>
+<li><p>malloc 分配内存的时候,怎么**<em>确定分配内存的大小</em>**</p>
+<p>利用使用 new 和 delete 时, 编译器自动传入的 size<em>t 参数**</em>(new 操作的对象的大小, 相当于 sizeof(T))_**</p>
+</li>
+<li><p><strong><em>使用时, 需要确保类的大小不小于一个指针的大小!!!</em></strong></p>
+<p>链表操作时,需要转换成<code>obj*</code>的类型,而指针的大小为 4 字节, 所以需要类的大小不小于一个指针的大小</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-0-成品代码"><a href="#3-0-成品代码" class="headerlink" title="[3.0]成品代码"></a>[3.0]成品代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">myAlloc</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">obj</span> &#123;</span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">obj</span>* next;       <span class="comment">//维护链表</span></span><br><span class="line">    &#125;;</span><br><span class="line">    obj* header = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> MAX_BLOCK = <span class="number">10</span>;   <span class="comment">//内存池的大小</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="title">alloc</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        obj* ret;</span><br><span class="line">        <span class="keyword">if</span> (!header) &#123;</span><br><span class="line">            <span class="comment">//申请内存池</span></span><br><span class="line">            <span class="type">size_t</span> len = size * MAX_BLOCK;</span><br><span class="line">            ret = header = <span class="built_in">static_cast</span>&lt;obj*&gt;(::<span class="keyword">operator</span> <span class="built_in">new</span>(len));</span><br><span class="line">            <span class="comment">//对内存池进行切块并串成链表</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAX_BLOCK; i++) &#123;</span><br><span class="line">                ret-&gt;next = (obj*)((<span class="type">char</span>*)ret + size);	<span class="comment">//转换成char*是因为char的占用为1字节</span></span><br><span class="line">                ret = ret-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            ret-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ret = header;</span><br><span class="line">        header = header-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dealloc</span><span class="params">(<span class="type">void</span>* p, <span class="type">size_t</span>)</span> </span>&#123;</span><br><span class="line">        ((obj*)p)-&gt;next = header;</span><br><span class="line">        header = (obj*)p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">testMryCrl_3</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> data2;</span><br><span class="line">    <span class="type">static</span> myAlloc alloc;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> alloc.<span class="built_in">alloc</span>(size);	<span class="comment">//交给myAlloc处理</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* p, <span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> alloc.<span class="built_in">dealloc</span>(p, size);<span class="comment">//交给myAlloc处理</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">testMryCrl_3</span>(<span class="type">int</span> data):<span class="built_in">data</span>(data)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myAlloc testMryCrl_3::alloc;		<span class="comment">//静态成员, 类内定义, 类外初始化</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-0-缺点分析"><a href="#3-0-缺点分析" class="headerlink" title="[3.0]缺点分析"></a>[3.0]缺点分析</h3><ul>
+<li>不同类需要使用该内存池的时候, 需要定义的内容其实是固定的</li>
+<li>回收内存机制有待优化</li>
+<li><strong>需要确保使用该分配器的类的大小不小于一个指针的大小!!!</strong></li>
+</ul>
+<hr>
+<h2 id="内存池-4-0"><a href="#内存池-4-0" class="headerlink" title="内存池 4.0"></a>内存池 4.0</h2><ul>
+<li>通过使用宏定义, 将需要重复的部分封装成一个宏,提高代码可读性</li>
+</ul>
+<hr>
+<h3 id="4-0-实现细节"><a href="#4-0-实现细节" class="headerlink" title="[4.0]实现细节"></a>[4.0]实现细节</h3><ul>
+<li>使用宏定义, 换行需要使用\</li>
+<li>类外声明时,通过宏获得类型</li>
+<li>将 static 方法声明称 protected</li>
+</ul>
+<hr>
+<h3 id="4-0-成品代码"><a href="#4-0-成品代码" class="headerlink" title="[4.0]成品代码"></a>[4.0]成品代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">myAlloc</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">obj</span> &#123;</span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">obj</span>* next;       <span class="comment">//维护链表</span></span><br><span class="line">    &#125;;</span><br><span class="line">    obj* header = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> MAX_BLOCK = <span class="number">10</span>;   <span class="comment">//内存池的大小</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="title">alloc</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        obj* ret;</span><br><span class="line">        <span class="keyword">if</span> (!header) &#123;</span><br><span class="line">            <span class="comment">//申请内存池</span></span><br><span class="line">            <span class="type">size_t</span> len = size * MAX_BLOCK;</span><br><span class="line">            ret = header = <span class="built_in">static_cast</span>&lt;obj*&gt;(::<span class="keyword">operator</span> <span class="built_in">new</span>(len));</span><br><span class="line">            <span class="comment">//对内存池进行切块并串成链表</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAX_BLOCK; i++) &#123;</span><br><span class="line">                ret-&gt;next = (obj*)((<span class="type">char</span>*)ret + size);</span><br><span class="line">                ret = ret-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            ret-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ret = header;</span><br><span class="line">        header = header-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dealloc</span><span class="params">(<span class="type">void</span>* p, <span class="type">size_t</span>)</span> </span>&#123;</span><br><span class="line">        ((obj*)p)-&gt;next = header;</span><br><span class="line">        header = (obj*)p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INSIDE_ALLOC protected: static myAlloc alloc;\</span></span><br><span class="line"><span class="meta">public:static void* operator new(size_t size)&#123;return alloc.alloc(size);&#125;\</span></span><br><span class="line"><span class="meta">static void operator delete(void* p, size_t size)&#123;return alloc.dealloc(p, size);&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OUTSIDE_ALLOC(T) myAlloc T::alloc;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">testMryCrl_4</span> &#123;</span><br><span class="line">INSIDE_ALLOC		<span class="comment">//宏定义</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> data2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">testMryCrl_4</span>(<span class="type">int</span> data):<span class="built_in">data</span>(data)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">OUTSIDE_ALLOC</span>(testMryCrl_4)</span><br></pre></td></tr></table></figure>
+
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a><a class="post-meta__tags" href="/Notes/tags/C/">C++</a><a class="post-meta__tags" href="/Notes/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a></div><div class="post_share"><div class="social-share" data-image="/Notes/images/cover/back3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--VC6%E4%B9%8Bmalloc/" title="内存管理--VC6之malloc"><img class="cover" src="/Notes/images/cover/back7.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">内存管理--VC6之malloc</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%87%86%E5%A4%87%E7%9F%A5%E8%AF%86/" title="内存管理准备知识"><img class="cover" src="/Notes/images/cover/back2.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">内存管理准备知识</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--C++%E5%85%B3%E9%94%AE%E5%AD%97/" title="内存管理--C++关键字"><img class="cover" src="/Notes/images/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">内存管理--C++关键字</div></div></a></div><div><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--GNU2.9alloc/" title="内存管理--GNU2.9alloc"><img class="cover" src="/Notes/images/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">内存管理--GNU2.9alloc</div></div></a></div><div><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--Lokiallocator/" title="内存管理--Lokiallocator"><img class="cover" src="/Notes/images/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">内存管理--Lokiallocator</div></div></a></div><div><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--VC6%E4%B9%8Bmalloc/" title="内存管理--VC6之malloc"><img class="cover" src="/Notes/images/cover/back7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">内存管理--VC6之malloc</div></div></a></div><div><a href="/Notes/2023/03/31/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%87%86%E5%A4%87%E7%9F%A5%E8%AF%86/" title="内存管理准备知识"><img class="cover" src="/Notes/images/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">内存管理准备知识</div></div></a></div><div><a href="/Notes/2023/03/31/Socket%E5%9F%BA%E6%9C%ACapi/" title="Socket基本api"><img class="cover" src="/Notes/images/cover/back6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">Socket基本api</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E2%80%93%E7%AE%80%E5%8D%95%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">内存管理–简单内存池的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">内存池的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B1%A0-1-0"><span class="toc-number">1.2.</span> <span class="toc-text">内存池 1.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82-%E6%98%93%E8%B8%A9%E5%9D%91"><span class="toc-number">1.2.1.</span> <span class="toc-text">[1.0]实现细节(易踩坑)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.2.</span> <span class="toc-text">[1.0]成品代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">[1.0]缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B1%A0-2-0"><span class="toc-number">1.3.</span> <span class="toc-text">内存池 2.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#union-%E8%81%94%E5%90%88%E4%BD%93"><span class="toc-number">1.3.1.</span> <span class="toc-text">union 联合体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-number">1.3.2.</span> <span class="toc-text">[2.0]实现细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">[2.0]成品代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.3.4.</span> <span class="toc-text">[2.0]缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B1%A0-3-0"><span class="toc-number">1.4.</span> <span class="toc-text">内存池 3.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-0-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-number">1.4.1.</span> <span class="toc-text">[3.0]实现细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-0-%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.2.</span> <span class="toc-text">[3.0]成品代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-0-%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.4.3.</span> <span class="toc-text">[3.0]缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B1%A0-4-0"><span class="toc-number">1.5.</span> <span class="toc-text">内存池 4.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-0-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-number">1.5.1.</span> <span class="toc-text">[4.0]实现细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-0-%E6%88%90%E5%93%81%E4%BB%A3%E7%A0%81"><span class="toc-number">1.5.2.</span> <span class="toc-text">[4.0]成品代码</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img src="/Notes/images/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--并发之[半同步半分应堆]"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]">web项目--并发之[半同步半分应堆]</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架"><img src="/Notes/images/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--服务器框架"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架">web项目--服务器框架</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现"><img src="/Notes/images/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--线程池的设计和实现"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现">web项目--线程池的设计和实现</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制"><img src="/Notes/images/cover/back6.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--锁机制"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制">web项目--锁机制</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/OS-MemorySystem/" title="OS-内存系统"><img src="/Notes/images/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="OS-内存系统"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/OS-MemorySystem/" title="OS-内存系统">OS-内存系统</a><time datetime="2023-03-31T15:27:39.000Z" title="发表于 2023-03-31 23:27:39">2023-03-31</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/Notes/images/cover/back3.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
