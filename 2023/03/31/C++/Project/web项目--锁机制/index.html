@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>web项目--锁机制 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="web 项目–锁机制基础知识RAII RAII 全称是“Resource Acquisition is Initialization”，直译过来是“资源获取即初始化”. 在构造函数中申请分配资源，在析构函数中释放资源。因为 C++的语言机制保证了，当一个对象创建的时候，自动调用构造函数，当对象超出作用域的时候会自动调用析构函数。所以，在 RAII 的指导下，我们应该使用类来管理资源，将资源和对象的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web项目--锁机制">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="web 项目–锁机制基础知识RAII RAII 全称是“Resource Acquisition is Initialization”，直译过来是“资源获取即初始化”. 在构造函数中申请分配资源，在析构函数中释放资源。因为 C++的语言机制保证了，当一个对象创建的时候，自动调用构造函数，当对象超出作用域的时候会自动调用析构函数。所以，在 RAII 的指导下，我们应该使用类来管理资源，将资源和对象的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://juanzoran.github.io/Notes/images/cover/back7.jpg">
+<meta property="article:published_time" content="2023-03-31T15:29:07.000Z">
+<meta property="article:modified_time" content="2023-04-01T02:33:23.069Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://juanzoran.github.io/Notes/images/cover/back7.jpg"><link rel="shortcut icon" href="/Notes/images/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web项目--锁机制',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-01 10:33:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1E1E2E')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="https://codebyzach.github.io/pace/#"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/Notes/images/cover/back7.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">web项目--锁机制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-01T02:33:23.069Z" title="更新于 2023-04-01 10:33:23">2023-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/C/%E7%8E%A9%E5%85%B7%E9%A1%B9%E7%9B%AE/">玩具项目</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/C/%E7%8E%A9%E5%85%B7%E9%A1%B9%E7%9B%AE/C-%E6%9C%8D%E5%8A%A1%E5%99%A8/">C++服务器</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="web项目--锁机制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="web-项目–锁机制"><a href="#web-项目–锁机制" class="headerlink" title="web 项目–锁机制"></a>web 项目–锁机制</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="RAII"><a href="#RAII" class="headerlink" title="RAII"></a>RAII</h3><ul>
+<li>RAII 全称是“Resource Acquisition is Initialization”，直译过来是<strong>“资源获取即初始化”</strong>.</li>
+<li><strong>在构造函数中申请分配资源，在析构函数中释放资源</strong>。因为 C++的语言机制保证了，当一个对象创建的时候，自动调用构造函数，当对象超出作用域的时候会自动调用析构函数。所以，在 RAII 的指导下，我们应该使用类来管理资源，将资源和对象的生命周期绑定</li>
+<li>RAII 的核心思想是<strong>将资源或者状态与对象的生命周期绑定</strong>，通过 C++的语言机制，实现资源和状态的安全管理,智能指针是 RAII 最好的例子</li>
+</ul>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><ul>
+<li><strong>用于多线程同步</strong></li>
+</ul>
+<p>只支持两种操作 :</p>
+<ul>
+<li><p>P(申请信号量操作)</p>
+<p>申请时如果信号量 的值大于 1, 则 - 1</p>
+<p>如果信号量的值为 0, 则<strong>挂起</strong></p>
+</li>
+<li><p>V(返还信号量操作)</p>
+<p>返还时如果有等待信号量的线程, 则<strong>唤醒</strong></p>
+<p>如果没有则信号量 +1</p>
+</li>
+<li><p>信号量的取值可以是任何自然数，最常用的，最简单的信号量是二进制信号量，只有 0 和 1 两个值.</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>sem_init 函数用于初始化一个未命名的信号量</li>
+<li>sem_destory 函数用于销毁信号量</li>
+<li>sem_wait 函数将以原子操作方式将信号量减一,信号量为 0 时,sem_wait 阻塞</li>
+<li>sem_post 函数以原子操作方式将信号量加一,信号量大于 0 时,唤醒调用 sem_post 的线程</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="互斥量"><a href="#互斥量" class="headerlink" title="互斥量"></a>互斥量</h3><ul>
+<li><p><strong>用于多线程互斥</strong></p>
+</li>
+<li><p>只有 0 和 1 两种状态</p>
+</li>
+<li><p><strong>加锁和解锁操作必须是同一进程</strong></p>
+</li>
+<li><p>互斥锁,也成互斥量,可以保护关键代码段,以确保独占式访问.当进入关键代码段,获得互斥锁将其加锁;离开关键代码段,唤醒等待该互斥锁的线程.</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>pthread_mutex_init 函数用于初始化互斥锁</li>
+<li>pthread_mutex_destory 函数用于销毁互斥锁</li>
+<li>pthread_mutex_lock 函数以原子操作方式给互斥锁加锁</li>
+<li>pthread_mutex_unlock 函数以原子操作方式给互斥锁解锁</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><ul>
+<li><strong>信号量和互斥量(互斥锁有什么区别)?</strong></li>
+</ul>
+<p>​ 信号量是为了同步, 互斥量是为了互斥;</p>
+<p>互斥量只能保证<strong>同一时刻只能有一个进程访问资源, 具有唯一性和排他性</strong>, 但无法限制访问者的先后顺序</p>
+<p>信号量<strong>在互斥的基础上,通过其他机制实现访问者对资源的有序访问</strong>, 如 : 挂起队列</p>
+<p>​</p>
+<p>​ 互斥量只有 0 和 1 两种状态, 信号量可以是任何自然数</p>
+<p>​</p>
+<p>​ <strong>互斥的加锁和解锁只能由同一进程操作, 而信号量可以由不同的进程获得</strong></p>
+<hr>
+<h3 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h3><ul>
+<li>线程同步时可能会出现 :</li>
+</ul>
+<p>​ 一个线程需要等另一个线程完成一个条件才可继续往下执行, 当前运行时条件还不成立, 所以应该先阻塞该进程, 当另一个线程完成了该条件, 再将之前阻塞的线程唤醒;</p>
+<p>​ 完成这样的操作, 所用到的通信方式即使用条件变量</p>
+<ul>
+<li>条件变量提供了一种线程间的通知机制,当某个共享数据达到某个值时,唤醒等待这个共享数据的线程.</li>
+</ul>
+<blockquote>
+<ul>
+<li>pthread_cond_init 函数用于初始化条件变量</li>
+<li>pthread_cond_destory 函数销毁条件变量</li>
+<li>pthread_cond_broadcast 函数以广播的方式唤醒<strong>所有</strong>等待目标条件变量的线程</li>
+<li>pthread_cond_wait 函数用于等待目标条件变量.该函数调用时需要传入 <strong>mutex 参数(加锁的互斥锁)</strong> ,函数执行时,先把调用线程放入条件变量的请求队列,然后将互斥锁 mutex 解锁,当函数成功返回为 0 时,互斥锁会再次被锁上. <strong>也就是说函数内部会有一次解锁和加锁操作</strong>.</li>
+</ul>
+</blockquote>
+<ul>
+<li><p><em>条件变量总是搭配互斥锁使用</em></p>
+</li>
+<li><p><strong><em>经典的用于解决生产者消费者问题</em></strong></p>
+</li>
+</ul>
+<hr>
+<h3 id="锁机制的功能"><a href="#锁机制的功能" class="headerlink" title="锁机制的功能"></a><strong>锁机制的功能</strong></h3><ul>
+<li>实现多线程同步，通过锁机制，确保任一时刻只能有一个线程能进入关键代码段.</li>
+</ul>
+<h4 id="封装的功能"><a href="#封装的功能" class="headerlink" title="封装的功能"></a><strong>封装的功能</strong></h4><ul>
+<li>类中主要是 Linux 下三种锁进行封装，将锁的创建于销毁函数封装在类的构造与析构函数中，实现 RAII 机制</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span><span class="keyword">class</span> sem&#123;</span><br><span class="line"> <span class="number">2</span>    <span class="keyword">public</span>:</span><br><span class="line"> <span class="number">3</span>        <span class="comment">//构造函数</span></span><br><span class="line"> <span class="number">4</span>        <span class="built_in">sem</span>()</span><br><span class="line"> <span class="number">5</span>        &#123;</span><br><span class="line"> <span class="number">6</span>            <span class="comment">//信号量初始化</span></span><br><span class="line"> <span class="number">7</span>            <span class="keyword">if</span>(<span class="built_in">sem_init</span>(&amp;m_sem,<span class="number">0</span>,<span class="number">0</span>)!=<span class="number">0</span>)&#123;</span><br><span class="line"> <span class="number">8</span>                <span class="keyword">throw</span> std::<span class="built_in">exception</span>();</span><br><span class="line"> <span class="number">9</span>            &#125;</span><br><span class="line"><span class="number">10</span>        &#125;</span><br><span class="line"><span class="number">11</span>        <span class="comment">//析构函数</span></span><br><span class="line"><span class="number">12</span>        ~<span class="built_in">sem</span>()</span><br><span class="line"><span class="number">13</span>        &#123;</span><br><span class="line"><span class="number">14</span>            <span class="comment">//信号量销毁</span></span><br><span class="line"><span class="number">15</span>            <span class="built_in">sem_destroy</span>(&amp;m_sem);</span><br><span class="line"><span class="number">16</span>        &#125;</span><br><span class="line"><span class="number">17</span>    <span class="keyword">private</span>:</span><br><span class="line"><span class="number">18</span>        <span class="type">sem_t</span> m_sem;</span><br><span class="line"><span class="number">19</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将重复使用的代码封装为函数，减少代码的重复，使其更简洁</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>   <span class="comment">//条件变量的使用机制需要配合锁来使用</span></span><br><span class="line"> <span class="number">2</span>   <span class="comment">//内部会有一次加锁和解锁</span></span><br><span class="line"> <span class="number">3</span>   <span class="comment">//封装起来会使得更加简洁</span></span><br><span class="line"> <span class="number">4</span>   <span class="function"><span class="type">bool</span> <span class="title">wait</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> 5   </span>&#123;</span><br><span class="line"> <span class="number">6</span>       <span class="type">int</span> ret=<span class="number">0</span>;</span><br><span class="line"> <span class="number">7</span>       <span class="built_in">pthread_mutex_lock</span>(&amp;m_mutex);</span><br><span class="line"> <span class="number">8</span>       ret=<span class="built_in">pthread_cond_wait</span>(&amp;m_cond,&amp;m_mutex);</span><br><span class="line"> <span class="number">9</span>       <span class="built_in">pthread_mutex_unlock</span>(&amp;m_mutex);</span><br><span class="line"><span class="number">10</span>       <span class="keyword">return</span> ret==<span class="number">0</span>;</span><br><span class="line"><span class="number">11</span>   &#125;</span><br><span class="line"><span class="number">12</span>   <span class="function"><span class="type">bool</span> <span class="title">signal</span><span class="params">()</span></span></span><br><span class="line"><span class="function">13   </span>&#123;</span><br><span class="line"><span class="number">14</span>       <span class="keyword">return</span> <span class="built_in">pthread_cond_signal</span>(&amp;m_cond)==<span class="number">0</span>;</span><br><span class="line"><span class="number">15</span>   &#125;</span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/Notes/tags/C/">C++</a><a class="post-meta__tags" href="/Notes/tags/%E5%90%8E%E7%AB%AF/">后端</a></div><div class="post_share"><div class="social-share" data-image="/Notes/images/cover/back7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现"><img class="cover" src="/Notes/images/cover/back7.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">web项目--线程池的设计和实现</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="/Notes/images/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">autohotkey</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/31/Book_Notes/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/%E7%AC%AC%E4%B8%80%E7%AB%A0--TCPIP%E5%8D%8F%E8%AE%AE%E6%97%8F/" title="第一章--TCPIP协议族"><img class="cover" src="/Notes/images/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">第一章--TCPIP协议族</div></div></a></div><div><a href="/Notes/2023/03/31/Book_Notes/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/%E7%AC%AC%E4%BA%94%E7%AB%A0--Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80APi/" title="第五章--Linux网络编程基础APi"><img class="cover" src="/Notes/images/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">第五章--Linux网络编程基础APi</div></div></a></div><div><a href="/Notes/2023/03/31/Book_Notes/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/%E7%AC%AC%E5%85%AB%E7%AB%A0--%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6/" title="第八章--高性能服务器程序框架"><img class="cover" src="/Notes/images/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">第八章--高性能服务器程序框架</div></div></a></div><div><a href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img class="cover" src="/Notes/images/cover/back6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">web项目--并发之[半同步半分应堆]</div></div></a></div><div><a href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架"><img class="cover" src="/Notes/images/cover/back6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">web项目--服务器框架</div></div></a></div><div><a href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现"><img class="cover" src="/Notes/images/cover/back7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">web项目--线程池的设计和实现</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web-%E9%A1%B9%E7%9B%AE%E2%80%93%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">web 项目–锁机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAII"><span class="toc-number">1.1.1.</span> <span class="toc-text">RAII</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E6%96%A5%E9%87%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">互斥量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E9%97%AE"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">提问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.4.</span> <span class="toc-text">条件变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.5.</span> <span class="toc-text">锁机制的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">封装的功能</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img src="/Notes/images/cover/back6.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--并发之[半同步半分应堆]"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]">web项目--并发之[半同步半分应堆]</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架"><img src="/Notes/images/cover/back6.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--服务器框架"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架">web项目--服务器框架</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现"><img src="/Notes/images/cover/back7.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--线程池的设计和实现"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现">web项目--线程池的设计和实现</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制"><img src="/Notes/images/cover/back7.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--锁机制"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制">web项目--锁机制</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img src="/Notes/images/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="autohotkey"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey">autohotkey</a><time datetime="2023-03-31T15:27:39.000Z" title="发表于 2023-03-31 23:27:39">2023-03-31</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/Notes/images/cover/back7.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
