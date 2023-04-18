@@ -30,6 +30,7 @@ tags:
 
 ## 实例
 
+Lost Image!!
 ![image-20220817113429318](C:\Users\xh030927\AppData\Roaming\Typora\typora-user-images\image-20220817113429318.png)
 
 ## 进阶

@@ -9,13 +9,13 @@ menu:
   分类: /categories/ || fas fa-folder-open
   # 清单||fa fa-heartbeat:
   #   音乐: /music/ || fas fa-music
-  #   照片: /Gallery/ || fas fa-images
+  #   照片: /Gallery/ || fas fa-https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/demo.gif
   #   电影: /movies/ || fas fa-video
   # 友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
 
 nav:
-  # logo: /images/zoran.png
+  # logo: /https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/demo.gif/zoran.png
   display_title: true
   fixed: false # fixed navigation bar
 
@@ -91,7 +91,7 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: /images/favicon.ico
+favicon: /https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/demo.gif/favicon.ico
 
 # Avatar (頭像)
 avatar:
@@ -138,13 +138,11 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-    - /images/cover/back1.jpg
-    - /images/cover/back2.jpg
-    - /images/cover/back3.jpg
-    - /images/cover/back4.jpg
-    - /images/cover/back5.jpg
-    - /images/cover/back6.jpg
-    - /images/cover/back7.jpg
+    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg
+    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg
+    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg
+    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg
+    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -155,7 +153,7 @@ error_img:
 error_404:
   enable: true
   subtitle: "页面走丢了"
-  background: /images/error.jpg
+  background: /https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/error.jpg
 
 post_meta:
   page: # Home Page
@@ -506,19 +504,19 @@ theme_color:
   enable: true
   main: "#8bc663"
   paginator: "#00c4b6"
-  button_hover: "#FF7242"
+  button_hover: "#74c7ec"
   text_selection: "#00C4B6"
-  link_color: "#58a6ff"
+  link_color: "#74c7ec"
   meta_color: "#00c4b6"
   hr_color: "#ff5d62"
-  code_foreground: "#7E9CD8"
-  code_background: "#ECF7FE"
+  code_foreground: "#74c7ec"
+  code_background: "#282832"
   toc_color: "#10B981"
   blockquote_padding_color: "#49b1f5"
   blockquote_background_color: "#49b1f5"
-  scrollbar_color: "#49b1f5"
+  scrollbar_color: "#a6e3a1"
   meta_theme_color_light: "#00c4b6"
-  meta_theme_color_dark: "#1E1E2E"
+  meta_theme_color_dark: "#181825"
 
 # The top_img settings of home page
 # default: top img - full screen, site info - middle (默認top_img全屏，site_info在中間)
@@ -536,7 +534,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://JuanZoran.github.io/Notes/images/background.png)
+background: url(https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/background.png)
 # background: "#1E1E2E"
 
 # Footer Background
@@ -614,7 +612,7 @@ beautify:
   enable: true
   field: post # site/post
   title-prefix-icon: '\f0c1'
-  title-prefix-icon-color: '#F47466'
+  title-prefix-icon-color: "#F47466"
 
 # Global font settings
 # Don't modify the following settings unless you know how they work (非必要不要修改)
@@ -656,6 +654,7 @@ subtitle:
     - 记录编程学习的个人心得
     - 还有乱七八糟的想法
     - 或者是折腾的日记
+    - 共同进步!
 
 # Loading Animation (加載動畫)
 preloader:
@@ -663,9 +662,9 @@ preloader:
   # source
   # 1. fullpage-loading
   # 2. pace (progress bar)
-  source: 2
+  source: 1
   # pace theme (see https://codebyzach.github.io/pace/)
-  pace_css_url: https://codebyzach.github.io/pace/#
+  pace_css_url: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/center-atom.css
 # aside (側邊欄)
 # --------------------------------------
 
