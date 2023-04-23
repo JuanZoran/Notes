@@ -1,0 +1,515 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>zsh的基本使用 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="TLDR我的 github 地址: JuanZoran我的配置地址: dotfiles  Termux对应的dotfiles在termux分支  本文要点 Zsh的插件管理 Zsh的插件介绍 Zsh的一些使用技巧  Zsh 的插件管理上一篇文章介绍了Zsh的安装和背景同时简单介绍了一下Zsh的插件管理–Zinit，这里详细介绍一下Zinit的使用。  项目地址：zdharma&#x2F;zinit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zsh的基本使用">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/04/23/Toss_Diary/Termux/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="TLDR我的 github 地址: JuanZoran我的配置地址: dotfiles  Termux对应的dotfiles在termux分支  本文要点 Zsh的插件管理 Zsh的插件介绍 Zsh的一些使用技巧  Zsh 的插件管理上一篇文章介绍了Zsh的安装和背景同时简单介绍了一下Zsh的插件管理–Zinit，这里详细介绍一下Zinit的使用。  项目地址：zdharma&#x2F;zinit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg">
+<meta property="article:published_time" content="2023-04-23T12:23:00.000Z">
+<meta property="article:modified_time" content="2023-04-23T12:36:30.836Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="Termux">
+<meta property="article:tag" content="小米平板5Pro">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="zsh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/04/23/Toss_Diary/Termux/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'zsh的基本使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-23 20:36:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">zsh的基本使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-23T12:23:00.000Z" title="发表于 2023-04-23 20:23:00">2023-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-23T12:36:30.836Z" title="更新于 2023-04-23 20:36:30">2023-04-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/Termux%E9%85%8D%E7%BD%AE/">Termux配置</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/Termux%E9%85%8D%E7%BD%AE/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro%E9%85%8D%E7%BD%AE/">小米平板5Pro配置</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="zsh的基本使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR"></a>TLDR</h1><p>我的 github 地址: <a target="_blank" rel="noopener" href="https://github.com/JuanZoran">JuanZoran</a><br>我的配置地址: <a target="_blank" rel="noopener" href="https://github.com/JuanZoran/dotfiles">dotfiles</a></p>
+<blockquote>
+<p><code>Termux</code>对应的<code>dotfiles</code>在<code>termux</code>分支</p>
+</blockquote>
+<h1 id="本文要点"><a href="#本文要点" class="headerlink" title="本文要点"></a>本文要点</h1><ul>
+<li><code>Zsh</code>的插件管理</li>
+<li><code>Zsh</code>的插件介绍</li>
+<li><code>Zsh</code>的一些使用技巧</li>
+</ul>
+<h1 id="Zsh-的插件管理"><a href="#Zsh-的插件管理" class="headerlink" title="Zsh 的插件管理"></a>Zsh 的插件管理</h1><p>上一篇文章介绍了<code>Zsh</code>的安装和背景同时简单介绍了一下<code>Zsh</code>的插件管理–Zinit，这里详细介绍一下<code>Zinit</code>的使用。</p>
+<ul>
+<li>项目地址：<a target="_blank" rel="noopener" href="https://github.com/zdharma-continuum/zinit">zdharma&#x2F;zinit</a></li>
+<li>官方文档：<a target="_blank" rel="noopener" href="https://zdharma-continuum.github.io/zinit/wiki/">zdharma&#x2F;zinit</a></li>
+</ul>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>类似于<code>vim/neovim</code>的插件管理, zinit 的插件安装也是只需要 github 的<code>username/reponame</code>即可安装</p>
+<blockquote>
+<p><code>zi</code> 是<code>zinit</code>的别名, 作用完全一样</p>
+</blockquote>
+<p>使用 Termux 的时候, 由于安卓的特殊性, 可能优先使用使用官方打包好的文件更好</p>
+<ul>
+<li>安装: <code>pkg install &#123;&#123;package&#125;&#125;</code></li>
+<li>查找: <code>pkg search &#123;&#123;package&#125;&#125;</code></li>
+</ul>
+<h3 id="安装一个最简单的插件"><a href="#安装一个最简单的插件" class="headerlink" title="安装一个最简单的插件:"></a>安装一个最简单的插件:</h3><p><code>zinit light zsh-users/zsh-autosuggestions</code></p>
+<p>解释:</p>
+<ul>
+<li><p><code>zinit</code></p>
+<p>zinit 自身</p>
+</li>
+<li><p><code>light</code></p>
+<p><code>加载|下载</code>插件的命令</p>
+<blockquote>
+<p>同样作用的还有<code>load</code><br><code>load</code> 将启用报告这样可以通过使用 <code>zinit report &#123;plugin-spec&#125;</code> 查看信息<br><code>light</code> 是一个没有跟踪和报告的显着更快的加载, 一般情况下, 只需要使用<code>light</code>即可<br>官方说: 在 Turbo 模式下，跟踪引起的性能损失可以忽略不计, <strong>zinit 已经够快了</strong></p>
+</blockquote>
+</li>
+<li><p><code>zsh-users/zsh-autosuggestions</code></p>
+<p>通过’&#x2F;‘分为两部分, 前一部分为 github 上仓库的<code>用户名</code>, 后一部分为<code>仓库名</code><br> 只需要提供这两部分, zinit 在启动的时候如果发现没有找到该插件,自动从 github 上下载</p>
+</li>
+</ul>
+<hr>
+<h3 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h3><h4 id="ice"><a href="#ice" class="headerlink" title="ice"></a><code>ice</code></h4><p>第一眼看到这个名字, 似乎没有提供任何的信息, 但是实际上他是一个非常强大的功能</p>
+<p><strong>官方介绍</strong>:</p>
+<p>冰通常是作为饮料或者咖啡的添加物, 在<code>zinit</code>中, <code>ice</code>意味着向下一个<code>zinit</code>命令中配置一些选项<br>冰通常也是会很快融化的, 所以在<code>zinit</code>中, 它只会作用与下一条<code>zinit</code>命令</p>
+<p><strong>示例说明</strong>:</p>
+<pre><code>通过`ice`可以实现很多强大的配置, 并且直观易懂
+</code></pre>
+<ul>
+<li><code>as&quot; program&quot;</code></li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zinit ice as<span class="string">&quot;program&quot;</span> <span class="built_in">cp</span><span class="string">&quot;httpstat.sh -&gt; httpstat&quot;</span> pick<span class="string">&quot;httpstat&quot;</span></span><br><span class="line">zinit light b4b4r07/httpstat</span><br></pre></td></tr></table></figure>
+
+<pre><code>上面的命令通过`ice`为下一条命令`zinit light b4b4r07/httpstat`添加一块冰(配置)
+`as&quot;program&quot;`告诉`zsh`该插件不是一个`zsh`插件, 而是应该添加到`$PATH`中的命令
+`pick`为选中的目标, 设置可执行权限(可能需要一些linux文件系统的知识)
+</code></pre>
+<ul>
+<li><code>atpull ... | atpull ...</code></li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zinit ice as<span class="string">&quot;program&quot;</span> <span class="built_in">mv</span><span class="string">&quot;httpstat.sh -&gt; httpstat&quot;</span> \</span><br><span class="line">      pick<span class="string">&quot;httpstat&quot;</span> atpull<span class="string">&#x27;!git reset --hard&#x27;</span></span><br><span class="line">zinit light b4b4r07/httpstat</span><br></pre></td></tr></table></figure>
+
+<pre><code>`atpull`在插件更新的时候执行, 该命令会在插件更新的时候执行`git reset --hard`命令
+如果后面跟着的命令以!开头, 表明该命令应该在pull之前执行
+</code></pre>
+<blockquote>
+<p>为了不让 Zsh 扩展感叹号，请使用 ‘…’ 而不是 “…” 来包含 atpull ice-mod 的内容<br>这是 shell 双引号和单引号的语法, 与<code>zinit</code>无关</p>
+</blockquote>
+<ul>
+<li><p><strong>Turbo 模式</strong></p>
+<p>这是 zinit 拥有超高性能的一个原因, 也是很多现代化插件管理器应该支持的–<code>延迟加载</code></p>
+<p>简单来说, 就是在开始的时候只加载必要的插件, 等进入页面或者触发了对应的条件再加载</p>
+<blockquote>
+<p><strong>需要 Zsh 5.3 或更高版本</strong>, Termux 安装的默认是最新版, 无需担心</p>
+</blockquote>
+<ul>
+<li><code>wait</code> 延迟加载</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zinit ice <span class="built_in">wait</span><span class="string">&#x27;!0&#x27;</span></span><br><span class="line">zinit load halfo/lambda-mod-zsh-theme</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>wait</code>命令后面的数字表示该插件应该在进入 zsh 页面后<code>&#123;number&#125;</code>秒加载该插件<br>似乎需要在数字前加上’!’</p>
+</blockquote>
+<p><code>wait</code> ‘!0’表示在进入 zsh 之后立即加载该插件<br><code>wait</code> 后不带参数, zinit 将默认为 <strong>1ms</strong> 后加载该插件</p>
+<ul>
+<li><code>load</code> 条件加载</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当处于 ~/tmp 目录下时, load zprompts 插件</span></span><br><span class="line"></span><br><span class="line">zinit ice load<span class="string">&#x27;![[ $PWD = */tmp* ]]&#x27;</span> unload<span class="string">&#x27;![[ $PWD != */tmp* ]]&#x27;</span> \</span><br><span class="line">    atload<span class="string">&quot;!promptinit; prompt sprint3&quot;</span></span><br><span class="line">zinit load psprint/zprompts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当处于 ~/tmp 目录下时, unload angry-fly 插件</span></span><br><span class="line">zinit ice load<span class="string">&#x27;![[ $PWD != */tmp* ]]&#x27;</span> unload<span class="string">&#x27;![[ $PWD = */tmp* ]]&#x27;</span></span><br><span class="line">zinit load russjohnson/angry-fly-zsh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，要卸载插件才能正常工作，插件需要加载跟踪<br>所以 zinit load … ，而不是 zinit light … 。<br>跟踪会导致轻微的减速，但这不会影响使用 Turbo 模式时 Zsh 的启动时间</p>
+</blockquote>
+</li>
+<li><p>其他可以参考官方 wiki, 获取更详细的介绍</p>
+<ul>
+<li><code>as &quot;completion&quot;</code>: 将<code>snippet</code> 子命令直接指向一个完成文件</li>
+<li><code>blockf</code>: 为该插件启用<code>zinit</code>自己的补全方法</li>
+<li><code>for</code>: 用于简化使用 zinit ice 的使用, 将两条命令合并为一条</li>
+</ul>
+</li>
+</ul>
+<h4 id="Snippet"><a href="#Snippet" class="headerlink" title="Snippet"></a>Snippet</h4><blockquote>
+<p>我是<code>oh-my-zsh</code>(或者是其他 zsh 配置系统)的用户, 我想转 zinit, 但是我已经习惯了包管理器自带的插件了怎么办?</p>
+<p>使用<code>snippet</code>, 你可以轻松的安装 oh-my-zsh 自带的一大堆插件当中的一个</p>
+</blockquote>
+<p>oh-my-zsh 是一个社区维护的 zsh 配置系统, 他提供了很多的插件, 这些插件是和他一起被克隆下来</p>
+<blockquote>
+<p>所有的插件可以见 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins">oh-my-zsh&#x2F;plugins</a></p>
+</blockquote>
+<p>通过<code>zinit snippet</code>可以轻松的其他插件系统中的内置插件</p>
+<p><strong>示例说明</strong></p>
+<p>从 URL 中下载单个文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zinit snippet <span class="string">&#x27;https://github.com/robbyrussell/oh-my-zsh/raw/master/plugins/git/git.plugin.zsh&#x27;</span></span><br><span class="line">zinit snippet <span class="string">&#x27;https://github.com/sorin-ionescu/prezto/blob/master/modules/helper/init.zsh&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以是一个目录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zinit ice svn</span><br><span class="line">zinit snippet PZT::modules/docker</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>对于<code>oh-my-zsh</code>用户, 可以使用<code>OMZ::</code>前缀简写</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zinit snippet OMZ::plugins/git/git.plugin.zsh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于<code>Prezto</code>用户, 可以使用<code>PZT::</code>前缀简写</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zinit snippet PZT::modules/helper/init.zsh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p>zinit 的功能其实还有很多, 比如补全, 内置插件, 条件判断, 下载 hook 这些<br>目前我只介绍我使用到了的部分, 等后续有时间再补充</p>
+<hr>
+<h2 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h2><p>我有的朋友, 使用 omz 的原因一个是很多人推荐, 另一个原因是他有很多的主题提供</p>
+<p>然而 zsh 拥有强大的插件系统, 使用 zinit 可以轻松的找到用户制作的主题</p>
+<p><strong>我了解的比较火的几款主题分别为</strong>:</p>
+<ul>
+<li><a href="#romkatvpowerlevel10khttpsgithubcomromkatvpowerlevel10k">romkatv&#x2F;powerlevel10k</a></li>
+<li><a href="#starshiphttpsgithubcomstarshipstarship">starship</a></li>
+</ul>
+<h3 id="romkatv-x2F-powerlevel10k"><a href="#romkatv-x2F-powerlevel10k" class="headerlink" title="romkatv&#x2F;powerlevel10k"></a><a target="_blank" rel="noopener" href="https://github.com/romkatv/powerlevel10k">romkatv&#x2F;powerlevel10k</a></h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>Powerlevel10k 是一个继承于 Powerlevel9k 的主题, 但是它比 Powerlevel9k 更加<strong>强大, 更加美观, 更加快速</strong></p>
+<p><strong>使用 Shell 编写</strong> 但是<strong>支持异步渲染以及缓存</strong>, 启动速度相比<code>Powerlevel9k</code>快了很多</p>
+<p>功能上, Powerlevel10k 支持很多的图标, 以及很多的选项, 你可以根据自己的喜好进行配置</p>
+<blockquote>
+<p>最重要的是, <code>p10k</code> 支持<code>瞬态提示</code><br>简单来说, 当你输入命令的时候, 你可以看到命令的提示, 但是当你按下回车的时候, 这个提示就会消失, 这样可以让你的命令行更加的干净<br>当你使用双行命令的时候, 这个尤其有用, 可以减少很多的干扰信息</p>
+</blockquote>
+<p><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/trans.png" alt="瞬态提示"></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>将一下代码添加到你的<code>~/.zshrc</code>中</p>
+<blockquote>
+<p>在<code>zinit</code>的<code>(( $&#123;+_comps&#125; )) &amp;&amp; _comps[zinit]=_zinit</code>命令之后</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zi ice depth=1; zinit light romkatv/powerlevel10k</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Termux 中使用<code>pkg install p10k</code>安装&#96;</p>
+</blockquote>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在命令行中运行<code>p10k configure</code>即可进入配置界面</p>
+<p> <img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/p10k_conf.png" alt="p10k 配置"></p>
+<p>运行之后会在你的家目录下生成一个<code>.p10k.zsh</code>文件, 你可以在这个文件中进行配置<br>但是由于文件内容太多, 配置起来很不方便, 所以我建议在<code>github</code>上找一个喜欢的主题再进行微调</p>
+<p>如果没有生效请手动添加以下代码到你的<code>~/.zshrc</code>中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ ! -f ~/.p10k.zsh ]] || <span class="built_in">source</span> ~/.p10k.zsh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这段代码的意思是如果存在<code>.p10k.zsh</code>文件(你的配置), 则加载这个文件</p>
+</blockquote>
+<h3 id="starship"><a href="#starship" class="headerlink" title="starship"></a><a target="_blank" rel="noopener" href="https://github.com/starship/starship">starship</a></h3><h4 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h4><p>Starship 是一个快速, 简单, 以及可配置的命令行提示符<br>他由 Rust 编写, 性能相比<code>Powerlevel10k</code>要快一些, 同时感觉鲁棒性更好<br><strong>而且有官方的中文文档, 虽然翻译的不完全</strong></p>
+<p> <img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/starship_dash.png" alt="Starship官方"></p>
+<p><a target="_blank" rel="noopener" href="https://starship.rs/zh-CN/config/">官方文档</a></p>
+<p>官方介绍:</p>
+<ul>
+<li>快：🚀 它很快——真的非常快！</li>
+<li>可定制：🎨 配置提示的各个方面。</li>
+<li>通用：🌍 适用于任何操作系统的任何 shell。</li>
+<li>智能化：💡 相关信息一目了然。</li>
+<li>功能丰富：🛠️ 支持所有您喜欢的工具。</li>
+<li>简单：👍 安装快速 – 几分钟内即可开始使用。</li>
+</ul>
+<blockquote>
+<p>starship 虽然功能丰富, 但是并不支持瞬态提示</p>
+</blockquote>
+<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p>将一下代码添加到你的<code>~/.zshrc</code>中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zi ice depth=1; zinit light starship/starship</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Termux 中使用<code>pkg install starship</code>安装&#96;</p>
+</blockquote>
+<h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><p>starship 的配置文件在<code>~/.config/starship.toml</code>中, 可以先运行以下命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.config &amp;&amp; <span class="built_in">touch</span> ~/.config/starship.toml</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg" alt="效果展示"> </p>
+<p>详细的介绍可以查看<a target="_blank" rel="noopener" href="https://starship.rs/zh-CN/config/">官方文档</a></p>
+<p><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/starship_wiki.png" alt="starship文档"></p>
+<blockquote>
+<p>也可以直接复制我的配置文件: <a target="_blank" rel="noopener" href="https://github.com/JuanZoran/dotfiles/blob/master/config/starship.toml">starship.toml</a></p>
+</blockquote>
+<h2 id="常用工具安装"><a href="#常用工具安装" class="headerlink" title="常用工具安装"></a>常用工具安装</h2><p>工具相关的介绍可以参考 <a href="https://juanzoran.github.io/Notes/2023/03/30/Toss_Diary/Termux/Termux%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%80)/">上一篇</a></p>
+<h3 id="marlonrichert-x2F-zsh-autocomplete"><a href="#marlonrichert-x2F-zsh-autocomplete" class="headerlink" title="marlonrichert&#x2F;zsh-autocomplete"></a>marlonrichert&#x2F;zsh-autocomplete</h3><p>官方地址: <a target="_blank" rel="noopener" href="https://github.com/marlonrichert/zsh-autocomplete">marlonrichert&#x2F;zsh-autocomplete</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zi light marlonrichert/zsh-autocomplete</span><br></pre></td></tr></table></figure>
+
+<p>虽然有一点小 bug, 但是完全不影响是一个很好用的补全插件</p>
+<h4 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h4><ul>
+<li><p>插入公共子串</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># all Tab widgets</span></span><br><span class="line"><span class="built_in">zstyle</span> <span class="string">&#x27;:autocomplete:*complete*:*&#x27;</span> insert-unambiguous <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># all history widgets</span></span><br><span class="line"><span class="built_in">zstyle</span> <span class="string">&#x27;:autocomplete:*history*:*&#x27;</span> insert-unambiguous <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ^S</span></span><br><span class="line"><span class="built_in">zstyle</span> <span class="string">&#x27;:autocomplete:menu-search:*&#x27;</span> insert-unambiguous <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/insert_pre.png" alt="before"> </p>
+<p><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/insert.png" alt="after"> </p>
+<p>当补全内容含有公共子串时, 则按<code>Tab</code>自动插入公共子串</p>
+<p>zstyle ‘:autocomplete:*‘ widget-style menu-select</p>
+</li>
+<li><p>选择模式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">zstyle</span> <span class="string">&#x27;:autocomplete:*&#x27;</span> widget-style menu-select</span><br><span class="line"><span class="comment"># complete-word: 类似与bash的补全, Tab补全第一个, Shift+Tab补全最后一个</span></span><br><span class="line"><span class="comment"># menu-complete: 每次按Tab都会在补全列表中选择下一个</span></span><br><span class="line"><span class="comment"># menu-select:  每次按Tab都会在补全列表中选择下一个, 但是会显示补全列表</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他</p>
+<p>参考官方说明: <a target="_blank" rel="noopener" href="https://github.com/marlonrichert/zsh-autocomplete">marlonrichert&#x2F;zsh-autocomplete</a></p>
+</li>
+</ul>
+<h3 id="zsh-vi-mode"><a href="#zsh-vi-mode" class="headerlink" title="zsh-vi-mode"></a>zsh-vi-mode</h3><blockquote>
+<p>如果你习惯 vi 的模式, 那么这个插件能让你在终端中如虎添翼</p>
+</blockquote>
+<p>该插件高度可定制, 强烈建议阅读一下官方文档</p>
+<p>官方地址: <a target="_blank" rel="noopener" href="https://github.com/jeffreytse/zsh-vi-mode">jeffreytse&#x2F;zsh-vi-mode</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zinit ice depth=1</span><br><span class="line">zinit light jeffreytse/zsh-vi-mode</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置-3"><a href="#配置-3" class="headerlink" title="配置"></a>配置</h4><ul>
+<li><p>hook 函数</p>
+<ul>
+<li><code>zvm_before_init_commands</code></li>
+<li><code>zvm_after_init_commands</code></li>
+<li><code>zvm_before_select_vi_mode_commands</code></li>
+<li><code>zvm_after_select_vi_mode_commands</code></li>
+<li><code>zvm_before_lazy_keybindings_commands</code></li>
+<li><code>zvm_after_lazy_keybindings_commands</code></li>
+</ul>
+</li>
+<li><p>对 zsh 原生 vi-mode 的补充</p>
+<blockquote>
+<p><code>zvm_conig</code>函数是会被<code>zsh-vi-mode</code>插件自动调用的</p>
+</blockquote>
+<ul>
+<li><code>vi-surround</code></li>
+</ul>
+<p>在配置中添加以下代码</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">zvm_config</span></span> () &#123;</span><br><span class="line">    ZVM_INSERT_MODE_CURSOR=<span class="variable">$ZVM_CURSOR_BLINKING_BEAM</span></span><br><span class="line">    ZVM_VI_INSERT_ESCAPE_BINDKEY=<span class="string">&#x27;^S&#x27;</span></span><br><span class="line">    ZVM_VI_SURROUND_BINDKEY=<span class="string">&#x27;s-prefix&#x27;</span></span><br><span class="line">    ZVM_READKEY_ENGINE=<span class="variable">$ZVM_READKEY_ENGINE_NEX</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>- ZVM_VI_SURROUND_BINDKEY=classic
+    S&quot;   : 添加 &quot; 用于视觉选择
+    ys&quot;  : 添加 &quot; 用于视觉选择
+    cs&quot;&#39; : 将 &quot; 更改为 &#39;
+    ds&quot;  ：删除 &quot;
+
+- ZVM_VI_SURROUND_BINDKEY=s-prefix
+    sa&quot;  : 添加 &quot; 用于视觉选择
+    sd&quot;  ：删除 &quot;
+    sr&quot;&#39; : 将 &quot; 更改为 &#39;
+</code></pre>
+<ul>
+<li><p><code>ctrl-a和ctrl-x</code>的扩展</p>
+<ul>
+<li>数字（十进制、十六进制、二进制…）</li>
+<li>布尔值（真或假，是或否，开或关……）</li>
+<li>平日（周日、周一、周二、周三……）</li>
+<li>月份（一月、二月、三月、四月、五月……）</li>
+<li>运算符（&amp;&amp;、||、++、–、&#x3D;&#x3D;、!&#x3D;&#x3D; 和、或…）</li>
+<li>…</li>
+</ul>
+<blockquote>
+<p>和 vim 的 ctrl-a 有一些不同: 这里需要在内容上使用 ctrl + a 才生效</p>
+</blockquote>
+</li>
+<li><p><strong>使用<code>vim/neovim</code>编辑命令行</strong></p>
+<p>这个功能十分强大, 简单来说就是可以随时用 vim&#x2F;neovim 打开当前编辑的命令行,编辑完了之后再返回到命令行</p>
+<blockquote>
+<p>默认的键绑定是<code>vv</code>, 如果需要更改请参考官方文档</p>
+</blockquote>
+<p>   <img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/vi_command_line.png"></p>
+</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/JuanZoran/dotfiles/blob/master/config/zsh/maps.zsh">我的配置</a></p>
+<blockquote>
+<p>很多是根据我自己习惯的键位改的</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="zsh-autosuggestions"><a href="#zsh-autosuggestions" class="headerlink" title="zsh-autosuggestions"></a>zsh-autosuggestions</h3><p>官方地址: <a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions">zsh-users&#x2F;zsh-autosuggestions</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zi ice <span class="built_in">wait</span> lucid atload<span class="string">&#x27;_zsh_autosuggest_start&#x27;</span></span><br><span class="line">zi light zsh-users/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
+<h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p>官方地址: <a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-users&#x2F;zsh-syntax-highlighting</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zinit light zsh-users/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+
+<p>根据个人喜好定制的, 你也可以直接复制我的<a target="_blank" rel="noopener" href="https://github.com/JuanZoran/dotfiles/blob/master/config/zsh/highlight.zsh">颜色配置</a></p>
+<p><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/highlight.png"> </p>
+<h1 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h1><ul>
+<li><p>命令行里的<code>emacs | vi-mode</code></p>
+<p>zsh 对 emacs 和 vi 键位有着原生的支持, 但是我觉得介绍文档有一点老, 可能不是很适合新手</p>
+<ul>
+<li><p>键绑定是<code>bindkey -M &#123;mode&#125; &#123;key&#125; &#123;widget&#125;</code> 的形式</p>
+</li>
+<li><p><code>bindkey -M</code> 可以查看所有的模式</p>
+<p>所有可用的模式:</p>
+<ul>
+<li><code>.safe</code></li>
+<li><code>command</code></li>
+<li><code>emacs</code></li>
+<li><code>isearch</code></li>
+<li><code>listscroll</code></li>
+<li><code>main</code></li>
+<li><code>menuselect</code></li>
+<li><code>vicmd</code></li>
+<li><code>viins</code></li>
+<li><code>viopp</code></li>
+<li><code>visual</code></li>
+</ul>
+</li>
+<li><p><code>bindkey</code>: 可以查看所有的键绑定</p>
+<ul>
+<li><code>bindkey &lt;keystroke&gt;</code> : 基于按键查看 widgets</li>
+<li><code>bindkey &lt;keystroke&gt; &lt;widget&gt;</code> : 绑定到已经有的 widgets 里面</li>
+<li><code>bindkey -s &lt;keystroke&gt; &lt;keystroke&gt;</code> : 把 a 绑定到 b 快捷键上</li>
+<li><code>bindkey -M &lt;keymap&gt; &lt;keystroke&gt;</code> : 绑定到具体模式</li>
+<li><code>bindkey -r &lt;keystroke&gt;</code> : 删除键绑定</li>
+<li><code>bindkey -M &lt;keymap&gt; -r &lt;keystroke&gt;</code> : 删除 Bindkey</li>
+</ul>
+</li>
+<li><p>zle -l 查看所有的 widgets</p>
+</li>
+</ul>
+</li>
+<li><p>寻找需要的插件</p>
+<p>zsh 的插件很多, 可以去<a target="_blank" rel="noopener" href="https://github.com/unixorn/awesome-zsh-plugins">awesome-zsh-plugins</a> 里看看有没有你需要的</p>
+<blockquote>
+<p>编程学习的小技巧: 任何一个领域, 一般都会都对应的<code>awesome-xxx</code>话题, 里面会包含很多社区维护的优秀资源<br>例如:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/vinta/awesome-python">awesome-python</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rockerBOO/awesome-neovim">awesome-neovim</a></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>zsh 是一个强大的 shell, 但是他的配置的确很多, 同时文档又比较零散, 希望这篇文章能帮助到你入门<code>zsh</code></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/Termux/">Termux</a><a class="post-meta__tags" href="/Notes/tags/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5Pro/">小米平板5Pro</a><a class="post-meta__tags" href="/Notes/tags/Linux/">Linux</a><a class="post-meta__tags" href="/Notes/tags/zsh/">zsh</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">web项目--并发之[半同步半分应堆]</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/30/Toss_Diary/Termux/Termux%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%80)/" title="Termux的使用(一)"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">Termux的使用(一)</div></div></a></div><div><a href="/Notes/2023/03/30/Toss_Diary/Termux/Termux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/" title="Termux的安装与介绍"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">Termux的安装与介绍</div></div></a></div><div><a href="/Notes/2023/03/31/Toss_Diary/Termux/%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="基本使用"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">基本使用</div></div></a></div><div><a href="/Notes/2023/03/30/Toss_Diary/Termux/%E5%BC%95%E5%AF%BC%E7%AF%87/" title="引导篇"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">引导篇</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TLDR"><span class="toc-number">1.</span> <span class="toc-text">TLDR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E8%A6%81%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">本文要点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zsh-%E7%9A%84%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">Zsh 的插件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">安装插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.1.</span> <span class="toc-text">安装一个最简单的插件:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7"><span class="toc-number">3.1.2.</span> <span class="toc-text">高级技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ice"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">ice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Snippet"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">Snippet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85"><span class="toc-number">3.2.</span> <span class="toc-text">主题安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#romkatv-x2F-powerlevel10k"><span class="toc-number">3.2.1.</span> <span class="toc-text">romkatv&#x2F;powerlevel10k</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#starship"><span class="toc-number">3.2.2.</span> <span class="toc-text">starship</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-1"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="toc-number">3.3.</span> <span class="toc-text">常用工具安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#marlonrichert-x2F-zsh-autocomplete"><span class="toc-number">3.3.1.</span> <span class="toc-text">marlonrichert&#x2F;zsh-autocomplete</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-2"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh-vi-mode"><span class="toc-number">3.3.2.</span> <span class="toc-text">zsh-vi-mode</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-3"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh-autosuggestions"><span class="toc-number">3.3.3.</span> <span class="toc-text">zsh-autosuggestions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh-syntax-highlighting"><span class="toc-number">3.3.4.</span> <span class="toc-text">zsh-syntax-highlighting</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-number">4.</span> <span class="toc-text">使用技巧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/04/23/Toss_Diary/Termux/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="zsh的基本使用"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="zsh的基本使用"/></a><div class="content"><a class="title" href="/Notes/2023/04/23/Toss_Diary/Termux/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="zsh的基本使用">zsh的基本使用</a><time datetime="2023-04-23T12:23:00.000Z" title="发表于 2023-04-23 20:23:00">2023-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--并发之[半同步半分应堆]"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E5%B9%B6%E5%8F%91%E4%B9%8B%5B%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%88%86%E5%BA%94%E5%A0%86%5D/" title="web项目--并发之[半同步半分应堆]">web项目--并发之[半同步半分应堆]</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--服务器框架"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6/" title="web项目--服务器框架">web项目--服务器框架</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--线程池的设计和实现"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="web项目--线程池的设计和实现">web项目--线程池的设计和实现</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="web项目--锁机制"/></a><div class="content"><a class="title" href="/Notes/2023/03/31/C++/Project/web%E9%A1%B9%E7%9B%AE--%E9%94%81%E6%9C%BA%E5%88%B6/" title="web项目--锁机制">web项目--锁机制</a><time datetime="2023-03-31T15:29:07.000Z" title="发表于 2023-03-31 23:29:07">2023-03-31</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
