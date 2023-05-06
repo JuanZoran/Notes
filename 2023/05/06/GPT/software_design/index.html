@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>software_design | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:  我在设计程序的时候，将服务和渲染分别抽象成了后端和前端，目前我的程序后端的情况如下: 只有一个后端是本地请求数据库，查询的时候没有任何网络 IO 延迟， 也就是非阻塞立即返回， 其他后端需要进行异步 IO 请求，请求的过程中，我希望此时前端打开一个窗口渲染相应的等待动画，那我处理的逻辑应该如何设计， 才能最便于维护和扩展呢  ChatGPT:  为了实现这种设计，你可以使用以下技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="software_design">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/06/GPT/software_design/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran:  我在设计程序的时候，将服务和渲染分别抽象成了后端和前端，目前我的程序后端的情况如下: 只有一个后端是本地请求数据库，查询的时候没有任何网络 IO 延迟， 也就是非阻塞立即返回， 其他后端需要进行异步 IO 请求，请求的过程中，我希望此时前端打开一个窗口渲染相应的等待动画，那我处理的逻辑应该如何设计， 才能最便于维护和扩展呢  ChatGPT:  为了实现这种设计，你可以使用以下技术">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg">
+<meta property="article:published_time" content="2023-05-06T04:52:36.000Z">
+<meta property="article:modified_time" content="2023-05-06T05:21:46.550Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/06/GPT/software_design/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'software_design',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-05-06 13:21:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">software_design</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-06T04:52:36.000Z" title="发表于 2023-05-06 12:52:36">2023-05-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-06T05:21:46.550Z" title="更新于 2023-05-06 13:21:46">2023-05-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="software_design"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran:</p>
+<ul>
+<li>我在设计程序的时候，将服务和渲染分别抽象成了后端和前端，目前我的程序后端的情况如下: 只有一个后端是本地请求数据库，查询的时候没有任何网络 IO 延迟， 也就是非阻塞立即返回， 其他后端需要进行异步 IO 请求，请求的过程中，我希望此时前端打开一个窗口渲染相应的等待动画，那我处理的逻辑应该如何设计， 才能最便于维护和扩展呢</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li>为了实现这种设计，你可以使用以下技术和架构：</li>
+</ul>
+<ol>
+<li><strong>后端</strong> ：为每个后端服务创建一个抽象层，这些服务可以是本地数据库服务，也可以是需要进行异步 IO 请求的服务。这个抽象层定义了一个通用的接口，以便前端无需关心底层服务的具体实现。</li>
+<li><strong>前端</strong> ：使用一个前端框架（如 React、Vue 或 Angular）来构建用户界面。这将帮助你更好地管理组件和状态。</li>
+<li><strong>异步编程</strong> ：使用异步编程技术（如 Promises、async&#x2F;await 或 ReactiveX）处理后端服务的异步 IO 请求。这将使你的代码更易于维护和理解。</li>
+</ol>
+<p>以下是一个简化的实现步骤：</p>
+<ol>
+<li>在后端，为每个服务创建一个抽象层。例如，你可以使用接口或抽象类定义一个通用的服务接口，其中包含一个异步方法，如 <code>fetchData()</code>。然后，为每个具体的服务实现这个接口。</li>
+<li>在前端，当用户发起一个操作时（例如点击一个按钮），调用相应后端服务的 <code>fetchData()</code> 方法。由于该方法是异步的，它将立即返回一个 Promise 或类似的异步对象。</li>
+<li>在等待后端服务返回结果期间，显示一个等待动画。你可以使用前端框架的状态管理机制（如 React 的 state 或 Vue 的 data）来控制动画的显示和隐藏。</li>
+<li>当后端服务返回结果时，隐藏等待动画，并使用返回的数据更新前端的状态。这将导致前端自动重新渲染，显示新的数据。</li>
+<li>如果后端服务返回错误（例如网络错误或超时），则隐藏等待动画，并显示一个错误消息。你可以为这种情况提供一个重试机制，以便用户可以重新发起请求。</li>
+</ol>
+<p>这种设计将使你的程序易于维护和扩展。通过将后端服务抽象为通用接口，你可以在不影响前端代码的情况下轻松添加新的服务或修改现有服务。同时，使用异步编程技术和前端框架可以简化状态管理和组件渲染，提高程序的可读性。</p>
+<p>Zoran:</p>
+<ul>
+<li><p>目前我的代码大概得逻辑是这样的, 请你帮我做相应的改进， 可以编写伪代码来方便提现设计思想:—To Do Online Query<br>---@param data TransData @data<br>---@param backend TransOnlineBackend @backend<br>local function do_query(data, backend)<br>– TODO : template method for online query<br>local name &#x3D; backend.name<br>local uri &#x3D; backend.uri<br>local method &#x3D; backend.method<br>local formatter &#x3D; backend.formatter<br>local query &#x3D; backend.get_query(data)<br>local header &#x3D; type(backend.header) &#x3D;&#x3D; ‘function’ and backend.header(data) or backend.header</p>
+<pre><code>local function handle(output)
+    local status, body = pcall(vim.json.decode, output.body)
+    if not status or not body then
+        if not Trans.conf.debug then
+            backend.debug(body)
+            data.trace[name] = output
+        end
+
+        data.result[name] = false
+        return
+    end
+
+    -- vim.print(data.result[name])
+    data.result[name] = formatter(body, data)
+end
+
+Trans.curl[method](uri, &#123;
+    query = query,
+    callback = handle,
+    header = header,
+&#125;)
+-- Hook ?
+</code></pre>
+<p>end</p>
+</li>
+</ul>
+<p>---@type table&lt;string, fun(data: TransData):boolean&gt;<br>local strategy &#x3D; {<br>fallback &#x3D; function(data)<br>local result &#x3D; data.result<br>Trans.backend.offline.query(data)</p>
+<pre><code>    if result.offline then return true end
+
+    local update = data.frontend:wait()
+    for _, backend in ipairs(data.backends) do
+        do_query(data, backend)
+
+        local name = backend.name
+        ---@cast backend TransBackend
+        while result[name] == nil and update(backend) do
+        end
+
+        if result[name] then return true end
+    end
+
+    return false
+end,
+--- TODO :More Strategys
+</code></pre>
+<p>}</p>
+<p>– HACK : Core process logic<br>local function process(opts)<br>opts &#x3D; init_opts(opts)<br>local str &#x3D; opts.str<br>if not str or str &#x3D;&#x3D; ‘’ then return end</p>
+<pre><code>-- Find in cache
+if Trans.cache[str] then
+    local data = Trans.cache[str]
+    data.frontend:process(data)
+    return
+end
+
+local data = Trans.data.new(opts)
+if strategy[data.frontend.opts.query](data) then
+    Trans.cache[data.str] = data
+    data.frontend:process(data)
+else
+    data.frontend:fallback()
+end
+</code></pre>
+<p>end</p>
+<p>ChatGPT:</p>
+<ul>
+<li>从代码中看，你已经实现了一些可维护性和扩展性的设计。但是，我有一些建议可以进一步优化你的代码：</li>
+</ul>
+<ol>
+<li>将不同的功能划分为不同的模块。例如，你可以将后端服务的代码与策略实现分离。这将使得代码更易于理解和维护。</li>
+<li>在处理异步请求时，使用 Promise 或 async&#x2F;await（或 Rust 中的 Futures）替代回调函数。这将使你的代码更易于阅读和维护。</li>
+</ol>
+<p>根据这些建议，我为你的代码提供了一些修改：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">-- backend.lua</span></span><br><span class="line"><span class="keyword">local</span> Backend = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Backend.new</span><span class="params">(name, uri, method, formatter, get_query, header)</span></span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        name = name,</span><br><span class="line">        uri = uri,</span><br><span class="line">        method = method,</span><br><span class="line">        formatter = formatter,</span><br><span class="line">        get_query = get_query,</span><br><span class="line">        header = header</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> Backend</span><br><span class="line"></span><br><span class="line"><span class="comment">-- strategy.lua</span></span><br><span class="line"><span class="keyword">local</span> Strategy = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Strategy.fallback</span><span class="params">(data)</span></span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> Strategy</span><br><span class="line"></span><br><span class="line"><span class="comment">-- main.lua</span></span><br><span class="line"><span class="keyword">local</span> Backend = <span class="built_in">require</span>(<span class="string">&quot;backend&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> Strategy = <span class="built_in">require</span>(<span class="string">&quot;strategy&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">do_query</span><span class="params">(data, backend)</span></span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">process</span><span class="params">(opts)</span></span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在 main.lua 中创建后端实例</span></span><br><span class="line"><span class="keyword">local</span> backend = Backend.new(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;uri&quot;</span>, <span class="string">&quot;method&quot;</span>, formatter, get_query, header)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用策略</span></span><br><span class="line"><span class="keyword">local</span> result = Strategy.fallback(data)</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码将后端服务和策略实现分离到不同的模块中，并使用了模块化的方式来组织代码。你可以根据自己的需求进一步优化和调整这些代码。</p>
+<p>注意：我使用的是 Lua 语言来表示这些伪代码，但实际上你可以将这些设计原则应用于任何编程语言，包括 Rust。</p>
+<p>Zoran:</p>
+<ul>
+<li>我刚刚提到了， 我的后端中存在一个本地查询的后端，他的操作是立即返回的没有 IO 延迟， 也就是不需要打开窗口渲染动画， 这种情况如何抽象才能实现统一处理呢?</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li>为了实现统一处理，你可以将本地查询和远程查询都抽象为异步操作。这样一来，你的前端代码就无需关心后端服务是本地的还是远程的，只需要处理异步结果即可。在具体实现时，可以将本地查询包装为一个立即解析的异步操作。</li>
+</ul>
+<p>以下是一个简化的示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// backend.rs</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">trait</span> <span class="title class_">Backend</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">fetch_data</span>(&amp;<span class="keyword">self</span>, data: &amp;TransData) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;FormattedData, Error&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// local_backend.rs</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">LocalBackend</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Backend</span> <span class="keyword">for</span> <span class="title class_">LocalBackend</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">fetch_data</span>(&amp;<span class="keyword">self</span>, data: &amp;TransData) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;FormattedData, Error&gt; &#123;</span><br><span class="line">        <span class="comment">// 执行本地查询</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// 将结果包装为一个立即解析的异步操作</span></span><br><span class="line">        futures::future::<span class="title function_ invoke__">ready</span>(result)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// remote_backend.rs</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">RemoteBackend</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Backend</span> <span class="keyword">for</span> <span class="title class_">RemoteBackend</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">fetch_data</span>(&amp;<span class="keyword">self</span>, data: &amp;TransData) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;FormattedData, Error&gt; &#123;</span><br><span class="line">        <span class="comment">// 执行远程查询</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.rs</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">process</span>(data: TransData, backends: <span class="type">Vec</span>&lt;<span class="type">Box</span>&lt;<span class="keyword">dyn</span> Backend&gt;&gt;) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">backend</span> <span class="keyword">in</span> backends &#123;</span><br><span class="line">        <span class="comment">// 无论后端是本地的还是远程的，都将结果处理为异步操作</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">result</span> = backend.<span class="title function_ invoke__">fetch_data</span>(&amp;data).<span class="keyword">await</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据结果更新前端状态，显示或隐藏等待动画</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们将本地查询和远程查询的操作都抽象为异步函数（使用 <code>async fn</code>）。本地查询的结果会立即返回，而远程查询的结果会在 I&#x2F;O 完成后返回。这样，前端代码就可以统一处理异步结果，而不必关心底层服务的具体实现。</p>
+<p>Zoran:</p>
+<ul>
+<li>如果这样处理的话，那本地查询是不是也会先打开等待动画的窗口， 如何解决这个问题呢</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li>为了避免在本地查询时显示等待动画，你可以在后端抽象中添加一个方法来检查是否需要显示等待动画。下面是一个示例：</li>
+</ul>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// backend.rs</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">trait</span> <span class="title class_">Backend</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">fetch_data</span>(&amp;<span class="keyword">self</span>, data: &amp;TransData) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;FormattedData, Error&gt;;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">requires_waiting_animation</span>(&amp;<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> <span class="type">bool</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// local_backend.rs</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">LocalBackend</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Backend</span> <span class="keyword">for</span> <span class="title class_">LocalBackend</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">fetch_data</span>(&amp;<span class="keyword">self</span>, data: &amp;TransData) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;FormattedData, Error&gt; &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">requires_waiting_animation</span>(&amp;<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> <span class="type">bool</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// remote_backend.rs</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">RemoteBackend</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Backend</span> <span class="keyword">for</span> <span class="title class_">RemoteBackend</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">fetch_data</span>(&amp;<span class="keyword">self</span>, data: &amp;TransData) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;FormattedData, Error&gt; &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">requires_waiting_animation</span>(&amp;<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> <span class="type">bool</span> &#123;</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.rs</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">process</span>(data: TransData, backends: <span class="type">Vec</span>&lt;<span class="type">Box</span>&lt;<span class="keyword">dyn</span> Backend&gt;&gt;) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">backend</span> <span class="keyword">in</span> backends &#123;</span><br><span class="line">        <span class="keyword">if</span> backend.<span class="title function_ invoke__">requires_waiting_animation</span>() &#123;</span><br><span class="line">            <span class="comment">// 显示等待动画</span></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">result</span> = backend.<span class="title function_ invoke__">fetch_data</span>(&amp;data).<span class="keyword">await</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> backend.<span class="title function_ invoke__">requires_waiting_animation</span>() &#123;</span><br><span class="line">            <span class="comment">// 隐藏等待动画</span></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据结果更新前端状态</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们在 <code>Backend</code> trait 中添加了一个新方法 <code>requires_waiting_animation()</code>。本地查询的实现返回 <code>false</code>，表示不需要显示等待动画；远程查询的实现返回 <code>true</code>，表示需要显示等待动画。在前端代码中，我们根据这个方法的返回值来决定是否显示等待动画。这样一来，本地查询就不会显示等待动画了。</p>
+<p>Zoran:</p>
+<ul>
+<li>async 和 await 是如何避免回调函数的呢</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li><code>async</code> 和 <code>await</code> 是一种编程模型，它们提供了一种更简洁的方式来处理异步操作，避免了回调地狱（callback hell）的问题。下面我将解释它们是如何避免回调函数的。</li>
+</ul>
+<p>在传统的异步编程中，我们通常使用回调函数来处理异步操作的结果。当一个异步操作完成时，回调函数将被执行。然而，当我们需要处理多个相互依赖的异步操作时，代码会变得非常复杂，因为需要嵌套多层回调函数。这就导致了所谓的“回调地狱”。</p>
+<p>而 <code>async</code> 和 <code>await</code> 提供了一种更简洁、更直观的方式来处理异步操作。使用这种编程模型，我们可以用同步的方式编写异步代码。在函数中，我们可以使用 <code>await</code> 关键字来等待一个异步操作的结果，而不需要使用回调函数。当 <code>await</code> 被执行时，函数会暂停执行，直到异步操作完成。这样，我们就可以像编写同步代码一样编写异步代码，从而避免了回调地狱。</p>
+<p>下面举一个简单的例子来说明这个概念：</p>
+<p><strong>使用回调函数的示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fetchData</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">    <span class="comment">// 异步获取数据</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">callback</span>(<span class="string">&quot;data&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">processData</span>(<span class="params">data, callback</span>) &#123;</span><br><span class="line">    <span class="comment">// 异步处理数据</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">callback</span>(data.<span class="title function_">toUpperCase</span>());</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetchData</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">processData</span>(data, <span class="function">(<span class="params">processedData</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(processedData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>** 的示例：**</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="string">&quot;data&quot;</span>);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">processData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(data.<span class="title function_">toUpperCase</span>());</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetchData</span>();</span><br><span class="line">    <span class="keyword">const</span> processedData = <span class="keyword">await</span> <span class="title function_">processData</span>(data);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(processedData);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>从上面的例子可以看到，使用 <code>async</code> 和 <code>await</code> 编写的代码更简洁、更易于理解。我们不再需要使用回调函数来处理异步操作的结果，而是可以像编写同步代码一样编写异步代码。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/06/GPT/misc/" title="misc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">misc</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">B_tree</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">B_tree</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">CPP_QA</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lexer/" title="Lexer"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lexer</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lua_QA</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/misc/" title="misc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">misc</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">autohotkey</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Lua_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA">Lua_QA</a><time datetime="2023-05-06T05:22:06.000Z" title="发表于 2023-05-06 13:22:06">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="CPP_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA">CPP_QA</a><time datetime="2023-05-06T05:10:54.000Z" title="发表于 2023-05-06 13:10:54">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/misc/" title="misc"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="misc"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/misc/" title="misc">misc</a><time datetime="2023-05-06T05:05:16.000Z" title="发表于 2023-05-06 13:05:16">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/software_design/" title="software_design"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="software_design"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/software_design/" title="software_design">software_design</a><time datetime="2023-05-06T04:52:36.000Z" title="发表于 2023-05-06 12:52:36">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="B_tree"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree">B_tree</a><time datetime="2023-05-06T04:50:41.000Z" title="发表于 2023-05-06 12:50:41">2023-05-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>misc | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:   riscv汇编和x86 intel汇编有什么不同  ChatGPT:   RISC-V和x86是两种不同的处理器架构，分别遵循不同的指令集和设计原则。RISC-V是一种精简指令集计算机（RISC）架构，而x86是一种复杂指令集计算机（CISC）架构。这两者之间的汇编语言（assembly）也有很多显著差异。以下是RISC-V汇编与x86 Intel汇编之间的一些主要差异：   指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="misc">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/06/GPT/misc/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran:   riscv汇编和x86 intel汇编有什么不同  ChatGPT:   RISC-V和x86是两种不同的处理器架构，分别遵循不同的指令集和设计原则。RISC-V是一种精简指令集计算机（RISC）架构，而x86是一种复杂指令集计算机（CISC）架构。这两者之间的汇编语言（assembly）也有很多显著差异。以下是RISC-V汇编与x86 Intel汇编之间的一些主要差异：   指">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg">
+<meta property="article:published_time" content="2023-05-06T05:05:16.000Z">
+<meta property="article:modified_time" content="2023-05-06T05:34:27.950Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/06/GPT/misc/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'misc',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-06 13:34:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">misc</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-06T05:05:16.000Z" title="发表于 2023-05-06 13:05:16">2023-05-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-06T05:34:27.950Z" title="更新于 2023-05-06 13:34:27">2023-05-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="misc"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran: </p>
+<ul>
+<li>riscv汇编和x86 intel汇编有什么不同</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>RISC-V和x86是两种不同的处理器架构，分别遵循不同的指令集和设计原则。RISC-V是一种精简指令集计算机（RISC）架构，而x86是一种复杂指令集计算机（CISC）架构。这两者之间的汇编语言（assembly）也有很多显著差异。以下是RISC-V汇编与x86 Intel汇编之间的一些主要差异：</li>
+</ul>
+<ol>
+<li>指令集设计理念：RISC-V遵循RISC设计原则，强调简单、规整的指令集，易于实现高性能的流水线硬件。x86遵循CISC设计原则，具有更复杂的指令集和多种寻址方式。 </li>
+<li>寄存器：RISC-V具有32个通用寄存器（RV32I）或64个通用寄存器（RV64I），命名为x0到x31（或x63）。x86有较少的通用寄存器，如EAX、EBX、ECX、EDX等，以及一些特殊功能寄存器，如段寄存器、标志寄存器等。 </li>
+<li>指令数量：RISC-V具有较少的指令数量，而x86有大量指令，包括许多特定于某些操作的复杂指令。 </li>
+<li>指令长度：RISC-V指令长度固定为32位，而x86指令长度可变，从1字节到15字节不等。 </li>
+<li>指令格式：RISC-V指令格式相对简单，通常采用三地址格式，如：<code>add rd, rs1, rs2</code>（将rs1和rs2的值相加，结果存储在rd中）。x86指令格式更复杂，支持多种寻址方式，如立即数寻址、基址寻址、相对寻址等。 </li>
+<li>跨平台兼容性：RISC-V是开源架构，旨在支持各种处理器实现，从微控制器到高性能计算机。x86架构主要由Intel和AMD设计和制造，主要用于个人计算机、服务器等领域。 </li>
+<li>系统调用约定：RISC-V和x86在进行系统调用时，寄存器的使用和参数传递约定不同。</li>
+</ol>
+<p>这些差异导致RISC-V汇编和x86 Intel汇编在编程和代码阅读方面存在显著差异。了解这些差异有助于编写针对特定架构的高效、可移植的程序。</p>
+<p>Zoran: </p>
+<ul>
+<li>RISC-V汇编主要用在什么处理器和架构上?</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>RISC-V（Reduced Instruction Set Computer V）是一种开源指令集架构（ISA），主要用于实现各种处理器和系统。由于其开放性、灵活性和可扩展性，RISC-V已成为从微控制器（MCU）到高性能计算机（HPC）等各种处理器和系统架构的热门选择。以下是一些主要应用场景：</li>
+</ul>
+<ol>
+<li>微控制器（MCU）：RISC-V被广泛应用于嵌入式系统领域，如物联网设备、智能家居、无线通信等。在这些领域，RISC-V可用于实现低功耗、高性能的微控制器。 </li>
+<li>系统级芯片（SoC）：RISC-V可以作为集成在SoC中的处理器核心，用于各种应用，如智能手机、平板电脑、智能电视等。 </li>
+<li>边缘计算：RISC-V也适用于边缘计算领域，用于实现局部数据处理、实时分析等功能，以减轻云端服务器的负担。 </li>
+<li>人工智能（AI）与机器学习（ML）：RISC-V在AI加速器领域也有广泛应用，如用于实现专用神经网络处理器等。 </li>
+<li>高性能计算（HPC）：虽然RISC-V架构通常与简单的处理器实现相关联，但其也可应用于高性能计算场景。针对高性能计算的RISC-V扩展已经开始出现，这将进一步推动RISC-V在HPC领域的应用。 </li>
+<li>学术研究和教育：由于其开源性和易于实现的特点，RISC-V在学术界得到了广泛关注。许多研究人员利用RISC-V进行处理器设计、优化等研究工作。同时，RISC-V也被用于计算机体系结构、汇编语言等课程的教学。</li>
+</ol>
+<p>总之，RISC-V汇编可应用于各种处理器和系统架构，从简单的嵌入式系统到高性能计算机。其开源、灵活的特点使得越来越多的企业和开发者选择使用RISC-V作为他们的处理器架构。</p>
+<p>Zoran: </p>
+<ul>
+<li>lua解释器是怎么运作的</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>Lua解释器是一种基于虚拟机的、轻量级的脚本语言解释器，它负责解释和执行Lua脚本。Lua解释器的工作过程大致可以分为以下几个阶段：</li>
+</ul>
+<ol>
+<li>词法分析：首先，Lua解释器将输入的源代码字符串分解为一系列的“tokens”（词素）。这些tokens是Lua语言的基本语法单位，如关键字、标识符、运算符、字面值等。 </li>
+<li>语法分析：接着，Lua解释器将这些tokens组织成一个抽象语法树（AST）。AST是一种树状结构，用于表示源代码的逻辑结构和层次关系。语法分析器根据Lua语言的语法规则，将tokens组合成语句、表达式、函数定义等高级结构。 </li>
+<li>代码生成：在生成AST之后，Lua解释器将其转换为字节码（也称为中间代码）。字节码是一种低级的、与平台无关的指令集，可以在Lua虚拟机上执行。字节码的生成过程涉及许多优化技术，以提高Lua代码的运行效率。 </li>
+<li>虚拟机执行：最后，Lua虚拟机负责执行生成的字节码。Lua虚拟机是一种基于栈的虚拟机，它在内存中维护一个数据栈来存储临时变量、函数调用参数和返回值等。虚拟机通过读取和解释字节码指令，完成各种运算、控制流程跳转、函数调用等操作。 </li>
+<li>垃圾回收：Lua具有自动内存管理和垃圾回收功能。Lua虚拟机使用标记-清除算法来跟踪和回收不再使用的内存。此外，Lua还提供了弱引用表等特性，以帮助程序员更好地控制内存管理。</li>
+</ol>
+<p>在整个过程中，Lua解释器还支持动态类型检查、表和元表操作、协程等高级特性。此外，Lua解释器可以很容易地与C和C++等编程语言集成，作为一个嵌入式脚本引擎提供强大的扩展性和灵活性。</p>
+<p>需要注意的是，这种方法可能需要额外的手动查找实现，因为<code>std::array</code>或<code>std::pair</code>的数组不具有<code>std::map</code>提供的查找方法。不过，对于较小的容器，这通常不是一个问题。</p>
+<p>Zoran: </p>
+<ul>
+<li>创建一个tui程序， 需要学习哪些内容</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>要创建一个TUI（文本用户界面）程序，需要学习以下内容：</li>
+</ul>
+<ol>
+<li>基本编程知识：首先，确保熟悉至少一种编程语言，例如Python、C++、Rust或Go等。 </li>
+<li>终端基础：了解终端的基本工作原理，如何在终端中显示文本、移动光标、设置颜色等。 </li>
+<li>TUI库：选择一个适合你编程语言的TUI库。这些库可以简化TUI开发过程，提供更高级的功能，如窗口、面板、菜单等。一些常见的TUI库如下：</li>
+</ol>
+<ul>
+<li>Python：npyscreen、urwid、blessed</li>
+<li>C++：ncurses、PDCurses</li>
+<li>Rust：cursive、tui-rs</li>
+<li>Go：tview、termbox-go</li>
+</ul>
+<ol start="4">
+<li>事件驱动编程：TUI程序通常采用事件驱动编程模型，了解如何处理用户输入事件（如按键、鼠标点击等）以及在界面上响应这些事件。 </li>
+<li>TUI设计原则：学习TUI设计的最佳实践，包括布局、导航、可读性等方面，以提高用户体验。 </li>
+<li>跨平台兼容性：了解如何使TUI程序在不同操作系统和终端环境下保持兼容性。</li>
+</ol>
+<p>要开始创建一个TUI程序，首先选择一个编程语言和TUI库，然后阅读库的文档以了解其功能和使用方法。从简单的界面和功能开始，逐步构建您的TUI程序。学习并掌握这些知识，你将能够创建出功能丰富且易用的TUI程序。</p>
+<p>Zoran: </p>
+<ul>
+<li>TUI是如何创建窗口移动光标的呢， 是通过向终端不断地发送转义字符来渲染吗</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>是的，TUI（文本用户界面）程序通过向终端发送特定的转义序列（也称为ANSI转义码）来控制光标的位置、移动、改变文本颜色等。这些转义序列是一系列以ASCII码表示的字符，以ESC（\033或\033）字符开头，后跟一系列表示命令和参数的字符。</li>
+</ul>
+<p>当终端接收到这些转义序列时，它会根据相应的指令执行操作，如移动光标、更改文本属性等。TUI程序使用这些序列来创建窗口、面板、菜单等用户界面元素。</p>
+<p>例如，以下是一些常见的ANSI转义序列： </p>
+<ul>
+<li>光标移动：<code>\033[nA</code> 光标向上移动n行，<code>\033[nB</code> 光标向下移动n行，<code>\033[nC</code> 光标向右移动n列，<code>\033[nD</code> 光标向左移动n列。 </li>
+<li>光标定位：<code>\033[y;xH</code> 或 <code>\033[y;xf</code> 将光标移动到第y行，第x列。 </li>
+<li>清屏：<code>\033[2J</code> 清除屏幕上的所有内容，并将光标移至左上角（1,1）。</li>
+</ul>
+<p>TUI库（如ncurses、urwid等）通常会封装这些底层操作，使开发人员无需直接处理转义序列。库会提供高级的界面元素和函数，以便更容易地构建用户界面。</p>
+<p>Zoran: </p>
+<ul>
+<li>如何设计合理的API</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>设计合理的API是一项重要且具有挑战性的工作。一个好的API应该易于理解、易于使用且具有良好的扩展性。以下是一些建议，可以帮助您设计合理的API：</li>
+</ul>
+<ol>
+<li>明确目标：明确API的目标和应用场景，理解您的目标用户及其需求。 </li>
+<li>一致性：遵循一致的命名和编码约定，这有助于用户更容易地理解和使用API。 </li>
+<li>简洁性：保持API简洁明了，避免不必要的复杂性。专注于提供核心功能，同时提供足够的灵活性以满足不同的用例。 </li>
+<li>易用性：易用性是一个重要的设计原则。API应该易于上手，具有良好的文档和示例。提供有意义的错误消息，以帮助用户识别和解决问题。 </li>
+<li>模块化：将API划分为可重用的模块和组件。这可以使API更易于维护和扩展，同时还能让用户仅关注他们需要的部分。 </li>
+<li>版本控制：为API实施版本控制策略，以便在进行向后不兼容的更改时，不会影响现有用户。 </li>
+<li>安全性：确保API的安全性，包括数据保护、访问控制和身份验证。 </li>
+<li>性能：关注API的性能，优化延迟和吞吐量。适当地使用缓存、分页和数据压缩等技术。 </li>
+<li>错误处理：为API设计合理的错误处理策略。使用标准的HTTP状态码来表示错误，并提供有关错误原因的详细信息。 </li>
+<li>文档：编写清晰、详细的文档，以便用户更容易地理解和使用API。包括概述、功能描述、代码示例和错误处理等内容。</li>
+</ol>
+<p>总之，设计合理的API需要对用户需求、技术限制和最佳实践有深入的了解。不断学习和实践将有助于您更好地掌握API设计的技巧。</p>
+<p>Zoran: </p>
+<ul>
+<li>从API设计的角度来说， 声明式的API比命令式的API更好吗</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>从API设计的角度来说，声明式API和命令式API各有优缺点，不同的场景和需求可能更适合其中一种。以下是关于这两种API风格的一些观点：</li>
+</ul>
+<p>声明式API：</p>
+<ol>
+<li>更易于理解：声明式API关注结果，而不是实现过程。用户只需声明他们希望达到的目标状态，而不需要关心如何实现。</li>
+<li>更易于维护：由于声明式API抽象了实现细节，因此更容易适应底层实现的更改。此外，声明式代码通常更简洁，易于阅读和维护。</li>
+<li>更容易推理：声明式API更容易推理，因为它描述了期望的结果而不是具体的步骤。</li>
+</ol>
+<p>命令式API：</p>
+<ol>
+<li>更灵活：命令式API提供了更多的控制，因为用户可以精确地指定实现过程。这使得命令式API在处理复杂场景和高度定制化需求时更具优势。</li>
+<li>更易于实现：对于一些简单的任务和库，命令式API可能更容易实现，因为它们更直接地映射到底层代码和算法。</li>
+</ol>
+<p>综上所述，在选择声明式API和命令式API时，应根据具体的需求和场景进行权衡。在许多情况下，两者可以结合使用，例如通过提供声明式API作为高级抽象，同时为需要更多控制和灵活性的用户提供命令式API。</p>
+<p>Zoran: </p>
+<ul>
+<li>C++通常如何编写声明式的API呢</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在C++中编写声明式API，主要关注点在于抽象实现细节、专注于结果而不是过程。以下是一些建议和策略，可以帮助您在C++中编写声明式API：</li>
+</ul>
+<ol>
+<li>使用高级抽象：使用类、结构体、模板和其他C++特性来表示高级抽象，封装底层实现细节。 </li>
+<li>函数式编程：借鉴函数式编程的思想，使用不可变对象、纯函数、递归等。C++11及更高版本引入了许多函数式编程特性，例如<code>std::function</code>、<code>std::bind</code>和lambda表达式。 </li>
+<li>使用RAII（资源获取即初始化）：通过使用RAII模式来管理资源，可以简化资源管理，避免内存泄漏和资源泄漏。 </li>
+<li>使用智能指针：使用<code>std::shared_ptr</code>和<code>std::unique_ptr</code>来自动管理内存，避免手动分配和释放内存。 </li>
+<li>利用STL（标准模板库）：STL提供了一系列通用的数据结构和算法，例如<code>std::vector</code>、<code>std::map</code>、<code>std::algorithm</code>等。利用STL可以帮助您编写更简洁、高效的声明式代码。 </li>
+<li>设计易于组合的API：将API设计为可组合的小部件，以便用户可以将它们组合以满足特定需求。这通常意味着API应该遵循“单一职责原则”。 </li>
+<li>使用类型安全的接口：尽可能使用类型安全的接口，例如使用枚举代替整数常量，使用<code>std::variant</code>或<code>std::optional</code>表示可选值等。 </li>
+<li>文档和示例：编写清晰的文档和示例，以帮助用户理解如何使用您的API以及期望的结果。</li>
+</ol>
+<p>通过遵循这些建议和策略，您可以在C++中创建声明式API，从而使用户更容易理解和使用您的库或框架。</p>
+<p>Zoran: </p>
+<ul>
+<li>拥有C++, lua, 计算机网络，自动机，操作系统的基础， 学习嵌入式应该遵循什么样的学习路线</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在具备C++、Lua、计算机网络、自动机、操作系统等基础知识的前提下，学习嵌入式系统可以遵循以下学习路线：</li>
+</ul>
+<ol>
+<li>嵌入式系统基础</li>
+</ol>
+<ul>
+<li>学习嵌入式系统的基本概念、特点和应用领域</li>
+<li>了解嵌入式硬件（如处理器、内存、I&#x2F;O接口等）和软件（如嵌入式操作系统、固件等）的基本知识</li>
+</ul>
+<ol start="2">
+<li>嵌入式编程语言</li>
+</ol>
+<ul>
+<li>深入学习C&#x2F;C++语言，特别是在嵌入式环境下的应用</li>
+<li>学习其他嵌入式编程语言，如Python、Rust等（视具体应用场景而定）</li>
+</ul>
+<ol start="3">
+<li>微控制器（MCU）与开发板</li>
+</ol>
+<ul>
+<li>学习常用的微控制器（如ARM、AVR、MSP430等）及其特点</li>
+<li>熟悉各种开发板（如Arduino、Raspberry Pi、STM32等），学会使用它们进行实践项目</li>
+</ul>
+<ol start="4">
+<li>嵌入式操作系统</li>
+</ol>
+<ul>
+<li>学习RTOS（实时操作系统）的原理，如FreeRTOS、uC&#x2F;OS等</li>
+<li>学习嵌入式Linux系统，了解其开发环境、驱动编程等知识</li>
+</ul>
+<ol start="5">
+<li>嵌入式外设与接口</li>
+</ol>
+<ul>
+<li>学习常用的嵌入式外设（如传感器、显示器、通信模块等）</li>
+<li>了解常见的通信接口（如UART、I2C、SPI、CAN等）和协议（如TCP&#x2F;IP、HTTP、MQTT等）</li>
+</ul>
+<ol start="6">
+<li>嵌入式项目实践</li>
+</ol>
+<ul>
+<li>参与嵌入式项目，将所学知识应用于实际开发中，提高自己的实际操作能力</li>
+<li>尝试使用不同的硬件平台、操作系统和编程语言，拓宽自己的技能树</li>
+</ul>
+<ol start="7">
+<li>特定领域的深入学习</li>
+</ol>
+<ul>
+<li>根据个人兴趣和职业发展方向，选择特定领域进行深入学习，如物联网（IoT）、机器人、自动驾驶等</li>
+</ul>
+<p>在学习过程中，不断实践和动手操作是非常重要的。通过实际项目和应用场景，可以加深对嵌入式系统的理解，提高自己的开发能力。</p>
+<p>Zoran: </p>
+<ul>
+<li>除了事件驱动模型， 还有哪些经典的软件设计模型？</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>除了事件驱动模型外，还有以下几种经典的软件设计模型：</li>
+</ul>
+<ol>
+<li>面向对象编程（OOP）<br>面向对象编程是一种编程范式，它使用“对象”来表示现实世界中的实</li>
+</ol>
+<p>Zoran: </p>
+<ul>
+<li>我说的是软件设计模型， 不是软件设计范式</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>抱歉理解错了您的问题，关于软件设计模型，这里有一些经典的模型：</li>
+</ul>
+<ol>
+<li>Model-View-Controller (MVC)<br>MVC是一种将应用程序逻辑分为三个相互连接的部分的设计模式。Model代表应用程序的数据结构，View表示数据的展示方式，Controller处理用户输入和更新Model和View。 </li>
+<li>Model-View-ViewModel (MVVM)<br>MVVM是一种用于将UI和业务逻辑分离的设计模式。Model代表数据结构，View表示用户界面，ViewModel是一个处理View和Model之间数据绑定和交互的中间层。 </li>
+<li>Model-View-Presenter (MVP)<br>MVP是一种类似于MVC的设计模式，但在MVP中，Presenter承担了Controller的角色，处理用户输入并更新Model和View。MVP模式的目标是实现更好的关注点分离和代码复用。 </li>
+<li>Observer<br>Observer模式是一种行为型设计模式，它允许对象间建立一种一对多的依赖关系，当一个对象状态发生变化时，所有依赖于它的对象都会收到通知并自动更新。 </li>
+<li>Singleton<br>Singleton模式是一种用于确保类只有一个实例，并提供全局访问点的设计模式。这种模式在需要确保全局唯一性的资源或服务时非常有用。 </li>
+<li>Factory Method<br>Factory Method模式是一种创建型设计模式，它提供了一种在不指定具体类的情况下创建对象的接口。这允许在运行时根据需要创建不同类型的对象。 </li>
+<li>Strategy<br>Strategy模式是一种行为型设计模式，它定义了一系列算法，并将每个算法封装在一个具有公共接口的类中。这使得算法可以在运行时互换使用，从而提高代码的灵活性和可扩展性。 </li>
+<li>Command<br>Command模式是一种行为型设计模式，它将请求封装为一个对象，从而允许将请求参数化、对请求排队或记录请求日志，以及支持可撤销操作。</li>
+</ol>
+<p>这些设计模型可以根据项目需求和特点进行选择和组合，以实现高效、可扩展和可维护的软件设计。</p>
+<p>Zoran: </p>
+<ul>
+<li>什么是依赖注入， C++能不能实现依赖注入，如何实现</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>依赖注入（Dependency Injection，简称DI）是一种设计模式，用于降低模块间的耦合，提高代码的可维护性和可测试性。依赖注入的核心思想是将一个对象的依赖项（如其他对象或服务）通过构造函数、属性或方法（而非对象内部自己创建）传递给该对象。这样一来，对象与其依赖项之间的关系变得更加灵活，方便在不同场景（如测试）下替换依赖项。</li>
+</ul>
+<p>C++可以实现依赖注入。实现依赖注入的一种简单方法是通过构造函数传递依赖项。以下是一个简单的例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 依赖项接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IService</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">execute</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 依赖项实现</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ServiceImpl</span> : <span class="keyword">public</span> IService &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">execute</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Executing service implementation.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Client类依赖于IService</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 通过构造函数传递依赖项</span></span><br><span class="line">    <span class="built_in">Client</span>(<span class="type">const</span> IService&amp; service) : _service(service) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        _service.<span class="built_in">execute</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> IService&amp; _service;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ServiceImpl service;</span><br><span class="line">    <span class="function">Client <span class="title">client</span><span class="params">(service)</span></span>;</span><br><span class="line">    client.<span class="built_in">doSomething</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>上述代码中，<code>Client</code>类依赖于<code>IService</code>接口。依赖项（<code>ServiceImpl</code>）通过<code>Client</code>类的构造函数传递给<code>Client</code>对象。这样，如果需要替换<code>IService</code>的实现，只需在创建<code>Client</code>对象时传入新的实现即可，而无需修改<code>Client</code>类的内部实现。</p>
+<p>另一种实现依赖注入的方法是使用依赖注入容器（如C++中的Boost.DI库）。这些容器可以自动管理对象的创建和依赖项注入，简化了依赖注入的实现。</p>
+<p>Zoran: </p>
+<ul>
+<li>嵌入式的开发一般是如何进行的， 编写的代码如何传到树莓派类似的机器上</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>嵌入式开发通常涉及到硬件和软件的紧密结合。开发过程包括设计、编写、调试和部署嵌入式系统的软件。以下是嵌入式开发的一般步骤：</li>
+</ul>
+<ol>
+<li>了解硬件平台：在开始开发之前，需要了解所使用的嵌入式硬件平台的特性，如处理器架构、内存、外设接口等。这将帮助你选择合适的编程语言、工具链和库。 </li>
+<li>搭建开发环境：选择合适的编程语言（如C、C++或Rust）和开发工具（如编译器、调试器等）。对于树莓派这样的嵌入式Linux系统，可以使用GCC或Clang作为编译器。还需要安装目标平台的交叉编译工具链，以便在开发机器上编译目标系统可执行的程序。 </li>
+<li>编写代码：根据硬件平台和需求编写嵌入式软件。这可能包括编写底层驱动程序、操作系统、中间件和应用程序。在编写代码时，要特别关注性能、内存使用和功耗等方面。 </li>
+<li>编译和部署：使用交叉编译工具链将代码编译为目标平台的可执行文件。然后将编译好的可执行文件传输到嵌入式设备（如树莓派）上。传输方式有多种，例如通过SSH、FTP、SCP或者使用物理介质（如SD卡或U盘）。 </li>
+<li>调试和测试：在目标平台上运行可执行文件，并进行调试和测试。可以使用GDB等调试器进行远程调试，或者使用printf、log等方式输出调试信息。为确保软件的稳定性和性能，应对其进行充分的测试。 </li>
+<li>优化和迭代：根据测试结果和实际需求，对软件进行优化和修改。持续改进软件，直至满足项目需求。</li>
+</ol>
+<p>总之，嵌入式开发涉及多个环节，包括硬件平台的选择、开发环境的搭建、代码编写、编译部署和调试等。树莓派等嵌入式设备通常使用Linux操作系统，开发过程与普通的Linux应用程序开发类似，但需要特别关注性能、内存使用和功耗等方面。</p>
+<p>Zoran: </p>
+<ul>
+<li>一般是如何编写驱动的呢， 软件是如何控制硬件的， 通过CPU来向硬件发送相应的控制指令吗</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>驱动程序（或驱动）是操作系统中的一部分，负责管理和控制与计算机硬件设备通信的过程。驱动程序充当硬件和高级应用之间的桥梁，它可以将应用程序的抽象请求转换为硬件可以理解的具体指令。编写驱动程序通常需要对硬件设备的工作原理有深入了解，以便能够有效地控制和管理它们。</li>
+</ul>
+<p>编写驱动程序的一般步骤如下： </p>
+<ol>
+<li>了解硬件设备：在编写驱动程序之前，需要深入了解硬件设备的工作原理、特性和接口。阅读硬件设备的技术手册和数据表，了解设备如何通过寄存器、中断和其他硬件机制进行通信。 </li>
+<li>选择开发环境：选择合适的编程语言（通常为C或C++）和开发工具（如编译器、调试器等）。对于嵌入式设备，可能需要安装交叉编译工具链，以便在开发机器上编译目标系统可执行的驱动程序。 </li>
+<li>编写驱动代码：根据硬件设备的特性和操作系统的要求，编写驱动程序代码。驱动程序代码通常包括设备初始化、设备控制、数据传输和设备关闭等操作。在编写代码时，需要遵循操作系统的驱动程序开发规范和API。 </li>
+<li>编译和部署驱动程序：使用编译器将驱动程序代码编译为可加载的模块或内核模块。将编译好的驱动程序传输到目标系统上，并根据操作系统的要求进行安装和加载。 </li>
+<li>调试和测试驱动程序：在目标系统上运行驱动程序，并进行调试和测试。可以使用调试器（如GDB）进行远程调试，或者使用内核日志等方式输出调试信息。确保驱动程序能够正确地控制硬件设备并与其他系统组件协同工作。</li>
+</ol>
+<p>软件是通过向硬件发送控制指令来控制硬件的。这些指令可能涉及读写寄存器、操作内存映射的I&#x2F;O区域、发送或接收中断等。驱动程序负责将这些指令转换为硬件可以理解的形式，并通过CPU和总线等硬件通道与硬件设备通信。</p>
+<p>总之，编写驱动程序需要对硬件设备和操作系统有深入了解。驱动程序通过发送控制指令来控制硬件设备，并负责管理硬件与高级应用之间的通信</p>
+<p>Zoran: </p>
+<ul>
+<li>硬件可以理解的具体指令一般值的是什么？这些硬件也有相应的汇编指令吗</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>硬件可以理解的具体指令通常指的是与特定硬件设备相关的低级操作，这些操作涉及对硬件寄存器的读写、内存映射的I&#x2F;O操作、中断处理等。这些操作通常不是CPU的汇编指令，而是硬件设备特定的操作，每个硬件设备可能有其自己的控制和通信机制。然而，驱动程序通常会使用CPU的汇编指令来实现这些低级操作。</li>
+</ul>
+<p>例如，一个驱动程序可能需要通过I2C总线与某个传感器通信。通信过程中，驱动程序需要使用CPU的汇编指令来控制I2C控制器。这可能包括配置I2C控制器的寄存器、发送数据、接收数据等。尽管这些操作涉及到CPU的汇编指令，但最终目的是控制硬件设备（传感器）而非CPU本身。</p>
+<p>硬件设备通常不具有与CPU类似的汇编指令集。相反，它们通常有自己的控制和通信协议，例如通过寄存器、中断和总线等机制进行通信。驱动程序的主要任务是将高级应用程序的抽象请求转换为这些硬件设备可以理解的具体操作。</p>
+<p>总的来说，硬件可以理解的具体指令通常是指与特定硬件设备相关的低级操作。这些操作通常不是CPU的汇编指令，但驱动程序会使用CPU的汇编指令来实现这些操作。硬件设备通常有自己的控制和通信机制，而不是与CPU类似的汇编指令集。</p>
+<p>Zoran: </p>
+<ul>
+<li>picom和awesome wm一起使用的时候, picom有什么作用, 为什么需要他</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>Picom（原名 Compton）是一个独立的X11合成器，用于为Linux和BSD桌面环境提供硬件加速的窗口和屏幕合成效果。Picom的主要目的是改善窗口绘制性能，以减少屏幕撕裂和图形卡垂直同步（VSync）问题。它还可以添加一些视觉效果，如阴影、透明度和过渡动画。</li>
+</ul>
+<p>Awesome WM是一个高度可配置的窗口管理器，它允许用户自定义布局、快捷键、窗口行为等。然而，Awesome WM本身并不具备硬件加速的合成功能。这意味着，在没有合成器的情况下，使用Awesome WM可能会导致屏幕撕裂和刷新问题。</p>
+<p>在这种情况下，Picom可以与Awesome WM一起使用，为窗口管理器提供硬件加速的合成效果。Picom可以解决Awesome WM中的屏幕撕裂和刷新问题，同时还可以增加一些视觉效果。这使得用户在使用Awesome WM时能够获得更好的视觉体验和性能。为了实现这一点，用户需要在Awesome WM的配置文件中启动Picom作为一个后台进程。</p>
+<p>Zoran: </p>
+<ul>
+<li>我在使用awesome wm的时候使用picom, 设置了程序窗口的边框颜色, 有时候会异常的闪烁, 可能是什么原因导致的</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>闪烁问题可能由多种原因引起。以下是一些建议，帮助您找到可能的原因并解决问题：</li>
+</ul>
+<ol>
+<li>图形驱动程序问题：确保您的图形驱动程序是最新的，并且正确配置。如果您使用的是开源驱动程序，尝试切换到专有驱动程序，反之亦然。 </li>
+<li>Picom配置问题：检查您的Picom配置文件（例如：<code>~/.config/picom/picom.conf</code>），确保没有不兼容的设置。特别是，尝试调整不同的后端（例如，从“glx”切换到“xrender”）和VSync选项。此外，您可以尝试关闭某些特效（如阴影和透明度），看看问题是否仍然存在。 </li>
+<li>Awesome WM配置问题：检查Awesome WM的配置文件（例如：<code>~/.config/awesome/rc.lua</code>），确保没有与Picom冲突的设置。例如，确保您没有在Awesome WM中设置边框颜色，因为这可能会与Picom的设置冲突。 </li>
+<li>软件兼容性问题：某些应用程序可能与Picom和&#x2F;或Awesome WM不兼容，导致闪烁问题。尝试关闭或替换可能引起问题的应用程序，看看问题是否仍然存在。 </li>
+<li>系统资源问题：确保您的系统具有足够的资源（例如，内存和CPU）来运行Picom和Awesome WM。如果系统资源不足，这可能导致闪烁和性能问题。</li>
+</ol>
+<p>通过尝试以上建议，您应该能够诊断和解决闪烁问题。如果问题仍然存在，请查看Picom和Awesome WM的错误日志以获取更多信息，或寻求社区支持以获得更多帮助。</p>
+<p>Zoran: </p>
+<ul>
+<li>我希望在awesome wm里设置颜色, 让picom不要设置窗口的颜色, 这应该怎么解决</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在Awesome WM中设置窗口边框颜色时，您需要在Awesome WM配置文件（通常为<code>~/.config/awesome/rc.lua</code>）中进行更改。要修改边框颜色，请找到如下类似的代码行：</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">beautiful.border_normal = <span class="string">&quot;#000000&quot;</span></span><br><span class="line">beautiful.border_focus = <span class="string">&quot;#535d6c&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这里，<code>beautiful.border_normal</code>表示非活动窗口的边框颜色，<code>beautiful.border_focus</code>表示活动窗口的边框颜色。您可以根据需要更改这些颜色值。例如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">beautiful.border_normal = <span class="string">&quot;#ff0000&quot;</span></span><br><span class="line">beautiful.border_focus = <span class="string">&quot;#00ff00&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>接下来，为了确保Picom不会影响窗口边框的颜色，您需要在Picom配置文件（通常为<code>~/.config/picom/picom.conf</code>）中禁用可能影响边框颜色的功能。请确保以下设置被禁用或注释掉：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#shadow = true;</span><br><span class="line">#inactive-opacity = 1;</span><br><span class="line">#active-opacity = 1;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这样，Picom就不会设置窗口边框颜色，而Awesome WM则会根据您的配置进行颜色设置。在修改配置文件后，需要重启Awesome WM和Picom以使更改生效。您可以通过在终端中运行以下命令重启Awesome WM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">awesome-client <span class="string">&quot;awesome.restart()&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>同时，通过终端关闭Picom进程并重新启动它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">killall picom</span><br><span class="line">picom --config ~/.config/picom/picom.conf &amp;</span><br></pre></td></tr></table></figure>
+
+<p>现在，您应该能看到Awesome WM配置的窗口边框颜色，而Picom不会影响这些颜色设置。</p>
+<p>Zoran: </p>
+<ul>
+<li>使用wezterm的时候, 有时候无法使用fcitx5输入中文, 需要先打开kitty之后再重启wezterm才可以正常使用fcitx5, 可能是什么原因造成的</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>这个问题可能是由于Wezterm和Fcitx5之间的环境变量设置问题造成的。以下是一些建议和解决方案：</li>
+</ul>
+<ol>
+<li>确保环境变量已正确设置。在<code>~/.bashrc</code>或<code>~/.zshrc</code>文件中，添加以下行（如果尚未添加）：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">&quot;@im=fcitx&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>保存更改后，重新加载配置文件（例如，通过在终端中运行<code>source ~/.bashrc</code>或<code>source ~/.zshrc</code>），然后尝试重新启动Wezterm。 </p>
+<ol>
+<li>从命令行启动Wezterm，可以确保它继承了正确的环境变量。尝试在终端中运行<code>wezterm</code>，看看是否能正常使用Fcitx5。 </li>
+<li>确保Fcitx5在Wezterm启动时已经运行。如果Fcitx5在Wezterm启动之前没有运行，可能会导致输入法问题。可以尝试在启动Wezterm之前确保Fcitx5已经启动。 </li>
+<li>检查Wezterm和Fcitx5的日志和错误消息。在出现问题时，查看Wezterm和Fcitx5的相关日志可能会提供更多关于问题的信息。可以查看<code>~/.local/share/wezterm/wezterm.log</code>和<code>~/.config/fcitx5/crash.log</code>文件，看看是否有任何有关错误或警告消息。 </li>
+<li>尝试更新Wezterm和Fcitx5到它们的最新版本。有时，这类问题可能是因为软件的旧版本导致的，更新到最新版本可能会解决这些问题。</li>
+</ol>
+<p>总之，首先检查环境变量设置，确保Fcitx5已启动，并尝试从命令行启动Wezterm。如果问题仍然存在，请查看相关日志以获取更多信息，并考虑更新Wezterm和Fcitx5。</p>
+<p>Zoran: </p>
+<ul>
+<li>awesome wm 的widget里, 什么时候需要layout参数呢</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在Awesome WM中，当你想在一个widget容器中组合多个widgets时，你需要使用layout参数。layout参数定义了如何在容器中组织这些widgets。Awesome WM提供了几种预定义的布局类型，如水平布局、垂直布局和网格布局。</li>
+</ul>
+<p>例如，假设你想创建一个包含文本和图标的widget组合，可以使用水平布局（wibox.layout.fixed.horizontal）将它们放在一起：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> wibox = <span class="built_in">require</span>(<span class="string">&quot;wibox&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> layout = wibox.layout.fixed.horizontal()</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> text_widget = wibox.widget.textbox(<span class="string">&quot;Hello, Awesome WM!&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> icon_widget = wibox.widget.imagebox(<span class="string">&quot;/path/to/icon.png&quot;</span>)</span><br><span class="line"></span><br><span class="line">layout:add(icon_widget)</span><br><span class="line">layout:add(text_widget)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个例子中，<code>layout</code>参数用于将文本和图像widgets组合在一个水平布局中。然后，你可以将此组合的widget添加到wibox或其他容器中。</p>
+<p>总之，当你需要将多个widgets组合在一个容器中时，使用layout参数。根据你想要的布局方式选择适当的布局类型。</p>
+<p>Zoran: </p>
+<ul>
+<li>这段代码哪里缺少了layout呢:<br>return {<br>  {<br>  {<br>      {<br>          battery_border_thing,<br>          direction &#x3D; ‘south’,<br>          widget &#x3D; wibox.container.rotate,<br>      },<br>      {<br>          battery_progress,<br>          direction &#x3D; ‘east’,<br>          widget &#x3D; wibox.container.rotate(),<br>      },<br>      layout &#x3D; wibox.layout.fixed.vertical,<br>      spacing &#x3D; dpi(-4),<br>  },<br>  {<br>      bat_icon,<br>      margins &#x3D; { top &#x3D; dpi(3) },<br>      widget &#x3D; wibox.container.margin,<br>  },<br>  layout &#x3D; wibox.layout.stack,<br>  },<br>  widget &#x3D; wibox.container.margin,<br>  margins &#x3D; { left &#x3D; dpi(7.47), right &#x3D; dpi(7.47) },<br>}</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>这段代码中的layout参数已经在适当的地方使用。这个示例创建了一个自定义的widget结构，其中包含两个布局：一个垂直布局（<code>wibox.layout.fixed.vertical</code>）和一个堆叠布局（<code>wibox.layout.stack</code>）。</li>
+</ul>
+<p>垂直布局用于组合一个带边框的<code>battery_border_thing</code>和一个旋转的<code>battery_progress</code>，它们之间的间距为<code>-4</code>像素。堆叠布局将垂直布局与一个带边距的<code>bat_icon</code>叠加在一起。这两个布局都嵌套在一个带外边距的容器中。</p>
+<p>这段代码中的layout参数已经正确地应用在相应的容器上。没有遗漏的layout参数。</p>
+<p>Zoran: </p>
+<ul>
+<li>wibox.widget函数有什么作用</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li><code>wibox.widget</code> 实际上是一个命名空间，它包含了在 Awesome WM 中创建各种类型 widget 时使用的一系列模块和类。<code>wibox.widget</code> 自身并不是一个函数，而是一个用于组织和访问不同 widget 类型的容器。</li>
+</ul>
+<p>例如，这里列举了一些来自 <code>wibox.widget</code> 命名空间中的常用模块和类： </p>
+<ul>
+<li><code>wibox.widget.textbox</code>：用于创建文本框 widget，可以显示纯文本或富文本。 </li>
+<li><code>wibox.widget.imagebox</code>：用于创建图像框 widget，可以显示图像。 </li>
+<li><code>wibox.widget.progressbar</code>：用于创建进度条 widget，可以显示一个数值的进度。 </li>
+<li><code>wibox.widget.systray</code>：用于创建系统托盘 widget，可以显示系统托盘图标。</li>
+</ul>
+<p>你可以通过 <code>require()</code> 函数访问这些模块和类，然后使用它们创建各种类型的 widget。例如，要创建一个文本框 widget，你可以这样做：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> wibox = <span class="built_in">require</span>(<span class="string">&quot;wibox&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> my_textbox = wibox.widget.textbox()</span><br><span class="line">my_textbox:set_text(<span class="string">&quot;Hello, World!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Zoran: </p>
+<ul>
+<li>现在不报错了, 请问之前是为什么报错?</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>之前的错误是由于<code>wibox.container.background</code>的第一个参数应该是一个已经创建好的widget对象，而不是一个widget构造函数（如<code>wibox.widget.textbox</code>）。</li>
+</ul>
+<p>在修改后的代码中，我们首先创建了一个名为<code>battery_textbox</code>的新textbox控件，然后将这个已经创建好的控件作为<code>wibox.container.background</code>的第一个参数。这样就避免了之前的错误。</p>
+<p>Zoran: </p>
+<ul>
+<li>为什么我这样设置之后, 原来可以显示的组件就无法显示了:<br>return {<br>  {<br>  {<br>      battery_border_thing,<br>      battery_progress,<br>      spacing &#x3D; dpi(-4),<br>      layout &#x3D; wibox.layout.fixed.horizontal, – 添加这一行<br>  },<br>  {<br>      markup &#x3D; “<span foreground='" .. c.purple .. "'></span>“,<br>      font &#x3D; beautiful.icon_var .. ‘10’,<br>      align &#x3D; ‘center’,<br>      valign &#x3D; ‘center’,<br>      widget &#x3D; wibox.widget.textbox,<br>  },<br>  layout &#x3D; wibox.layout.stack,<br>  },<br>  widget &#x3D; wibox.container.margin,<br>  margins &#x3D; { left &#x3D; dpi(7), right &#x3D; dpi(7) },<br>}</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>您的代码看起来是正确的。在这里，您创建了一个<code>stack</code>布局，其中有两个元素，一个是<code>battery_border_thing</code>和<code>battery_progress</code>的水平布局，另一个是一个带有<code>markup</code>属性的<code>textbox</code>控件。</li>
+</ul>
+<p>如果原本可以显示的组件现在无法显示，可能的原因包括： </p>
+<ol>
+<li>组件之间的层叠顺序发生了改变，导致某些组件被其他组件遮挡。您可以调整组件在<code>stack</code>布局中的顺序，看看是否可以解决这个问题。</li>
+<li>某些属性（如颜色、大小等）可能在您的代码更改过程中发生了变化，导致组件不再可见。您可以检查这些属性设置，确保它们是正确的。 </li>
+<li>如果您的<code>beautiful</code>主题文件有所更改，那么可能会影响到组件的外观。请检查您的主题设置以排除此问题。</li>
+</ol>
+<p>请尝试检查上述可能的原因，看看是否可以找到问题所在。如果问题仍然存在，可以提供更多关于组件和您的<code>beautiful</code>主题设置的信息，以便更好地诊断问题。</p>
+<p>ChatGPT: </p>
+<ul>
+<li>您的代码看起来应该可以正常工作。但是，如果 <code>bg_focus</code> 属性没有生效，可能是因为在 <code>widget_template</code> 中没有将 <code>id = &#39;background_role&#39;</code> 的背景颜色与 <code>style</code> 中定义的颜色相关联。</li>
+</ul>
+<p>要解决这个问题，您可以将 <code>widget_template</code> 部分更改为以下内容：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">widget_template = &#123;</span><br><span class="line">    &#123;</span><br><span class="line">        &#123; id = <span class="string">&#x27;text_role&#x27;</span>, font = beautiful.font_name .. <span class="string">&#x27; 12&#x27;</span>, widget = wibox.widget.textbox &#125;,</span><br><span class="line">        <span class="comment">-- id = &#x27;margin_role&#x27;,</span></span><br><span class="line">        top    = dpi(<span class="number">0</span>),</span><br><span class="line">        bottom = dpi(<span class="number">0</span>),</span><br><span class="line">        left   = dpi(<span class="number">2</span>),</span><br><span class="line">        right  = dpi(<span class="number">2</span>),</span><br><span class="line">        widget = wibox.container.margin,</span><br><span class="line">    &#125;,</span><br><span class="line">    id = <span class="string">&#x27;background_role&#x27;</span>,</span><br><span class="line">    widget = wibox.container.background,</span><br><span class="line">    <span class="comment">-- 添加这两行，将背景颜色与style相关联</span></span><br><span class="line">    bg = <span class="function"><span class="keyword">function</span><span class="params">(t, _, _)</span></span></span><br><span class="line">        <span class="keyword">return</span> t.style.bg_focus <span class="keyword">or</span> <span class="literal">nil</span></span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    bg_focus = style.bg_focus,</span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这将确保 <code>background_role</code> 控件的背景颜色与 <code>style.bg_focus</code> 相关联。如果仍然没有生效，请检查 <code>beautiful.color</code> 是否正确设置了相应的颜色值。</p>
+<p>Zoran: </p>
+<ul>
+<li>这样设置以后, 所有的tag都不显示了:<br>local c       &#x3D; beautiful.color<br>---@see <a target="_blank" rel="noopener" href="https://awesomewm.org/apidoc/widgets/awful.widget.taglist.html#awful.widget.taglist">https://awesomewm.org/apidoc/widgets/awful.widget.taglist.html#awful.widget.taglist</a><br>local style   &#x3D; {<br>  – INFO :<br>  fg_focus    &#x3D; c.light_purple,<br>  bg_focus    &#x3D; c.blue,<br>  – bg_focus    &#x3D; c.gray,<br>  fg_empty    &#x3D; c.dim_blue,<br>  fg_occupied &#x3D; c.teal,<br>  – shape       &#x3D; gears.shape.rounded_rect,<br>  spacing     &#x3D; dpi(30),<br>}</li>
+</ul>
+<hr>
+<h2 id="local-btn-act-x3D-util-enum-bottomlocal-button-x3D-util-button"><a href="#local-btn-act-x3D-util-enum-bottomlocal-button-x3D-util-button" class="headerlink" title="local btn_act &#x3D; util.enum.bottomlocal button  &#x3D; util.button"></a>local btn_act &#x3D; util.enum.bottom<br>local button  &#x3D; util.button</h2><p>local buttons &#x3D; util.keys {<br>    button { btn_act.LEFT, function(t) t:view_only() end },<br>    button { mods &#x3D; { modkey }, 1, function(t)<br>        if client.focus then<br>            client.focus:move_to_tag(t)<br>        end<br>    end, },<br>    button { mods &#x3D; { modkey }, 3, function(t)<br>        if client.focus then<br>            client.focus:toggle_tag(t)<br>        end<br>    end, },<br>    button { btn_act.RIGHT, awful.tag.viewtoggle },<br>    button { btn_act.SCROLL_DOWN, function(t) awful.tag.viewnext(t.screen) end },<br>    button { btn_act.SCROLL_UP, function(t) awful.tag.viewprev(t.screen) end },<br>}</p>
+<p>return function(s)<br>    awful.tag( – { ‘ ’, ‘ ’, ‘ ’, ‘ ’, ‘ ’, ‘ ’, ‘ ’, ‘ ’, ‘ ’ },<br>        { ‘1’, ‘2’, ‘3’, ‘4’ },<br>        s, awful.layout.layouts[1])</p>
+<pre><code>return awful.widget.taglist &#123;
+    screen          = s,
+    filter          = awful.widget.taglist.filter.all,
+    layout          = &#123; spacing = 0, layout = wibox.layout.fixed.horizontal &#125;,
+    style           = style,
+    buttons         = buttons,
+    widget_template = &#123;
+        &#123;
+            &#123; id = &#39;text_role&#39;, font = beautiful.font_name .. &#39; 12&#39;, widget = wibox.widget.textbox &#125;,
+            -- id = &#39;margin_role&#39;,
+            top    = dpi(0),
+            bottom = dpi(0),
+            left   = dpi(2),
+            right  = dpi(2),
+            widget = wibox.container.margin,
+        &#125;,
+        bg = function(t, _, _)
+            return t.style.bg_focus or nil
+        end,
+
+        widget = wibox.container.background,
+        ---@diagnostic disable-next-line: unused-local
+        create_callback = function(self, c3, index, objects) --luacheck: no unused args
+            self:connect_signal(&#39;mouse::enter&#39;, function()
+                if #c3:clients() &gt; 0 then
+                    awesome.emit_signal(&#39;bling::tag_preview::update&#39;, c3)
+                    awesome.emit_signal(&#39;bling::tag_preview::visibility&#39;, s, true)
+                end
+            end)
+            self:connect_signal(&#39;mouse::leave&#39;, function()
+                awesome.emit_signal(&#39;bling::tag_preview::visibility&#39;, s, false)
+            end)
+        end,
+    &#125;,
+&#125;
+</code></pre>
+<p>end</p>
+<p>ChatGPT: </p>
+<ul>
+<li>抱歉，我之前的建议可能导致了这个问题。让我们尝试另一种方法来设置背景颜色。在 <code>widget_template</code> 中，您可以根据不同的状态为每个标签设置不同的背景颜色。</li>
+</ul>
+<p>这是一个修改后的 <code>widget_template</code> 示例，它根据标签的状态设置不同的背景颜色：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">widget_template = &#123;</span><br><span class="line">    &#123;</span><br><span class="line">        &#123; id = <span class="string">&#x27;text_role&#x27;</span>, font = beautiful.font_name .. <span class="string">&#x27; 12&#x27;</span>, widget = wibox.widget.textbox &#125;,</span><br><span class="line">        <span class="comment">-- id = &#x27;margin_role&#x27;,</span></span><br><span class="line">        top    = dpi(<span class="number">0</span>),</span><br><span class="line">        bottom = dpi(<span class="number">0</span>),</span><br><span class="line">        left   = dpi(<span class="number">2</span>),</span><br><span class="line">        right  = dpi(<span class="number">2</span>),</span><br><span class="line">        widget = wibox.container.margin,</span><br><span class="line">    &#125;,</span><br><span class="line">    id     = <span class="string">&#x27;background_role&#x27;</span>,</span><br><span class="line">    widget = wibox.container.background,</span><br><span class="line">    <span class="comment">-- 根据标签状态设置背景颜色</span></span><br><span class="line">    set_bg = <span class="function"><span class="keyword">function</span><span class="params">(self, state)</span></span></span><br><span class="line">        <span class="keyword">if</span> state == <span class="string">&#x27;focus&#x27;</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">self</span>.bg = style.bg_focus</span><br><span class="line">        <span class="keyword">elseif</span> state == <span class="string">&#x27;empty&#x27;</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">self</span>.bg = <span class="literal">nil</span></span><br><span class="line">        <span class="keyword">elseif</span> state == <span class="string">&#x27;occupied&#x27;</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">self</span>.bg = <span class="literal">nil</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后，在 <code>create_callback</code> 和 <code>update_callback</code> 函数中，您需要调用 <code>set_bg</code> 函数来根据标签的状态更新背景颜色：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">create_callback = <span class="function"><span class="keyword">function</span><span class="params">(self, c3, index, objects)</span></span> <span class="comment">--luacheck: no unused args</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line">    <span class="built_in">self</span>:get_children_by_id(<span class="string">&#x27;background_role&#x27;</span>)[<span class="number">1</span>]:set_bg(c3.selected <span class="keyword">and</span> <span class="string">&#x27;focus&#x27;</span> <span class="keyword">or</span> (c3:is_empty() <span class="keyword">and</span> <span class="string">&#x27;empty&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;occupied&#x27;</span>))</span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span>,</span><br><span class="line">update_callback = <span class="function"><span class="keyword">function</span><span class="params">(self, c3, index, objects)</span></span> <span class="comment">--luacheck: no unused args</span></span><br><span class="line">    <span class="built_in">self</span>:get_children_by_id(<span class="string">&#x27;background_role&#x27;</span>)[<span class="number">1</span>]:set_bg(c3.selected <span class="keyword">and</span> <span class="string">&#x27;focus&#x27;</span> <span class="keyword">or</span> (c3:is_empty() <span class="keyword">and</span> <span class="string">&#x27;empty&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;occupied&#x27;</span>))</span><br><span class="line"><span class="keyword">end</span>,</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这应该解决了您的问题，并使得每个标签根据其状态显示正确的背景颜色。</p>
+<p>Zoran: </p>
+<ul>
+<li>这个widget_template应该填什么, 在哪里可以找到相关的文档, 我在官网没有找到相应的文档</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li><code>widget_template</code> 是一个表，用于定义一个自定义的 AwesomeWM 标签列表部件。这个表包含了一个包含子部件的层次结构，以及在标签列表创建和更新时要调用的回调函数。<code>widget_template</code> 具有很高的灵活性，允许您根据需要自定义标签列表的外观和行为。</li>
+</ul>
+<p>尽管 <code>widget_template</code> 的文档可能不如其他部分详细，但您可以在以下网址找到有关如何自定义标签列表的一些示例和说明： </p>
+<ul>
+<li>AwesomeWM 官方 GitHub 仓库中的一个示例配置文件，其中包含一个自定义的标签列表：<a target="_blank" rel="noopener" href="https://github.com/awesomeWM/awesome/blob/master/awesomerc.lua">https://github.com/awesomeWM/awesome/blob/master/awesomerc.lua</a> </li>
+<li>AwesomeWM 官方文档的标签列表部分，其中有一些关于如何使用标签列表的基本示例：<a target="_blank" rel="noopener" href="https://awesomewm.org/apidoc/widgets/awful.widget.taglist.html">https://awesomewm.org/apidoc/widgets/awful.widget.taglist.html</a></li>
+</ul>
+<p>此外，您还可以在 GitHub 和其他网站上搜索由其他用户创建的 AwesomeWM 配置文件，以获得有关如何使用 <code>widget_template</code> 自定义标签列表的更多示例和想法。希望这些资源对您有所帮助！</p>
+<p>Zoran: </p>
+<ul>
+<li>为什么很多配置示例不直接设置成数字, 而是设置成dpi(数字)呢, 这样做有什么区别</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>使用 <code>dpi()</code> 函数设置值而不是直接使用数字的原因是为了确保配置在不同分辨率和屏幕密度的显示器上保持一致的外观和布局。<code>dpi()</code> 函数会将其参数与屏幕的像素密度相乘，从而使您的配置更具自适应性。</li>
+</ul>
+<p>在处理像素密度不同的屏幕时，固定的像素值可能会导致外观和布局问题。例如，在高分辨率显示器上，直接设置的像素值可能会导致部件和间距过小，难以辨认；而在低分辨率显示器上，这些值可能会过大，导致布局问题。</p>
+<p>通过使用 <code>dpi()</code> 函数，您可以确保在不同设备上保持一致的用户体验。这对于使用不同显示器的多显示器设置或希望在不同硬件上使用相同配置的用户尤为重要。</p>
+<p>例如，使用 <code>dpi(10)</code> 而不是直接使用 <code>10</code> 可以确保间距、大小等属性在所有屏幕上看起来都一样。如果屏幕的 DPI 更高，<code>dpi(10)</code> 会自动缩放以适应屏幕。这使得布局和外观在不同屏幕上更具一致性。</p>
+<p>Zoran: </p>
+<ul>
+<li>什么是dpi</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>DPI（每英寸点数，Dots Per Inch）是一个用于衡量打印品质或显示器分辨率的度量单位。它表示每英寸长度上的点（像素）数量。DPI 值越高，图像或显示的细节就越丰富，因为每单位面积内有更多的点来呈现图像。</li>
+</ul>
+<p>在显示器和屏幕上，DPI 是用来描述屏幕密度的指标。屏幕密度是指屏幕上每英寸的像素数量。高密度的屏幕能够显示更多的细节，图像和文本看起来更清晰。例如，智能手机、平板电脑和高分辨率显示器通常具有较高的 DPI，这使它们能够显示更清晰的图像和更锐利的文本。</p>
+<p>在编程和用户界面设计中，了解 DPI 对于确保应用程序在各种设备上正确呈现和适应不同屏幕分辨率至关重要。使用 DPI 作为度量单位可以帮助开发人员创建更具自适应性的布局，以适应不同分辨率和像素密度的屏幕。</p>
+<p>Zoran: </p>
+<ul>
+<li><p>为什么如果加上s.wibar.y &#x3D; 20就会导致只有主屏幕会显示wibar, 而注释掉wibar.y就可以所有屏幕上都显示:<br>  s.wibar &#x3D; awful.wibar {<br>  screen       &#x3D; s,<br>  position     &#x3D; ‘top’,<br>  height       &#x3D; size.height * 0.03,<br>  width        &#x3D; size.width * 0.8,<br>  shape        &#x3D; gears.shape.rounded_rect,<br>  stretch      &#x3D; false, – 是否wibar需要拉伸填满屏幕。<br>  bg           &#x3D; beautiful.color.dark,<br>  fg           &#x3D; beautiful.color.dim_blue,<br>  opacity      &#x3D; 0.8, – wibox 的不透明度，介于 0 和 1 之间。<br>  – x            &#x3D; 0,<br>  – y            &#x3D; 20,<br>  border_width &#x3D; 4,<br>  border_color &#x3D; beautiful.color.blue,<br>  }</p>
+<p>  s.wibar.y &#x3D; 20</p>
+</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>问题可能在于设置<code>wibar.y</code>为固定值。当您将<code>wibar.y</code>设置为一个固定值，例如<code>20</code>时，它将对所有屏幕应用相同的位置。在多屏幕设置中，这可能会导致wibar仅在主屏幕上显示，因为其他屏幕的坐标可能与主屏幕不同。</li>
+</ul>
+<p>注释掉<code>wibar.y</code>或删除它时，wibar将根据其默认值（通常为0）进行定位。这意味着它会在每个屏幕的顶部显示，而不是试图将其定位在可能不适用于所有屏幕的特定位置。</p>
+<p>如果您希望在每个屏幕上都使用自定义的<code>y</code>值，可以考虑根据每个屏幕的特定属性来设置<code>y</code>值。例如，您可以获取屏幕的工作区尺寸或位置，并根据这些信息来调整<code>wibar.y</code>。这样，您可以确保wibar在每个屏幕上都正确显示。</p>
+<p>Zoran: </p>
+<ul>
+<li>为什么直接初始化的时候传递x, y的大小不起作用, 在初始化后, 再设置才有效果</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在某些情况下，当您在<code>awful.wibar</code>构造函数中直接设置<code>x</code>和<code>y</code>属性时，可能不会立即生效。这可能是由于<code>awful.wibar</code>在创建过程中的某个阶段会重置或忽略这些属性。</li>
+</ul>
+<p>一种解决方法是，在创建<code>awful.wibar</code>之后，单独设置这些属性。这样做可以确保在wibar完全创建之后再应用<code>x</code>和<code>y</code>的值，从而避免在创建过程中被意外覆盖或忽略。这就是为什么在初始化后再设置<code>x</code>和<code>y</code>值才能生效的原因。</p>
+<p>例如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">s.wibar = awful.wibar &#123;</span><br><span class="line">    screen       = s,</span><br><span class="line">    position     = <span class="string">&#x27;top&#x27;</span>,</span><br><span class="line">    height       = size.height * <span class="number">0.03</span>,</span><br><span class="line">    width        = size.width * <span class="number">0.8</span>,</span><br><span class="line">    shape        = gears.shape.rounded_rect,</span><br><span class="line">    stretch      = <span class="literal">false</span>,</span><br><span class="line">    bg           = beautiful.color.dark,</span><br><span class="line">    fg           = beautiful.color.dim_blue,</span><br><span class="line">    opacity      = <span class="number">0.8</span>,</span><br><span class="line">    border_width = <span class="number">4</span>,</span><br><span class="line">    border_color = beautiful.color.blue,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置x和y属性</span></span><br><span class="line">s.wibar.x = some_x_value</span><br><span class="line">s.wibar.y = some_y_value</span><br></pre></td></tr></table></figure>
+
+<p>这样，在<code>awful.wibar</code>创建后，就可以单独设置<code>x</code>和<code>y</code>属性，确保它们会生效。</p>
+<p>Zoran: </p>
+<ul>
+<li>awesome wm将窗口设置成全屏的时候,会和wibar重叠,有什么办法可以避免这个问题吗</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在 Awesome WM 中，可以通过修改客户端规则来确保全屏窗口在 wibar 下方。为此，可以修改 <code>rc.lua</code> 配置文件中的 <code>awful.rules</code> 部分。</li>
+</ul>
+<p>找到以下代码段：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">awful.rules.rules = &#123;</span><br><span class="line">    <span class="comment">-- All clients will match this rule.</span></span><br><span class="line">    &#123; rule = &#123; &#125;,</span><br><span class="line">      properties = &#123; border_width = beautiful.border_width,</span><br><span class="line">                     border_color = beautiful.border_normal,</span><br><span class="line">                     focus = awful.client.focus.filter,</span><br><span class="line">                     raise = <span class="literal">true</span>,</span><br><span class="line">                     keys = clientkeys,</span><br><span class="line">                     buttons = clientbuttons,</span><br><span class="line">                     screen = awful.screen.preferred,</span><br><span class="line">                     placement = awful.placement.no_overlap+awful.placement.no_offscreen</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个基本规则下，添加一个新规则，将全屏窗口的层级（layer）设置为较低值，以确保它们在 wibar 下方：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">awful.rules.rules = &#123;</span><br><span class="line">    <span class="comment">-- All clients will match this rule.</span></span><br><span class="line">    <span class="comment">-- ... (existing rules)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">-- Rule for fullscreen clients</span></span><br><span class="line">    &#123; rule_any = &#123;fullscreen = <span class="literal">true</span>&#125;,</span><br><span class="line">      properties = &#123;layer = <span class="string">&quot;below&quot;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这将确保全屏窗口位于 wibar 下方。保存更改并重新加载 Awesome WM 配置（Mod4+Shift+r），然后测试全屏窗口是否正常显示。如果问题仍然存在，请检查是否有其他插件或设置可能与这些设置冲突。</p>
+<p>Zoran: </p>
+<ul>
+<li>class NFA<br>{<br>public:<br>  using state &#x3D; int;</li>
+</ul>
+<p>public:<br>    explicit NFA(const char ch);<br>    explicit NFA(const std::string&amp; postfix);<br>    NFA(NFA&amp;&amp;) &#x3D; default;<br>    NFA(const NFA&amp;) &#x3D; default;<br>    NFA&amp; operator&#x3D; (NFA&amp;&amp;) &#x3D; default;<br>    NFA&amp; operator&#x3D; (const NFA&amp;) &#x3D; default;<br>    ~NFA() &#x3D; default;</p>
+<pre><code>// TODO : add a method to print the NFA
+// TODO : add a method to validate a string
+
+void operator| (const NFA&amp; other) &#123;
+    // TODO :
+&#125;
+
+void operator^ (const NFA&amp; other) &#123;
+    // TODO :
+&#125;
+
+void operator* () &#123;
+&#125;
+</code></pre>
+<p>private:<br>    state new_state() {<br>        return size++;<br>    }</p>
+<p>private:<br>    std::map&lt;state, std::map&lt;char, state&gt;&gt; transition {};<br>    std::map&lt;state, std::map&lt;state, bool&gt;&gt; epsilon_transition {};<br>    state start {};<br>    state end {};<br>    size_t size {};<br>};</p>
+<p>&#x2F;*<br> *</p>
+<ul>
+<li><p>INFO :</p>
+</li>
+<li><p>Thompson algorithm</p>
+</li>
+<li><p>meta characters : ( ) | * + ?<br> *&#x2F;<br>inline NFA::NFA(const std::string&amp; postfix) {<br> using stack &#x3D; std::stack<NFA>;<br> stack st {};</p>
+<p> for (const auto ch : postfix) {<br> switch (ch) {<br>     case ‘<em>‘:<br>         st.top()</em>; &#x2F;&#x2F; 为什么这里不行呢?<br>         break;<br>     case ‘^’:<br>         break;<br>     case ‘|’:<br>         break;<br>     default:<br>         break;<br> }<br> }</p>
+<p> assert(st.size() &#x3D;&#x3D; 1);</p>
+</li>
+</ul>
+<p>}</p>
+<p>inline NFA::NFA(const char ch) {<br>    start &#x3D; new_state();<br>    end &#x3D; new_state();</p>
+<pre><code>transition[start][ch] = end;
+</code></pre>
+<p>}</p>
+<p>ChatGPT: </p>
+<ul>
+<li>在您的代码中，<code>st.top()*;</code> 这一行的问题在于，您试图使用 <code>*</code> 作为一个运算符来调用成员函数。但是，C++中<code>*</code>运算符的含义是解引用指针，它不能直接用于对象。如果您想在栈顶的 <code>NFA</code> 对象上调用 <code>operator*()</code> 函数，您应该这样做：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">st.<span class="built_in">top</span>().<span class="keyword">operator</span>*();</span><br></pre></td></tr></table></figure>
+
+<p>这将在栈顶的 <code>NFA</code> 对象上调用 <code>operator*()</code> 成员函数。</p>
+<p>所以，您的代码应该如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> ch : postfix) &#123;</span><br><span class="line">    <span class="keyword">switch</span> (ch) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">            st.<span class="built_in">top</span>().<span class="keyword">operator</span>*();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;^&#x27;</span>:</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;|&#x27;</span>:</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样修改后，代码应该可以正常运行。</p>
+<p>Zoran: </p>
+<ul>
+<li>什么是梯度下降算法</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>梯度下降（Gradient Descent）算法是一种用于优化目标函数（通常为损失函数）的迭代方法。在机器学习和深度学习领域中，梯度下降被广泛应用于模型参数的优化。其核心思想是利用目标函数的梯度（导数）信息来逐步更新模型参数，以找到一个局部最小值（或全局最小值）点，从而最小化目标函数。</li>
+</ul>
+<p>梯度下降算法的基本步骤如下：</p>
+<ol>
+<li>初始化模型参数（通常使用随机值）。</li>
+<li>计算目标函数关于模型参数的梯度（导数）。</li>
+<li>按照梯度的负方向更新模型参数，即将参数沿负梯度方向移动一定的步长，以减小目标函数的值。</li>
+<li>重复步骤2和3，直到满足收敛条件（例如，达到最大迭代次数或梯度值小于给定阈值）。</li>
+</ol>
+<p>在实际应用中，梯度下降算法有多种变体，例如批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）和小批量梯度下降（Mini-batch Gradient Descent）。这些变体主要区别在于计算梯度时使用的数据量：批量梯度下降使用整个数据集，随机梯度下降使用单个样本，而小批量梯度下降使用部分样本。不同变体的收敛速度、稳定性和计算开销各有差异，需要根据具体问题和计算资源选择合适的方法。</p>
+<p>Zoran: </p>
+<ul>
+<li>CMake Error at CMakeLists.txt:66 (project):<br>The CMAKE_CXX_COMPILER:</li>
+</ul>
+<p>– Configuring incomplete, errors occurred!<br>not found in the PATH.</p>
+<p>  Tell CMake where to find the compiler by setting either the environment<br>  variable “CXX” or the CMake cache entry CMAKE_CXX_COMPILER to the full path<br>  to the compiler, or to the compiler name if it is in the PATH.<br>这是什么原因</p>
+<p>ChatGPT: </p>
+<ul>
+<li>这个错误是因为CMake无法找到C++编译器。CMake需要知道编译器的位置来正确地生成构建文件。错误提示中提到的CMAKE_CXX_COMPILER变量用于指定C++编译器的路径。</li>
+</ul>
+<p>解决这个问题的方法有以下几种： </p>
+<ol>
+<li>确保C++编译器已经安装，并且其路径已经添加到系统的PATH环境变量中。这样CMake就可以自动找到编译器。 </li>
+<li>通过设置环境变量CXX来指定编译器的路径。在命令行中执行以下命令（假设你的编译器路径是 <code>/usr/bin/g++</code>，请替换为实际路径）：</li>
+</ol>
+<p>对于Linux或macOS：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="variable constant_">CXX</span>=<span class="regexp">/usr/</span>bin/g++</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于Windows（CMD）：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">set</span> CXX=C:\path\<span class="keyword">to</span>\g++.exe</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于Windows（PowerShell）：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$env</span><span class="symbol">:CXX</span> = <span class="string">&quot;C:\path\to\g++.exe&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后再运行CMake。<br>3. 直接在CMakeLists.txt文件中或CMake命令行参数中设置CMAKE_CXX_COMPILER变量。例如，在CMakeLists.txt文件中添加以下内容（使用实际编译器路径替换 <code>/usr/bin/g++</code>）：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">set</span>(<span class="type">CMAKE_CXX_COMPILER</span> <span class="string">&quot;/usr/bin/g++&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或者在运行CMake时，使用以下命令行参数（请替换为实际路径）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cmake -<span class="variable constant_">DCMAKE_CXX_COMPILER</span>=<span class="regexp">/usr/</span>bin/g++ &lt;other_options&gt; &lt;source_directory&gt;</span><br></pre></td></tr></table></figure>
+
+<p>尝试上述方法之一，确保CMake可以找到C++编译器，然后重新运行CMake。如果问题仍然存在，请检查编译器的安装和配置。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CPP_QA</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/06/GPT/software_design/" title="software_design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">software_design</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">B_tree</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">CPP_QA</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lexer/" title="Lexer"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lexer</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lua_QA</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/software_design/" title="software_design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">software_design</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">autohotkey</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#local-btn-act-x3D-util-enum-bottomlocal-button-x3D-util-button"><span class="toc-number">1.</span> <span class="toc-text">local btn_act &#x3D; util.enum.bottomlocal button  &#x3D; util.button</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Lua_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA">Lua_QA</a><time datetime="2023-05-06T05:22:06.000Z" title="发表于 2023-05-06 13:22:06">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="CPP_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA">CPP_QA</a><time datetime="2023-05-06T05:10:54.000Z" title="发表于 2023-05-06 13:10:54">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/misc/" title="misc"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="misc"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/misc/" title="misc">misc</a><time datetime="2023-05-06T05:05:16.000Z" title="发表于 2023-05-06 13:05:16">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/software_design/" title="software_design"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="software_design"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/software_design/" title="software_design">software_design</a><time datetime="2023-05-06T04:52:36.000Z" title="发表于 2023-05-06 12:52:36">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="B_tree"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree">B_tree</a><time datetime="2023-05-06T04:50:41.000Z" title="发表于 2023-05-06 12:50:41">2023-05-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>CPP_QA | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:  C++有什么办法可以将 vector快速的转换成 string 吗  ChatGPT:  在 C++ 中，可以很容易地将 vector&lt;char&gt; 快速地转换成 std::string。你只需使用 std::string 的构造函数，它接受两个迭代器作为参数，分别表示要复制的字符范围的开始和结束位置。以下是一个示例：  123456789101112131415#inc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP_QA">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/06/GPT/CPP_QA/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran:  C++有什么办法可以将 vector快速的转换成 string 吗  ChatGPT:  在 C++ 中，可以很容易地将 vector&lt;char&gt; 快速地转换成 std::string。你只需使用 std::string 的构造函数，它接受两个迭代器作为参数，分别表示要复制的字符范围的开始和结束位置。以下是一个示例：  123456789101112131415#inc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg">
+<meta property="article:published_time" content="2023-05-06T05:10:54.000Z">
+<meta property="article:modified_time" content="2023-05-06T05:29:17.812Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/06/GPT/CPP_QA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CPP_QA',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-05-06 13:29:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CPP_QA</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-06T05:10:54.000Z" title="发表于 2023-05-06 13:10:54">2023-05-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-06T05:29:17.812Z" title="更新于 2023-05-06 13:29:17">2023-05-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/C/">C++</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CPP_QA"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran:</p>
+<ul>
+<li>C++有什么办法可以将 vector<char>快速的转换成 string 吗</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li>在 C++ 中，可以很容易地将 <code>vector&lt;char&gt;</code> 快速地转换成 <code>std::string</code>。你只需使用 <code>std::string</code> 的构造函数，它接受两个迭代器作为参数，分别表示要复制的字符范围的开始和结束位置。以下是一个示例：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">char</span>&gt; vec &#123;<span class="string">&#x27;H&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;W&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;!&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用范围构造函数将 vector&lt;char&gt; 转换为 std::string</span></span><br><span class="line">    <span class="function">std::string <span class="title">str</span><span class="params">(vec.begin(), vec.end())</span></span>;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; str &lt;&lt; std::endl; <span class="comment">// 输出：Hello, World!</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们首先创建了一个 <code>vector&lt;char&gt;</code>，然后使用 <code>std::string</code> 的构造函数将其转换为字符串。<code>vec.begin()</code> 和 <code>vec.end()</code> 分别表示字符范围的开始和结束位置。</p>
+<p>Zoran:</p>
+<ul>
+<li>考虑 y 有以下代码, C++在头文件中, 类的成员函数在类外声明, 加上 inline 起到了什么作用:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Postfix</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="built_in">Postfix</span>(<span class="type">const</span> std::string&amp; infix);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Postfix</span>(Postfix&amp;&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Postfix</span>(<span class="type">const</span> Postfix&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    Postfix&amp; <span class="keyword">operator</span>= (Postfix&amp;&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    Postfix&amp; <span class="keyword">operator</span>= (<span class="type">const</span> Postfix&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">Postfix</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">Postfix::Postfix</span><span class="params">(<span class="type">const</span> std::string&amp; infix)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> Postfix::~<span class="built_in">Postfix</span>()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ChatGPT:</p>
+<ul>
+<li>在 C++中，在类外声明成员函数并添加<code>inline</code>关键字起到以下作用：</li>
+</ul>
+<ol>
+<li><strong>避免多重定义</strong> ：使用<code>inline</code>关键字告诉编译器将此成员函数的定义内联展开。这意味着在编译期间，编译器会将调用此成员函数的地方替换为函数体本身，从而减少了函数调用的开销。由于<code>inline</code>函数在每个调用点都被展开，因此可以在多个源文件中包含相同的<code>inline</code>函数定义，而不会导致多重定义错误。</li>
+<li><strong>优化性能</strong> ：内联函数的另一个优点是它们可以帮助提高程序性能。因为内联函数的代码直接插入到调用点，所以函数调用的开销得以避免。但是，需要注意的是，过度使用内联函数可能导致代码膨胀，反而影响性能。</li>
+<li><strong>强制内联</strong> ：虽然 C++编译器通常会自动将简短的成员函数内联，但在某些情况下，编译器可能会忽略内联建议。通过显式添加<code>inline</code>关键字，可以要求编译器在可能的情况下强制将该成员函数内联。需要注意的是，<code>inline</code>关键字只是一个建议，编译器可能会根据具体情况决定是否实际内联该函数。</li>
+</ol>
+<p>总之，将类成员函数在类外声明并添加<code>inline</code>关键字可以提高程序性能，避免多重定义错误，并在可能的情况下强制编译器进行内联。</p>
+<p>Zoran:</p>
+<ul>
+<li>现代编译器的 inline 不是会自己决定吗, inline 关键字现在还有用吗, 以 C++20 为标准</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li>确实，现代 C++编译器（包括支持 C++20 的编译器）通常会自动决定是否对函数进行内联。编译器会根据函数的复杂性和其他因素自动选择内联或不内联。因此，显式地使用<code>inline</code>关键字在很多情况下可能不是绝对必要的。</li>
+</ul>
+<p>然而，<code>inline</code>关键字在某些情况下仍然有用：</p>
+<ol>
+<li><strong>避免多重定义</strong> ：如之前所述，<code>inline</code>关键字可以避免多重定义错误。当在头文件中定义函数时（尤其是模板函数），使用<code>inline</code>关键字可以确保在多个源文件中包含该头文件时不会出现链接错误。</li>
+<li><strong>明确表达意图</strong> ：在某些情况下，显式使用<code>inline</code>关键字可以作为一种对其他程序员的提示，表明您希望该函数被内联。虽然这只是一个建议，但它可以帮助提高代码可读性。</li>
+<li><strong>强制内联</strong> ：尽管编译器通常会自动决定内联，但在某些情况下，您可能希望强制编译器尝试内联特定函数。通过显式添加<code>inline</code>关键字，您可以向编译器发出强制内联的信号。但请注意，<code>inline</code>关键字仍然只是一个建议，编译器可能会根据具体情况决定是否实际内联该函数。</li>
+</ol>
+<p>综上所述，虽然现代 C++编译器可以自动决定内联，但在某些特定情况下，显式使用<code>inline</code>关键字仍然有其价值。</p>
+<p>Zoran:</p>
+<ul>
+<li>为什么 constexpr 不能用于 std::map, 考虑以下代码:<br>constexpr std::map&lt;char, int&gt; PRIORITIES({<br>{‘+’, 1},<br>{ ‘-‘, 1},<br>{ ‘*‘, 2},<br>{ ‘&#x2F;‘, 2},<br>{ ‘^’, 3},<br>{ ‘(‘, 0},<br>{ ‘)’, 0}<br>});</li>
+</ul>
+<p>ChatGPT:</p>
+<ul>
+<li><code>std::map</code>是一个动态数据结构，它的内部使用平衡二叉树（通常是红黑树）来存储元素。在构造过程中，<code>std::map</code>需要动态分配内存来创建树的节点。<code>constexpr</code>要求在编译时计算值，而在编译时无法执行动态内存分配操作。</li>
+</ul>
+<p>C++17 引入了<code>std::map</code>的不太灵活但在编译时可用的替代品<code>std::array</code>或<code>std::pair</code>的数组，以及在 C++20 中引入的<code>std::span</code>。使用这些替代品，您可以创建<code>constexpr</code>容器。例如，您可以将上述代码修改为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> std::array&lt;std::pair&lt;<span class="type">char</span>, <span class="type">int</span>&gt;, 7&gt; PRIORITIES&#123;&#123;</span><br><span class="line">    &#123;<span class="string">&#x27;+&#x27;</span>,  <span class="number">1</span>&#125;,</span><br><span class="line">    &#123; <span class="string">&#x27;-&#x27;</span>, <span class="number">1</span>&#125;,</span><br><span class="line">    &#123; <span class="string">&#x27;*&#x27;</span>, <span class="number">2</span>&#125;,</span><br><span class="line">    &#123; <span class="string">&#x27;/&#x27;</span>, <span class="number">2</span>&#125;,</span><br><span class="line">    &#123; <span class="string">&#x27;^&#x27;</span>, <span class="number">3</span>&#125;,</span><br><span class="line">    &#123; <span class="string">&#x27;(&#x27;</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123; <span class="string">&#x27;)&#x27;</span>, <span class="number">0</span>&#125;</span><br><span class="line">&#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Zoran:</p>
+<ul>
+<li>C++的 switch-case 什么时候需要加{}什么时候不需要呢<br>ChatGPT:</li>
+<li>在 C++中，当一个<code>case</code>中的代码块包含变量的初始化或声明时，需要使用大括号 <code>&#123;&#125;</code> 将其包围。这是因为在<code>switch</code>语句中，所有的<code>case</code>语句共享相同的作用域。因此，如果在一个<code>case</code>中声明变量而没有使用大括号，那么在其他<code>case</code>中可能会引发编译错误，因为变量名可能已经在其他地方声明过了。</li>
+</ul>
+<p>以下是一个示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (value) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>: &#123;</span><br><span class="line">        <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>: &#123;</span><br><span class="line">        <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，如果您的<code>case</code>代码块中没有变量声明或初始化，那么就不需要使用大括号。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (value) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，由于没有变量声明，所以不需要使用大括号。但请注意，为了代码的可读性和一致性，有时在没有变量声明的情况下仍然使用大括号也是可以接受的。</p>
+<p>Zoran: </p>
+<ul>
+<li>为什么这里直接传test.first会报错, 而先用Type::str input &#x3D; test.first在传入input就不会报错了</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>这是因为，当您直接将 <code>test.first</code> 传递给 <code>addConcatOperator()</code> 函数时，您实际上正在尝试传递一个 <code>const std::string</code> 类型的引用，而不是一个可修改的 <code>std::string</code> 类型的引用。由于 <code>addConcatOperator()</code> 函数试图修改输入字符串，所以编译器不允许您传递一个 <code>const</code> 类型的引用，因为它是只读的。</li>
+</ul>
+<p>在 <code>for (auto test : all_tests)</code> 循环中，<code>test</code> 变量实际上是一个 <code>const std::pair&lt;const std::string, std::string&gt;</code> 类型的副本。这意味着 <code>test.first</code> 和 <code>test.second</code> 都是 <code>const</code> 类型的值，不能被修改。</p>
+<p>当您使用 <code>Type::str input = test.first;</code> 创建一个新的变量 <code>input</code>，您实际上是创建了一个 <code>test.first</code> 的副本，这个副本是一个可修改的 <code>std::string</code>。这就是为什么将 <code>input</code> 传递给 <code>addConcatOperator()</code> 函数不会报错。</p>
+<p>如果您希望避免创建额外的副本，可以将循环变量声明为非 <code>const</code> 引用。这样，您可以直接传递 <code>test.first</code>，如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; test : all_tests) &#123;</span><br><span class="line">    <span class="built_in">addConcatOperator</span>(test.first);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Input: &quot;</span> &lt;&lt; test.first &lt;&lt; <span class="string">&quot;, Output: &quot;</span> &lt;&lt; test.second &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>请注意，这会修改 <code>all_tests</code> 中的键，这可能不是您期望的行为。在这种情况下，您需要权衡是否创建额外副本，还是直接修改原始数据。</p>
+<p>Zoran: </p>
+<ul>
+<li>如何让input的类型为Type::str呢:<br>  for (auto [input, expected] : all_tests) {<br>  auto left &#x3D; std::move(input);<br>  addConcatOperator(left);<br>  EXPECT_EQ(expected, input);<br>  }</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在C++17中，结构化绑定并不直接支持引用类型。为了实现这一点，您可以采用以下方法：</li>
+</ul>
+<p>首先，修改 <code>all_tests</code> 的类型为 <code>std::vector&lt;std::pair&lt;Type::str, Type::str&gt;&gt;</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">const</span> std::vector&lt;std::pair&lt;Type::str, Type::str&gt;&gt; all_tests&#123;</span><br><span class="line">    &#123;<span class="string">&quot;ab&quot;</span>, <span class="string">&quot;a^b&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;a|b&quot;</span>, <span class="string">&quot;a|b&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;a*b&quot;</span>, <span class="string">&quot;a*^b&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;(a)b&quot;</span>, <span class="string">&quot;(a)^b&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;a(b)&quot;</span>, <span class="string">&quot;a^(b)&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接下来，在 <code>for</code> 循环中，使用 <code>std::tie</code> 将 <code>input</code> 和 <code>expected</code> 绑定到 <code>test</code> 的成员：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; test : all_tests) &#123;</span><br><span class="line">    Type::str&amp; input = test.first;</span><br><span class="line">    <span class="type">const</span> Type::str&amp; expected = test.second;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">addConcatOperator</span>(input);</span><br><span class="line">    <span class="built_in">EXPECT_EQ</span>(expected, input);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lua_QA</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/06/GPT/misc/" title="misc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">misc</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">B_tree</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lexer/" title="Lexer"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lexer</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lua_QA</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/misc/" title="misc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">misc</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/software_design/" title="software_design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">software_design</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">autohotkey</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Lua_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA">Lua_QA</a><time datetime="2023-05-06T05:22:06.000Z" title="发表于 2023-05-06 13:22:06">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="CPP_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/CPP_QA/" title="CPP_QA">CPP_QA</a><time datetime="2023-05-06T05:10:54.000Z" title="发表于 2023-05-06 13:10:54">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/misc/" title="misc"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="misc"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/misc/" title="misc">misc</a><time datetime="2023-05-06T05:05:16.000Z" title="发表于 2023-05-06 13:05:16">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/software_design/" title="software_design"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="software_design"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/software_design/" title="software_design">software_design</a><time datetime="2023-05-06T04:52:36.000Z" title="发表于 2023-05-06 12:52:36">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="B_tree"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/B_tree/" title="B_tree">B_tree</a><time datetime="2023-05-06T04:50:41.000Z" title="发表于 2023-05-06 12:50:41">2023-05-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
