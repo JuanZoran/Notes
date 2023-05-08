@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>AwesomeWm_Q&amp;A | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:   awesoem wm如何获取当前工作区的客户端数目  ChatGPT:   要获取当前工作区（标签）的客户端数目，您可以使用以下代码段：  12345678910local awful &#x3D; require(&quot;awful&quot;)local function get_client_count()    local tag &#x3D; awful.screen.focused(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AwesomeWm_Q&amp;A">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/08/GPT/AwesomeWm_Q_A/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran:   awesoem wm如何获取当前工作区的客户端数目  ChatGPT:   要获取当前工作区（标签）的客户端数目，您可以使用以下代码段：  12345678910local awful &#x3D; require(&quot;awful&quot;)local function get_client_count()    local tag &#x3D; awful.screen.focused(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg">
+<meta property="article:published_time" content="2023-05-08T04:16:23.000Z">
+<meta property="article:modified_time" content="2023-05-08T04:23:34.249Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/08/GPT/AwesomeWm_Q_A/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AwesomeWm_Q&A',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-05-08 12:23:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">45</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AwesomeWm_Q&amp;A</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-08T04:16:23.000Z" title="发表于 2023-05-08 12:16:23">2023-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-08T04:23:34.249Z" title="更新于 2023-05-08 12:23:34">2023-05-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AwesomeWm_Q&amp;A"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran: </p>
+<ul>
+<li>awesoem wm如何获取当前工作区的客户端数目</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>要获取当前工作区（标签）的客户端数目，您可以使用以下代码段：</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> awful = <span class="built_in">require</span>(<span class="string">&quot;awful&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">get_client_count</span><span class="params">()</span></span></span><br><span class="line">    <span class="keyword">local</span> tag = awful.screen.focused().selected_tag</span><br><span class="line">    <span class="keyword">local</span> clients_count = #tag:clients()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;当前工作区的客户端数目: &quot;</span> .. clients_count)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">get_client_count()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个代码示例使用了Awful库，首先获取当前焦点屏幕的选定标签，然后使用<code>:clients()</code>函数获取该标签的客户端列表。通过计算列表的长度（使用<code>#</code>运算符），您可以获得当前工作区的客户端数目。将该数字输出到终端以显示客户端数目。请注意，您可能需要将此代码段集成到您的Awesome配置文件（例如<code>rc.lua</code>）中才能使其生效。</p>
+<p>Zoran: </p>
+<ul>
+<li>awesome wm的client, tag, screen这些的关系是什么, 我感觉很乱, 如何去理解呢</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在Awesome WM中，client、tag和screen的概念相互关联，共同组成了窗口管理的基本框架。理解它们之间的关系有助于更好地使用和配置Awesome WM。下面是它们之间的关系及其作用：</li>
+</ul>
+<ol>
+<li><strong>Client（客户端）</strong> ：在Awesome WM中，一个客户端就是一个窗口。这可能是一个应用程序窗口，如文本编辑器、浏览器、文件管理器等。客户端是最基本的单元，用于在桌面环境中组织和管理应用程序。 </li>
+<li><strong>Tag（标签）</strong> ：标签类似于其他桌面环境中的虚拟桌面或工作区。一个标签可以包含一个或多个客户端（窗口）。标签可以用来对客户端进行分类和组织，以便更有效地管理您的工作空间。例如，您可以在一个标签中放置所有的通讯工具，如电子邮件客户端、即时消息等；在另一个标签中放置所有的办公软件，如文本编辑器、表格处理软件等。 </li>
+<li><strong>Screen（屏幕）</strong> ：屏幕代表实际的物理显示设备，如显示器或投影仪。每个屏幕可以显示一个或多个标签，这取决于您的配置。在多显示器设置中，每个屏幕可以独立地显示和管理标签和客户端。</li>
+</ol>
+<p>理解这些概念之间的关系的一个简单方法是将客户端（窗口）视为最基本的单元，它们可以根据任务或分类组织到标签（工作区）中，而标签则可以在一个或多个屏幕（显示设备）上显示。</p>
+<p>在实际应用中，您可以根据自己的需求创建和配置标签，将客户端添加到合适的标签中，从而使您的桌面环境更加有序和易于管理。同时，根据您的硬件配置，您可以在单个或多个屏幕上显示和操作这些标签和客户端。</p>
+<p>Zoran: </p>
+<ul>
+<li>如何正确处理各种事件的分发呢</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在Awesome WM中，事件是在窗口管理器内部进行操作时发生的一些特定动作。事件可以由键盘按键、鼠标点击或系统状态更改等触发。为了正确处理各种事件的分发，您需要在配置文件（如<code>rc.lua</code>）中定义事件处理程序。以下是处理事件分发的一般步骤：</li>
+</ul>
+<ol>
+<li><strong>了解事件类型</strong> ：熟悉Awesome WM支持的事件类型，例如<code>button</code>, <code>key</code>, <code>tag</code>, <code>client</code>等。 </li>
+<li><strong>创建事件处理程序</strong> ：针对您关注的事件类型，编写事件处理程序。事件处理程序是一个接收特定参数的函数，该函数定义了事件触发时执行的操作。例如，您可以为键盘快捷键创建一个处理程序来执行特定任务。 </li>
+<li><strong>绑定事件处理程序</strong> ：将事件处理程序绑定到特定的对象或组件，例如绑定到客户端窗口、标签或全局事件。例如，您可以将键盘快捷键处理程序绑定到全局事件，或者将鼠标点击处理程序绑定到特定的客户端窗口。</li>
+</ol>
+<p>以下是一个简单的示例，说明了如何创建一个键盘快捷键处理程序并将其绑定到全局事件：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">-- 引入&quot;awful&quot;库，它包含了很多有用的函数和事件处理工具</span></span><br><span class="line"><span class="keyword">local</span> awful = <span class="built_in">require</span>(<span class="string">&quot;awful&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义一个事件处理程序，用于打开终端应用程序</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">open_terminal</span><span class="params">()</span></span></span><br><span class="line">    awful.spawn(<span class="string">&quot;x-terminal-emulator&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建一个键盘快捷键，绑定到事件处理程序</span></span><br><span class="line">awful.key(&#123;&#125;, <span class="string">&quot;F12&quot;</span>, open_terminal)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个例子中，我们首先引入了<code>awful</code>库，定义了一个打开终端的事件处理程序，然后创建了一个快捷键并绑定到该处理程序。这样，当用户按下F12键时，终端应用程序将启动。</p>
+<p>在处理事件时，请确保正确绑定处理程序，并根据需要确保处理程序具有正确的参数。为了避免冲突和意外行为，务必仔细测试您的配置文件，确保所有事件处理程序按预期运行。</p>
+<p>Zoran: </p>
+<ul>
+<li>如何在awesome wm内实现一个类似于windows上的alt-tab行为的算法</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在Awesome WM中，您可以使用Lua脚本来实现一个类似于Windows上的Alt+Tab行为。以下是一个简单的示例，说明如何实现这个功能：</li>
+</ul>
+<ol>
+<li>在<code>rc.lua</code>文件的开头，确保已经引入了以下库：</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> awful = <span class="built_in">require</span>(<span class="string">&quot;awful&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> gears = <span class="built_in">require</span>(<span class="string">&quot;gears&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在<code>rc.lua</code>文件的<code>globalkeys</code>部分，添加以下代码来定义Alt+Tab和Alt+Shift+Tab行为：</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">-- 定义一个表来存储当前的alttab状态</span></span><br><span class="line"><span class="keyword">local</span> alttab = &#123;</span><br><span class="line">    cycle_prev = <span class="literal">false</span>,</span><br><span class="line">    clients = &#123;&#125;,</span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义一个函数来处理alttab操作</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">alttab_handler</span><span class="params">(is_previous)</span></span></span><br><span class="line">    <span class="comment">-- 获取当前的屏幕和工作区</span></span><br><span class="line">    <span class="keyword">local</span> screen = awful.screen.focused()</span><br><span class="line">    <span class="keyword">local</span> tag = screen.selected_tag</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 如果正在切换，则恢复原状</span></span><br><span class="line">    <span class="keyword">if</span> alttab.cycle_prev <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> alttab.clients[alttab.index] <span class="keyword">then</span></span><br><span class="line">            tag:view_only()</span><br><span class="line">            alttab.clients[alttab.index]:<span class="built_in">lower</span>()</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        alttab.clients = tag:clients()</span><br><span class="line">        alttab.index = <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 按指定的方向进行循环</span></span><br><span class="line">    <span class="keyword">if</span> is_previous <span class="keyword">then</span></span><br><span class="line">        alttab.index = alttab.index - <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> alttab.index &lt; <span class="number">1</span> <span class="keyword">then</span></span><br><span class="line">            alttab.index = #alttab.clients</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        alttab.index = alttab.index + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> alttab.index &gt; #alttab.clients <span class="keyword">then</span></span><br><span class="line">            alttab.index = <span class="number">1</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 提升选定的客户端并聚焦</span></span><br><span class="line">    <span class="keyword">if</span> alttab.clients[alttab.index] <span class="keyword">then</span></span><br><span class="line">        tag:view_only()</span><br><span class="line">        alttab.clients[alttab.index]:raise()</span><br><span class="line">        client.focus = alttab.clients[alttab.index]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    alttab.cycle_prev = <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在按下Alt时开始处理Alt+Tab和Alt+Shift+Tab</span></span><br><span class="line">awful.key(&#123; <span class="string">&quot;Mod1&quot;</span> &#125;, <span class="string">&quot;Tab&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> alttab_handler(<span class="literal">false</span>) <span class="keyword">end</span>, &#123;description = <span class="string">&quot;Switch to next client&quot;</span>, group = <span class="string">&quot;client&quot;</span>&#125;),</span><br><span class="line">awful.key(&#123; <span class="string">&quot;Mod1&quot;</span>, <span class="string">&quot;Shift&quot;</span> &#125;, <span class="string">&quot;Tab&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> alttab_handler(<span class="literal">true</span>) <span class="keyword">end</span>, &#123;description = <span class="string">&quot;Switch to previous client&quot;</span>, group = <span class="string">&quot;client&quot;</span>&#125;),</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在松开Alt键时，结束循环并重置状态</span></span><br><span class="line">awful.key(&#123; <span class="string">&quot;Mod1&quot;</span> &#125;, <span class="string">&quot;Tab&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> alttab.cycle_prev = <span class="literal">false</span> <span class="keyword">end</span>, &#123;description = <span class="string">&quot;Finish switching&quot;</span>, group = <span class="string">&quot;client&quot;</span>&#125;, <span class="string">&quot;keyup&quot;</span>),</span><br><span class="line">awful.key(&#123; <span class="string">&quot;Mod1&quot;</span>, <span class="string">&quot;Shift&quot;</span> &#125;, <span class="string">&quot;Tab&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> alttab.cycle_prev = <span class="literal">false</span> <span class="keyword">end</span>, &#123;description = <span class="string">&quot;Finish switching&quot;</span>, group = <span class="string">&quot;client&quot;</span>&#125;, <span class="string">&quot;keyup&quot;</span>),</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个示例首先定义了一个表<code>alttab</code>来存储有关当前Alt+Tab状态的信息，然后实现了一个<code>alttab_handler</code>函数来处理客户端之间的切换。在按下Alt+Tab或Alt+Shift+Tab时，将调用此函数以实现类似于Windows的行为。</p>
+<p>请注意，这只是一个简单的示例，您可能需要根据自己的需求对其进行调整。例如，您可以</p>
+<p>Zoran: </p>
+<ul>
+<li>awesome 设置client的最大化属性会和wibar重叠, 可能是哪里出现的问题, 如何解决呢</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>这个问题可能是由于客户端在最大化时未考虑wibar（顶部或底部的任务栏）所占用的空间所导致的。要解决此问题，您需要确保在计算客户端的大小和位置时考虑到wibar。</li>
+</ul>
+<p>为了解决这个问题，您可以在<code>rc.lua</code>文件中使用<code>awful.placement</code>库来调整客户端窗口的位置和大小。这里是一个简单的示例： </p>
+<ol>
+<li>在<code>rc.lua</code>文件的开头，确保已经引入了以下库：</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> awful = <span class="built_in">require</span>(<span class="string">&quot;awful&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在<code>rc.lua</code>中找到<code>client.connect_signal</code>部分，并添加以下代码：</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">-- 当一个客户端请求最大化时</span></span><br><span class="line">client.connect_signal(<span class="string">&quot;request::geometry&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">(c, context)</span></span></span><br><span class="line">    <span class="keyword">if</span> context == <span class="string">&quot;maximize&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="comment">-- 获取屏幕和任务栏的大小</span></span><br><span class="line">        <span class="keyword">local</span> screen = c.screen</span><br><span class="line">        <span class="keyword">local</span> screen_geometry = screen.geometry</span><br><span class="line">        <span class="keyword">local</span> wibar_height = screen.mywibox.height</span><br><span class="line"></span><br><span class="line">        <span class="comment">-- 计算客户端的新位置和大小</span></span><br><span class="line">        <span class="keyword">local</span> new_x = screen_geometry.x</span><br><span class="line">        <span class="keyword">local</span> new_y = screen_geometry.y + wibar_height</span><br><span class="line">        <span class="keyword">local</span> new_width = screen_geometry.width</span><br><span class="line">        <span class="keyword">local</span> new_height = screen_geometry.height - wibar_height</span><br><span class="line"></span><br><span class="line">        <span class="comment">-- 更新客户端的位置和大小</span></span><br><span class="line">        c:geometry(&#123;</span><br><span class="line">            x = new_x,</span><br><span class="line">            y = new_y,</span><br><span class="line">            width = new_width,</span><br><span class="line">            height = new_height</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这段代码监听了<code>request::geometry</code>信号，当客户端请求最大化时，将调整其位置和大小，以确保不与wibar重叠。当客户端最大化时，它将计算一个新的位置和大小，然后使用<code>c:geometry</code>方法更新客户端的位置和大小。</p>
+<p>这只是一个简单的示例，您可能需要根据自己的需求对其进行调整。例如，您可能需要考虑在屏幕的</p>
+<p>Zoran: </p>
+<ul>
+<li>如何将wibar的背景色设置成透明</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>在Awesome WM中，要将wibar的背景色设置为透明，您需要为<code>bg</code>属性分配带有透明度的颜色值。颜色值可以用RGBA格式表示，其中A是透明度，范围是0到1，0表示完全透明，1表示不透明。</li>
+</ul>
+<p>下面是一个如何设置wibar背景为半透明的示例：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> my_wibox = awful.wibar(&#123;</span><br><span class="line">    position = <span class="string">&quot;top&quot;</span>, </span><br><span class="line">    screen = s,</span><br><span class="line">    height = <span class="number">20</span>,</span><br><span class="line">    bg = <span class="string">&quot;#00000066&quot;</span>,  <span class="comment">-- 66是透明度的十六进制值，相当于40%的不透明度</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个例子中，<code>#000000</code>是黑色，<code>66</code>是透明度值，结果是一个半透明的黑色背景。您可以根据需要调整颜色和透明度值。</p>
+<p>如果您使用的是一个较新的版本的Awesome，也可以使用<code>gears.color</code>函数将背景色与透明度组合在一起。例如，如果您想将背景色设置为50%透明的红色，可以这样做：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> gears = <span class="built_in">require</span>(<span class="string">&quot;gears&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> my_wibox = awful.wibar(&#123;</span><br><span class="line">    position = <span class="string">&quot;top&quot;</span>, </span><br><span class="line">    screen = s,</span><br><span class="line">    height = <span class="number">20</span>,</span><br><span class="line">    bg = gears.color.transparent(<span class="string">&quot;#FF0000&quot;</span>, <span class="number">0.5</span>),  <span class="comment">-- 50%透明的红色</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个例子中，<code>gears.color.transparent()</code>函数用于将<code>#FF0000</code>红色与50%的透明度组合在一起。这样，您就可以更容易地控制颜色和透明度，而无需将它们混合在一个字符串中。</p>
+<p>Zoran: </p>
+<ul>
+<li>awesome wm 的flex.horizontal和align.horizontal有什么不同</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li><code>wibox.layout.flex.horizontal</code>和<code>wibox.layout.align.horizontal</code>在Awesome WM中是两种不同的布局类型，它们的主要区别在于如何分配可用的空间给部件。</li>
+</ul>
+<ol>
+<li><code>wibox.layout.flex.horizontal</code>：这是一个弹性布局，它将在水平方向上等比例分配空间给其中的所有部件。如果布局中的部件有更多可用空间，每个部件的宽度将增加，反之则缩小。它们始终占据整个布局区域。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> flex_layout = wibox.layout.flex.horizontal()</span><br><span class="line">flex_layout:add(widget1)</span><br><span class="line">flex_layout:add(widget2)</span><br><span class="line">flex_layout:add(widget3)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个例子中，<code>widget1</code>、<code>widget2</code>和<code>widget3</code>在水平方向上将等比例分配空间，填满整个<code>flex_layout</code>布局。 </p>
+<ol>
+<li><code>wibox.layout.align.horizontal</code>：这是一个对齐布局，它允许你在三个区域（左、中、右）放置部件。左、右区域中的部件将保持它们的原始大小，而中间部分的部件会填满剩余的空间。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> align_layout = wibox.layout.align.horizontal()</span><br><span class="line">align_layout:set_left(widget1)</span><br><span class="line">align_layout:set_middle(widget2)</span><br><span class="line">align_layout:set_right(widget3)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这个例子中，<code>widget1</code>和<code>widget3</code>将保持它们的原始大小，靠近布局的左边和右边，<code>widget2</code>会填满剩余的空间。</p>
+<p>总之，<code>wibox.layout.flex.horizontal</code>和<code>wibox.layout.align.horizontal</code>在分配空间和部件位置方面有所不同。<code>flex.horizontal</code>提供了一个在水平方向上自动调整部件大小以填满可用空间的布局，而<code>align.horizontal</code>则允许你更精确地放置部件，使得某些部件保持固定大小，而其他部件填充剩余空间。根据你的需求和界面设计，你可以选择使用哪种布局类型。</p>
+<p>Zoran: </p>
+<ul>
+<li>为什么很多配置示例不直接设置成数字, 而是设置成dpi(数字)呢, 这样做有什么区别</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>使用 <code>dpi()</code> 函数设置值而不是直接使用数字的原因是为了确保配置在不同分辨率和屏幕密度的显示器上保持一致的外观和布局。<code>dpi()</code> 函数会将其参数与屏幕的像素密度相乘，从而使您的配置更具自适应性。</li>
+</ul>
+<p>在处理像素密度不同的屏幕时，固定的像素值可能会导致外观和布局问题。例如，在高分辨率显示器上，直接设置的像素值可能会导致部件和间距过小，难以辨认；而在低分辨率显示器上，这些值可能会过大，导致布局问题。</p>
+<p>通过使用 <code>dpi()</code> 函数，您可以确保在不同设备上保持一致的用户体验。这对于使用不同显示器的多显示器设置或希望在不同硬件上使用相同配置的用户尤为重要。</p>
+<p>例如，使用 <code>dpi(10)</code> 而不是直接使用 <code>10</code> 可以确保间距、大小等属性在所有屏幕上看起来都一样。如果屏幕的 DPI 更高，<code>dpi(10)</code> 会自动缩放以适应屏幕。这使得布局和外观在不同屏幕上更具一致性。</p>
+<p>Zoran: </p>
+<ul>
+<li>什么是dpi</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>DPI（每英寸点数，Dots Per Inch）是一个用于衡量打印品质或显示器分辨率的度量单位。它表示每英寸长度上的点（像素）数量。DPI 值越高，图像或显示的细节就越丰富，因为每单位面积内有更多的点来呈现图像。</li>
+</ul>
+<p>在显示器和屏幕上，DPI 是用来描述屏幕密度的指标。屏幕密度是指屏幕上每英寸的像素数量。高密度的屏幕能够显示更多的细节，图像和文本看起来更清晰。例如，智能手机、平板电脑和高分辨率显示器通常具有较高的 DPI，这使它们能够显示更清晰的图像和更锐利的文本。</p>
+<p>在编程和用户界面设计中，了解 DPI 对于确保应用程序在各种设备上正确呈现和适应不同屏幕分辨率至关重要。使用 DPI 作为度量单位可以帮助开发人员创建更具自适应性的布局，以适应不同分辨率和像素密度的屏幕。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/Notes/2023/05/08/GPT/VimTips/" title="VimTips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VimTips</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">autohotkey</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/gcc/" title="gcc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">gcc</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/gdb/" title="gdb"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">gdb</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/git/" title="git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">git</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/makefile/" title="makefile的基本使用"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">makefile的基本使用</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">45</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="AwesomeWm_Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A">AwesomeWm_Q&amp;A</a><time datetime="2023-05-08T04:16:23.000Z" title="发表于 2023-05-08 12:16:23">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/VimTips/" title="VimTips"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="VimTips"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/VimTips/" title="VimTips">VimTips</a><time datetime="2023-05-08T04:12:11.000Z" title="发表于 2023-05-08 12:12:11">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/Python_Q_A/" title="Python_Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Python_Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/Python_Q_A/" title="Python_Q&amp;A">Python_Q&amp;A</a><time datetime="2023-05-08T04:09:28.000Z" title="发表于 2023-05-08 12:09:28">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Lua_QA"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA">Lua_QA</a><time datetime="2023-05-06T05:22:06.000Z" title="发表于 2023-05-06 13:22:06">2023-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="C++ Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A">C++ Q&amp;A</a><time datetime="2023-05-06T05:10:54.000Z" title="发表于 2023-05-06 13:10:54">2023-05-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
