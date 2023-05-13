@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Rust入门 Q&amp;A | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:  Rust 的标准库中有哪些容器，请你按照: 容器说明，代码示例， 代码讲解， 使用场景，注意事项， 底层实现， 对应的类似的 C++的容器 的形式来向我一一讲解  ChatGPT:  Rust 标准库中有几种主要的容器类型：Vector（Vec）、String、HashMap 和 HashSet。这里我将按照要求的格式来一一讲解这些容器。   Vector（Vec）容器说明：Vec">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Rust入门 Q&amp;A | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran: Rust 的标准库中有哪些容器，请你按照: 容器说明，代码示例， 代码讲解， 使用场景，注意事项， 底层实现， 对应的类似的 C++的容器 的形式来向我一一讲解  ChatGPT: Rust 标准库中有几种主要的容器类型：Vector（Vec）、String、HashMap 和 HashSet。这里我将按照要求的格式来一一讲解这些容器。   Vector（Vec）容器说明：Vecto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rust入门 Q&amp;A">
 <meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/06/GPT/Rust_tutor/index.html">
 <meta property="og:site_name" content="Zoran的个人博客">
-<meta property="og:description" content="Zoran:  Rust 的标准库中有哪些容器，请你按照: 容器说明，代码示例， 代码讲解， 使用场景，注意事项， 底层实现， 对应的类似的 C++的容器 的形式来向我一一讲解  ChatGPT:  Rust 标准库中有几种主要的容器类型：Vector（Vec）、String、HashMap 和 HashSet。这里我将按照要求的格式来一一讲解这些容器。   Vector（Vec）容器说明：Vec">
+<meta property="og:description" content="Zoran: Rust 的标准库中有哪些容器，请你按照: 容器说明，代码示例， 代码讲解， 使用场景，注意事项， 底层实现， 对应的类似的 C++的容器 的形式来向我一一讲解  ChatGPT: Rust 标准库中有几种主要的容器类型：Vector（Vec）、String、HashMap 和 HashSet。这里我将按照要求的格式来一一讲解这些容器。   Vector（Vec）容器说明：Vecto">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg">
 <meta property="article:published_time" content="2023-05-06T04:47:34.000Z">
-<meta property="article:modified_time" content="2023-05-08T04:11:23.105Z">
+<meta property="article:modified_time" content="2023-05-10T05:32:11.165Z">
 <meta property="article:author" content="Zoran">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/06/GPT/Rust_tutor/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/06/GPT/Rust_tutor/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/Notes/',
   algolia: undefined,
   localSearch: undefined,
@@ -56,8 +56,8 @@
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2023-05-08 12:11:23'
+  isToc: true,
+  postUpdate: '2023-05-10 13:32:11'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -177,12 +177,10 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (false) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">30</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Rust入门 Q&amp;A</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-06T04:47:34.000Z" title="发表于 2023-05-06 12:47:34">2023-05-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-08T04:11:23.105Z" title="更新于 2023-05-08 12:11:23">2023-05-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Rust/">Rust</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Rust入门 Q&amp;A"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran:</p>
-<ul>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">33</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Rust入门 Q&amp;A</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-06T04:47:34.000Z" title="发表于 2023-05-06 12:47:34">2023-05-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-10T05:32:11.165Z" title="更新于 2023-05-10 13:32:11">2023-05-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Rust/">Rust</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Rust入门 Q&amp;A"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 的标准库中有哪些容器，请你按照: 容器说明，代码示例， 代码讲解， 使用场景，注意事项， 底层实现， 对应的类似的 C++的容器 的形式来向我一一讲解</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT"><a href="#ChatGPT" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>Rust 标准库中有几种主要的容器类型：Vector（Vec）、String、HashMap 和 HashSet。这里我将按照要求的格式来一一讲解这些容器。</li>
 </ul>
 <ol>
@@ -210,12 +208,10 @@ if (false) {
 <ol>
 <li>HashMap<br>容器说明：HashMap 是一个基于哈希表的键值对集合，用于存</li>
 </ol>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-1"><a href="#ChatGPT-1" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>储键值对。它提供了快速的 O(1) 键查找、插入和删除操作。</li>
 </ul>
 <p>代码示例：</p>
@@ -237,12 +233,10 @@ if (false) {
 <p>注意事项：需要注意 HashSet 的元素类型必须实现 <code>Eq</code> 和 <code>Hash</code> trait。此外，HashSet 不保证顺序，如果需要顺序敏感的集合，可以使用 BTreeSet。</p>
 <p>底层实现：HashSet 内部使用 HashMap 实现，具有良好的平均性能。但在哈希冲突时，查找、插入和删除操作的性能可能会降低。</p>
 <p>对应的类似的 C++ 的容器：<code>std::unordered_set</code></p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-2"><a href="#Zoran-2" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>还有哪些标准库容器</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-2"><a href="#ChatGPT-2" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>除了上述提到的 Vec、String、HashMap 和 HashSet，Rust 标准库中还有以下容器：</li>
 </ul>
 <ol>
@@ -266,12 +260,10 @@ if (false) {
 </ol>
 <p>对应的类似的 C++ 的容器：<code>std::priority_queue</code></p>
 <p>这些容器都位于 <code>std::collections</code> 模块中。需要注意的是，尽管这些容器在功能上与 C++ 的容器相似，但它们在语法、接口和实现上可能存在差异。在使用时，请务必参考 Rust 官方文档以获取正确的使用方法。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-3"><a href="#Zoran-3" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 标准库没有提供栈和队列的容器吗</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-3"><a href="#ChatGPT-3" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>Rust 标准库中没有单独的栈（Stack）和队列（Queue）容器，但是可以使用其他容器来实现它们的功能。</li>
 </ul>
 <p>对于栈（Stack），您可以使用 Rust 中的 Vector（Vec）。向量的 <code>push</code> 和 <code>pop</code> 方法分别可以在 O(1) 时间内完成元素的入栈和出栈操作。例如：</p>
@@ -282,12 +274,10 @@ if (false) {
 
 <p>在这个例子中，我们使用 <code>push_back</code> 方法将元素添加到队列的尾部，并使用 <code>pop_front</code> 方法从队列的首部移除元素。这样就实现了一个先进先出（FIFO）的队列。</p>
 <p>虽然 Rust 标准库没有专门的栈和队列容器，但使用 Vec 和 VecDeque 可以很容易地实现它们的功能。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-4"><a href="#Zoran-4" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 有没有类似于 C++的 cppreference 这样的网站呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-4"><a href="#ChatGPT-4" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>Rust 的官方文档非常完善，可以作为 Rust 版本的 “cppreference”。在这里，您可以找到 Rust 的 API、语法、示例和解释等内容。以下是一些有用的在线资源：</li>
 </ul>
 <ol>
@@ -297,12 +287,10 @@ if (false) {
 <li>Rust API Guidelines：这个文档提供了关于如何编写高质量的 Rust API 的建议。适合已经熟悉 Rust 并希望提高代码质量的开发者。网址：<a target="_blank" rel="noopener" href="https://rust-lang.github.io/api-guidelines/">https://rust-lang.github.io/api-guidelines/</a></li>
 </ol>
 <p>这些在线资源可以帮助您学习 Rust，解决问题并提高代码质量。在 Rust 社区中，这些资源通常被视为 Rust 的 “cppreference”。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-5"><a href="#Zoran-5" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>从 C++迁移到 Rust, 应该遵从怎样的学习路线呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-5"><a href="#ChatGPT-5" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>从 C++ 迁移到 Rust 时，您可能会发现两者在语法、内存管理和编程范式等方面存在一些差异。以下是一些建议的学习路线，以帮助您更顺利地进行迁移：</li>
 </ul>
 <ol>
@@ -316,12 +304,10 @@ if (false) {
 <li>参与 Rust 社区<br>参加论坛、邮件列表、聊天室或本地 Rust 会议，以便了解其他开发者的经验和最佳实践。Rust 社区非常友好，您可以在这里获得帮助和建议。</li>
 </ol>
 <p>遵循这些学习路线，您将逐步熟悉 Rust 语言的特性和用法。虽然 Rust 与 C++</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-6"><a href="#Zoran-6" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 的标准库中有哪些常用的宏， 请你按照刚刚让你介绍标准库容器的方式来向我介绍</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-6"><a href="#ChatGPT-6" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>Rust 标准库中有许多有用的宏。以下是一些常用宏的介绍：</li>
 </ul>
 <ol>
@@ -357,12 +343,10 @@ if (false) {
 <p>代码示例：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>,</span><br></pre></td></tr></table></figure>
 
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-7"><a href="#Zoran-7" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-7"><a href="#ChatGPT-7" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>3];</li>
 </ul>
 <p>代码讲解：在这个示例中，我们使用 <code>vec!</code> 宏创建了一个新的 Vec <code>v</code>，并用整数值 1、2 和 3 初始化它。</p>
@@ -378,12 +362,10 @@ if (false) {
 <p>使用场景：<code>macro_rules!</code> 宏用于创建可复用的代码片段，例如生成模板代码、实现编译时计算等。</p>
 <p>注意事项：宏定义与普通函数不同，宏使用模式匹配和替换进行扩展。在使用宏时，请确保遵循 Rust 的宏编写规范。</p>
 <p>以上仅是 Rust 标准库中众多宏的一部分。更多宏及其用法，请参考 Rust 文档：<a target="_blank" rel="noopener" href="https://doc.rust-lang.org/std/index.html?search=">https://doc.rust-lang.org/std/index.html?search=</a></p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-8"><a href="#Zoran-8" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>请你按照: 语法说明， 代码示例，代码讲解， 注意事项，使用建议的方式来向我介绍 Rust 的宏编写规范</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-8"><a href="#ChatGPT-8" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 中，宏是一种功能强大的元编程工具，它允许在编译时生成和操作代码。以下是有关 Rust 宏编写规范的介绍：</li>
 </ul>
 <ol>
@@ -411,12 +393,10 @@ if (false) {
 <li>谨慎使用宏，避免过度使用宏导致代码难以阅读和维护。</li>
 </ul>
 <p>Rust 宏是一个强大的工具，可以帮助您实现复杂的代码生成和元编程。遵循这些规范和建议，您将能够更有效地编写和使用 Rust 宏。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-9"><a href="#Zoran-9" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>有哪些类似于:expr 的类型可以用于宏的编写， 他们对应着那些代码，请向我详细介绍一下</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-9"><a href="#ChatGPT-9" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 宏中，您可以使用不同的匹配器来捕获各种语法结构。以下是一些常见的匹配器及其对应的代码：</li>
 </ul>
 <ol>
@@ -483,12 +463,10 @@ if (false) {
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> impl_trait &#123;</span><br><span class="line">    ($name:ident, $lt:lifetime) =&gt; &#123;</span><br><span class="line">        <span class="keyword">impl</span>&lt;$lt&gt; MyTrait <span class="keyword">for</span> $name&lt;$lt&gt; &#123;</span><br><span class="line">            <span class="comment">// implementation</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>以上是 Rust 宏中的常见匹配器及其用法。您可以使用这些匹配器捕获各种 Rust 语法结构，并根据需要在宏输出中使用它们。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-10"><a href="#Zoran-10" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>请你告诉我他们对应什么语句，也就是写一些使用这些宏的例子来向我讲解</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-10"><a href="#ChatGPT-10" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>当然，以下是使用这些匹配器的一些示例：</li>
 </ul>
 <ol>
@@ -537,12 +515,10 @@ if (false) {
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">trait</span> <span class="title class_">MyTrait</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">do_something</span>(&amp;<span class="keyword">self</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Container</span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    value: &amp;<span class="symbol">&#x27;a</span> <span class="type">i32</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">impl_trait!(Container, <span class="symbol">&#x27;a</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span>&lt;<span class="symbol">&#x27;a</span>&gt; MyTrait <span class="keyword">for</span> <span class="title class_">Container</span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">do_something</span>(&amp;<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;Value: &#123;&#125;&quot;</span>, <span class="keyword">self</span>.value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">value</span> = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">container</span> = Container &#123; value: &amp;value &#125;;</span><br><span class="line">    container.<span class="title function_ invoke__">do_something</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: Value: 42</span></span><br></pre></td></tr></table></figure>
 
 <p>以上是使用这些匹配器的一些示例。通过这些示例，您可以了解如何在宏中使用这些匹配器来捕获和生成不同的 Rust 语法结构。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-11"><a href="#Zoran-11" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 的 struct 对应 C++的 class, impl 对应 C++的成员函数， traits 对应什么呢？</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-11"><a href="#ChatGPT-11" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 中，trait 对应于 C++ 的接口（interface）或抽象基类（abstract base class）。Trait 用于定义一组共享的行为或方法，这些行为可以被多个不同的类型实现。这类似于 C++ 中的纯虚函数（pure virtual functions）或接口，但 Rust 的 trait 更灵活且功能更丰富。</li>
 </ul>
 <p>这是一个简单的例子，说明 Rust trait 与 C++ 接口的类似之处：</p>
@@ -553,12 +529,10 @@ if (false) {
 
 <p>在这个例子中，Rust 的 <code>Drawable</code> trait 类似于 C++ 的 <code>Drawable</code> 接口。这些类型都定义了一个共享的 <code>draw</code> 方法，不同的结构体（Rust）和类（C++）可以实现这个方法。</p>
 <p>然而，Rust 的 trait 还具有一些额外的功能，例如可以包含具有默认实现的方法，还可以实现泛型和关联类型等高级功能。这使得 Rust 的 trait 更灵活且功能更丰富。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-12"><a href="#Zoran-12" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>在 C++中，使用多态需要父类指针指向子类，那在 Rust 中应该是如何使用多态的呢， 请你写一些代码示例来向我讲解</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-12"><a href="#ChatGPT-12" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 中，使用多态的一种方法是通过 trait 对象。trait 对象使得可以在运行时处理不同类型的实现了特定 trait 的值。要创建 trait 对象，需要将引用（<code>&amp;</code> 或 <code>&amp;mut</code>）与 trait 名称相结合，并用 <code>dyn</code> 关键字表示。</li>
 </ul>
 <p>以下是一个简单的例子，展示了如何在 Rust 中使用 trait 对象实现多态：</p>
@@ -569,12 +543,10 @@ if (false) {
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Drawing a circle <span class="keyword">with</span> radius <span class="number">5</span></span><br><span class="line">Drawing a square <span class="keyword">with</span> side <span class="number">4</span></span><br></pre></td></tr></table></figure>
 
 <p>这个例子展示了如何在 Rust 中通过 trait 对象实现多态。请注意，trait 对象会有一些运行时开销，因为它们需要动态分发方法调用。不过，在许多情况下，这种开销是可以接受的。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-13"><a href="#Zoran-13" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>这里的 dyn 的关键字起到的作用是什么， 如果不使用 dyn 关键字会有什么问题</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-13"><a href="#ChatGPT-13" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li><code>dyn</code> 关键字用于显式地表示使用了一个 trait 对象。它起到了一种明确说明的作用，表明我们在这里使用了动态分发，而非静态分发。</li>
 </ul>
 <p>在早期的 Rust 版本中，<code>dyn</code> 关键字是可选的。但在后来的版本中，为了提高代码的可读性和明确性，Rust 团队决定将 <code>dyn</code> 关键字设为必须使用。</p>
@@ -583,12 +555,10 @@ if (false) {
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">warning: trait objects without an explicit `dyn` are deprecated</span><br><span class="line">  --&gt; src/main.rs:24:28</span><br><span class="line">   |</span><br><span class="line">24 |     let mut drawables: Vec&lt;&amp;Drawable&gt; = Vec::new();</span><br><span class="line">   |                            ^^^^^^^^^ help: use `dyn`: `dyn Drawable`</span><br></pre></td></tr></table></figure>
 
 <p>总之，<code>dyn</code> 关键字在这里的作用是提高代码的可读性，明确表示我们在使用动态分发的 trait 对象。为了遵循 Rust 的最佳实践，建议始终在 trait 对象上使用 <code>dyn</code> 关键字。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-14"><a href="#Zoran-14" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>C++可以通过模板来实现静态多态，在 Rust 中有静态多态吗，如何实现呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-14"><a href="#ChatGPT-14" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>是的，Rust 中也可以实现静态多态。在 Rust 中，可以使用泛型来实现静态多态。泛型允许你编写可适用于多种类型的代码，但是在编译时会为每种类型生成特定的代码。这意味着泛型代码的运行时性能与为特定类型编写的代码相同。</li>
 </ul>
 <p>下面是一个使用泛型实现静态多态的简单示例：</p>
@@ -597,12 +567,10 @@ if (false) {
 <p>在这个示例中，我们定义了一个泛型函数 <code>draw_static</code>，它接受一个 <code>Drawable</code> trait 限定的泛型参数。这意味着，对于任何实现了 <code>Drawable</code> 的类型 <code>T</code>，我们都可以调用 <code>draw_static</code> 函数。</p>
 <p>当我们在 <code>main</code> 函数中调用 <code>draw_static(&amp;circle)</code> 和 <code>draw_static(&amp;square)</code> 时，Rust 编译器会为每种类型生成特定的代码。这意味着，<code>draw_static</code> 函数在运行时不会有动态分发的开销。这与 C++ 模板实现的静态多态类似。</p>
 <p>通过使用泛型，你可以在 Rust 中实现静态多态，从而在不影响性能的情况下编写灵活、通用的代码。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-15"><a href="#Zoran-15" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>C++可以通过宏和模板来实现静态反射，但是貌似没有实现动态反射， 关于反射这个问题，在 Rust 中是怎么样的情况呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-15"><a href="#ChatGPT-15" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>Rust 语言核心本身没有直接提供完整的反射功能，类似于 C++。不过，可以通过一些库或编译时技巧来实现部分反射特性。</li>
 </ul>
 <ol>
@@ -616,12 +584,10 @@ if (false) {
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> serde::&#123;Serialize, Deserialize&#125;;</span><br><span class="line"><span class="keyword">use</span> typetag::serde::&#123;Serialize, Deserialize&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[typetag::serde]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">trait</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">sound</span>(&amp;<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> <span class="type">String</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[derive(Serialize, Deserialize)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    name: <span class="type">String</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[typetag::serde]</span></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Animal</span> <span class="keyword">for</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">sound</span>(&amp;<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> <span class="type">String</span> &#123;</span><br><span class="line">        <span class="built_in">format!</span>(<span class="string">&quot;&#123;&#125; says Woof!&quot;</span>, <span class="keyword">self</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[derive(Serialize, Deserialize)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    name: <span class="type">String</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[typetag::serde]</span></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Animal</span> <span class="keyword">for</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">sound</span>(&amp;<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> <span class="type">String</span> &#123;</span><br><span class="line">        <span class="built_in">format!</span>(<span class="string">&quot;&#123;&#125; says Meow!&quot;</span>, <span class="keyword">self</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>请注意，这种方法仍然有一定的限制，并且不像 Java 或 C# 等其他语言那样功能强大。如果你需要更多的动态反射功能，可能需要考虑使用其他编程语言或编写自定义的运行时类型信息系统。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-16"><a href="#Zoran-16" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 的 attribute 如何使用，有哪些 attribute 可以使用呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-16"><a href="#ChatGPT-16" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 中，属性（attributes）是一种将元数据（metadata）附加到代码的方法。它们可以应用于模块、结构体、枚举、函数、方法、常量等。属性以井号（#）开头，后跟一个方括号（[]）内的属性名称和可选的参数。</li>
 </ul>
 <p>以下是一些常用的 Rust 属性及其用途：</p>
@@ -656,12 +622,10 @@ if (false) {
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#[inline]</span></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">fast_function</span>() &#123;</span><br><span class="line">    <span class="comment">// Code that should be inlined for performance reasons</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这些只是 Rust 属性的一部分示例。Rust 属性有很多种用途，还有一些 crate 也提供自定义属性。你可以在 <a target="_blank" rel="noopener" href="https://doc.rust-lang.org/reference/attributes.html">Rust 参考手册</a> 中查看完整的属性列表。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-17"><a href="#Zoran-17" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>Rust 中可以调用 C++吗， 如何调用呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-17"><a href="#ChatGPT-17" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 中调用 C++ 代码并不像调用 C 代码那样简单，因为 C++ 使用了名字改编（name mangling）和类（classes）等特性。为了调用 C++ 代码，你需要使用一种方法来桥接 Rust 和 C++ 之间的差异。一种常见的方法是通过创建一个 C 语言的包装器（wrapper）来实现。</li>
 </ul>
 <p>以下是一个简单的示例，演示了如何从 Rust 调用 C++ 代码：</p>
@@ -688,12 +652,10 @@ if (false) {
 
 <p>这将输出 “Hello from C++!”，说明 Rust 成功调用了 C++ 代码。</p>
 <p>请注意，这个示例中的错误处理非常简单，没有考虑多线程问题和内存安全性。在实际项目中，你可能需要创建更复杂的包装器和安全抽象来确保在 Rust 中使用 C++ 代码时不会出现问题。还有一些工具和库（如 <a target="_blank" rel="noopener" href="https://github.com/dtolnay/cxx">cxx</a> 和 <a target="_blank" rel="noopener" href="https://github.com/mystor/rust-cpp">rust-cpp</a> ）可以简化 Rust 和 C++ 之间的互操作。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-18"><a href="#Zoran-18" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>C++的 RPC 一般是如何实现的，使用的时候需要注意什么， 什么时候应该使用 RPC, 什么时候不应该使用 RPC</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-18"><a href="#ChatGPT-18" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>远程过程调用（Remote Procedure Call，RPC）是一种允许程序在网络上的其他计算机上调用函数或方法的通信协议。在 C++ 中，RPC 通常通过使用各种库和框架实现。以下是一些实现 C++ RPC 的常见方法：</li>
 </ul>
 <ol>
@@ -718,12 +680,10 @@ if (false) {
 <ol>
 <li>低延迟要求：如果你的应用程序对延迟非常敏感，那么 RPC 可能</li>
 </ol>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-19"><a href="#Zoran-19" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>RPC 是如何实现的呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-19"><a href="#ChatGPT-19" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>远程过程调用（Remote Procedure Call，RPC）是一种分布式系统中的通信协议，允许程序在网络上的其他计算机上调用函数或方法。RPC 的实现通常涉及以下组件和步骤：</li>
 </ul>
 <ol>
@@ -743,12 +703,10 @@ if (false) {
 <li>客户端接收到响应数据，反序列化得到函数结果。</li>
 </ol>
 <p>需要注意的是，不同的 RPC 框架可能有不同的实现细节，但它们基本上都遵循类似的设计原则。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-20"><a href="#Zoran-20" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>为什么 Rust 编写链表很困难</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-20"><a href="#ChatGPT-20" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>在 Rust 中编写链表相对困难的主要原因是 Rust 的所有权和借用机制。这些机制确保了内存安全和避免了数据竞争，但在实现某些数据结构时可能会导致一些挑战。</li>
 </ul>
 <p>对于链表，我们通常需要在节点之间建立引用关系。这意味着我们需要处理原始指针（例如 <code>*const T</code> 和 <code>*mut T</code>）或使用 <code>Rc</code>（引用计数）和 <code>RefCell</code>（运行时借用检查）等智能指针。这使得实现链表变得相对复杂，因为需要处理以下问题：</p>
@@ -760,12 +718,10 @@ if (false) {
 </ol>
 <p>为了解决这些问题，Rust 提供了一些工具，如智能指针（例如 <code>Rc</code> 和 <code>RefCell</code>）和 <code>unsafe</code> 代码块。然而，使用这些工具可能会导致代码变得更复杂，需要更多的注意力来确保安全性。</p>
 <p>尽管如此，Rust 中实现链表仍然是可行的，但需要更多的努力和对 Rust 所有权和借用规则的深入理解。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-21"><a href="#Zoran-21" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>如何使用 rust 为 lua 编写模块, 请你给我一些代码示例</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-21"><a href="#ChatGPT-21" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>要使用 Rust 为 Lua 编写模块，您可以使用<code>rlua</code>库。这个库提供了一种安全、简洁的方式来与 Lua 进行交互。以下是一个简单的示例，展示了如何使用 Rust 编写一个将两个数字相加的 Lua 模块：</li>
 </ul>
 <ol>
@@ -780,12 +736,10 @@ if (false) {
 
 <p>在这个例子中，我们首先定义了一个 Rust 函数<code>add_numbers</code>，接受两个整数并返回它们的和。然后我们创建了一个 Lua 实例，并将 Rust 函数包装为 Lua 函数。接下来，我们将这个 Lua 函数设置为全局变量，以便在 Lua 代码中调用。</p>
 <p>在上述示例中，我们直接在 Rust 代码中使用了 Lua 代码字符串，以展示如何在 Lua 中调用该模块。在实际应用中，您可以将 Rust 模块暴露给外部 Lua 代码，以便在 Lua 脚本中使用这些函数。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-22"><a href="#Zoran-22" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>请你详细为我解释一下刚刚那一段代码, 从第一行为什么要使用 extern 开始</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-22"><a href="#ChatGPT-22" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>这段代码实现了一个简单的 Rust 和 Lua 交互的示例，使用了<code>rlua</code>库。我将逐行解释这段代码。</li>
 </ul>
 <ol>
@@ -800,12 +754,10 @@ if (false) {
 <li><code>lua_ctx.globals().set(&quot;add_numbers&quot;, lua_add_numbers)?;</code>：这行代码将包装后的 Lua 函数<code>lua_add_numbers</code>设置为一个全局变量，使其在 Lua 代码中可用。我们使用<code>?</code>操作符处理可能的错误。</li>
 <li><code>let result: i32 = lua_ctx.load(&quot;return add_numbers(2, 3)&quot;).eval()?;</code>：这行代码加载并执行一个 Lua 代码字符串，该字符串调用我们之前定义的<code>add_numbers</code>函数。<code>load</code>方法返回一个<code>Result</code>类型的值，因此我们使用<code>?</code>操作符处理可能的错误。</li>
 </ol>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-23"><a href="#Zoran-23" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-23"><a href="#ChatGPT-23" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>接着上一条回答的解释，以下是剩余的代码行解释：</li>
 </ul>
 <ol>
@@ -815,23 +767,19 @@ if (false) {
 <li><code>&#125;</code>：这行代码结束了<code>main</code>函数。由于<code>main</code>函数的返回类型是<code>Result&lt;()&gt;</code>，如果在上述过程中出现任何错误，这些错误将被自动向上传播并在运行时显示。</li>
 </ol>
 <p>这个简单的示例展示了如何使用 Rust 为 Lua 编写一个模块。在实际应用中，您可以将 Rust 模块暴露给外部 Lua 代码，以便在 Lua 脚本中使用这些函数。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-24"><a href="#Zoran-24" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>E type mismatch in function arguments rustc(E0631)<br>expected function signature <code>fn(LuaContext&lt;&#39;_&gt;, _) -&gt; _</code><br>found function signature <code>for&lt;&#39;r&gt; fn(&amp;&#39;r Lua, (i32, i32)) -&gt; _</code><br>这是在怎么回事</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-24"><a href="#ChatGPT-24" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>抱歉，之前的代码示例中存在类型错误。在这里，我们需要使用<code>rlua</code>库的<code>LuaContext</code>类型，而不是<code>Lua</code>类型。以下是修复后的代码：</li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> rlua::&#123;Function, Lua, LuaContext, <span class="type">Result</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改函数签名，使用 LuaContext 代替 Lua</span></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua_ctx: LuaContext, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;()&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = Lua::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">    lua.<span class="title function_ invoke__">context</span>(|lua_ctx| &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">lua_add_numbers</span>: Function = lua_ctx.<span class="title function_ invoke__">create_function</span>(add_numbers)?;</span><br><span class="line">        lua_ctx.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, lua_add_numbers)?;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">result</span>: <span class="type">i32</span> = lua_ctx.<span class="title function_ invoke__">load</span>(<span class="string">&quot;return add_numbers(2, 3)&quot;</span>).<span class="title function_ invoke__">eval</span>()?;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;2 + 3 = &#123;&#125;&quot;</span>, result);</span><br><span class="line">        <span class="title function_ invoke__">Ok</span>(())</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这里我们将<code>add_numbers</code>函数的签名更改为<code>fn add_numbers(lua_ctx: LuaContext, (a, b): (i32, i32)) -&gt; Result&lt;i32&gt;</code>，并在<code>use</code>语句中导入<code>LuaContext</code>类型。这样，代码示例应该可以正常编译并运行。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-25"><a href="#Zoran-25" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>如何编译打包, 然后在 lua 代码中调用呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-25"><a href="#ChatGPT-25" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>为了将 Rust 代码编译成一个共享库（例如.so 或.dll 文件），然后在 Lua 代码中调用，我们需要执行以下步骤：</li>
 </ul>
 <ol>
@@ -863,47 +811,39 @@ if (false) {
 
 <p>确保将<code>path_to_lib</code>设置为您的共享库文件的实际路径。运行 Lua 脚本，您将看到输出：”2 + 3 &#x3D; 5”。</p>
 <p>通过这种方式，您可以将 Rust 编写的模块编译为共</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-26"><a href="#Zoran-26" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>crate <code>ffi</code> is privateprivate crate<br>no function or associated item named <code>from_existing_state</code> found for struct <code>Lua</code> in the current scopefunction or associated item not found in <code>Lua</code><br>trait objects must include the <code>dyn</code> keyword<br>no function or associated item named <code>default</code> found for trait object <code>dyn LuaExternalError</code> in the current scopefunction or associated item not found in <code>dyn LuaExternalError</code><br>add <code>dyn</code> keyword before this trait: <code>&lt;dyn </code>, <code>&gt;</code></li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-26"><a href="#ChatGPT-26" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>抱歉，我犯了一个错误。在最新版本的<code>rlua</code>库中，<code>from_existing_state</code>方法已被移除。我们需要使用<code>rlua::Lua::unsafe_new_with_existing_state</code>方法代替。</li>
 </ul>
 <p>为了解决这个问题，请参考以下修改后的代码：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> rlua::&#123;Function, Lua, LuaContext, <span class="type">Result</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> std::os::raw::c_int;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改函数签名，使用 LuaContext 代替 Lua</span></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua_ctx: LuaContext, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="keyword">fn</span> <span class="title function_">register_rust_lua_module</span>(lua: *<span class="keyword">mut</span> rlua::ffi::lua_State) <span class="punctuation">-&gt;</span> c_int &#123;</span><br><span class="line">    <span class="comment">// 使用 unsafe_new_with_existing_state 代替 from_existing_state</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = <span class="keyword">unsafe</span> &#123; Lua::<span class="title function_ invoke__">unsafe_new_with_existing_state</span>(lua) &#125;;</span><br><span class="line"></span><br><span class="line">    lua.<span class="title function_ invoke__">context</span>(|lua_ctx| &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">lua_add_numbers</span>: Function = lua_ctx.<span class="title function_ invoke__">create_function</span>(add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">        lua_ctx.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, lua_add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">        <span class="title function_ invoke__">Ok</span>(<span class="number">0</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_ invoke__">unwrap</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在这个修改后的版本中，我们使用<code>Lua::unsafe_new_with_existing_state</code>方法代替了<code>Lua::from_existing_state</code>。现在这个示例应该可以正常编译并与 Lua 代码一起使用。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-27"><a href="#Zoran-27" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>unresolved import <code>rlua::LuaContext</code>no <code>LuaContext</code> in the root<br>no function or associated item named <code>unsafe_new_with_existing_state</code> found for struct <code>Lua</code> in the current scopefunction or associated item not found in <code>Lua</code><br>crate <code>ffi</code> is privateprivate crate<br>a similar name exists in the module: <code>Context</code><br>there is an associated function with a similar name: <code>unsafe_new_with</code></li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-27"><a href="#ChatGPT-27" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>对不起，我之前的回答中有错误。在<code>rlua</code>中，您需要将<code>Context</code>类型用于<code>add_numbers</code>的参数，而不是<code>LuaContext</code>，并且您需要使用<code>Lua::unsafe_new_with</code>方法，而不是我之前提到的<code>Lua::unsafe_new_with_existing_state</code>方法。</li>
 </ul>
 <p>以下是修正后的代码示例：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> rlua::&#123;Function, Context, Lua, <span class="type">Result</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> std::os::raw::c_int;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Context 代替 LuaContext</span></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua_ctx: Context, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="keyword">fn</span> <span class="title function_">register_rust_lua_module</span>(lua: *<span class="keyword">mut</span> rlua::ffi::lua_State) <span class="punctuation">-&gt;</span> c_int &#123;</span><br><span class="line">    <span class="comment">// 使用 Lua::unsafe_new_with 代替 Lua::unsafe_new_with_existing_state</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = <span class="keyword">unsafe</span> &#123; Lua::<span class="title function_ invoke__">unsafe_new_with</span>(lua, ()) &#125;;</span><br><span class="line"></span><br><span class="line">    lua.<span class="title function_ invoke__">context</span>(|lua_ctx| &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">lua_add_numbers</span>: Function = lua_ctx.<span class="title function_ invoke__">create_function</span>(add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">        lua_ctx.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, lua_add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">        <span class="title function_ invoke__">Ok</span>(<span class="number">0</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_ invoke__">unwrap</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在这个示例应该可以正常编译并与 Lua 代码一起使用。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-28"><a href="#Zoran-28" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>expected 1 argument, found 2<br>crate <code>ffi</code> is privateprivate crate<br>this function takes 1 argument but 2 arguments were supplied expected struct <code>StdLib</code>found raw pointer <code>*mut rlua_lua54_sys::bindings::lua_State</code><br>argument of type <code>()</code> unexpected<br>expected struct <code>StdLib</code>, found <code>*mut rlua_lua54_sys::bindings::lua_State</code><br>remove the extra argument: <code>(/* StdLib */)</code></li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-28"><a href="#ChatGPT-28" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>对于上述问题，我再次为我的错误向您道歉。在最新版本的<code>rlua</code>库中，我们需要使用<code>Lua::load_from_ptr</code>方法来实现相同的目标。以下是修正后的代码示例：</li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> rlua::&#123;Function, Context, Lua, <span class="type">Result</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> std::os::raw::c_int;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Context 代替 LuaContext</span></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua_ctx: Context, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="keyword">fn</span> <span class="title function_">register_rust_lua_module</span>(lua: *<span class="keyword">mut</span> rlua::ffi::lua_State) <span class="punctuation">-&gt;</span> c_int &#123;</span><br><span class="line">    <span class="comment">// 使用 Lua::load_from_ptr 方法</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = <span class="keyword">unsafe</span> &#123; Lua::<span class="title function_ invoke__">load_from_ptr</span>(lua) &#125;;</span><br><span class="line"></span><br><span class="line">    lua.<span class="title function_ invoke__">context</span>(|lua_ctx| &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">lua_add_numbers</span>: Function = lua_ctx.<span class="title function_ invoke__">create_function</span>(add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">        lua_ctx.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, lua_add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">        <span class="title function_ invoke__">Ok</span>(<span class="number">0</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_ invoke__">unwrap</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在这个示例应该可以正常编译并与 Lua 代码一起使用。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-29"><a href="#Zoran-29" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>crate <code>ffi</code> is privateprivate crate<br>no function or associated item named <code>load_from_ptr</code> found for struct <code>Lua</code> in the current scopefunction or associated item not found in <code>Lua</code><br>there is a method with a similar name: <code>load_from_std_lib</code></li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-29"><a href="#ChatGPT-29" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>抱歉，我在之前的回答中犯了错误。经过进一步研究，我发现<code>rlua</code>库并不支持从现有的<code>lua_State</code>创建<code>Lua</code>实例。在这种情况下，我们将转向使用<code>mlua</code>库，它是<code>rlua</code>的一个替代库，与<code>rlua</code>类似，但提供了更多的功能和灵活性。</li>
 </ul>
 <p>首先，将<code>Cargo.toml</code>中的依赖项更改为<code>mlua</code>：</p>
@@ -914,24 +854,20 @@ if (false) {
 
 <p>这里我们使用了<code>mlua</code>库，并将<code>add_numbers</code>函数签名更改为<code>fn add_numbers(lua: &amp;Lua, (a, b): (i32, i32)) -&gt; Result&lt;i32&gt;</code>。我们还将<code>register_rust_lua_module</code>函数中的<code>from_existing_state</code>替换为<code>Lua::from_ptr</code>。</p>
 <p>按照先前的说明，将 Rust 项目编译为共享库，然后在 Lua 代码中调用。您应该能够正常运行修复后的示例。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-30"><a href="#Zoran-30" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>如何删掉之前使用 cargo add rlua 添加的依赖呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-30"><a href="#ChatGPT-30" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>要删除使用<code>cargo add rlua</code>添加的依赖，只需在<code>Cargo.toml</code>文件中找到<code>[dependencies]</code>部分，然后删除<code>rlua</code>这一行即可。</li>
 </ul>
 <p>例如，如果您的<code>Cargo.toml</code>文件中的<code>[dependencies]</code>部分看起来像这样：</p>
 <figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">rlua</span> = <span class="string">&quot;0.17&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>只需删除<code>rlua = &quot;0.17&quot;</code>这一行，然后保存文件。现在，<code>rlua</code>依赖项已从您的项目中删除。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-31"><a href="#Zoran-31" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>error: You must enable one of the features: lua54, lua53, lua52, lua51, luajit, luajit52, luau<br>–&gt; &#x2F;home&#x2F;zoran&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;mlua-0.8.8&#x2F;build&#x2F;main.rs:52:5<br>|<br>52 | &#x2F; compile_error!(<br>53 | | “You must enable one of the features: lua54, lua53, lua52, lua51, luajit, luajit52, luau”<br>54 | | );<br>| |**_**^</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-31"><a href="#ChatGPT-31" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>这个错误表明，您需要为<code>mlua</code>库启用一个特性，以选择要使用的 Lua 版本。您可以在<code>Cargo.toml</code>文件中的<code>[dependencies]</code>部分中，为<code>mlua</code>指定一个特性。</li>
 </ul>
 <p>例如，如果您要使用 Lua 5.4，可以在<code>Cargo.toml</code>文件中将<code>mlua</code>依赖项更改为如下所示：</p>
@@ -939,57 +875,47 @@ if (false) {
 
 <p>这里，我们通过<code>features = [&quot;lua54&quot;]</code>来启用<code>lua54</code>特性。您可以根据需要选择不同的 Lua 版本（例如<code>lua53</code>、<code>lua52</code>、<code>lua51</code>、<code>luajit</code>、<code>luajit52</code>或<code>luau</code>）。</p>
 <p>在指定了特性后，错误应该会消失，您可以继续编译项目。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-32"><a href="#Zoran-32" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>module <code>ffi</code> is privateprivate module<br>no function or associated item named <code>from_ptr</code> found for struct <code>Lua</code> in the current scopefunction or associated item not found in <code>Lua</code><br>unused import: <code>Function``#[warn(unused_imports)]</code> on by default<br>remove the unused import<br>there is an associated function with a similar name: <code>init_from_ptr</code></li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-32"><a href="#ChatGPT-32" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>非常抱歉，再次为我的错误向您道歉。在<code>mlua</code>库中，我们应该使用<code>Lua::init_from_ptr</code>而不是<code>Lua::from_ptr</code>。以下是修正后的代码示例：</li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> mlua::&#123;Function, Lua, <span class="type">Result</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> std::os::raw::c_int;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua: &amp;Lua, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="keyword">fn</span> <span class="title function_">register_rust_lua_module</span>(lua: *<span class="keyword">mut</span> mlua::ffi::lua_State) <span class="punctuation">-&gt;</span> c_int &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = <span class="keyword">unsafe</span> &#123; Lua::<span class="title function_ invoke__">init_from_ptr</span>(lua) &#125;;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">add_numbers_fn</span> = lua.<span class="title function_ invoke__">create_function</span>(add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    lua.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, add_numbers_fn).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在，这个修正后的示例应该可以正常编译并与 Lua 代码一起使用。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-33"><a href="#Zoran-33" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>module <code>ffi</code> is privateprivate module<br>unused import: <code>Function``#[warn(unused_imports)]</code> on by default<br>remove the unused import</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-33"><a href="#ChatGPT-33" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>抱歉，我忘了删除未使用的导入。请使用以下修正后的代码示例：</li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> mlua::&#123;Lua, <span class="type">Result</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> std::os::raw::c_int;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua: &amp;Lua, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="keyword">fn</span> <span class="title function_">register_rust_lua_module</span>(lua: *<span class="keyword">mut</span> mlua::ffi::lua_State) <span class="punctuation">-&gt;</span> c_int &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = <span class="keyword">unsafe</span> &#123; Lua::<span class="title function_ invoke__">init_from_ptr</span>(lua) &#125;;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">add_numbers_fn</span> = lua.<span class="title function_ invoke__">create_function</span>(add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    lua.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, add_numbers_fn).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在此修正后的示例中，我已删除了未使用的<code>Function</code>导入。现在，这个示例应该可以正常编译并与 Lua 代码一起使用。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-34"><a href="#Zoran-34" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>module <code>ffi</code> is privateprivate module</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-34"><a href="#ChatGPT-34" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>我再次为此道歉。看起来我们需要直接使用<code>mlua::ffi::lua_State</code>类型而不是尝试导入私有模块。以下是修正后的代码示例：</li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">use</span> mlua::&#123;Lua, <span class="type">Result</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> std::os::raw::c_int;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_numbers</span>(lua: &amp;Lua, (a, b): (<span class="type">i32</span>, <span class="type">i32</span>)) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(a + b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="keyword">fn</span> <span class="title function_">register_rust_lua_module</span>(lua: *<span class="keyword">mut</span> mlua::lua_State) <span class="punctuation">-&gt;</span> c_int &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">lua</span> = <span class="keyword">unsafe</span> &#123; Lua::<span class="title function_ invoke__">init_from_ptr</span>(lua) &#125;;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">add_numbers_fn</span> = lua.<span class="title function_ invoke__">create_function</span>(add_numbers).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    lua.<span class="title function_ invoke__">globals</span>().<span class="title function_ invoke__">set</span>(<span class="string">&quot;add_numbers&quot;</span>, add_numbers_fn).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在这个修正后的示例中，我已将<code>*mut mlua::ffi::lua_State</code>更改为<code>*mut mlua::lua_State</code>。现在，这个示例应该可以正常编译并与 Lua 代码一起使用。</p>
-<p>Zoran:</p>
-<ul>
+<h1 id="Zoran-35"><a href="#Zoran-35" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
 <li>我编译生成了 lua_tutor.so, 我应该如何在 lua 中使用他呢</li>
 </ul>
-<p>ChatGPT:</p>
-<ul>
+<h2 id="ChatGPT-35"><a href="#ChatGPT-35" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>要在 Lua 代码中使用编译生成的<code>lua_tutor.so</code>共享库，您需要使用<code>package.cpath</code>来指定共享库的位置（如果它不在默认搜索路径中），然后使用<code>package.loadlib</code>函数加载共享库并调用其中的<code>register_rust_lua_module</code>函数。</li>
 </ul>
 <p>假设您的<code>lua_tutor.so</code>文件位于<code>/path/to/your/shared/libs/</code>目录下，您可以在 Lua 代码中执行以下操作：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">-- 设置共享库搜索路径，这里的&quot;/path/to/your/shared/libs/&quot;需要替换为您的实际路径</span></span><br><span class="line"><span class="built_in">package</span>.<span class="built_in">cpath</span> = <span class="built_in">package</span>.<span class="built_in">cpath</span> .. <span class="string">&quot;;/path/to/your/shared/libs/?.so&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 加载共享库</span></span><br><span class="line"><span class="keyword">local</span> lua_tutor = <span class="built_in">package</span>.<span class="built_in">loadlib</span>(<span class="string">&quot;lua_tutor.so&quot;</span>, <span class="string">&quot;register_rust_lua_module&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 调用 register_rust_lua_module 函数注册 add_numbers 函数</span></span><br><span class="line">lua_tutor()</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 现在您可以使用 add_numbers 函数</span></span><br><span class="line"><span class="keyword">local</span> result = add_numbers(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;3 + 5 =&quot;</span>, result)  <span class="comment">-- 输出 &quot;3 + 5 = 8&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>这段 Lua 代码首先设置了<code>package.cpath</code>，然后使用<code>package.loadlib</code>加载<code>lua_tutor.so</code>共享库，并将<code>register_rust_lua_module</code>函数存储在<code>lua_tutor</code>变量中。接下来，调用<code>lua_tutor()</code>以执行<code>register_rust_lua_module</code>函数，该函数将在全局范围内注册<code>add_numbers</code>函数。最后，您可以像使用普通 Lua 函数一样使用<code>add_numbers</code>函数。</p>
-<p>Zoran: </p>
-<ul>
-<li>为什么Go, Rust这些新型语言， 都抛弃了构造函数，他们是如何解决需要构造函数的场景的呢</li>
+<h1 id="Zoran-36"><a href="#Zoran-36" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
+<li>为什么 Go, Rust 这些新型语言， 都抛弃了构造函数，他们是如何解决需要构造函数的场景的呢</li>
 </ul>
-<p>ChatGPT: </p>
-<ul>
+<h2 id="ChatGPT-36"><a href="#ChatGPT-36" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
 <li>Go 和 Rust 这些新型编程语言在设计时确实没有像 C++ 和 Java 那样提供显式的构造函数。它们采用了一些其他方法来处理对象的初始化，以确保代码更加简洁、清晰和灵活。下面我们分别看一下 Go 和 Rust 是如何解决需要构造函数的场景的。</li>
 </ul>
 <p>Go：</p>
@@ -997,34 +923,565 @@ if (false) {
 <p>例如，有一个结构体 <code>Zoran</code>：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> Zoran <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="type">string</span></span><br><span class="line">    Age  <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <p>可以创建一个名为 <code>NewZoran</code> 的工厂方法，用于初始化并返回一个 <code>Person</code> 结构体指针：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewZoran</span><span class="params">(name <span class="type">string</span>, age <span class="type">int</span>)</span></span> *Person &#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;Zoran&#123;</span><br><span class="line">        Name: name,</span><br><span class="line">        Age:  age,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <p>要创建并初始化一个 <code>Zoran</code> 对象，可以这样做：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">person := NewZoran(<span class="string">&quot;Alice&quot;</span>, <span class="number">30</span>)</span><br></pre></td></tr></table></figure>
-
-
 
 <p>Rust：</p>
 <p>Rust 也没有显式的构造函数。与 Go 类似，Rust 也采用工厂方法的模式，使用关联函数（也就是静态方法）来实现。</p>
 <p>例如，有一个结构体 <code>Zoran</code>：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Zoran</span> &#123;</span><br><span class="line">    name: <span class="type">String</span>,</span><br><span class="line">    age: <span class="type">u32</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <p>可以为结构体实现一个名为 <code>new</code> 的关联函数（当然，你也可以选择其他名字），用于创建并初始化 <code>Zoran</code> 对象：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Zoran</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">new</span>(name: <span class="type">String</span>, age: <span class="type">u32</span>) <span class="punctuation">-&gt;</span> Zoran &#123;</span><br><span class="line">        Zoran &#123; name, age &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 
 <p>要创建并初始化一个 <code>Zoran</code> 对象，可以这样做：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">person</span> = Zoran::<span class="title function_ invoke__">new</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Alice&quot;</span>), <span class="number">30</span>);</span><br></pre></td></tr></table></figure>
 
-
-
 <p>通过这些方法，Go 和 Rust 分别以不同的方式解决了需要构造函数的场景，实现了对象的创建和初始化，同时保持了代码简洁和易于理解。</p>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/06/GPT/Lexer/" title="词法分析器 Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">词法分析器 Q&amp;A</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/04/GPT/Google_test/" title="Google_test"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Google_test</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lua_QA</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Python_Q_A/" title="Python_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Python_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">30</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/10/GPT/RE_parser/" title="正则表达式扩展"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="正则表达式扩展"/></a><div class="content"><a class="title" href="/Notes/2023/05/10/GPT/RE_parser/" title="正则表达式扩展">正则表达式扩展</a><time datetime="2023-05-09T16:17:39.000Z" title="发表于 2023-05-10 00:17:39">2023-05-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="CLI_Command"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command">CLI_Command</a><time datetime="2023-05-08T07:13:13.000Z" title="发表于 2023-05-08 15:13:13">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Gdb-tips"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips">Gdb-tips</a><time datetime="2023-05-08T06:11:18.000Z" title="发表于 2023-05-08 14:11:18">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="AwesomeWm_Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A">AwesomeWm_Q&amp;A</a><time datetime="2023-05-08T04:16:23.000Z" title="发表于 2023-05-08 12:16:23">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/VimTips/" title="VimTips"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="VimTips"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/VimTips/" title="VimTips">VimTips</a><time datetime="2023-05-08T04:12:11.000Z" title="发表于 2023-05-08 12:12:11">2023-05-08</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<h1 id="Zoran-37"><a href="#Zoran-37" class="headerlink" title="Zoran"></a>Zoran</h1><p>我想学习 Rust 语言， 你需要告诉我最重要的 20%的知识， 我只需要学习这些重要知识， 能够让我对 Rust 语言的 80%有充分和扎实的了解</p>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>学习一种新的编程语言可以是一项复杂的任务，但是有一些基本的概念和特性是特别重要的。以下是我认为在学习 Rust 语言时最重要的 20%的知识：</p>
+<ol>
+<li><p><strong>所有权（Ownership）</strong> ：在 Rust 中，每个值都有一个被称为其所有者（owner）的变量。值在任何时候都只能有一个所有者，当所有者（变量）离开作用域，值就会被删除。这是 Rust 处理内存管理的独特方式。</p>
+</li>
+<li><p><strong>引用与借用（References &amp; Borrowing）</strong> ：你可以通过引用来访问数据，而不用获取其所有权。当你获取数据的引用时，就被称为”借用”。</p>
+</li>
+<li><p><strong>切片（Slices）</strong> ：Rust 中的切片允许你引用集合的一部分，而不是整个集合。</p>
+</li>
+<li><p><strong>结构体（Structs）</strong> ：结构体是 Rust 中创建自定义数据类型的主要方式，它们用于将多个相关的值组合成一个类型。</p>
+</li>
+<li><p><strong>枚举与模式匹配（Enums and Pattern Matching）</strong> ：Rust 的枚举类型非常强大，可以让你通过数据的不同可能性来定义一个类型。</p>
+</li>
+<li><p><strong>错误处理（Error Handling）</strong> ：Rust 将错误处理作为语言的一部分，有两种主要的错误类型：可恢复的和不可恢复的。</p>
+</li>
+<li><p><strong>模块系统（Modules）</strong> ：Rust 使用模块系统来管理大型项目和库的代码，可以帮助你组织和重用代码。</p>
+</li>
+<li><p><strong>并发（Concurrency）</strong> ：Rust 的所有权和类型系统使其成为并发编程的理想选择，特别是对于那些需要避免数据竞争的情况。</p>
+</li>
+<li><p><strong>Rust 的标准库（The Rust Standard Library）</strong> ：理解 Rust 的标准库中的常见类型和特性是非常重要的，例如 <code>Vec&lt;T&gt;</code> , <code>String</code> , <code>Option&lt;T&gt;</code> , <code>Result&lt;T, E&gt;</code> , <code>panic!</code> 和 <code>unwrap</code> 等。</p>
+</li>
+<li><p><strong>Cargo，Rust 的构建系统和包管理器</strong> ：Cargo 是 Rust 的官方构建工具和包管理器，它可以帮助你构建项目，管理依赖等。</p>
+</li>
+</ol>
+<p>以上的这些概念和特性是 Rust 语言中的核心部分，理解和掌握这些可以让你对 Rust 有一个扎实的基础。然后，你可以根据需要或兴趣深入学习更多的高级主题。</p>
+<hr>
+<h1 id="Zoran-38"><a href="#Zoran-38" class="headerlink" title="Zoran"></a>Zoran</h1><p>我希望学习 Rust 语言， 作为一个初学者，你需要给我定制 30 天学习计划来启动我的学习，以掌握这门语言</p>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><p>当然，以下是一个适合 Rust 初学者的 30 天学习计划：</p>
+<p><strong>第 1-3 天：环境设置和基础知识</strong></p>
+<ul>
+<li><p>安装 Rust</p>
+</li>
+<li><p>了解 Cargo, Rust 的构建系统和包管理器</p>
+</li>
+<li><p>学习基础的语法结构：变量，数据类型，函数，注释，控制流等。</p>
+<p><strong>第 4-6 天：所有权（Ownership）</strong></p>
+</li>
+<li><p>学习所有权概念，包括值的移动和复制</p>
+</li>
+<li><p>理解引用和借用，以及可变性如何与所有权交互</p>
+<p><strong>第 7-9 天：结构体和枚举（Structs and Enums）</strong></p>
+</li>
+<li><p>学习如何定义和使用结构体</p>
+</li>
+<li><p>学习枚举以及如何使用 <code>match</code> 进行模式匹配</p>
+<p><strong>第 10-12 天：错误处理（Error Handling）</strong></p>
+</li>
+<li><p>了解 Rust 中的错误是如何处理的</p>
+</li>
+<li><p>学习 <code>Result</code> 和 <code>Option</code> 枚举，以及如何使用它们进行错误处理</p>
+<p><strong>第 13-15 天：包和模块（Packages and Modules）</strong></p>
+</li>
+<li><p>学习如何创建和管理 Rust 包和模块</p>
+</li>
+<li><p>学习如何使用 Cargo 来测试你的代码</p>
+<p><strong>第 16-18 天：集合类型（Collections）</strong></p>
+</li>
+<li><p>学习 Rust 的集合类型，例如：向量（Vec）、字符串（String）和哈希映射（HashMap）</p>
+</li>
+<li><p>理解何时使用哪种集合类型</p>
+<p><strong>第 19-21 天：Rust 中的常用特性</strong></p>
+</li>
+<li><p>学习更多的 Rust 特性，例如：切片（Slices）、闭包（Closures）和迭代器（Iterators）</p>
+</li>
+<li><p>学习如何使用这些特性来写更高效的代码</p>
+<p><strong>第 22-24 天：并发（Concurrency）</strong></p>
+</li>
+<li><p>理解 Rust 中的并发概念</p>
+</li>
+<li><p>学习线程（Threads）和消息传递（Message Passing）</p>
+<p><strong>第 25-27 天：项目实践</strong></p>
+</li>
+<li><p>开始一个小项目，将你所学的知识应用于实践</p>
+</li>
+<li><p>试着解决你在编程过程中遇到的问题</p>
+<p><strong>第 28-30 天：阅读和理解其他人的代码</strong></p>
+</li>
+<li><p>在 GitHub 上找一些 Rust 项目，尝试阅读和理解代码</p>
+</li>
+<li><p>学习别人如何组织代码，如何处理错误等</p>
+</li>
+</ul>
+<p>每天都要抽出一些时间进行实践。同时，也要保持好奇心，遇到不懂的问题就去查阅文档或者在网上搜索答案。最重要的是，享受学习过程，祝你学习顺利！</p>
+<hr>
+<h1 id="Zoran-39"><a href="#Zoran-39" class="headerlink" title="Zoran"></a>Zoran</h1><p>我正在学习 Rust, 先需要你对我做测试， 找出我知识上的不足， 并做解释加强我的知识理解， 开始对我学习的主题进行提问</p>
+<h2 id="Response-2"><a href="#Response-2" class="headerlink" title="Response"></a>Response</h2><p>很好，我们可以通过一些问题来了解你目前对 Rust 的理解。这里有一些问题涵盖了 Rust 的一些基础和进阶知识：</p>
+<ol>
+<li><p>什么是所有权（Ownership）？在 Rust 中，为什么所有权的概念很重要？</p>
+</li>
+<li><p>请解释一下在 Rust 中什么是“借用（Borrowing）”和“生命周期（Lifetimes）”。</p>
+</li>
+<li><p>Rust 是如何进行内存管理的？</p>
+</li>
+<li><p>请解释 Rust 中的数据类型。它们有哪些？每种类型通常在什么情况下使用？</p>
+</li>
+<li><p>在 Rust 中，什么是可变和不可变的引用？它们之间有什么区别？</p>
+</li>
+<li><p>什么是枚举（Enums）？你能提供一个使用枚举的例子吗？</p>
+</li>
+<li><p>请解释一下 Rust 中的模式匹配（Pattern Matching）是如何工作的。</p>
+</li>
+<li><p>什么是 <code>Option</code> 和 <code>Result</code> 类型？在什么场景下会使用它们？</p>
+</li>
+<li><p>在 Rust 中，如何处理错误（Error Handling）？</p>
+</li>
+<li><p>你能描述一下 Rust 的并发模型吗？Rust 如何防止数据竞争？</p>
+</li>
+</ol>
+<p>请尽量详细地回答每个问题。如果有任何问题你不确定或者不了解的，我们可以一起深入讨论。</p>
+<hr>
+<h1 id="Zoran-40"><a href="#Zoran-40" class="headerlink" title="Zoran"></a>Zoran</h1><p>我将从 C++的角度来回答你的这些问题: 1. 所有权，类似于 C++的 unique_ptr, Rust 也使用了类似的概念， 来保证一份内存只由一个对象负责管理和释放， Rust 中的内存管理系统是围绕所有权进行展开的， 如果不能正确理解 Rust 的所有权机制，将无法编写出能通过编译的代码 2. 借用的概念和 C++中的 weak_ptr 的概念类似， 用于当需要传递一个内存对象， 同时不希望对象被转移， 此时需要一个能够传递对象， 但是不转移所有权的概念， 借用就诞生了; 生命周期是一个对象以及对应内存释放的时机管理， 比如{}内的对象， 在离开{}自动被释放， {}就是相关对象的生命周期; 3, Rust 是通过生命周期+所有权来管理， 类似于 C++中的 RAII ＋智能指针的管理方式</p>
+<h2 id="Response-3"><a href="#Response-3" class="headerlink" title="Response"></a>Response</h2><p>你的理解是准确的。下面是对你回答的补充和解释：</p>
+<ol>
+<li><p><strong>所有权</strong> ：你的理解是正确的。所有权是 Rust 内存安全的核心概念。在 Rust 中，每个值都有一个被称为其所有者（owner）的变量，当所有者（变量）离开作用域，值就会被删除。这种方式确保了内存的安全使用和高效管理。</p>
+</li>
+<li><p><strong>借用和生命周期</strong> ：你的对比很恰当。Rust 的借用机制确实和 C++的 <code>weak_ptr</code> 有些相似。Rust 通过借用机制来实现内存安全。在 Rust 中，你可以通过引用来访问数据，而不用获取其所有权。生命周期则是 Rust 用来管理引用有效性的一种机制，确保引用在其生命周期内始终有效。</p>
+</li>
+<li><p><strong>内存管理</strong> ：Rust 的内存管理方式确实类似于 C++的 RAII (Resource Acquisition Is Initialization) 模式和智能指针。Rust 通过所有权、借用和生命周期的概念来保证内存安全，防止空指针解引用、悬垂指针和数据竞争等问题的发生。</p>
+</li>
+</ol>
+<p>接下来，我们继续回答其他问题，帮助你更深入的理解 Rust。</p>
+<ol>
+<li><p><strong>数据类型</strong> ：Rust 有几种基本的数据类型，包括整型、浮点型、布尔型、字符型、字符串、数组、切片、元组和函数等。每种类型都有其特定的用途和限制。</p>
+</li>
+<li><p><strong>可变和不可变引用</strong> ：在 Rust 中，你可以创建变量的可变引用或不可变引用。不可变引用不允许修改引用的数据，而可变引用则允许。在同一作用域中，你可以有多个不可变引用，或者一个可变引用，但不能同时拥有这两种引用，这是为了防止数据竞争。</p>
+</li>
+<li><p><strong>枚举</strong> ：Rust 中的枚举类似于 C++的枚举，但更加强大。它可以有多种形式，并且每种形式都可以携带不同类型和数量的数据。</p>
+</li>
+<li><p><strong>模式匹配</strong> ：Rust 的模式匹配类似于 C++的 switch 语句，但更强大。它可以用于枚举、结构体和其他复杂类型，并且可以包含各种复杂的匹配条件。</p>
+</li>
+<li><p><strong>Option 和 Result 类型</strong> ：这两种类型用于表示可能存在的错误。Option 类型用于表示一个值可能存在也可能不存在，Result 类型用于表示一个操作可能成功也可能失败。</p>
+</li>
+<li><p><strong>错误处理</strong> ：Rust 中的错误处理通过返回 Result 类型或使用 panic 宏来实现。Result 类型表示</p>
+</li>
+</ol>
+<hr>
+<h1 id="Zoran-41"><a href="#Zoran-41" class="headerlink" title="Zoran"></a>Zoran</h1><p>继续</p>
+<h2 id="Response-4"><a href="#Response-4" class="headerlink" title="Response"></a>Response</h2><ol>
+<li><p><strong>错误处理（续）</strong> ：一个操作可能成功（ <code>Ok</code> ）也可能失败（ <code>Err</code> ）。如果操作成功，可以使用 <code>unwrap()</code> 方法或者模式匹配来获取结果，如果失败，可以处理错误或传递给上层。使用 <code>panic!</code> 宏会导致当前线程立即停止执行并开始回退（unwinding）。</p>
+</li>
+<li><p><strong>并发</strong> ：Rust 中的并发模型基于其所有权系统来防止数据竞争。Rust 的线程间通信（inter-thread communication）机制是通过 <code>std::sync::mpsc</code> 模块实现的，这个模块提供了一个多生产者，单消费者（multiple-producer, single-consumer）的通道，让你可以在多个线程间发送数据。此外，Rust 还提供了一些同步原语，如 <code>Mutex</code> 和 <code>RwLock</code> 。</p>
+</li>
+</ol>
+<p>请尝试回答剩下的问题，看看你对 Rust 的理解是否足够深入。</p>
+<hr>
+<h1 id="Zoran-42"><a href="#Zoran-42" class="headerlink" title="Zoran"></a>Zoran</h1><p>我对 Rust 的数据类型不是很了解， 请你以对比 C++的数据类型的方式， 来向我介绍 Rust 的数据类型， 有哪些 C++中不是内置类型的，而 Rust 中是内置的，以及他们使用的方式上有什么不同? 在使用的过程中， 需要注意和 C++的使用有哪些差异</p>
+<h2 id="Response-5"><a href="#Response-5" class="headerlink" title="Response"></a>Response</h2><p>Rust 和 C++的数据类型在很大程度上是相似的，但是 Rust 提供了一些更安全和便利的内置类型。以下是一些主要的数据类型和它们的比较：</p>
+<ol>
+<li><p><strong>整数</strong> ：Rust 和 C++都有带符号和无符号的整数类型，比如 i32、u32 等。Rust 中，整数默认是 i32 类型。需要注意的是，Rust 的整数溢出行为在调试和发布模式下是不同的。在调试模式下，溢出会导致程序崩溃，而在发布模式下，Rust 的整数溢出行为和 C++相同（即，采用二进制补码表示）。</p>
+</li>
+<li><p><strong>浮点数</strong> ：Rust 和 C++都有单精度和双精度浮点数类型，即 f32 和 f64。Rust 中，浮点数默认是 f64 类型。</p>
+</li>
+<li><p><strong>布尔值</strong> ：Rust 和 C++都有布尔类型，即 bool。Rust 中，布尔值只能是 true 或 false。Rust 不允许像 C++那样使用整数代替布尔值。</p>
+</li>
+<li><p><strong>字符</strong> ：Rust 的字符类型 char 是 32 位的，可以表示一个 Unicode 标量值。这是 Rust 与 C++的一个主要区别，C++的 char 类型是 8 位的，通常用于表示 ASCII 字符。</p>
+</li>
+<li><p><strong>数组</strong> ：Rust 和 C++都有数组类型，但是 Rust 的数组长度是固定的，且在编译时确定。另外，Rust 的数组类型包含元素数量，比如[i32; 5]表示一个包含 5 个 i32 元素的数组。</p>
+</li>
+<li><p><strong>切片</strong> ：切片是 Rust 特有的数据类型，类似于 C++的数组引用或 std::span。切片是对数组或其他集合的引用，它包含一个指向第一个元素的指针和一个长度。因此，切片本身的大小在编译时是固定的。</p>
+</li>
+<li><p><strong>元组</strong> ：Rust 和 C++都有元组类型。Rust 的元组可以包含不同类型的元素，元素的数量在编译时确定。</p>
+</li>
+<li><p><strong>字符串</strong> ：Rust 有两种主要的字符串类型： <code>String</code> 和 <code>str</code> 。 <code>String</code> 类型类似于 C++的 <code>std::string</code> ，是可变的和拥有所有权的。 <code>str</code> 通常以借用形式出现，即 <code>&amp;str</code> ，它是不可变的。这与 C++的字符串处理方式有所不同。</p>
+</li>
+<li><p><strong>Option</strong> ：这是 Rust 特有的类型，用于表示一个值可能存在也可能不存在。这比在 C++中用指针和 null 来表示可选值更安全。</p>
+</li>
+<li><p><strong>Result</strong> ：这也是 Rust 特有的类型，用于表示一个操作可能成功（ <code>Ok</code> ）也可能失败（ <code>Err</code> ）。这是一种比在 C++中使用异常或错误代码更明确和</p>
+</li>
+</ol>
+<hr>
+<h1 id="Zoran-43"><a href="#Zoran-43" class="headerlink" title="Zoran"></a>Zoran</h1><p>继续</p>
+<h2 id="Response-6"><a href="#Response-6" class="headerlink" title="Response"></a>Response</h2><ol>
+<li><p><strong>Result（续）</strong> ：显式的错误处理方式。你可以使用模式匹配来处理 <code>Result</code> ，也可以使用 <code>unwrap()</code> 方法来获取 <code>Ok</code> 的值（如果结果是 <code>Err</code> ，则 <code>unwrap()</code> 会导致程序崩溃）。</p>
+</li>
+<li><p><strong>引用和借用</strong> ：Rust 的引用与 C++的引用有所不同。Rust 中的引用需要明确生命周期，而且分为可变引用和不可变引用。同一时间内，你可以有多个不可变引用或者一个可变引用，但不能同时拥有。</p>
+</li>
+<li><p><strong>Box</strong> ： <code>Box&lt;T&gt;</code> 是一个在堆上分配的智能指针，类似于 C++中的 <code>std::unique_ptr</code> 。它可以用来创建递归类型和动态分配大量数据。</p>
+</li>
+<li><p><strong>Rc 和 Arc</strong> ：这两种类型提供了引用计数的智能指针，类似于 C++的 <code>std::shared_ptr</code> 。 <code>Rc</code> 是非线程安全的，而 <code>Arc</code> 是线程安全的。</p>
+</li>
+<li><p><strong>Cell 和 RefCell</strong> ：这两种类型提供了在不可变引用上进行内部可变性的能力。 <code>Cell</code> 和 <code>RefCell</code> 的区别在于， <code>Cell</code> 在编译时检查借用规则，而 <code>RefCell</code> 在运行时检查。</p>
+</li>
+<li><p><strong>枚举</strong> ：Rust 的枚举比 C++的枚举更强大，每个枚举成员可以有不同的数据类型和数量。</p>
+</li>
+</ol>
+<p>在使用 Rust 的数据类型时，你需要注意以下几点：</p>
+<ul>
+<li><p>Rust 是静态类型语言，变量的类型在编译时必须已知。尽管 Rust 有类型推断，但你仍然需要为函数参数和返回值明确指定类型。</p>
+</li>
+<li><p>Rust 强调内存安全。所有权、借用和生命周期的概念在 Rust 的数据类型中都有所体现。</p>
+</li>
+<li><p>Rust 不允许空指针解引用和悬垂指针。对于可能不存在的值，你应使用 <code>Option</code> 类型；对于可能失败的操作，你应使用 <code>Result</code> 类型。</p>
+</li>
+<li><p>在同一时间，一个变量只能有一个可变引用或任意数量的不可变引用。</p>
+</li>
+<li><p>Rust 的整数类型在溢出时的行为与 C++不同。在调试模式下，Rust 的整数溢出会导致程序崩溃。</p>
+</li>
+<li><p>Rust 的字符类型是 32 位的，可以表示一个 Unicode 标量值。</p>
+</li>
+<li><p>Rust 的切片类型是一种安全的数组引用。</p>
+</li>
+<li><p>Rust 的字符串类型是 UTF-8 编码的。</p>
+</li>
+</ul>
+<p>以上就是 Rust 数据类型和 C++数据类型的一些主要差异和注意事项。希望对你有所帮助。</p>
+<hr>
+<h1 id="Zoran-44"><a href="#Zoran-44" class="headerlink" title="Zoran"></a>Zoran</h1><p>你上述提到的所有类型， 全部都是 Rust 的内置类型吗， 请你为每一个类型给出相应的代码示例以及讲解， 在介绍一下他实际上是如何实现的</p>
+<h2 id="Response-7"><a href="#Response-7" class="headerlink" title="Response"></a>Response</h2><p>是的，我提到的类型都是 Rust 的内置类型，以下是一些示例和简单的实现讲解：</p>
+<ol>
+<li><strong>整数</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span>: <span class="type">i32</span> = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span>: <span class="type">u32</span> = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中， <code>a</code> 是一个有符号 32 位整数， <code>b</code> 是一个无符号 32 位整数。</p>
+<ol>
+<li><strong>浮点数</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">x</span>: <span class="type">f32</span> = <span class="number">3.0</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span>: <span class="type">f64</span> = <span class="number">3.0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这里， <code>x</code> 是一个 32 位浮点数， <code>y</code> 是一个 64 位浮点数。默认情况下，Rust 使用 f64，因为它的精度是 f32 的两倍。</p>
+<ol>
+<li><strong>布尔值</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">t</span> = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">f</span>: <span class="type">bool</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>true</code> 和 <code>false</code> 是布尔类型的两个值。</p>
+<ol>
+<li><strong>字符</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">c</span>: <span class="type">char</span> = <span class="string">&#x27;z&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">z</span>: <span class="type">char</span> = <span class="string">&#x27;ℤ&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">heart_eyed_cat</span> = &#x27;😻&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>字符类型代表单个 Unicode 标量值。</p>
+<ol>
+<li><strong>数组</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]; <span class="comment">// 类型是 [i32; 3]</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span>: [<span class="type">i32</span>; <span class="number">5</span>] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">c</span> = [<span class="number">3</span>; <span class="number">5</span>]; <span class="comment">// 类型是 [i32; 5]，等同于 [3, 3, 3, 3, 3]</span></span><br></pre></td></tr></table></figure>
+
+<p>数组的大小在编译时必须是已知的。</p>
+<ol>
+<li><strong>切片</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">slice</span> = &amp;a[<span class="number">1</span>..<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>切片类型代表数组的一部分。</p>
+<ol>
+<li><strong>元组</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">tup</span>: (<span class="type">i32</span>, <span class="type">f64</span>, <span class="type">u8</span>) = (<span class="number">500</span>, <span class="number">6.4</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>元组是将多个其他类型的值组合进一个复合类型的主要方式。</p>
+<ol>
+<li><strong>字符串</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="string">&quot;hello&quot;</span>;  <span class="comment">// 不可变</span></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);  <span class="comment">// 可变</span></span><br></pre></td></tr></table></figure>
+
+<p><code>str</code> 是不可变的， <code>String</code> 可以被修改。</p>
+<ol>
+<li><strong>Option</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">some_number</span> = <span class="title function_ invoke__">Some</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">some_string</span> = <span class="title function_ invoke__">Some</span>(<span class="string">&quot;a string&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">absent_number</span>: <span class="type">Option</span>&lt;<span class="type">i32</span>&gt; = <span class="literal">None</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>Option&lt;T&gt;</code> 类型的值可以是一个类型为 T 的某个值（ <code>Some&lt;T&gt;</code> ），也可以为 <code>None</code> 。</p>
+<ol>
+<li><strong>Result</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Result</span>&lt;T, E&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(T),</span><br><span class="line">    <span class="title function_ invoke__">Err</span>(E),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Result</code> 类型被广泛用于错误处理。</p>
+<ol>
+<li><strong>引用和借用</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">len</span> = <span class="title function_ invoke__">calculate_length</span>(&amp;s1);  <span class="comment">// 通过引用借用s1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">calculate_length</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">usize</span> &#123;  <span class="comment">// s是对String的引用</span></span><br><span class="line">    s.<span class="title function_ invoke__">len</span>()</span><br><span class="line">&#125; <span class="comment">// 这里，s离开了作用域。但因为它并不拥有引用值的所有权，所以什么</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Zoran-45"><a href="#Zoran-45" class="headerlink" title="Zoran"></a>Zoran</h1><p>继续</p>
+<h2 id="Response-8"><a href="#Response-8" class="headerlink" title="Response"></a>Response</h2><ol>
+<li><strong>引用和借用 (续)</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">calculate_length</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">usize</span> &#123;  <span class="comment">// s是对String的引用</span></span><br><span class="line">    s.<span class="title function_ invoke__">len</span>()</span><br><span class="line">&#125; <span class="comment">// 这里，s离开了作用域。但因为它并不拥有引用值的所有权，所以什么都不会发生</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们创建了一个字符串 <code>s1</code> ，然后通过引用 <code>&amp;s1</code> 将其借用给 <code>calculate_length</code> 函数。这个函数不会获取 <code>s1</code> 的所有权，所以在函数结束时， <code>s1</code> 不会被丢弃。</p>
+<ol>
+<li><strong>Box</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，我们创建了一个在堆上分配的整数 <code>5</code> 。 <code>Box</code> 可以用来创建递归类型，例如链表和树。</p>
+<ol>
+<li><strong>Rc 和 Arc</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::rc::Rc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">rc_examples</span> = <span class="string">&quot;Rc examples&quot;</span>.<span class="title function_ invoke__">to_string</span>();</span><br><span class="line"><span class="keyword">let</span> <span class="variable">shared_string</span> = Rc::<span class="title function_ invoke__">new</span>(rc_examples);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">cloned_string</span> = Rc::<span class="title function_ invoke__">clone</span>(&amp;shared_string);</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>shared_string</code> 和 <code>cloned_string</code> 都指向同一个字符串。当最后一个 <code>Rc</code> 离开作用域时，这个字符串会被丢弃。</p>
+<ol>
+<li><strong>Cell 和 RefCell</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cell::Cell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">x</span> = Cell::<span class="title function_ invoke__">new</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span> = &amp;x;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">z</span> = &amp;x;</span><br><span class="line">x.<span class="title function_ invoke__">set</span>(<span class="number">2</span>);</span><br><span class="line">y.<span class="title function_ invoke__">set</span>(<span class="number">3</span>);</span><br><span class="line">z.<span class="title function_ invoke__">set</span>(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们创建了一个 <code>Cell</code> 并修改了它的值。虽然 <code>x</code> 、 <code>y</code> 和 <code>z</code> 都是不可变的，但我们可以通过 <code>Cell</code> 来改变内部的值。</p>
+<ol>
+<li><strong>枚举</strong></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Message</span> &#123;</span><br><span class="line">    Quit,</span><br><span class="line">    Move &#123; x: <span class="type">i32</span>, y: <span class="type">i32</span> &#125;,</span><br><span class="line">    <span class="title function_ invoke__">Write</span>(<span class="type">String</span>),</span><br><span class="line">    <span class="title function_ invoke__">ChangeColor</span>(<span class="type">i32</span>, <span class="type">i32</span>, <span class="type">i32</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们定义了一个枚举 <code>Message</code> ，它有四种变体。这些变体可以包含不同类型和数量的数据。</p>
+<p>以上的类型都是 Rust 的内置类型，大多数都与内存安全有关，例如所有权、借用和生命周期。这也是 Rust 与其他语言不同的地方。</p>
+<hr>
+<h1 id="Zoran-46"><a href="#Zoran-46" class="headerlink" title="Zoran"></a>Zoran</h1><p>Rust 的 String::new 和 String::clone 有什么区别呢, 请你以 C++为对比讲解一下</p>
+<h2 id="Response-9"><a href="#Response-9" class="headerlink" title="Response"></a>Response</h2><p><code>String::new</code> 和 <code>String::clone</code> 在 Rust 中的作用如下：</p>
+<ul>
+<li><code>String::new</code> ：这是一个静态方法，用于创建一个新的空字符串。例如：</li>
+</ul>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>String::clone</code> ：这是一个实例方法，用于创建当前字符串的一个完整复制品。如果你有一个字符串 <code>s</code> ，你可以创建它的一个副本 <code>s1</code> ，就像这样：</li>
+</ul>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = s.<span class="title function_ invoke__">clone</span>();</span><br></pre></td></tr></table></figure>
+
+<p>在 C++中，对应的操作可能是这样：</p>
+<ul>
+<li><code>std::string::empty</code> 或者直接构造一个空的 <code>std::string</code> ，对应于 <code>String::new</code> ：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::string s; <span class="comment">// 等同于Rust的 let s = String::new();</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>拷贝构造函数或者 <code>std::string::assign</code> ，对应于 <code>String::clone</code> ：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::string s1 = s; <span class="comment">// 等同于Rust的 let s1 = s.clone();</span></span><br></pre></td></tr></table></figure>
+
+<p>在 Rust 中， <code>String::clone</code> 和 <code>=</code> 操作的行为是不同的。 <code>=</code> 操作在 Rust 中会移动所有权，而不是进行复制。例如：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = s;</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 错误！s已经被移动了</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>s</code> 的所有权被移动到了 <code>s1</code> ，所以我们不能再使用 <code>s</code> 。如果我们想保留 <code>s</code> 的所有权并创建一个新的字符串 <code>s1</code> ，我们应该使用 <code>clone</code> 方法：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = s.<span class="title function_ invoke__">clone</span>();</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 正确！s的所有权没有被移动</span></span><br></pre></td></tr></table></figure>
+
+<p>在 C++中， <code>=</code> 操作会创建一个新的复制品，这和 Rust 的 <code>clone</code> 方法类似。所以在 C++中，你可以在复制后继续使用原来的字符串。</p>
+<hr>
+<h1 id="Zoran-47"><a href="#Zoran-47" class="headerlink" title="Zoran"></a>Zoran</h1><p>调用 String::new(“Hello”), String::from(“Hello”)以及”Hello”.clone()之间的区别， 联系是什么呢</p>
+<h2 id="Response-10"><a href="#Response-10" class="headerlink" title="Response"></a>Response</h2><p>首先，对于 <code>String::new(&quot;Hello&quot;)</code> ，这实际上是不正确的，因为 <code>String::new</code> 不接受任何参数，它只是用来创建一个新的空字符串。</p>
+<p>对于 <code>String::from(&quot;Hello&quot;)</code> 和 <code>&quot;Hello&quot;.to_string()</code> ，这两个是等价的，它们都用来从字符串字面量创建一个新的 <code>String</code> 对象。</p>
+<p>而 <code>&quot;Hello&quot;.clone()</code> 在这里实际上不会工作，因为 <code>&quot;Hello&quot;</code> 是一个字符串字面量，其类型是 <code>&amp;str</code> ，并没有实现 <code>clone</code> 方法。在 Rust 中， <code>clone</code> 方法通常用于复制已经存在的 <code>String</code> 对象，而不是用于从字符串字面量创建 <code>String</code> 对象。</p>
+<p>以下是正确的用法：</p>
+<ul>
+<li>创建一个新的空字符串：</li>
+</ul>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从字符串字面量创建一个新的 <code>String</code> 对象：</li>
+</ul>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="string">&quot;Hello&quot;</span>.<span class="title function_ invoke__">to_string</span>(); <span class="comment">// 这两种方式效果相同</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>复制一个已经存在的 <code>String</code> 对象：</li>
+</ul>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = s1.<span class="title function_ invoke__">clone</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Zoran-48"><a href="#Zoran-48" class="headerlink" title="Zoran"></a>Zoran</h1><p>Rust 的引用借用，是由传递者决定的吗， 传递参数的时候传递&amp;value, 就是传递借用， 传递 value 就是所有权转移的引用吗</p>
+<h2 id="Response-11"><a href="#Response-11" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。</p>
+<p>在 Rust 中，函数参数的传递方式由调用者（传递者）决定。如果你在传递参数时使用了 <code>&amp;</code> 符号，那么你就是在借用这个值，也就是传递了一个引用，而不是值本身。在这种情况下，原始值的所有权并没有被转移，而是被共享，原始值可以在函数调用后继续被使用。</p>
+<p>例如：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">takes_reference</span>(&amp;s);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 这是合法的，因为s的所有权并没有被转移</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">takes_reference</span>(s: &amp;<span class="type">String</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一方面，如果你在传递参数时没有使用 <code>&amp;</code> 符号，那么你就是在转移这个值的所有权。在这种情况下，原始值的所有权被转移给了函数，原始值不能在函数调用后继续被使用。</p>
+<p>例如：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">takes_ownership</span>(s);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 这是不合法的，因为s的所有权已经被转移</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">takes_ownership</span>(s: <span class="type">String</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>s</code> 的所有权被转移给了 <code>takes_ownership</code> 函数，所以我们不能在函数调用后继续使用 <code>s</code> 。</p>
+<p>总的来说，你可以根据你的需求来选择是借用值还是转移所有权。如果你只是需要读取值，而不需要修改或者丢弃它，那么通常最好使用借用。如果你需要修改或者丢弃值，那么你应该转移所有权。</p>
+<hr>
+<h1 id="Zoran-49"><a href="#Zoran-49" class="headerlink" title="Zoran"></a>Zoran</h1><p>Box 的类型是在堆上分配的， 那他的所有权和内存管理体系和直接 lef b &#x3D; 5 有什么区别， 使用的时候需要注意哪些事项</p>
+<h2 id="Response-12"><a href="#Response-12" class="headerlink" title="Response"></a>Response</h2><p><code>Box</code> 在 Rust 中被用于在堆上分配内存。当你创建一个 <code>Box</code> 时，你在堆上分配了一块内存，然后你可以把值放入这块内存中。 <code>Box</code> 的所有权和内存管理规则与 Rust 中的其他类型基本一致，但它有一些特殊的用途和需要注意的地方。</p>
+<p>对比直接声明变量 <code>let b = 5</code> （这会在栈上创建一个整数），使用 <code>Box</code> 会使得数据存储在堆上：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这在以下情况下可能很有用：</p>
+<ol>
+<li><p><strong>当你需要分配大量的内存或者分配一个大的数据结构时。</strong>栈空间是有限的，而堆空间相对较大。如果你需要一个大数组或者其他大的数据结构，你可能需要使用 <code>Box</code> 。</p>
+</li>
+<li><p><strong>当你需要创建一个递归的数据类型时。</strong>例如，你可以使用 <code>Box</code> 来创建一个链表或者树状结构。在这些情况下，每一个节点可能会包含一个指向其他节点的 <code>Box</code> 。</p>
+</li>
+<li><p><strong>当你需要在运行时创建一个动态大小的数据类型时。</strong>Rust 中的所有类型都需要在编译时确定其大小。但是，你可以使用 <code>Box</code> 来创建一个动态大小的数据类型。</p>
+</li>
+</ol>
+<p>然而，使用 <code>Box</code> 也需要注意以下事项：</p>
+<ul>
+<li><p><strong>所有权规则仍然适用。</strong>当 <code>Box</code> 离开其作用域时，其包含的值也会被丢弃。这意味着你需要小心处理所有权，避免在值被丢弃后仍然试图访问它。</p>
+</li>
+<li><p><strong>在堆上分配内存相比在栈上分配内存要慢一些。</strong>因此，尽管 <code>Box</code> 提供了更大的空间，但你应当谨慎使用它，避免不必要的性能开销。</p>
+</li>
+<li><p><strong>你需要负责 <code>Box</code> 中值的修改和读取。</strong>虽然 <code>Box</code> 会自动处理内存的分配和释放，但你仍然需要管理 <code>Box</code> 中值的生命周期，例如防止数据竞争和悬挂引用。</p>
+</li>
+</ul>
+<hr>
+<h1 id="Zoran-50"><a href="#Zoran-50" class="headerlink" title="Zoran"></a>Zoran</h1><p>所以在 Rust 中， Box 这样通过堆上分配的内存，和使用栈分配的内存使用基本一样， 只是在效率上， 有所不同， 管理上仍然是类似 RAII 的所有权概念来进行管理吗</p>
+<h2 id="Response-13"><a href="#Response-13" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。无论是栈上分配的内存还是堆上分配的内存，Rust 都使用类似于 RAII（Resource Acquisition Is Initialization）的所有权系统来进行管理。</p>
+<p>当你使用 <code>Box</code> 在堆上分配内存时，这个 <code>Box</code> 变量会拥有这块内存的所有权。当 <code>Box</code> 变量离开其作用域时，Rust 会自动释放这块内存，这就是 RAII 的概念。这避免了常见的内存管理错误，如忘记释放内存或者试图访问已经释放的内存。</p>
+<p>然而，使用堆内存和栈内存的确存在一些差异。堆内存通常更大，但是分配和释放堆内存的速度比栈内存慢。此外，堆内存可以动态分配，这意味着你可以在运行时决定需要多少内存，这是栈内存做不到的。</p>
+<p>总的来说，无论是使用栈内存还是堆内存，你都应当遵循 Rust 的所有权规则，小心处理变量的生命周期，以避免内存安全问题。</p>
+<hr>
+<h1 id="Zoran-51"><a href="#Zoran-51" class="headerlink" title="Zoran"></a>Zoran</h1><p>使用堆上的内存，如果试图访问已经被释放了的内存， 编译器会在编译时不通过吗</p>
+<h2 id="Response-14"><a href="#Response-14" class="headerlink" title="Response"></a>Response</h2><p>Rust 的设计目标之一就是确保内存安全，避免像空指针解引用和数据竞争这样的常见错误。Rust 使用所有权系统来跟踪内存，所有权系统在编译时会检查代码，从而可以在大多数情况下预防使用已经被释放的内存的问题。</p>
+<p>例如，以下的代码会在编译时失败，因为试图在值被释放后访问它：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">c</span> = b;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, b); <span class="comment">// 错误：b 的值已经被移动</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这段代码中， <code>b</code> 的所有权被移动到 <code>c</code> ，然后我们试图访问 <code>b</code> ，这在 Rust 中是不被允许的，因此编译器会报错。</p>
+<p>然而，有一些复杂的内存错误可能无法在编译时被检测出来，例如使用 <code>Rc</code> 和 <code>RefCell</code> 创建的循环引用。在这种情况下，你需要更谨慎地管理你的内存。</p>
+<p>总的来说，尽管 Rust 的所有权系统可以在很大程度上帮助你管理内存，但是你仍然需要理解其工作原理，以便编写安全和高效的代码。</p>
+<hr>
+<h1 id="Zoran-52"><a href="#Zoran-52" class="headerlink" title="Zoran"></a>Zoran</h1><p>为什么需要使用 cell 而不是直接创建一个 mut 引用呢, 使用 Cell 的动机和场景是什么</p>
+<h2 id="Response-15"><a href="#Response-15" class="headerlink" title="Response"></a>Response</h2><p>Rust 的引用和借用规则有一个基本原则：你可以有多个不可变引用（&amp;T）或者一个可变引用（&amp;mut T），但是两者不能同时存在。这个规则是为了防止数据竞争，从而保证内存安全。</p>
+<p>然而，在某些情况下，你可能需要在多个地方改变一个值，而这些地方并不能提供一个唯一的&amp;mut T 引用。这就是 <code>Cell</code> 和 <code>RefCell</code> 的用武之地。</p>
+<p><code>Cell&lt;T&gt;</code> 类型提供了 <code>set</code> 和 <code>get</code> 方法，允许在拥有不可变引用的情况下改变内部值。这是通过内部可变性（interior mutability）实现的，它基本上是一个安全的方式去绕过 Rust 的借用规则。但是， <code>Cell&lt;T&gt;</code> 只能用于 <code>Copy</code> 类型，因为 <code>get</code> 方法需要复制值。</p>
+<p>例如，下面的代码是合法的：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cell::Cell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">c</span> = Cell::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">d</span> = c.<span class="title function_ invoke__">get</span>();</span><br><span class="line">c.<span class="title function_ invoke__">set</span>(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>RefCell&lt;T&gt;</code> 是 <code>Cell&lt;T&gt;</code> 的一个更通用的版本，它可以用于任何类型，但是它的 <code>borrow</code> 和 <code>borrow_mut</code> 方法在运行时检查借用规则，如果违反了借用规则，就会导致程序崩溃。</p>
+<p>使用 <code>Cell</code> 和 <code>RefCell</code> 需要谨慎，因为它们的使用可能导致代码更难理解和维护。然而，在某些情况下，它们是必要的，例如在某个结构体需要改变自身的一部分，但是这个结构体的方法只能获取到 <code>&amp;self</code> 引用时。</p>
+<hr>
+<h1 id="Zoran-53"><a href="#Zoran-53" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你详细解释一下:<br>Cell<T>只能用于 Copy 类型，因为 get 方法需要复制值。<br>既然是 Copy 类型, 比如 int, char, u32 这里这种类型不是没有所有权的概念吗, 我有点没有理解你这里的讲解</p>
+<h2 id="Response-16"><a href="#Response-16" class="headerlink" title="Response"></a>Response</h2><p><code>Cell&lt;T&gt;</code> 只对 <code>Copy</code> trait 的类型 <code>T</code> 有效，这是因为 <code>Cell&lt;T&gt;</code> 的 <code>get</code> 方法返回 <code>T</code> 的一个副本，而不是对 <code>T</code> 的引用。这样设计的原因是 <code>Cell&lt;T&gt;</code> 允许通过 <code>&amp;Cell&lt;T&gt;</code> （也就是一个不可变引用）修改其内部的值。如果 <code>get</code> 方法返回一个引用，那么在修改 <code>Cell&lt;T&gt;</code> 内部的值时就可能导致这个引用变得无效。</p>
+<p>所以说 <code>Cell&lt;T&gt;</code> 的 <code>get</code> 方法需要 <code>T</code> 实现 <code>Copy</code> trait，这样它就能在每次调用 <code>get</code> 方法时都返回一个新的 <code>T</code> 副本，而不是返回一个可能会在之后变得无效的引用。</p>
+<p>至于 “既然是 Copy 类型, 比如 int, char, u32 这里这种类型不是没有所有权的概念吗”，这个观点有一些误解。在 Rust 中，所有的类型，无论是 <code>Copy</code> 类型还是非 <code>Copy</code> 类型，都有所有权的概念。当我们说一个类型实现了 <code>Copy</code> trait，我们的意思是这个类型的值可以通过位复制（bitwise copy）来创建新的值，而原始值在此过程中并不会被 “消耗”（也就是说原始值之后仍然可以安全地使用）。对于那些没有实现 <code>Copy</code> trait 的类型，比如 <code>String</code> 或者 <code>Vec&lt;T&gt;</code> ，它们的值在被复制时原始值就不能再安全地使用了，除非我们显式地调用如 <code>clone</code> 方法这样的方法来创建一个新的副本。</p>
+<hr>
+<h1 id="Zoran-54"><a href="#Zoran-54" class="headerlink" title="Zoran"></a>Zoran</h1><p>那你刚刚给出的这段代码中:<br>use std::cell::Cell;</p>
+<p>let c &#x3D; Cell::new(5);<br>let d &#x3D; c.get();<br>c.set(10);</p>
+<p>d 是一个副本, 所以 c 设置了值为 10 以后, d 的值并没有改变, 仍然是 5 对吗?</p>
+<h2 id="Response-17"><a href="#Response-17" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。 <code>Cell&lt;T&gt;</code> 的 <code>get</code> 方法返回的是内部值的一个副本，而不是一个引用。所以当你改变 <code>Cell</code> 的内部值时，已经通过 <code>get</code> 方法得到的副本的值不会被改变。</p>
+<p>你可以通过以下代码来验证这一点：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cell::Cell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">c</span> = Cell::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">d</span> = c.<span class="title function_ invoke__">get</span>();</span><br><span class="line">c.<span class="title function_ invoke__">set</span>(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, d); <span class="comment">// 输出 5</span></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, c.<span class="title function_ invoke__">get</span>()); <span class="comment">// 输出 10</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>d</code> 的值仍然是 5，而 <code>c</code> 的值已经被改变为 10。这就是为什么 <code>Cell&lt;T&gt;</code> 只能用于实现了 <code>Copy</code> trait 的类型——这样可以确保 <code>get</code> 方法总是返回一个有效的值，即使 <code>Cell</code> 的内部值已经被改变。</p>
+<hr>
+<h1 id="Zoran-55"><a href="#Zoran-55" class="headerlink" title="Zoran"></a>Zoran</h1><p>那这个特性是不是意味着, Cell 的使用类型是有限制的, 他只能用于可以 Copy 的类型, 而不能用于其他拥有所有权概念的类型呢? 如果是, 请你为我梳理一下 Rust 中哪些类型是可以 Copy 的类型, 如果不是, 请你为我梳理一下 Rust 中, 哪些类型是拥有所有权的概念的, 哪些类型是没有所有权的概念的,他们的依据是什么</p>
+<h2 id="Response-18"><a href="#Response-18" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。 <code>Cell&lt;T&gt;</code> 只能用于那些实现了 <code>Copy</code> trait 的类型。在 Rust 中，所有类型都有所有权概念，包括那些实现了 <code>Copy</code> trait 的类型。 <code>Copy</code> trait 只是表示这个类型的值可以通过位复制（bitwise copy）来创建新的值，而原始值在此过程中并不会被 “消耗”。</p>
+<p>以下是一些常见的在 Rust 中实现了 <code>Copy</code> trait 的类型：</p>
+<ul>
+<li>所有整数类型，如 <code>i32</code> , <code>u32</code> 等</li>
+<li>所有浮点数类型，如 <code>f32</code> , <code>f64</code></li>
+<li>布尔类型 <code>bool</code></li>
+<li>字符类型 <code>char</code></li>
+<li>所有整数和浮点数的数组，其长度在编译时已知，如 <code>[i32; 3]</code></li>
+<li>所有元组，如果元组中的所有类型都实现了 <code>Copy</code> ，例如 <code>(i32, f64)</code></li>
+</ul>
+<p>以下是一些常见的在 Rust 中没有实现 <code>Copy</code> trait 的类型：</p>
+<ul>
+<li>字符串 <code>String</code></li>
+<li>动态数组 <code>Vec&lt;T&gt;</code></li>
+<li>智能指针，如 <code>Box&lt;T&gt;</code> , <code>Rc&lt;T&gt;</code> , <code>RefCell&lt;T&gt;</code></li>
+<li>函数和闭包</li>
+</ul>
+<p>注意，你可以为你自定义的类型实现 <code>Copy</code> trait，但是你需要确保这样做是安全的。例如，如果你的类型包含一个 <code>String</code> 字段，那么你就不能为这个类型实现 <code>Copy</code> trait，因为 <code>String</code> 类型没有实现 <code>Copy</code> 。</p>
+<p>所有权是 Rust 中的一个核心概念，它适用于所有类型。不过，有些类型的值在被复制时可以继续被安全地使用（这些类型实现了 <code>Copy</code> trait），而有些类型的值在被复制时就不能再被安全地使用（这些类型没有实现 <code>Copy</code> trait）。</p>
+<hr>
+<h1 id="Zoran-56"><a href="#Zoran-56" class="headerlink" title="Zoran"></a>Zoran</h1><p>既然所有权的概念适用于所有的类型, 那为什么这段代码是可以正常运行的呢:<br>let a &#x3D; 10;<br>let b &#x3D; a;<br>println!(“{}”, a); &#x2F;&#x2F; 10<br>按照所有权的概念, 这里不使用应该 a 的所有权被转移了吗,那这里 a 的内存不应该被释放了吗, 这里为什么没有任何问题呢</p>
+<h2 id="Response-19"><a href="#Response-19" class="headerlink" title="Response"></a>Response</h2><p>你的疑问非常有道理。在 Rust 中，所有权的概念确实适用于所有类型。然而，对于那些实现了 <code>Copy</code> trait 的类型来说，当我们尝试复制一个值时，它不会 “移动” 所有权，而是会创建一个新的副本，这个副本的值和原始值一样。</p>
+<p>在你的例子中：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = a;</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, a);  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p><code>a</code> 和 <code>b</code> 的类型是 <code>i32</code> ，它是一个实现了 <code>Copy</code> trait 的类型。当你写 <code>let b = a;</code> 时，你实际上是在创建 <code>a</code> 的一个新副本，并将这个副本绑定到 <code>b</code> 。这个操作并不会 “消耗” <code>a</code> ，所以 <code>a</code> 之后仍然可以安全地使用。</p>
+<p>如果 <code>a</code> 的类型是一个没有实现 <code>Copy</code> trait 的类型，比如 <code>String</code> ，那么 <code>let b = a;</code> 就会移动 <code>a</code> 的所有权到 <code>b</code> ， <code>a</code> 之后就不能再被安全地使用了：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = a;</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, a);  <span class="comment">// 编译错误：value borrowed here after move</span></span><br></pre></td></tr></table></figure>
+
+<p>这段代码会在编译时报错，因为 <code>a</code> 的所有权已经被移动到 <code>b</code> ，所以 <code>a</code> 不能再被安全地使用。</p>
+<p>这就是为什么在 Rust 中，所有类型都有所有权的概念，但是 <code>Copy</code> trait 的类型和非 <code>Copy</code> trait 的类型在处理所有权时有所不同。</p>
+<hr>
+<h1 id="Zoran-57"><a href="#Zoran-57" class="headerlink" title="Zoran"></a>Zoran</h1><p>所以实际上, 使用&#x3D;赋值一个对象的时候, Rust 首先会检查该对象有没有实现 Copy trait, 如果实现了则优先调用 Copy, 如果没有实现则进行所有权移动是吗</p>
+<h2 id="Response-20"><a href="#Response-20" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解非常准确。在 Rust 中， <code>=</code> 赋值操作的行为取决于源数据类型是否实现了 <code>Copy</code> trait：</p>
+<ul>
+<li><p>如果源数据类型实现了 <code>Copy</code> trait，那么 <code>=</code> 赋值操作将会创建源数据的一个副本。源数据之后仍然可以安全地使用，因为它并没有被 “消耗”。</p>
+</li>
+<li><p>如果源数据类型没有实现 <code>Copy</code> trait，那么 <code>=</code> 赋值操作将会移动源数据的所有权。源数据之后就不能再安全地使用，除非它被再次赋予新的值。</p>
+</li>
+</ul>
+<p>这种设计使得 Rust 可以在保证内存安全的同时，还能有良好的性能。对于那些实现了 <code>Copy</code> trait 的小型数据，复制通常是更高效的选择，因为它避免了需要进行内存分配和释放的开销。而对于那些没有实现 <code>Copy</code> trait 的大型数据，移动通常是更高效的选择，因为它只涉及到指针的复制和所有权的转移，而不需要复制整个数据。</p>
+<hr>
+<h1 id="Zoran-58"><a href="#Zoran-58" class="headerlink" title="Zoran"></a>Zoran</h1><p>那如果我希望为我的自定义类型实现 Copy trait, 有哪些实现方式呢?</p>
+<h2 id="Response-21"><a href="#Response-21" class="headerlink" title="Response"></a>Response</h2><p>在 Rust 中，为你的自定义类型实现 <code>Copy</code> trait 是相当简单的。你只需在类型定义后面添加一个 <code>impl Copy for YourType &#123;&#125;</code> 的代码块即可。然而，有一些重要的限制你需要注意：</p>
+<ul>
+<li><p>你的类型必须同时实现 <code>Clone</code> trait 才能实现 <code>Copy</code> trait。这是因为 <code>Copy</code> trait 意味着你的类型可以通过字节级别的复制创建新的实例，这样的复制被认为是“克隆”操作。你可以通过添加 <code>#[derive(Clone, Copy)]</code> 注解来自动为你的类型实现 <code>Clone</code> 和 <code>Copy</code> trait。</p>
+</li>
+<li><p>你的类型中所有的字段也都必须实现 <code>Copy</code> trait。如果你的类型包含一个不实现 <code>Copy</code> trait 的字段，比如 <code>String</code> ，那么你的类型就不能实现 <code>Copy</code> trait。</p>
+</li>
+</ul>
+<p>以下是一个为自定义类型实现 <code>Copy</code> trait 的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Clone, Copy)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyType</span> &#123;</span><br><span class="line">    a: <span class="type">i32</span>,</span><br><span class="line">    b: <span class="type">f64</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>MyType</code> 类型有两个字段： <code>a</code> 和 <code>b</code> ，它们的类型分别是 <code>i32</code> 和 <code>f64</code> ，这两种类型都实现了 <code>Copy</code> trait。因此，我们可以通过 <code>#[derive(Clone, Copy)]</code> 注解为 <code>MyType</code> 类型自动实现 <code>Clone</code> 和 <code>Copy</code> trait。</p>
+<p>如果你试图为包含不实现 <code>Copy</code> trait 的字段的类型实现 <code>Copy</code> trait，你将会在编译时得到一个错误。例如，以下代码将无法编译：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Clone, Copy)]</span> <span class="comment">// 编译错误：the trait `Copy` may not be implemented for this type</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyType</span> &#123;</span><br><span class="line">    a: <span class="type">i32</span>,</span><br><span class="line">    s: <span class="type">String</span>, <span class="comment">// String 类型没有实现 `Copy` trait</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个错误告诉我们 <code>String</code> 类型没有实现 <code>Copy</code> trait，因此 <code>MyType</code> 类型也不能实现 <code>Copy</code> trait。</p>
+<hr>
+<h1 id="Zoran-59"><a href="#Zoran-59" class="headerlink" title="Zoran"></a>Zoran</h1><p>对于使用 Box::new()一个实现了 Copy 类型的变量, 在之后的&#x3D;赋值给另一个新的变量的时候, 这里是会进行所有权移动吗, 原来的变量会能继续使用吗</p>
+<h2 id="Response-22"><a href="#Response-22" class="headerlink" title="Response"></a>Response</h2><p>当你把一个实现了 <code>Copy</code> trait 的值放入 <code>Box</code> 中时，这个值会被移动到堆上，然后你得到一个指向这个堆上值的 <code>Box</code> 指针。虽然值本身实现了 <code>Copy</code> trait，但 <code>Box</code> 指针本身并没有实现 <code>Copy</code> trait。这意味着当你把 <code>Box</code> 指针赋值给另一个变量时， <code>Box</code> 指针的所有权会被移动，原来的变量就不能再使用了。</p>
+<p>以下是一个例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = a;  <span class="comment">// 所有权移动</span></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, a);  <span class="comment">// 编译错误：value borrowed here after move</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>a</code> 是一个指向堆上 <code>5</code> 的 <code>Box</code> 指针。当我们写 <code>let b = a;</code> 时， <code>a</code> 的所有权被移动到 <code>b</code> ，所以 <code>a</code> 之后就不能再被安全地使用了。</p>
+<p>这是因为，尽管 <code>5</code> 是一个 <code>Copy</code> 类型，但 <code>Box::new(5)</code> 返回的是一个 <code>Box&lt;i32&gt;</code> 类型的值，而 <code>Box&lt;i32&gt;</code> 没有实现 <code>Copy</code> trait。因此，当 <code>Box&lt;i32&gt;</code> 被赋值时，它的所有权会被移动。这种行为确保了 Rust 的内存安全性，因为它防止了对已经释放的堆内存的访问。</p>
+<hr>
+<h1 id="Zoran-60"><a href="#Zoran-60" class="headerlink" title="Zoran"></a>Zoran</h1><p>实现 Copy 和 Clone, 这两者有什么区别呢, 他们在使用上要注意哪些</p>
+<h2 id="Response-23"><a href="#Response-23" class="headerlink" title="Response"></a>Response</h2><p><code>Copy</code> 和 <code>Clone</code> 都是 Rust 中的 trait，它们都用于创建对象的副本，但它们的工作方式和用途有所不同。</p>
+<ul>
+<li><p><code>Clone</code> trait： <code>Clone</code> trait 的目的是为了允许显式地创建一个对象的副本。当你调用一个对象的 <code>.clone()</code> 方法时，会创建一个新的对象，这个对象的状态与原对象相同，但占用不同的内存空间。这个过程可能包含动态内存分配或其他性能开销，因此应该显式地进行。</p>
+</li>
+<li><p><code>Copy</code> trait： <code>Copy</code> trait 是为了允许隐式地复制一个对象。当一个实现了 <code>Copy</code> trait 的对象被赋值给另一个变量时，会自动创建一个新的对象，这个对象的状态与原对象相同，但占用不同的内存空间。因为这个过程是隐式的，所以只有那些可以被安全地、低成本地复制的类型应该实现 <code>Copy</code> trait。这通常包括所有基本数据类型，如整数、浮点数和布尔值，以及由这些类型组成的复合类型。</p>
+</li>
+</ul>
+<p>注意的是，如果一个类型实现了 <code>Copy</code> ，那么在赋值时，源对象仍然有效，因为已经隐式地创建了一个新的副本。而如果一个类型只实现了 <code>Clone</code> ，那么在赋值时，你需要显式地调用 <code>.clone()</code> 方法，否则源对象的所有权会被移动。</p>
+<p>总的来说，以下是在使用 <code>Clone</code> 和 <code>Copy</code> 时需要注意的事项：</p>
+<ul>
+<li>当你创建一个可以被安全地、低成本地复制的类型时，应该同时实现 <code>Clone</code> 和 <code>Copy</code> trait。</li>
+<li>当你创建一个可能包含动态内存分配或其他性能开销的类型时，只应该实现 <code>Clone</code> trait。</li>
+<li>当你赋值一个实现了 <code>Copy</code> trait 的对象时，源对象仍然有效。</li>
+<li>当你赋值一个只实现了 <code>Clone</code> trait 的对象时，你需要显式地调用 <code>.clone()</code> 方法，否则源对象的所有权会被移动。</li>
+</ul>
+<hr>
+<h1 id="Zoran-61"><a href="#Zoran-61" class="headerlink" title="Zoran"></a>Zoran</h1><p>Rust 的 println 宏展开, 会在编译器去解析{}, 这样的占位符,并将参数放在对应的位置吗, println 这样的宏, 他在编译期做了哪些事情, 哪些事情是放在运行期做的呢</p>
+<h2 id="Response-24"><a href="#Response-24" class="headerlink" title="Response"></a>Response</h2><p>Rust 的 <code>println!</code> 宏在编译期进行一系列的处理，但有些事情是在运行时处理的。</p>
+<p>以下是在编译期完成的主要事情：</p>
+<ol>
+<li><p><strong>解析字符串</strong> ：编译器首先解析字符串，找到 <code>&#123;&#125;</code> 这样的占位符。</p>
+</li>
+<li><p><strong>类型检查</strong> ：编译器会检查传入的参数是否符合占位符的要求。例如，如果字符串中的占位符是 <code>&#123;&#125;</code> ，那么对应的参数需要实现 <code>std::fmt::Display</code> trait。如果占位符是 <code>&#123;:?&#125;</code> ，那么对应的参数需要实现 <code>std::fmt::Debug</code> trait。</p>
+</li>
+<li><p><strong>宏展开</strong> ：编译器将 <code>println!</code> 宏展开为一些底层的代码，这些代码将在运行时执行。</p>
+</li>
+</ol>
+<p>以下是在运行期完成的主要事情：</p>
+<ol>
+<li><p><strong>格式化字符串</strong> ：在运行时，程序根据参数的实际值替换字符串中的占位符，生成最终要打印的字符串。</p>
+</li>
+<li><p><strong>输出字符串</strong> ：程序将生成的字符串输出到标准输出。</p>
+</li>
+</ol>
+<p>你可以使用 <code>cargo expand</code> 命令（需要先通过 <code>cargo install cargo-expand</code> 命令安装）来查看宏展开后的代码。例如，以下是 <code>println!(&quot;Hello, &#123;&#125;!&quot;, &quot;world&quot;);</code> 展开后的代码（可能会有些不同，因为这是一个简化的版本）：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::io::_print(std::format_args_nl!(<span class="string">&quot;Hello, &#123;&#125;!&quot;</span>, <span class="string">&quot;world&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>可以看到， <code>println!</code> 宏被展开为了 <code>std::io::_print</code> 和 <code>std::format_args_nl</code> 的调用，这些函数在运行时生成和输出字符串。</p>
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/06/GPT/Lexer/" title="词法分析器 Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">词法分析器 Q&amp;A</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/04/GPT/Google_test/" title="Google_test"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Google_test</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Linux_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/Lua_QA/" title="Lua_QA"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">Lua_QA</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">33</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT"><span class="toc-number">1.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-1"><span class="toc-number">2.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-2"><span class="toc-number">3.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-2"><span class="toc-number">3.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-3"><span class="toc-number">4.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-3"><span class="toc-number">4.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-4"><span class="toc-number">5.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-4"><span class="toc-number">5.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-5"><span class="toc-number">6.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-5"><span class="toc-number">6.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-6"><span class="toc-number">7.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-6"><span class="toc-number">7.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-7"><span class="toc-number">8.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-7"><span class="toc-number">8.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-8"><span class="toc-number">9.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-8"><span class="toc-number">9.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-9"><span class="toc-number">10.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-9"><span class="toc-number">10.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-10"><span class="toc-number">11.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-10"><span class="toc-number">11.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-11"><span class="toc-number">12.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-11"><span class="toc-number">12.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-12"><span class="toc-number">13.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-12"><span class="toc-number">13.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-13"><span class="toc-number">14.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-13"><span class="toc-number">14.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-14"><span class="toc-number">15.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-14"><span class="toc-number">15.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-15"><span class="toc-number">16.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-15"><span class="toc-number">16.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-16"><span class="toc-number">17.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-16"><span class="toc-number">17.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-17"><span class="toc-number">18.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-17"><span class="toc-number">18.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-18"><span class="toc-number">19.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-18"><span class="toc-number">19.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-19"><span class="toc-number">20.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-19"><span class="toc-number">20.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-20"><span class="toc-number">21.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-20"><span class="toc-number">21.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-21"><span class="toc-number">22.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-21"><span class="toc-number">22.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-22"><span class="toc-number">23.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-22"><span class="toc-number">23.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-23"><span class="toc-number">24.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-23"><span class="toc-number">24.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-24"><span class="toc-number">25.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-24"><span class="toc-number">25.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-25"><span class="toc-number">26.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-25"><span class="toc-number">26.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-26"><span class="toc-number">27.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-26"><span class="toc-number">27.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-27"><span class="toc-number">28.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-27"><span class="toc-number">28.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-28"><span class="toc-number">29.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-28"><span class="toc-number">29.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-29"><span class="toc-number">30.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-29"><span class="toc-number">30.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-30"><span class="toc-number">31.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-30"><span class="toc-number">31.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-31"><span class="toc-number">32.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-31"><span class="toc-number">32.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-32"><span class="toc-number">33.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-32"><span class="toc-number">33.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-33"><span class="toc-number">34.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-33"><span class="toc-number">34.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-34"><span class="toc-number">35.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-34"><span class="toc-number">35.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-35"><span class="toc-number">36.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-35"><span class="toc-number">36.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-36"><span class="toc-number">37.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-36"><span class="toc-number">37.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-37"><span class="toc-number">38.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response"><span class="toc-number">38.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-38"><span class="toc-number">39.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-1"><span class="toc-number">39.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-39"><span class="toc-number">40.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-2"><span class="toc-number">40.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-40"><span class="toc-number">41.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-3"><span class="toc-number">41.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-41"><span class="toc-number">42.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-4"><span class="toc-number">42.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-42"><span class="toc-number">43.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-5"><span class="toc-number">43.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-43"><span class="toc-number">44.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-6"><span class="toc-number">44.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-44"><span class="toc-number">45.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-7"><span class="toc-number">45.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-45"><span class="toc-number">46.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-8"><span class="toc-number">46.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-46"><span class="toc-number">47.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-9"><span class="toc-number">47.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-47"><span class="toc-number">48.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-10"><span class="toc-number">48.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-48"><span class="toc-number">49.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-11"><span class="toc-number">49.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-49"><span class="toc-number">50.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-12"><span class="toc-number">50.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-50"><span class="toc-number">51.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-13"><span class="toc-number">51.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-51"><span class="toc-number">52.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-14"><span class="toc-number">52.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-52"><span class="toc-number">53.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-15"><span class="toc-number">53.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-53"><span class="toc-number">54.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-16"><span class="toc-number">54.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-54"><span class="toc-number">55.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-17"><span class="toc-number">55.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-55"><span class="toc-number">56.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-18"><span class="toc-number">56.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-56"><span class="toc-number">57.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-19"><span class="toc-number">57.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-57"><span class="toc-number">58.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-20"><span class="toc-number">58.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-58"><span class="toc-number">59.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-21"><span class="toc-number">59.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-59"><span class="toc-number">60.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-22"><span class="toc-number">60.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-60"><span class="toc-number">61.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-23"><span class="toc-number">61.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-61"><span class="toc-number">62.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-24"><span class="toc-number">62.1.</span> <span class="toc-text">Response</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="WebSocket"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket">WebSocket</a><time datetime="2023-05-13T04:21:44.000Z" title="发表于 2023-05-13 12:21:44">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Linux_Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A">Linux_Q&amp;A</a><time datetime="2023-05-13T04:13:14.000Z" title="发表于 2023-05-13 12:13:14">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/QT/" title="QT 中的核心类"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="QT 中的核心类"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/QT/" title="QT 中的核心类">QT 中的核心类</a><time datetime="2023-05-13T04:10:21.000Z" title="发表于 2023-05-13 12:10:21">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/10/GPT/RE_parser/" title="正则表达式扩展"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="正则表达式扩展"/></a><div class="content"><a class="title" href="/Notes/2023/05/10/GPT/RE_parser/" title="正则表达式扩展">正则表达式扩展</a><time datetime="2023-05-09T16:17:39.000Z" title="发表于 2023-05-10 00:17:39">2023-05-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="CLI_Command"/></a><div class="content"><a class="title" href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command">CLI_Command</a><time datetime="2023-05-08T07:13:13.000Z" title="发表于 2023-05-08 15:13:13">2023-05-08</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
