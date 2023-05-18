@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Git | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran在使用 git 管理项目的时候, 我需要拉取远端的的进度, 但是此时我的暂存区中有一些更改没有 commit, 我希望拉取远端的进度然后修改后在 commit, 我尝试使用: ❯ git pull –force错误：不能变基式拉取：您的索引中包含未提交的变更。错误：请提交或贮藏它们。 我应该如何解决这个问题 Response在这种情况下，你可以使用 git stash 命令将暂存区和工作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/13/GPT/Git/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran在使用 git 管理项目的时候, 我需要拉取远端的的进度, 但是此时我的暂存区中有一些更改没有 commit, 我希望拉取远端的进度然后修改后在 commit, 我尝试使用: ❯ git pull –force错误：不能变基式拉取：您的索引中包含未提交的变更。错误：请提交或贮藏它们。 我应该如何解决这个问题 Response在这种情况下，你可以使用 git stash 命令将暂存区和工作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg">
+<meta property="article:published_time" content="2023-05-13T12:01:04.000Z">
+<meta property="article:modified_time" content="2023-05-13T12:01:55.778Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/13/GPT/Git/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Git',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-13 20:01:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-13T12:01:04.000Z" title="发表于 2023-05-13 20:01:04">2023-05-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-13T12:01:55.778Z" title="更新于 2023-05-13 20:01:55">2023-05-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Git/">Git</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran"></a>Zoran</h1><p>在使用 git 管理项目的时候, 我需要拉取远端的的进度, 但是此时我的暂存区中有一些更改没有 commit, 我希望拉取远端的进度然后修改后在 commit, 我尝试使用:</p>
+<p>❯ git pull –force<br>错误：不能变基式拉取：您的索引中包含未提交的变更。<br>错误：请提交或贮藏它们。</p>
+<p>我应该如何解决这个问题</p>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>在这种情况下，你可以使用 <code>git stash</code> 命令将暂存区和工作区的更改暂时保存起来，然后执行 <code>git pull</code> 拉取远端的进度。最后，再用 <code>git stash apply</code> 或 <code>git stash pop</code> 将之前保存的更改恢复到工作区，这样你就可以继续修改并在完成后提交。</p>
+<p>下面是具体的操作步骤：</p>
+<ol>
+<li>使用 <code>git stash</code> 命令保存当前的更改：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>执行 <code>git pull</code> 命令拉取远端的进度：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用 <code>git stash apply</code> 或 <code>git stash pop</code> 恢复之前保存的更改：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply  <span class="comment"># 将保存的更改应用到工作区，但不会从暂存区删除</span></span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop  <span class="comment"># 将保存的更改应用到工作区，并从暂存区删除</span></span><br></pre></td></tr></table></figure>
+
+<p>现在你可以继续修改代码，完成后提交。</p>
+<p>需要注意的是，如果在拉取远端进度后恢复更改时遇到冲突，你需要手动解决这些冲突，然后继续提交。</p>
+<hr>
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran"></a>Zoran</h1><p>git 的 add, commit, stash, 这些概念都有什么用呢, 如何去理解和联系他们, 请你使用一个故事将他们串起来帮助我理解</p>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><p>在一个叫做 Gitland 的王国里，居民们使用 Git 魔法来管理他们的宝物——源代码。他们依靠三位勇士——Add 勇士、Commit 勇士和 Stash 勇士——来保护和维护这些宝物。这三位勇士各自有特殊的能力，相互合作，共同维护着 Gitland 的和平与繁荣。</p>
+<p>Add 勇士的力量在于将宝物收集到一个特殊的房间里，这个房间叫做“暂存区”。居民们在完成一项修改后，会将新的宝物交给 Add 勇士，他会仔细检查每个宝物，确保它们都准备好进入暂存区。暂存区是一个临时的存放地，用于收集所有待提交的宝物。</p>
+<p>Commit 勇士是一个勇敢的记录者，他的任务是将暂存区中的宝物永久地保存在 Gitland 的宝库——“提交历史”里。只有经过 Commit 勇士的批准，宝物才能获得一个永久的、唯一的名字，这个名字叫做“提交 ID”。这样，当居民们需要找到过去的宝物时，他们可以凭借这个名字轻松地找到它。</p>
+<p>Stash 勇士是一个聪明的守护者，他的力量在于将未准备好进入暂存区的宝物暂时存放在一个安全的地方——“储藏室”。当居民们需要在处理紧急任务时暂时离开手头的工作，Stash 勇士会将他们当前的宝物安全地存放起来。在紧急任务完成后，Stash 勇士会将这些宝物原封不动地归还给居民们，让他们继续之前的工作。</p>
+<p>有一天，Gitland 遭受了一场突如其来的黑暗入侵。黑暗之神试图用混乱的代码束缚 Gitland 的居民。居民们恳求三位勇士帮忙，他们立刻行动起来，共同应对这场危机。</p>
+<p>首先，Add 勇士迅速将修复黑暗入侵带来的问题的宝物收集到暂存区。接着，Commit 勇士将这些宝物永久地保存在提交历史里，确保他们永远不会丢失。然而，在此过程中，许多居民还没有来得及完成手头的工作，他们的宝物暂时还不能进入暂存区。</p>
+<p>这 个时候，Stash 勇士挺身而出，将这些未完成的宝物暂时存放在储藏室里，让居民们可以放心地去处理黑暗入侵的紧急任务。在黑暗之神被击败之后，Stash 勇士将储藏室中的宝物归还给居民们，让他们继续之前的工作。</p>
+<p>在这场战斗中，Gitland 的居民们深刻地理解了 Add 勇士、Commit 勇士和 Stash 勇士之间的联系。他们明白了，要想保护宝物——源代码，必须先通过 Add 勇士将宝物暂存，然后通过 Commit 勇士将宝物永久保存在提交历史中。而当他们需要处理紧急任务时，可以依靠 Stash 勇士将手头的宝物暂时存放，以便在任务完成后继续工作。</p>
+<p>有了这三位勇士的帮助，Gitland 的居民们学会了如何更好地管理他们的宝物，确保 Gitland 的繁荣与和平。通过这个故事，你应该能更好地理解 git 的 add、commit 和 stash 这三个概念以及它们之间的关系。在实际应用中，你可以根据自己的需求灵活地运用这些概念，高效地管理你的代码。</p>
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Compiler_Design</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">WebSocket</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-14</div><div class="title">Compiler_Design</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Linux_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response"><span class="toc-number">1.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-1"><span class="toc-number">2.1.</span> <span class="toc-text">Response</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Compiler_Design"/></a><div class="content"><a class="title" href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design">Compiler_Design</a><time datetime="2023-05-14T02:44:38.000Z" title="发表于 2023-05-14 10:44:38">2023-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/Git/" title="Git"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Git"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/Git/" title="Git">Git</a><time datetime="2023-05-13T12:01:04.000Z" title="发表于 2023-05-13 20:01:04">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="WebSocket"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket">WebSocket</a><time datetime="2023-05-13T04:21:44.000Z" title="发表于 2023-05-13 12:21:44">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Linux_Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A">Linux_Q&amp;A</a><time datetime="2023-05-13T04:13:14.000Z" title="发表于 2023-05-13 12:13:14">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/QT/" title="QT 中的核心类"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="QT 中的核心类"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/QT/" title="QT 中的核心类">QT 中的核心类</a><time datetime="2023-05-13T04:10:21.000Z" title="发表于 2023-05-13 12:10:21">2023-05-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

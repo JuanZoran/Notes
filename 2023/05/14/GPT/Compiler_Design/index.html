@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Compiler_Design | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran请你列举一下编译原理中，最重要的一些算法 Response编译原理是计算机科学中的一个重要领域，它研究如何将高级编程语言转换为目标机器可以执行的低级代码。在编译器的设计与实现过程中，有一些关键算法起到了核心作用。以下是编译原理中一些最重要的算法：  词法分析算法：  有限自动机（Finite Automata，FA） 正则表达式（Regular Expressions，RE）   语法分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler_Design">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/14/GPT/Compiler_Design/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran请你列举一下编译原理中，最重要的一些算法 Response编译原理是计算机科学中的一个重要领域，它研究如何将高级编程语言转换为目标机器可以执行的低级代码。在编译器的设计与实现过程中，有一些关键算法起到了核心作用。以下是编译原理中一些最重要的算法：  词法分析算法：  有限自动机（Finite Automata，FA） 正则表达式（Regular Expressions，RE）   语法分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg">
+<meta property="article:published_time" content="2023-05-14T02:44:38.000Z">
+<meta property="article:modified_time" content="2023-05-14T02:45:00.557Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/14/GPT/Compiler_Design/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Compiler_Design',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-14 10:45:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Compiler_Design</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-14T02:44:38.000Z" title="发表于 2023-05-14 10:44:38">2023-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-14T02:45:00.557Z" title="更新于 2023-05-14 10:45:00">2023-05-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Compiler_Design"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你列举一下编译原理中，最重要的一些算法</p>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>编译原理是计算机科学中的一个重要领域，它研究如何将高级编程语言转换为目标机器可以执行的低级代码。在编译器的设计与实现过程中，有一些关键算法起到了核心作用。以下是编译原理中一些最重要的算法：</p>
+<ol>
+<li><p>词法分析算法：</p>
+<ul>
+<li>有限自动机（Finite Automata，FA）</li>
+<li>正则表达式（Regular Expressions，RE）</li>
+</ul>
+</li>
+<li><p>语法分析算法：</p>
+<ul>
+<li>递归下降分析（Recursive Descent Parsing）</li>
+<li>预测分析（Predictive Parsing）</li>
+<li>自上而下的语法分析算法：<ul>
+<li>LL(1) 分析算法</li>
+</ul>
+</li>
+<li>自下而上的语法分析算法：<ul>
+<li>LR 分析算法（如：LR(0)、SLR(1)、LALR(1)、Canonical LR(1)）</li>
+<li>逐项集族构造算法（Item Set Family Construction）</li>
+<li>语法制导定义（Syntax-directed Definitions）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>语义分析与中间代码生成：</p>
+<ul>
+<li>抽象语法树（Abstract Syntax Tree，AST）</li>
+<li>属性文法（Attribute Grammars）</li>
+<li>三地址代码（Three-address Code，TAC）</li>
+</ul>
+</li>
+<li><p>优化算法：</p>
+<ul>
+<li>数据流分析（Data-flow Analysis）</li>
+<li>常量传播（Constant Propagation）</li>
+<li>活跃变量分析（Live Variable Analysis）</li>
+<li>死代码消除（Dead Code Elimination）</li>
+<li>循环不变式代码外提（Loop-invariant Code Motion）</li>
+<li>全局寄存器分配（Global Register Allocation）</li>
+<li>指针别名分析（Pointer Alias Analysis）</li>
+</ul>
+</li>
+<li><p>代码生成与目标代码优化：</p>
+<ul>
+<li>指令选择（Instruction Selection）</li>
+<li>指令调度（Instruction Scheduling）</li>
+<li>寄存器分配（Register Allocation）</li>
+<li>速度优化（Speed Optimization）</li>
+<li>空间优化（Space Optimization）</li>
+</ul>
+</li>
+</ol>
+<p>这些算法在编译原理中扮演着关键角色，用于实现高效的编译器。不过需要注意的是，这个领域仍在不断发展，未来可能会出现新的算法和技术。</p>
+<hr>
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你用一些形象的类比来向我介绍一下语法分析中的递归下降分析算法是如何工作的</p>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><p>递归下降分析算法可以用一棵分支繁茂的树来形象地类比。想象你站在一棵大树下，你的任务是根据给定的输入字符串，沿着树枝一步步找到正确的路径。</p>
+<ol>
+<li>从树的根节点（即文法的开始符号）开始，你开始探索各个分支。</li>
+<li>每个分支代表一个产生式规则，你需要根据当前输入符号选择合适的分支。</li>
+<li>当你沿着一个分支走下去，你可能会遇到一个非终结符（子节点）。这时，你需要递归地进入这个子节点，继续探索它的分支。</li>
+<li>如果你在某个子节点找到了匹配当前输入符号的分支，就意味着你在正确的路径上。然后你继续按照输入字符串的顺序，探索下一个符号。</li>
+<li>如果在某个节点找不到匹配当前输入符号的分支，就意味着走错了路。这时，你需要回溯到上一个节点，尝试其他分支。</li>
+<li>当你成功走到树的某片叶子节点（即输入符号的最后一个），并且所有输入符号都被匹配，那么恭喜你找到了正确的路径，完成了语法分析。</li>
+</ol>
+<p>在这个过程中，递归下降分析算法一步步解析输入字符串，沿着正确的路径构建语法树。当遇到歧义或错误时，它会尝试其他分支，直到找到正确的解析或确定输入字符串不符合给定文法。这个形象的类比有助于理解递归下降分析算法的工作原理。</p>
+<hr>
+<h1 id="Zoran-2"><a href="#Zoran-2" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你同样使用类比的方法， 来向我介绍一下递归下降分析算法和词法分析阶段的自动机算法的异同</p>
+<h2 id="Response-2"><a href="#Response-2" class="headerlink" title="Response"></a>Response</h2><p>想象一下，你需要在一个复杂的迷宫里找到一条通往终点的路径。这个迷宫有两个主要部分：一个是一个宽阔的大厅，另一个是一个充满分支的密林。宽阔的大厅代表词法分析阶段，而密林则代表递归下降分析算法。</p>
+<p>词法分析阶段的自动机算法可以看作是在宽阔的大厅中快速行走。在这个过程中，你需要根据输入字符串的字符，从一个状态转移到另一个状态。大厅中的每个状态都对应一个词法规则，而每个转移对应一个字符。你的目标是通过正确的状态转移，将输入字符串分割成有意义的单词（词法单元）。当你完成这个过程时，你已经走到了大厅的尽头，准备进入密林。</p>
+<p>递归下降分析算法则是在密林中寻找正确的路径。与宽阔的大厅不同，密林中的路径充满了分支。这些分支代表着语法规则，你需要根据输入的词法单元，选择正确的分支并构建语法树。在这个过程中，你可能需要多次回溯，尝试不同的分支，直到找到正确的解析。</p>
+<p>这两个阶段的主要异同可以总结如下：</p>
+<p>相同之处：</p>
+<ul>
+<li>两者都是编译器的关键组成部分，用于解析和理解输入的源代码。</li>
+<li>两者都需要根据给定的规则（词法规则或语法规则），逐步处理输入的字符串。</li>
+</ul>
+<p>不同之处：</p>
+<ul>
+<li>词法分析阶段关注于识别和分割源代码中的词法单元（如关键字、标识符、运算符等），而递归下降分析算法则关注于根据词法单元构建语法树，以理解源代码的结构和语义。</li>
+<li>词法分析通常使用自动机（如有限自动机）作为主要算法，而递归下降分析则使用递归调用和回溯的方法。</li>
+<li>词法分析的状态转移相对简单，通常只涉及线性的过程；而递归下降分析可能涉及复杂的分支和回溯。</li>
+</ul>
+<p>通过这个类比，你可以更好地理解词法分析阶段的自动机算法和递归下降分析算法在编译过程中的作用和关系。</p>
+<hr>
+<h1 id="Zoran-3"><a href="#Zoran-3" class="headerlink" title="Zoran"></a>Zoran</h1><p>再使用一些形象的类比来向我介绍一下语法分析算法中的预测分析算法是如何工作的</p>
+<h2 id="Response-3"><a href="#Response-3" class="headerlink" title="Response"></a>Response</h2><p>预测分析算法可以用一位在餐厅点餐的顾客来形象地类比。想象你正在一家拥有多种菜品的餐厅就餐，你需要根据菜单（文法规则）和自己的口味（输入字符串）来选择合适的菜品。而餐厅的服务员（预测分析算法）需要根据你的需求，为你提供正确的菜品。</p>
+<ol>
+<li>首先，你查看菜单，开始思考你要点什么（确定文法的开始符号）。</li>
+<li>服务员会观察你的选择，并提前预测你可能会点的菜品（查看预测分析表，根据当前的输入符号和非终结符选择一个产生式）。</li>
+<li>你根据自己的口味，选择一个菜品（输入符号）。</li>
+<li>服务员根据你的选择，给出推荐的菜品组合（应用产生式规则）。</li>
+<li>如果服务员的推荐符合你的口味（产生式规则匹配当前输入符号），你会继续点菜；否则，你会拒绝推荐，并寻找其他菜品（回溯并尝试其他产生式规则）。</li>
+<li>当你点完所有菜品（处理完所有输入符号），并且服务员成功满足你的需求（找到了正确的语法规则序列），那么恭喜你完成了点餐（完成了语法分析）。</li>
+</ol>
+<p>在这个过程中，预测分析算法根据当前的输入符号和非终结符，预测并选择合适的产生式规则。如果预测正确，分析过程继续进行；如果预测错误，分析过程需要回溯并尝试其他规则。这个形象的类比有助于理解预测分析算法的工作原理。</p>
+<hr>
+<h1 id="Zoran-4"><a href="#Zoran-4" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你再用一些形象的类比介绍一下自上而下的语法分析算法 LL(1)分析算法</p>
+<h2 id="Response-4"><a href="#Response-4" class="headerlink" title="Response"></a>Response</h2><p>自上而下的语法分析算法 LL(1)可以类比为一位在图书馆查找书籍的读者。想象你进入了一个巨大的图书馆，你的目标是根据书籍的分类（文法规则）和书名（输入字符串）找到一本特定的书。而图书馆管理员（LL(1)分析算法）需要根据你的需求，帮助你找到正确的书籍。</p>
+<ol>
+<li>首先，你告诉管理员你想找的书籍类别（确定文法的开始符号）。</li>
+<li>管理员会观察你的需求，并提前预测你可能会找的书籍类别（查看 LL(1)分析表，根据当前的输入符号和非终结符选择一个产生式）。</li>
+<li>根据管理员的指引，你进入某个书架区域，并开始寻找你想要的书名（输入符号）。</li>
+<li>如果你在当前区域找到了你想要的书名（产生式规则匹配当前输入符号），说明管理员的指引是正确的；否则，你需要回到管理员处，询问其他书籍类别的建议（回溯并尝试其他产生式规则）。</li>
+<li>当你找到所有想要的书籍（处理完所有输入符号），并且管理员成功满足你的需求（找到了正确的语法规则序列），那么恭喜你完成了书籍查找（完成了语法分析）。</li>
+</ol>
+<p>在这个过程中，LL(1)分析算法根据当前的输入符号和非终结符，预测并选择合适的产生式规则。LL(1)算法的特点是它只需向前看一个输入符号（1 代表向前看的符号个数），就能做出正确的选择。这个形象的类比有助于理解自上而下的语法分析算法 LL(1)的工作原理。</p>
+<hr>
+<h1 id="Zoran-5"><a href="#Zoran-5" class="headerlink" title="Zoran"></a>Zoran</h1><p>再用同样的方式向我介绍一下自下而上的语法分析算法:LR 分析算法</p>
+<h2 id="Response-5"><a href="#Response-5" class="headerlink" title="Response"></a>Response</h2><p>自下而上的语法分析算法 LR 可以类比为组装一辆汽车的生产线。想象你在一个汽车工厂，你的任务是将零部件（输入符号）组装成一辆完整的汽车（语法树）。而工厂中的机器人（LR 分析算法）需要根据生产流程（文法规则），按照正确的顺序组装零部件。</p>
+<ol>
+<li>首先，你拿到了一堆零部件，这些零部件需要按照特定的顺序组装成一辆汽车（确定文法的开始符号）。</li>
+<li>机器人按照生产流程，依次处理每个零部件（处理输入符号）。在这个过程中，机器人会将零部件压入一个栈中。</li>
+<li>当机器人发现栈顶的零部件可以组装成一个子模块（匹配一个产生式规则的右侧），它会将这些零部件组装起来，形成一个更大的组件（应用产生式规则，将右侧替换为左侧的非终结符）。</li>
+<li>机器人会不断地将零部件压入栈中，并检查是否可以进行组装。如果某个时刻，机器人无法继续组装（遇到错误的输入符号），那么生产线将停止，表示输入的零部件顺序有问题（输入字符串不符合给定文法）。</li>
+<li>当所有零部件都被处理完毕，并且机器人成功组装出一辆汽车（构建完成语法树），那么恭喜你完成了汽车的生产（完成了语法分析）。</li>
+</ol>
+<p>在这个过程中，LR 分析算法根据栈顶的状态和当前输入符号，进行移进（将输入符号压入栈）或规约（将栈顶的符号组装成更大的组件）。与自上而下的分析算法相比，自下而上的分析算法是从输入符号开始，逐步构建语法树。这个形象的类比有助于理解自下而上的语法分析算法 LR 的工作原理。</p>
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/Notes/2023/05/13/GPT/Git/" title="Git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Git</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/06/GPT/CPP_QA/" title="C++ Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Git/" title="Git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Git</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Linux_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response"><span class="toc-number">1.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-1"><span class="toc-number">2.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-2"><span class="toc-number">3.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-2"><span class="toc-number">3.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-3"><span class="toc-number">4.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-3"><span class="toc-number">4.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-4"><span class="toc-number">5.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-4"><span class="toc-number">5.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-5"><span class="toc-number">6.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-5"><span class="toc-number">6.1.</span> <span class="toc-text">Response</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Compiler_Design"/></a><div class="content"><a class="title" href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design">Compiler_Design</a><time datetime="2023-05-14T02:44:38.000Z" title="发表于 2023-05-14 10:44:38">2023-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/Git/" title="Git"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Git"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/Git/" title="Git">Git</a><time datetime="2023-05-13T12:01:04.000Z" title="发表于 2023-05-13 20:01:04">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="WebSocket"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket">WebSocket</a><time datetime="2023-05-13T04:21:44.000Z" title="发表于 2023-05-13 12:21:44">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Linux_Q&amp;A"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A">Linux_Q&amp;A</a><time datetime="2023-05-13T04:13:14.000Z" title="发表于 2023-05-13 12:13:14">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/QT/" title="QT 中的核心类"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="QT 中的核心类"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/QT/" title="QT 中的核心类">QT 中的核心类</a><time datetime="2023-05-13T04:10:21.000Z" title="发表于 2023-05-13 12:10:21">2023-05-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
