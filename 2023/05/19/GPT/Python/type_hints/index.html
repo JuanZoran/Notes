@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Python[pyright]类型诊断 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoranpyright 能否通过添加类型注释,来给变量的诊断添加类型信息 Response是的，Pyright 可以通过添加类型注释来给变量的诊断添加类型信息。Pyright 是一个 Python 语言服务器和类型检查器，它可以使用类型注释来提供更准确的代码诊断和更好的自动完成建议。 在 Python 中，你可以使用类型注释来指定变量、函数参数和返回值的类型。这些类型注释可以帮助 Pyright">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python[pyright]类型诊断">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/19/GPT/Python/type_hints/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoranpyright 能否通过添加类型注释,来给变量的诊断添加类型信息 Response是的，Pyright 可以通过添加类型注释来给变量的诊断添加类型信息。Pyright 是一个 Python 语言服务器和类型检查器，它可以使用类型注释来提供更准确的代码诊断和更好的自动完成建议。 在 Python 中，你可以使用类型注释来指定变量、函数参数和返回值的类型。这些类型注释可以帮助 Pyright">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg">
+<meta property="article:published_time" content="2023-05-19T15:41:54.000Z">
+<meta property="article:modified_time" content="2023-05-19T15:42:38.088Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/19/GPT/Python/type_hints/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python[pyright]类型诊断',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 23:42:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">42</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python[pyright]类型诊断</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-19T15:41:54.000Z" title="发表于 2023-05-19 23:41:54">2023-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T15:42:38.088Z" title="更新于 2023-05-19 23:42:38">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python[pyright]类型诊断"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran"></a>Zoran</h1><p>pyright 能否通过添加类型注释,来给变量的诊断添加类型信息</p>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>是的，Pyright 可以通过添加类型注释来给变量的诊断添加类型信息。Pyright 是一个 Python 语言服务器和类型检查器，它可以使用类型注释来提供更准确的代码诊断和更好的自动完成建议。</p>
+<p>在 Python 中，你可以使用类型注释来指定变量、函数参数和返回值的类型。这些类型注释可以帮助 Pyright 更准确地诊断代码中的问题。</p>
+<p>例如，你可以使用类型注释来指定一个变量的类型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x: <span class="built_in">int</span> = <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>x</code> 被注释为一个整数类型。如果你试图给 <code>x</code> 赋值一个非整数类型的值，Pyright 将会发出警告。</p>
+<p>你也可以在函数中使用类型注释来指定参数和返回值的类型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a: <span class="built_in">int</span>, b: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>add</code> 函数的参数 <code>a</code> 和 <code>b</code> 都被注释为整数类型，返回值也被注释为整数类型。如果你试图传递非整数类型的参数给 <code>add</code> 函数，或者试图返回非整数类型的值，Pyright 将会发出警告。</p>
+<hr>
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran"></a>Zoran</h1><p>python 的 os.mkdir 和 os.makedirs 有什么区别</p>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><p><code>os.mkdir</code> 和 <code>os.makedirs</code> 都是 Python 的 <code>os</code> 模块中用于创建目录的函数，但它们之间有一些重要的区别。</p>
+<ol>
+<li><code>os.mkdir(path)</code> ：这个函数用于创建单个目录。如果指定的路径中的父目录不存在，它将会抛出一个 <code>FileNotFoundError</code> 异常。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.mkdir(<span class="string">&quot;/my/directory&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果 “&#x2F;my” 目录不存在，这段代码将会抛出一个异常。</p>
+<ol>
+<li><code>os.makedirs(path)</code> ：这个函数用于递归地创建目录。如果指定的路径中的任何父目录不存在，它将会创建它们。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.makedirs(<span class="string">&quot;/my/directory&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>即使 “&#x2F;my” 目录不存在，这段代码也会成功运行，因为 <code>os.makedirs</code> 将会首先创建 “&#x2F;my” 目录，然后创建 “&#x2F;my&#x2F;directory” 目录。</p>
+<p>所以，如果你只需要创建一个目录，并且你确定父目录已经存在，你可以使用 <code>os.mkdir</code> 。如果你需要创建一个目录，但不确定父目录是否存在，或者你需要创建多级目录，你应该使用 <code>os.makedirs</code> 。</p>
+<hr>
+<h1 id="Zoran-2"><a href="#Zoran-2" class="headerlink" title="Zoran"></a>Zoran</h1><p>os.chdir 和 os.chroot 有什么区别</p>
+<h2 id="Response-2"><a href="#Response-2" class="headerlink" title="Response"></a>Response</h2><p><code>os.chdir</code> 和 <code>os.chroot</code> 都是 Python 的 <code>os</code> 模块中的函数，它们都用于改变当前的工作目录，但它们的用途和行为有所不同。</p>
+<ol>
+<li><code>os.chdir(path)</code> ：这个函数用于改变当前工作目录到指定的路径。这个改变对当前进程及其子进程有效。例如，如果你想改变当前工作目录到 “&#x2F;home&#x2F;user&#x2F;documents”，你可以这样做：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.chdir(<span class="string">&quot;/home/user/documents&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>之后的文件和目录操作（例如，打开文件）将基于新的工作目录。</p>
+<ol>
+<li><code>os.chroot(path)</code> ：这个函数用于改变当前进程的根目录，通常用于在一个隔离的环境中运行进程（例如，一个 chroot 沙盒）。这个改变对当前进程及其子进程有效，并且需要超级用户权限来执行。例如，如果你想改变当前进程的根目录到 “&#x2F;home&#x2F;user&#x2F;documents”，你可以这样做：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.chroot(<span class="string">&quot;/home/user/documents&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，”&#x2F;home&#x2F;user&#x2F;documents” 将成为新的文件系统根目录，进程将无法访问这个目录之外的任何文件或目录。</p>
+<p>总的来说， <code>os.chdir</code> 是用于改变工作目录的，而 <code>os.chroot</code> 是用于创建一个隔离的运行环境的。</p>
+<hr>
+<h1 id="Zoran-3"><a href="#Zoran-3" class="headerlink" title="Zoran"></a>Zoran</h1><p>def fzf() -&gt; (bool, str):<br>return (True, “hello”)</p>
+<p>python 如何定义返回值为元组呢, 以上的定义为什么不通过</p>
+<h2 id="Response-3"><a href="#Response-3" class="headerlink" title="Response"></a>Response</h2><p>你的函数定义应该是完全可以工作的。在 Python 中，可以直接返回一个元组，就像你在 <code>fzf</code> 函数中所做的那样。你不需要特别声明返回值是一个元组，Python 会自动将在 return 语句中用逗号分隔的值视为元组。</p>
+<p>以下是你的函数的一个简单使用示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fzf</span>() -&gt; (<span class="built_in">bool</span>, <span class="built_in">str</span>):</span><br><span class="line">    <span class="keyword">return</span> (<span class="literal">True</span>, <span class="string">&quot;hello&quot;</span>)</span><br><span class="line"></span><br><span class="line">result = fzf()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(result)  <span class="comment"># 输出：(True, &#x27;hello&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>fzf</code> 函数返回一个元组 <code>(True, &quot;hello&quot;)</code> ，并且这个元组被赋值给了变量 <code>result</code> 。</p>
+<p>如果你的代码没有按预期运行，那么可能是其他地方的问题。如果你能提供更多关于你的问题的信息，我可能能够帮助你找到问题的原因。</p>
+<hr>
+<h1 id="Zoran-4"><a href="#Zoran-4" class="headerlink" title="Zoran"></a>Zoran</h1><p>E Tuple expression not allowed in type annotation Pyright<br>  Use Tuple[T1, …, Tn] to indicate a tuple type or Union[T1, T2] to indicate a union type<br>以上是 pyright 的报错, 这是为什么</p>
+<h2 id="Response-4"><a href="#Response-4" class="headerlink" title="Response"></a>Response</h2><p>这个错误信息是因为你在类型注解中使用了 Python 的元组字面量语法 <code>(bool, str)</code> ，而不是 <code>typing.Tuple</code> 。在 Python 类型注解中，元组类型应该使用 <code>typing.Tuple</code> ，这样可以指定元组中每个元素的类型。</p>
+<p>你应该这样定义你的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Tuple</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fzf</span>() -&gt; <span class="type">Tuple</span>[<span class="built_in">bool</span>, <span class="built_in">str</span>]:</span><br><span class="line">    <span class="keyword">return</span> (<span class="literal">True</span>, <span class="string">&quot;hello&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里， <code>Tuple[bool, str]</code> 表示一个元组，其中第一个元素是 <code>bool</code> 类型，第二个元素是 <code>str</code> 类型。现在，你的类型注解应该能通过 <code>pyright</code> 的类型检查了。</p>
+<hr>
+<h1 id="Zoran-5"><a href="#Zoran-5" class="headerlink" title="Zoran"></a>Zoran</h1><p>def fzf(<br>extracmd: List[str] &#x3D; [],<br>input: str|List[str] &#x3D; “”,<br>) -&gt; Tuple[bool, str]:<br>“””Fzf wrapper</p>
+<pre><code>Returns:
+    Tuple[bool, str]: (selected, result)
+&quot;&quot;&quot;
+assert len(input) &gt; 0, &quot;Input cannot be empty&quot;
+if type(input) == List:
+    input = &quot;\n&quot;.join(input)
+
+cmd = [&quot;fzf&quot;, &quot;--print-query&quot;] + extracmd
+process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+result, _ = process.communicate(input=input.encode())
+result = result.decode().strip().split(&quot;\n&quot;)
+
+return (True, result[1]) if len(result) &gt; 1 else (False, result[0])
+</code></pre>
+<p>在这个函数当中, 我希望传入的时候参数可以接收 str 或者一个 List[str], 但是传如 process.communicate 的时候, 我确保了 input 已经是 str 类型, 可是 pyright 还是报错, E Cannot access member “encode” for type “List[str]” Pyright(reportGeneralTypeIssues)<br>Member “encode” is unknown<br>应该如何解决这个问题</p>
+<h2 id="Response-5"><a href="#Response-5" class="headerlink" title="Response"></a>Response</h2><p>在 Python 的类型检查中，它无法自动推断到你在函数内部已经将 <code>input</code> 转化为了 <code>str</code> 类型。所以当你试图在 <code>input</code> 上调用 <code>encode</code> 方法时，类型检查器会警告你，因为它仍然认为 <code>input</code> 可能是 <code>List[str]</code> 类型，而 <code>List[str]</code> 是没有 <code>encode</code> 方法的。</p>
+<p>为了解决这个问题，你可以在将 <code>input</code> 转化为字符串后，为它提供一个新的变量名，这样类型检查器就会知道新的变量是 <code>str</code> 类型的。这里是你的函数的修改版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span>, <span class="type">Union</span>, <span class="type">Tuple</span></span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fzf</span>(<span class="params"></span></span><br><span class="line"><span class="params">    extracmd: <span class="type">List</span>[<span class="built_in">str</span>] = [],</span></span><br><span class="line"><span class="params">    <span class="built_in">input</span>: <span class="type">Union</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">str</span>]] = <span class="string">&quot;&quot;</span>,</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="type">Tuple</span>[<span class="built_in">bool</span>, <span class="built_in">str</span>]:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Fzf wrapper</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        Tuple[bool, str]: (selected, result)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(<span class="built_in">input</span>) &gt; <span class="number">0</span>, <span class="string">&quot;Input cannot be empty&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(<span class="built_in">input</span>, <span class="built_in">list</span>):</span><br><span class="line">        input_str = <span class="string">&quot;\n&quot;</span>.join(<span class="built_in">input</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        input_str = <span class="built_in">input</span></span><br><span class="line"></span><br><span class="line">    cmd = [<span class="string">&quot;fzf&quot;</span>, <span class="string">&quot;--print-query&quot;</span>] + extracmd</span><br><span class="line">    process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)</span><br><span class="line">    result, _ = process.communicate(<span class="built_in">input</span>=input_str.encode())</span><br><span class="line">    result = result.decode().strip().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="literal">True</span>, result[<span class="number">1</span>]) <span class="keyword">if</span> <span class="built_in">len</span>(result) &gt; <span class="number">1</span> <span class="keyword">else</span> (<span class="literal">False</span>, result[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p>在这个修改版本中，我创建了一个新的变量 <code>input_str</code> 来存储转化为字符串后的 <code>input</code> 。当 <code>input</code> 是 <code>List[str]</code> 类型时，使用 <code>&quot;\n&quot;.join(input)</code> 来将它转化为字符串；当 <code>input</code> 是 <code>str</code> 类型时，直接将它赋值给 <code>input_str</code> 。这样，类型检查器就能知道 <code>input_str</code> 一定是 <code>str</code> 类型的，所以在 <code>input_str.encode()</code> 这一行就不会有类型错误了。</p>
+<hr>
+<h1 id="Zoran-6"><a href="#Zoran-6" class="headerlink" title="Zoran"></a>Zoran</h1><p>python 的 type 函数和 isinstance 函数, 有什么区别呢</p>
+<h2 id="Response-6"><a href="#Response-6" class="headerlink" title="Response"></a>Response</h2><p><code>type()</code> 和 <code>isinstance()</code> 函数在 Python 中都用于检查变量的类型，但是它们在一些细节上有所不同：</p>
+<ol>
+<li><p><code>type()</code> 函数： <code>type()</code> 会返回对象的确切类型。如果你有一个对象，你想知道它的确切类型是什么，你可以使用 <code>type()</code> 函数。例如，如果你有一个字符串， <code>type()</code> 会返回 <code>&lt;class &#39;str&#39;&gt;</code> 。但是， <code>type()</code> 并不考虑继承。这就意味着如果你有一个继承自另一个类的类， <code>type()</code> 会返回子类的类型，而不是父类的类型。</p>
+</li>
+<li><p><code>isinstance()</code> 函数： <code>isinstance()</code> 会检查对象是否是给定类型或者给定类型的子类。这就意味着 <code>isinstance()</code> 考虑了继承。如果你有一个继承自另一个类的类，并且你想检查一个对象是否是那个类或者其子类的实例，你应该使用 <code>isinstance()</code> 函数。</p>
+</li>
+</ol>
+<p>以下是一个例子来说明这两者的区别：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyStr</span>(<span class="title class_ inherited__">str</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">my_str = MyStr()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(my_str))  <span class="comment"># 输出： &lt;class &#x27;__main__.MyStr&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(my_str, <span class="built_in">str</span>))  <span class="comment"># 输出： True</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>MyStr</code> 是 <code>str</code> 类的子类。 <code>type(my_str)</code> 返回 <code>&lt;class &#39;__main__.MyStr&#39;&gt;</code> ，这是对象的确切类型。但是 <code>isinstance(my_str, str)</code> 返回 <code>True</code> ，因为 <code>my_str</code> 是 <code>str</code> 类或其子类的实例。</p>
+<p>总的来说，如果你想检查一个对象是否是特定类型或者那个类型的子类的实例，你应该使用 <code>isinstance()</code> 。如果你想知道对象的确切类型，你可以使用 <code>type()</code> 。</p>
+<hr>
+<h1 id="Zoran-7"><a href="#Zoran-7" class="headerlink" title="Zoran"></a>Zoran</h1><p>在 python 中我希望获取一个路径下的所有目录名称, 而不需要文件名, 不只是第一级目录下的目录, 我应该怎么做呢</p>
+<h2 id="Response-7"><a href="#Response-7" class="headerlink" title="Response"></a>Response</h2><p>你可以使用 Python 的 <code>os</code> 和 <code>os.path</code> 模块来遍历文件系统。下面的函数会递归地获取指定路径下的所有目录名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_directories</span>(<span class="params">path</span>):</span><br><span class="line">    directories = []</span><br><span class="line"></span><br><span class="line">    <span class="comment"># os.walk() 会生成一个三元组 (dirpath, dirnames, filenames)</span></span><br><span class="line">    <span class="keyword">for</span> dirpath, dirnames, filenames <span class="keyword">in</span> os.walk(path):</span><br><span class="line">        <span class="keyword">for</span> dirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            directories.append(os.path.join(dirpath, dirname))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> directories</span><br></pre></td></tr></table></figure>
+
+<p>在这个函数中， <code>os.walk(path)</code> 会遍历 <code>path</code> 指定的目录，以及所有的子目录，并且为每个目录生成一个三元组 <code>(dirpath, dirnames, filenames)</code> 。 <code>dirpath</code> 是当前目录的路径， <code>dirnames</code> 是当前目录下的所有子目录的名称， <code>filenames</code> 是当前目录下的所有文件的名称。</p>
+<p>对于每个目录，函数都会遍历 <code>dirnames</code> 列表，然后使用 <code>os.path.join(dirpath, dirname)</code> 来获取子目录的完整路径，并将其添加到 <code>directories</code> 列表中。</p>
+<p>这个函数返回的是所有子目录的完整路径。如果你只想要目录的名称，而不是完整路径，你可以将 <code>os.path.join(dirpath, dirname)</code> 替换为 <code>dirname</code> 。</p>
+<hr>
+<h1 id="Zoran-8"><a href="#Zoran-8" class="headerlink" title="Zoran"></a>Zoran</h1><p>def handle_new(blog_root: Path): # Create new blog post<br>categories &#x3D; [d.name for d in blog_root.glob(“*”) if d.is_dir()]<br>return print(categories)<br>我希望获得 blog_root 的最后一级目录的名称, 但是不要包括自身, 应该如何做呢</p>
+<h2 id="Response-8"><a href="#Response-8" class="headerlink" title="Response"></a>Response</h2><p>你可以使用 <code>Path.glob()</code> 函数配合一个更具体的匹配模式来实现这个需求。例如，你可以使用 <code>&quot;*/*&quot;</code> 来匹配 <code>blog_root</code> 下一级的所有目录：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handle_new</span>(<span class="params">blog_root: Path</span>):</span><br><span class="line">    <span class="comment"># Create new blog post</span></span><br><span class="line">    categories = [d.name <span class="keyword">for</span> d <span class="keyword">in</span> blog_root.glob(<span class="string">&quot;*/*&quot;</span>) <span class="keyword">if</span> d.is_dir()]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">print</span>(categories)</span><br></pre></td></tr></table></figure>
+
+<p>在这个代码中， <code>&quot;*/*&quot;</code> 表示匹配 <code>blog_root</code> 下一级的所有目录。 <code>glob()</code> 函数返回的是所有匹配的路径，然后你可以用 <code>is_dir()</code> 函数来检查每个路径是否是目录。对于每个目录，你可以使用 <code>name</code> 属性来获取它的名称。</p>
+<p>如果你只想获取最后一级目录，而不包括 <code>blog_root</code> 自身，这个代码应该能满足你的需求。</p>
+<hr>
+<h1 id="Zoran-9"><a href="#Zoran-9" class="headerlink" title="Zoran"></a>Zoran</h1><p>我希望获取的目录为相对目录的完整名字, 同时不只是第一级目录的子目录, 应该如何做呢</p>
+<h2 id="Response-9"><a href="#Response-9" class="headerlink" title="Response"></a>Response</h2><p>如果你希望获取相对于 <code>blog_root</code> 的所有子目录的相对路径，你可以将 <code>Path.glob()</code> 的结果与 <code>blog_root</code> 进行比较来得到相对路径。你可以使用 <code>Path.relative_to()</code> 方法来实现这个功能：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handle_new</span>(<span class="params">blog_root: Path</span>):</span><br><span class="line">    <span class="comment"># Create new blog post</span></span><br><span class="line">    categories = [d.relative_to(blog_root) <span class="keyword">for</span> d <span class="keyword">in</span> blog_root.glob(<span class="string">&quot;**/*&quot;</span>) <span class="keyword">if</span> d.is_dir()]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">print</span>(categories)</span><br></pre></td></tr></table></figure>
+
+<p>在这个代码中， <code>&quot;**/*&quot;</code> 表示匹配 <code>blog_root</code> 下所有级别的所有目录。然后，对于每个匹配的目录 <code>d</code> ，你可以使用 <code>d.relative_to(blog_root)</code> 来获取 <code>d</code> 相对于 <code>blog_root</code> 的路径。</p>
+<p>这个代码会输出所有子目录的相对路径，这些路径是相对于 <code>blog_root</code> 的。注意，这些路径不会包括 <code>blog_root</code> 自身。</p>
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/19/GPT/Tools/fzf/" title="fzf的使用"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">fzf的使用</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/19/GPT/Design/state_machine/" title="状态机模型"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">状态机模型</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-14</div><div class="title">Compiler_Design</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Git/" title="Git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Git</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Linux_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">42</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response"><span class="toc-number">1.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-1"><span class="toc-number">2.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-2"><span class="toc-number">3.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-2"><span class="toc-number">3.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-3"><span class="toc-number">4.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-3"><span class="toc-number">4.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-4"><span class="toc-number">5.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-4"><span class="toc-number">5.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-5"><span class="toc-number">6.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-5"><span class="toc-number">6.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-6"><span class="toc-number">7.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-6"><span class="toc-number">7.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-7"><span class="toc-number">8.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-7"><span class="toc-number">8.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-8"><span class="toc-number">9.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-8"><span class="toc-number">9.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-9"><span class="toc-number">10.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-9"><span class="toc-number">10.1.</span> <span class="toc-text">Response</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Tools/lisence/" title="开源许可证"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="开源许可证"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Tools/lisence/" title="开源许可证">开源许可证</a><time datetime="2023-05-19T15:52:02.000Z" title="发表于 2023-05-19 23:52:02">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/C++/concept/" title="C++ concept泛型约束"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="C++ concept泛型约束"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/C++/concept/" title="C++ concept泛型约束">C++ concept泛型约束</a><time datetime="2023-05-19T15:49:56.000Z" title="发表于 2023-05-19 23:49:56">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Design/model/" title="主流编程模型对比"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="主流编程模型对比"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Design/model/" title="主流编程模型对比">主流编程模型对比</a><time datetime="2023-05-19T15:48:35.000Z" title="发表于 2023-05-19 23:48:35">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Tools/fzf/" title="fzf的使用"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="fzf的使用"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Tools/fzf/" title="fzf的使用">fzf的使用</a><time datetime="2023-05-19T15:43:04.000Z" title="发表于 2023-05-19 23:43:04">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Python/type_hints/" title="Python[pyright]类型诊断"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Python[pyright]类型诊断"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Python/type_hints/" title="Python[pyright]类型诊断">Python[pyright]类型诊断</a><time datetime="2023-05-19T15:41:54.000Z" title="发表于 2023-05-19 23:41:54">2023-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

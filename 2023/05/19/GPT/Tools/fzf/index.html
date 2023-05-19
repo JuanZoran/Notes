@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>fzf的使用 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran请学习以下文档, 然后回答我 fzf 能不能实现当没有匹配选项的时候按下 enter, 返回用户当时输入的文本https:&#x2F;&#x2F;github.com&#x2F;junegunn&#x2F;fzf ResponseFrom the documentation of fzf on GitHub, it does not explicitly mention the feature you’re asking ab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fzf的使用">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/19/GPT/Tools/fzf/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran请学习以下文档, 然后回答我 fzf 能不能实现当没有匹配选项的时候按下 enter, 返回用户当时输入的文本https:&#x2F;&#x2F;github.com&#x2F;junegunn&#x2F;fzf ResponseFrom the documentation of fzf on GitHub, it does not explicitly mention the feature you’re asking ab">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg">
+<meta property="article:published_time" content="2023-05-19T15:43:04.000Z">
+<meta property="article:modified_time" content="2023-05-19T15:43:39.668Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="fzf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/19/GPT/Tools/fzf/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'fzf的使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 23:43:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">42</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">fzf的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-19T15:43:04.000Z" title="发表于 2023-05-19 23:43:04">2023-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T15:43:39.668Z" title="更新于 2023-05-19 23:43:39">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Tools/">Tools</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="fzf的使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran"></a>Zoran</h1><p>请学习以下文档, 然后回答我 fzf 能不能实现当没有匹配选项的时候按下 enter, 返回用户当时输入的文本<br><a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf">https://github.com/junegunn/fzf</a></p>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>From the documentation of <code>fzf</code> on GitHub, it does not explicitly mention the feature you’re asking about - returning the user’s input text when there are no matching options and pressing enter. <code>fzf</code> is a powerful command-line fuzzy finder that can be used with any list, but its behavior is typically to select from the provided list. If there are no matches, pressing enter usually does not return any result.</p>
+<p>However, depending on your specific use case, you might be able to achieve this functionality by using a custom script or function that checks if <code>fzf</code> returns an empty result, and if so, returns the original input instead.</p>
+<hr>
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran"></a>Zoran</h1><p>可以如何实现这样的功能呢</p>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><p>要实现这样的功能，你可能需要编写一个自定义的脚本或函数。以下是一个简单的 Bash 脚本示例，它使用 <code>fzf</code> 来获取用户的选择，如果没有匹配的选项，它将返回用户的输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取用户输入</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;请输入你的选择: &quot;</span> user_input</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 fzf 获取用户的选择</span></span><br><span class="line">selected_option=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$user_input</span>&quot;</span> | fzf)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果 fzf 没有返回结果（即没有匹配的选项），则返回用户的输入</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$selected_option</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$user_input</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$selected_option</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>这个脚本首先提示用户输入他们的选择，然后使用 <code>fzf</code> 来处理这个输入。如果 <code>fzf</code> 返回一个空结果（这意味着没有匹配的选项），脚本将输出用户原始的输入。否则，它将输出 <code>fzf</code> 的结果。</p>
+<p>请注意，这只是一个基本的示例，你可能需要根据你的具体需求来修改和扩展这个脚本。</p>
+<hr>
+<h1 id="Zoran-2"><a href="#Zoran-2" class="headerlink" title="Zoran"></a>Zoran</h1><p>可以如何使用 fzf –print-query 来改写这一个函数呢:<br>def handle_new(blog_root: Path): # Create new blog post<br>categories &#x3D; [d.name for d in blog_root.glob(“*”) if d.is_dir()]</p>
+<pre><code># Generate categories string for fzf
+categories_str = &quot;\n&quot;.join(categories)
+tmp = &quot;/tmp/temp_categories.txt&quot;
+with open(tmp, &quot;w&quot;) as temp_file:
+    temp_file.write(categories_str)
+
+cmd = f&quot;cat &#123;tmp&#125; | fzf --preview &#39;ls &#123;blog_root&#125;/&#123;&#123;&#125;&#125;&#39;&quot;
+selected_category = os.popen(cmd).read().strip()
+os.remove(tmp)
+
+if selected_category:
+    category = selected_category
+else:
+    category = click.prompt(&quot;Enter the category&quot;, type=str)
+    while category not in categories:
+        choice = click.prompt(
+            f&quot;Category [&#123;category&#125;] does not exist. Do you want to create it? (y/n)&quot;,
+            type=str,
+        )
+        if choice.lower() == &quot;y&quot;:
+            os.makedirs(blog_root / category)  # Recursively create the directory
+            categories.append(category)
+        else:
+            category = click.prompt(&quot;Enter the category&quot;, type=str)
+
+title: str = click.prompt(&quot;Enter the blog post title&quot;, type=str)
+assert not title.endswith(&quot;/&quot;), &quot;Title cannot end with /&quot;
+
+safe_title = &quot;&quot;.join(c if c.isalnum() or c.isspace() else &quot;_&quot; for c in title)
+file_name = f&quot;&#123;safe_title&#125;.md&quot;
+file_path = blog_root / category / file_name
+
+front_matter = f&quot;&quot;&quot;
+</code></pre>
+<hr>
+<p>title: {title}<br>date: {datetime.now().strftime(‘%Y-%m-%d %H:%M:%S’)}<br>categories:</p>
+<ul>
+<li>{category}<br>tags:</li>
+<li>编程</li>
+</ul>
+<hr>
+<p>“””<br>with open(file_path, “w”) as f:<br>f.write(front_matter)</p>
+<pre><code>os.system(f&quot;nvim -c &#39;+normal! Gzt&#39; &#123;file_path&#125;&quot;)
+</code></pre>
+<h2 id="Response-2"><a href="#Response-2" class="headerlink" title="Response"></a>Response</h2><p>你可以使用 <code>fzf</code> 的 <code>--print-query</code> 选项来获取用户的输入。当使用 <code>--print-query</code> 选项时， <code>fzf</code> 会在输出中首先打印查询字符串。你可以使用这个查询字符串来实现你的需求。</p>
+<p>以下是你的函数的修改版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">handle_new</span>(<span class="params">blog_root: Path</span>):</span><br><span class="line">    <span class="comment"># Create new blog post</span></span><br><span class="line">    categories = [d.name <span class="keyword">for</span> d <span class="keyword">in</span> blog_root.glob(<span class="string">&quot;*&quot;</span>) <span class="keyword">if</span> d.is_dir()]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Generate categories string for fzf</span></span><br><span class="line">    categories_str = <span class="string">&quot;\n&quot;</span>.join(categories)</span><br><span class="line">    tmp = <span class="string">&quot;/tmp/temp_categories.txt&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(tmp, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> temp_file:</span><br><span class="line">        temp_file.write(categories_str)</span><br><span class="line"></span><br><span class="line">    cmd = <span class="string">f&quot;cat <span class="subst">&#123;tmp&#125;</span> | fzf --print-query --preview &#x27;ls <span class="subst">&#123;blog_root&#125;</span>/&#123;&#123;&#125;&#125;&#x27;&quot;</span></span><br><span class="line">    result = os.popen(cmd).read().strip().split(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    os.remove(tmp)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(result) &gt; <span class="number">1</span>:</span><br><span class="line">        selected_category = result[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        selected_category = result[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> selected_category <span class="keyword">in</span> categories:</span><br><span class="line">        category = selected_category</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        category = click.prompt(<span class="string">&quot;Enter the category&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">        <span class="keyword">while</span> category <span class="keyword">not</span> <span class="keyword">in</span> categories:</span><br><span class="line">            choice = click.prompt(</span><br><span class="line">                <span class="string">f&quot;Category [<span class="subst">&#123;category&#125;</span>] does not exist. Do you want to create it? (y/n)&quot;</span>,</span><br><span class="line">                <span class="built_in">type</span>=<span class="built_in">str</span>,</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">if</span> choice.lower() == <span class="string">&quot;y&quot;</span>:</span><br><span class="line">                os.makedirs(blog_root / category)  <span class="comment"># Recursively create the directory</span></span><br><span class="line">                categories.append(category)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                category = click.prompt(<span class="string">&quot;Enter the category&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line">    title: <span class="built_in">str</span> = click.prompt(<span class="string">&quot;Enter the blog post title&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">    <span class="keyword">assert</span> <span class="keyword">not</span> title.endswith(<span class="string">&quot;/&quot;</span>), <span class="string">&quot;Title cannot end with /&quot;</span></span><br><span class="line"></span><br><span class="line">    safe_title = <span class="string">&quot;&quot;</span>.join(c <span class="keyword">if</span> c.isalnum() <span class="keyword">or</span> c.isspace() <span class="keyword">else</span> <span class="string">&quot;_&quot;</span> <span class="keyword">for</span> c <span class="keyword">in</span> title)</span><br><span class="line">    file_name = <span class="string">f&quot;<span class="subst">&#123;safe_title&#125;</span>.md&quot;</span></span><br><span class="line">    file_path = blog_root / category / file_name</span><br><span class="line"></span><br><span class="line">    front_matter = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string">title: <span class="subst">&#123;title&#125;</span></span></span><br><span class="line"><span class="string">date: <span class="subst">&#123;datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)&#125;</span></span></span><br><span class="line"><span class="string">categories:</span></span><br><span class="line"><span class="string">- <span class="subst">&#123;category&#125;</span></span></span><br><span class="line"><span class="string">tags:</span></span><br><span class="line"><span class="string">- 编程</span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(front_matter)</span><br><span class="line"></span><br><span class="line">    os.system(<span class="string">f&quot;nvim -c &#x27;+normal! Gzt&#x27; <span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在这个修改版本中，我添加了 <code>--print-query</code> 选项到 <code>fzf</code> 命令中。然后，我将 <code>fzf</code> 的输出分割成多行，并检查结果的长度。如果长度大于 1，那么说明 <code>fzf</code> 找到了匹配的选项，我将选择的类别设置为第二行（即匹配的选项）。如果长度等于 1，那么说明 <code>fzf</code> 没有找到匹配的选项，我将选择的类别设置为用户的输入（即第一行）。</p>
+<hr>
+<h1 id="Zoran-3"><a href="#Zoran-3" class="headerlink" title="Zoran"></a>Zoran</h1><pre><code># Generate categories string for fzf
+categories_str = &quot;\n&quot;.join(categories)
+tmp = &quot;/tmp/temp_categories.txt&quot;
+with open(tmp, &quot;w&quot;) as temp_file:
+    temp_file.write(categories_str)
+
+cmd = f&quot;cat &#123;tmp&#125; | fzf --preview &#39;ls &#123;blog_root&#125;/&#123;&#123;&#125;&#125;&#39;&quot;
+selected_category = os.popen(cmd).read().strip()
+os.remove(tmp)
+</code></pre>
+<p>这一部分, 可以不先创建文件再删掉吗, 而是通过 stdin 传入给 fzf, 省去了临时文件和 cat 的调用</p>
+<h2 id="Response-3"><a href="#Response-3" class="headerlink" title="Response"></a>Response</h2><p>当然可以，你可以直接将字符串传递给 <code>fzf</code> ，而不是先写入文件。这可以通过使用 Python 的 <code>subprocess</code> 模块来实现。以下是你的代码的修改版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handle_new</span>(<span class="params">blog_root: Path</span>):</span><br><span class="line">    <span class="comment"># Create new blog post</span></span><br><span class="line">    categories = [d.name <span class="keyword">for</span> d <span class="keyword">in</span> blog_root.glob(<span class="string">&quot;*&quot;</span>) <span class="keyword">if</span> d.is_dir()]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Generate categories string for fzf</span></span><br><span class="line">    categories_str = <span class="string">&quot;\n&quot;</span>.join(categories)</span><br><span class="line"></span><br><span class="line">    cmd = [<span class="string">&quot;fzf&quot;</span>, <span class="string">&quot;--print-query&quot;</span>, <span class="string">&quot;--preview&quot;</span>, <span class="string">f&quot;ls <span class="subst">&#123;blog_root&#125;</span>/&#123;&#123;&#125;&#125;&quot;</span>]</span><br><span class="line">    process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)</span><br><span class="line">    selected_category, _ = process.communicate(<span class="built_in">input</span>=categories_str.encode())</span><br><span class="line">    selected_category = selected_category.decode().strip().split(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(selected_category) &gt; <span class="number">1</span>:</span><br><span class="line">        selected_category = selected_category[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        selected_category = selected_category[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> selected_category <span class="keyword">in</span> categories:</span><br><span class="line">        category = selected_category</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        category = click.prompt(<span class="string">&quot;Enter the category&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">        <span class="keyword">while</span> category <span class="keyword">not</span> <span class="keyword">in</span> categories:</span><br><span class="line">            choice = click.prompt(</span><br><span class="line">                <span class="string">f&quot;Category [<span class="subst">&#123;category&#125;</span>] does not exist. Do you want to create it? (y/n)&quot;</span>,</span><br><span class="line">                <span class="built_in">type</span>=<span class="built_in">str</span>,</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">if</span> choice.lower() == <span class="string">&quot;y&quot;</span>:</span><br><span class="line">                os.makedirs(blog_root / category)  <span class="comment"># Recursively create the directory</span></span><br><span class="line">                categories.append(category)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                category = click.prompt(<span class="string">&quot;Enter the category&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line">    title: <span class="built_in">str</span> = click.prompt(<span class="string">&quot;Enter the blog post title&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">    <span class="keyword">assert</span> <span class="keyword">not</span> title.endswith(<span class="string">&quot;/&quot;</span>), <span class="string">&quot;Title cannot end with /&quot;</span></span><br><span class="line"></span><br><span class="line">    safe_title = <span class="string">&quot;&quot;</span>.join(c <span class="keyword">if</span> c.isalnum() <span class="keyword">or</span> c.isspace() <span class="keyword">else</span> <span class="string">&quot;_&quot;</span> <span class="keyword">for</span> c <span class="keyword">in</span> title)</span><br><span class="line">    file_name = <span class="string">f&quot;<span class="subst">&#123;safe_title&#125;</span>.md&quot;</span></span><br><span class="line">    file_path = blog_root / category / file_name</span><br><span class="line"></span><br><span class="line">    front_matter = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string">title: <span class="subst">&#123;title&#125;</span></span></span><br><span class="line"><span class="string">date: <span class="subst">&#123;datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)&#125;</span></span></span><br><span class="line"><span class="string">categories:</span></span><br><span class="line"><span class="string">- <span class="subst">&#123;category&#125;</span></span></span><br><span class="line"><span class="string">tags:</span></span><br><span class="line"><span class="string">- 编程</span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(front_matter)</span><br><span class="line"></span><br><span class="line">    os.system(<span class="string">f&quot;nvim -c &#x27;+normal! Gzt&#x27; <span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在这个修改版本中，我使用 <code>subprocess.Popen</code> 来启动 <code>fzf</code> 进程，并通过 <code>stdin</code> 传递类别字符串。然后，我使用 <code>communicate</code> 方法来发送输入并获取输出。这样就避免了创建和删除临时文件的需要。</p>
+<hr>
+<h1 id="Zoran-4"><a href="#Zoran-4" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你学习一下 fzf 的文档, 稍后我将对文档内容进行提问<br><a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf#using-the-finder">https://github.com/junegunn/fzf#using-the-finder</a></p>
+<h2 id="Response-4"><a href="#Response-4" class="headerlink" title="Response"></a>Response</h2><p>“fzf” is a general-purpose command-line fuzzy finder. It’s an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc. It’s portable, fast, and comes with a comprehensive feature set. It also includes a Vim&#x2F;Neovim plugin, key bindings, and fuzzy auto-completion.</p>
+<p>The “fzf” project consists of the following components:</p>
+<ul>
+<li>fzf executable</li>
+<li>fzf-tmux script for launching fzf in a tmux pane</li>
+<li>Shell extensions</li>
+<li>Key bindings (CTRL-T, CTRL-R, and ALT-C) for bash, zsh, fish</li>
+<li>Fuzzy auto-completion for bash, zsh</li>
+<li>Vim&#x2F;Neovim plugin</li>
+</ul>
+<p>“fzf” can be installed using Homebrew, git, or various Linux package managers. It can also be used as a Vim plugin.</p>
+<p>“fzf” will launch an interactive finder, read the list from STDIN, and write the selected item to STDOUT. It can be used with the “find” command to fetch a list of files, or it can turn itself into a different process with the “–bind” option.</p>
+<p>“fzf” supports a variety of key bindings, including moving the cursor up and down, selecting items, and exiting. It also supports multi-select mode, Emacs style key bindings, and mouse interactions.</p>
+<p>“fzf” also provides a preview window when the “–preview” option is set, automatically starting an external process with the current line as the argument and showing the result in a split window.</p>
+<p>Here are some questions to consider:</p>
+<ol>
+<li>How does “fzf” improve the command-line user experience?</li>
+<li>What are some potential use cases for the “fzf” command-line fuzzy finder?</li>
+<li>How does the preview window feature in “fzf” enhance its functionality?</li>
+</ol>
+<hr>
+<h1 id="Zoran-5"><a href="#Zoran-5" class="headerlink" title="Zoran"></a>Zoran</h1><p>介绍一下刚刚让你学习的文档中, 有关于”3. Interactive ripgrep integration”的部分</p>
+<h2 id="Response-5"><a href="#Response-5" class="headerlink" title="Response"></a>Response</h2><p>“Interactive ripgrep integration” 是 fzf 的一个高级特性，它允许你在 fzf 中动态地执行 ripgrep 搜索。</p>
+<p>以下是一个示例，它使用 fzf 作为 ripgrep 的选择器接口。在这个示例中，我们将 reload 动作绑定到 change 事件，所以每次你在 fzf 中输入时，ripgrep 进程都会用更新的查询字符串（由占位符表达式 {q} 表示）重新启动。此外，我们使用了 –disabled 选项，所以 fzf 不会执行任何二次过滤。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">INITIAL_QUERY=<span class="string">&quot;&quot;</span></span><br><span class="line">RG_PREFIX=<span class="string">&quot;rg --column --line-number --no-heading --color=always --smart-case &quot;</span></span><br><span class="line">FZF_DEFAULT_COMMAND=<span class="string">&quot;<span class="variable">$RG_PREFIX</span> &#x27;<span class="variable">$INITIAL_QUERY</span>&#x27;&quot;</span> \</span><br><span class="line">  fzf --<span class="built_in">bind</span> <span class="string">&quot;change:reload:<span class="variable">$RG_PREFIX</span> &#123;q&#125; || true&quot;</span> \</span><br><span class="line">      --ansi --disabled --query <span class="string">&quot;<span class="variable">$INITIAL_QUERY</span>&quot;</span> \</span><br><span class="line">      --height=50% --layout=reverse</span><br></pre></td></tr></table></figure>
+
+<p>如果 ripgrep 没有找到任何匹配项，它将以非零退出状态退出，fzf 会对此发出警告。为了抑制警告消息，我们在命令后添加了 || true，以便它总是以 0 退出。</p>
+<p>这个功能可以让你在使用 fzf 的同时，动态地执行 ripgrep 搜索，大大提高了搜索的灵活性和效率。</p>
+<hr>
+<h1 id="Zoran-6"><a href="#Zoran-6" class="headerlink" title="Zoran"></a>Zoran</h1><p>再介绍一下有关于”Preview window”的部分, 我应该如何使用这个特性</p>
+<h2 id="Response-6"><a href="#Response-6" class="headerlink" title="Response"></a>Response</h2><p>“fzf” 的 “Preview window” 是一个非常有用的特性，它可以让你在选择项时预览相关内容。</p>
+<p>当你设置了 “–preview” 选项时，fzf 会自动启动一个外部进程，并将当前行作为参数，然后在一个分割窗口中显示结果。你可以使用任何可以接受标准输入的命令作为预览命令。</p>
+<p>例如，你可以使用 “cat” 命令预览文件内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fzf --preview <span class="string">&#x27;cat &#123;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，”{}” 是一个占位符，它会被替换为当前选中的行。你也可以使用 “{+}” 来表示所有选中的行。</p>
+<p>你还可以使用 “–preview-window” 选项来自定义预览窗口的大小和位置。例如，你可以设置预览窗口在右侧，占据 50% 的宽度：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fzf --preview <span class="string">&#x27;cat &#123;&#125;&#x27;</span> --preview-window right:50%</span><br></pre></td></tr></table></figure>
+
+<p>此外，你还可以使用 “–bind” 选项来绑定键到 “toggle-preview” 命令，这样你就可以在需要时打开或关闭预览窗口。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fzf --preview <span class="string">&#x27;cat &#123;&#125;&#x27;</span> --<span class="built_in">bind</span> <span class="string">&#x27;?:toggle-preview&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，按 “?” 键将会切换预览窗口的显示和隐藏。</p>
+<p>总的来说，”Preview window” 特性可以让你在使用 fzf 时更好地理解和选择你的选项。</p>
+<hr>
+<h1 id="Zoran-7"><a href="#Zoran-7" class="headerlink" title="Zoran"></a>Zoran</h1><p>为什么”Turning into a different process”这一节提到了 fzf –print0 | xargs -0 -o vim instead of vim “$(fzf)”</p>
+<h2 id="Response-7"><a href="#Response-7" class="headerlink" title="Response"></a>Response</h2><p>“Turning into a different process” 是 fzf 的一个高级特性，它允许 fzf 将自身转变为一个不同的进程。这在某些情况下可以提供更好的用户体验。</p>
+<p>在 “fzf –print0 | xargs -0 -o vim” 和 “vim $(fzf)” 两种方式中，前者的优势在于它允许 vim 在 fzf 选择器仍然打开的情况下启动。这意味着你可以在 vim 中编辑文件，然后关闭 vim 返回到 fzf 选择器，而不需要重新启动 fzf。这在你需要在多个文件之间切换时非常有用。</p>
+<p>而 “vim $(fzf)” 命令会在你选择文件后关闭 fzf，然后启动 vim。当你关闭 vim 后，如果你想再次选择一个文件，你需要重新启动 fzf。</p>
+<p>因此，”fzf –print0 | xargs -0 -o vim” 提供了一种更流畅的工作流，允许你在不关闭 fzf 的情况下在多个文件之间切换。</p>
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/Notes/tags/fzf/">fzf</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/19/GPT/Design/model/" title="主流编程模型对比"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">主流编程模型对比</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/19/GPT/Python/type_hints/" title="Python[pyright]类型诊断"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python[pyright]类型诊断</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-14</div><div class="title">Compiler_Design</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Git/" title="Git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Git</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Linux_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">42</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response"><span class="toc-number">1.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-1"><span class="toc-number">2.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-2"><span class="toc-number">3.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-2"><span class="toc-number">3.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-3"><span class="toc-number">4.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-3"><span class="toc-number">4.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-4"><span class="toc-number">5.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-4"><span class="toc-number">5.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-5"><span class="toc-number">6.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-5"><span class="toc-number">6.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-6"><span class="toc-number">7.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-6"><span class="toc-number">7.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-7"><span class="toc-number">8.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-7"><span class="toc-number">8.1.</span> <span class="toc-text">Response</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Tools/lisence/" title="开源许可证"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="开源许可证"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Tools/lisence/" title="开源许可证">开源许可证</a><time datetime="2023-05-19T15:52:02.000Z" title="发表于 2023-05-19 23:52:02">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/C++/concept/" title="C++ concept泛型约束"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="C++ concept泛型约束"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/C++/concept/" title="C++ concept泛型约束">C++ concept泛型约束</a><time datetime="2023-05-19T15:49:56.000Z" title="发表于 2023-05-19 23:49:56">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Design/model/" title="主流编程模型对比"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="主流编程模型对比"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Design/model/" title="主流编程模型对比">主流编程模型对比</a><time datetime="2023-05-19T15:48:35.000Z" title="发表于 2023-05-19 23:48:35">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Tools/fzf/" title="fzf的使用"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="fzf的使用"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Tools/fzf/" title="fzf的使用">fzf的使用</a><time datetime="2023-05-19T15:43:04.000Z" title="发表于 2023-05-19 23:43:04">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Python/type_hints/" title="Python[pyright]类型诊断"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Python[pyright]类型诊断"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Python/type_hints/" title="Python[pyright]类型诊断">Python[pyright]类型诊断</a><time datetime="2023-05-19T15:41:54.000Z" title="发表于 2023-05-19 23:41:54">2023-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
