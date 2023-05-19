@@ -1,0 +1,391 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Rust中的宏 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran: Rust 的标准库中有哪些常用的宏， 请你按照刚刚让你介绍标准库容器的方式来向我介绍  ChatGPT: Rust 标准库中有许多有用的宏。以下是一些常用宏的介绍：   println!宏说明：println! 宏用于向标准输出（stdout）打印格式化字符串和换行符。  代码示例： 123456fn main() &amp;#123;    let name &#x3D; &quot;Alice&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust中的宏">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/19/GPT/Rust/macro/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="Zoran: Rust 的标准库中有哪些常用的宏， 请你按照刚刚让你介绍标准库容器的方式来向我介绍  ChatGPT: Rust 标准库中有许多有用的宏。以下是一些常用宏的介绍：   println!宏说明：println! 宏用于向标准输出（stdout）打印格式化字符串和换行符。  代码示例： 123456fn main() &amp;#123;    let name &#x3D; &quot;Alice&amp;q">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg">
+<meta property="article:published_time" content="2023-05-19T15:26:56.000Z">
+<meta property="article:modified_time" content="2023-05-19T15:28:28.408Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/19/GPT/Rust/macro/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Rust中的宏',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 23:28:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Rust中的宏</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-19T15:26:56.000Z" title="发表于 2023-05-19 23:26:56">2023-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T15:28:28.408Z" title="更新于 2023-05-19 23:28:28">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Rust/">Rust</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Rust中的宏"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
+<li>Rust 的标准库中有哪些常用的宏， 请你按照刚刚让你介绍标准库容器的方式来向我介绍</li>
+</ul>
+<h2 id="ChatGPT"><a href="#ChatGPT" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
+<li>Rust 标准库中有许多有用的宏。以下是一些常用宏的介绍：</li>
+</ul>
+<ol>
+<li>println!<br>宏说明：<code>println!</code> 宏用于向标准输出（stdout）打印格式化字符串和换行符。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">name</span> = <span class="string">&quot;Alice&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">age</span> = <span class="number">30</span>;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; is &#123;&#125; years old&quot;</span>, name, age);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码讲解：在这个示例中，我们使用 <code>println!</code> 宏将一个格式化字符串和两个变量（<code>name</code> 和 <code>age</code>）打印到标准输出。<code>&#123;&#125;</code> 是占位符，它将在运行时被变量值替换。</p>
+<p>使用场景：<code>println!</code> 宏常用于输出调试信息、程序运行状态等。</p>
+<p>注意事项：<code>println!</code> 宏是线程安全的，但如果需要更高性能的输出，可以考虑使用 <code>print!</code> 宏或其他低级 I&#x2F;O 函数。</p>
+<ol>
+<li>assert!<br>宏说明：<code>assert!</code> 宏用于在调试构建中验证一个表达式的布尔值。如果表达式为 <code>false</code>，则会引发 panic。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">assert!</span>(a + b == <span class="number">4</span>, <span class="string">&quot;The sum of a and b should be 4&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码讲解：在这个示例中，我们使用 <code>assert!</code> 宏检查 <code>a</code> 和 <code>b</code> 之和是否等于 4。如果不等于 4，将引发 panic 并显示提供的错误消息。</p>
+<p>使用场景：<code>assert!</code> 宏常用于验证函数的前置条件、后置条件或不变式。</p>
+<p>注意事项：<code>assert!</code> 宏仅在调试构建中有效，会在优化构建中被删除。如果需要在所有构建中进行验证，请使用 <code>debug_assert!</code> 宏。</p>
+<ol>
+<li>format!<br>宏说明：<code>format!</code> 宏用于将格式化字符串和变量组合成一个新的 String。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">name</span> = <span class="string">&quot;Alice&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">age</span> = <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="built_in">format!</span>(<span class="string">&quot;&#123;&#125; is &#123;&#125; years old&quot;</span>, name, age);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码讲解：在这个示例中，我们使用 <code>format!</code> 宏将一个格式化字符串和两个变量（<code>name</code> 和 <code>age</code>）组合成一个新的 String <code>s</code>。然后我们使用 <code>println!</code> 宏将其打印到标准输出。</p>
+<p>使用场景：<code>format!</code> 宏常用于构造复杂的字符串。</p>
+<p>注意事项：<code>format!</code> 宏可能导致内存分配。如果需要避免内存分配，请考虑使用 <code>write!</code> 或 <code>writeln!</code> 等其他宏。</p>
+<ol>
+<li>vec!<br>宏说明：<code>vec!</code> 宏用于创建一个新的 Vec（向量），并用给定的值填充它。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>,</span><br></pre></td></tr></table></figure>
+
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
+<li>继续</li>
+</ul>
+<h2 id="ChatGPT-1"><a href="#ChatGPT-1" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
+<li>3];</li>
+</ul>
+<p>代码讲解：在这个示例中，我们使用 <code>vec!</code> 宏创建了一个新的 Vec <code>v</code>，并用整数值 1、2 和 3 初始化它。</p>
+<p>使用场景：<code>vec!</code> 宏常用于创建和初始化 Vec。</p>
+<p>注意事项：<code>vec!</code> 宏可能导致内存分配。如果需要避免内存分配，请考虑使用数组或其他集合类型。</p>
+<ol>
+<li>macro_rules!<br>宏说明：<code>macro_rules!</code> 宏用于定义新的 Rust 宏。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> add &#123;</span><br><span class="line">    ($a:expr, $b:expr) =&gt; &#123;</span><br><span class="line">        $a + $b</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">sum</span> = add!(a, b);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The sum of a and b is &#123;&#125;&quot;</span>, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码讲解：在这个示例中，我们使用 <code>macro_rules!</code> 定义了一个名为 <code>add</code> 的新宏。该宏接受两个表达式作为参数，并将它们相加。然后我们在 <code>main</code> 函数中使用 <code>add!</code> 宏计算 <code>a</code> 和 <code>b</code> 的和，并将结果打印到标准输出。</p>
+<p>使用场景：<code>macro_rules!</code> 宏用于创建可复用的代码片段，例如生成模板代码、实现编译时计算等。</p>
+<p>注意事项：宏定义与普通函数不同，宏使用模式匹配和替换进行扩展。在使用宏时，请确保遵循 Rust 的宏编写规范。</p>
+<p>以上仅是 Rust 标准库中众多宏的一部分。更多宏及其用法，请参考 Rust 文档：<a target="_blank" rel="noopener" href="https://doc.rust-lang.org/std/index.html?search=">https://doc.rust-lang.org/std/index.html?search=</a></p>
+<h1 id="Zoran-2"><a href="#Zoran-2" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
+<li>请你按照: 语法说明， 代码示例，代码讲解， 注意事项，使用建议的方式来向我介绍 Rust 的宏编写规范</li>
+</ul>
+<h2 id="ChatGPT-2"><a href="#ChatGPT-2" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
+<li>在 Rust 中，宏是一种功能强大的元编程工具，它允许在编译时生成和操作代码。以下是有关 Rust 宏编写规范的介绍：</li>
+</ul>
+<ol>
+<li>语法说明<br>Rust 宏使用 <code>macro_rules!</code> 关键字定义。宏定义包括宏名称、输入模式匹配和输出代码生成规则。</li>
+<li>代码示例</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> multiply &#123;</span><br><span class="line">    ($a:expr, $b:expr) =&gt; &#123;</span><br><span class="line">        $a * $b</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">product</span> = multiply!(a, b);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The product of a and b is &#123;&#125;&quot;</span>, product);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>代码讲解<br>在这个示例中，我们定义了一个名为 <code>multiply</code> 的宏。宏接受两个表达式作为参数（<code>$a:expr</code> 和 <code>$b:expr</code>），并将它们相乘。我们在 <code>main</code> 函数中使用 <code>multiply!</code> 宏计算 <code>a</code> 和 <code>b</code> 的乘积，并将结果打印到标准输出。</li>
+<li>注意事项</li>
+</ol>
+<ul>
+<li>宏使用模式匹配来解析输入，这意味着它可以处理不同的输入类型和结构。但是，模式匹配需要正确设计以避免歧义和错误。</li>
+<li>宏的扩展发生在编译时，因此可以用于生成静态数据、模板代码或执行编译时计算。</li>
+<li>与函数不同，宏具有语法扩展能力，可以创建 DSL（领域特定语言）等复杂结构。</li>
+</ul>
+<ol start="3">
+<li>使用建议</li>
+</ol>
+<ul>
+<li>当您需要生成重复的代码、动态生成结构或执行编译时计算时，使用宏。然而，如果可能的话，优先考虑使用函数、泛型和特质，因为它们更易于理解和调试。</li>
+<li>在宏定义中使用规范的命名和参数类型，以提高代码可读性。例如，使用 <code>$a:expr</code> 而不是 <code>$a:e</code>。</li>
+<li>为宏编写文档和注释，解释宏的作用、输入要求和输出结果。</li>
+<li>谨慎使用宏，避免过度使用宏导致代码难以阅读和维护。</li>
+</ul>
+<p>Rust 宏是一个强大的工具，可以帮助您实现复杂的代码生成和元编程。遵循这些规范和建议，您将能够更有效地编写和使用 Rust 宏。</p>
+<h1 id="Zoran-3"><a href="#Zoran-3" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
+<li>有哪些类似于:expr 的类型可以用于宏的编写， 他们对应着那些代码，请向我详细介绍一下</li>
+</ul>
+<h2 id="ChatGPT-3"><a href="#ChatGPT-3" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
+<li>在 Rust 宏中，您可以使用不同的匹配器来捕获各种语法结构。以下是一些常见的匹配器及其对应的代码：</li>
+</ul>
+<ol>
+<li><code>expr</code>（表达式）</li>
+</ol>
+<p>匹配任何 Rust 表达式。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> square &#123;</span><br><span class="line">    ($x:expr) =&gt; &#123;</span><br><span class="line">        $x * $x</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>pat</code>（模式）</li>
+</ol>
+<p>匹配任何 Rust 模式。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> match_tuple &#123;</span><br><span class="line">    (($a:pat, $b:pat) =&gt; $t:tt) =&gt; &#123;</span><br><span class="line">        <span class="keyword">match</span> $t &#123;</span><br><span class="line">            ($a, $b) =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Matched&quot;</span>),</span><br><span class="line">            _ =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Not matched&quot;</span>),</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>stmt</code>（语句）</li>
+</ol>
+<p>匹配任何 Rust 语句。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> run_stmt &#123;</span><br><span class="line">    ($s:stmt) =&gt; &#123;</span><br><span class="line">        $s</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>ty</code>（类型）</li>
+</ol>
+<p>匹配任何 Rust 类型。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> create_struct &#123;</span><br><span class="line">    ($name:ident =&gt; $($field:ident: $ftype:ty),*) =&gt; &#123;</span><br><span class="line">        <span class="keyword">struct</span> $name &#123;</span><br><span class="line">            $($field: $ftype),*</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>ident</code>（标识符）</li>
+</ol>
+<p>匹配 Rust 标识符，如变量名、函数名、结构体名等。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> create_function &#123;</span><br><span class="line">    ($name:ident) =&gt; &#123;</span><br><span class="line">        <span class="keyword">fn</span> $<span class="title function_ invoke__">name</span>() &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">&quot;Function created&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>path</code>（路径）</li>
+</ol>
+<p>匹配 Rust 中的路径，例如模块、结构体、枚举等的引用。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> use_struct &#123;</span><br><span class="line">    ($p:path) =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">_</span> = $p &#123; field: <span class="number">1</span> &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>tt</code>（标记树）</li>
+</ol>
+<p>匹配任何 Rust 语法树的单个标记。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> tuple &#123;</span><br><span class="line">    ($($t:tt),*) =&gt; &#123;</span><br><span class="line">        ($($t),*)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>meta</code>（元数据）</li>
+</ol>
+<p>匹配属性（attribute）中的元数据。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> attr &#123;</span><br><span class="line">    (<span class="meta">#[$m:meta]</span>) =&gt; &#123;</span><br><span class="line">        <span class="meta">#[$m]</span></span><br><span class="line">        <span class="keyword">fn</span> <span class="title function_">some_function</span>() &#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>lifetime</code>（生命周期）</li>
+</ol>
+<p>匹配生命周期参数。</p>
+<p>代码示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">macro_rules!</span> impl_trait &#123;</span><br><span class="line">    ($name:ident, $lt:lifetime) =&gt; &#123;</span><br><span class="line">        <span class="keyword">impl</span>&lt;$lt&gt; MyTrait <span class="keyword">for</span> $name&lt;$lt&gt; &#123;</span><br><span class="line">            <span class="comment">// implementation</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上是 Rust 宏中的常见匹配器及其用法。您可以使用这些匹配器捕获各种 Rust 语法结构，并根据需要在宏输出中使用它们。</p>
+<h1 id="Zoran-4"><a href="#Zoran-4" class="headerlink" title="Zoran:"></a>Zoran:</h1><ul>
+<li>请你告诉我他们对应什么语句，也就是写一些使用这些宏的例子来向我讲解</li>
+</ul>
+<h2 id="ChatGPT-4"><a href="#ChatGPT-4" class="headerlink" title="ChatGPT:"></a>ChatGPT:</h2><ul>
+<li>当然，以下是使用这些匹配器的一些示例：</li>
+</ul>
+<ol>
+<li><code>expr</code>（表达式）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;a * b = &#123;&#125;&quot;</span>, square!(a * b));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: a * b = 144</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>pat</code>（模式）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">t</span> = (<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    match_tuple!((a, b) =&gt; t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: Matched</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>stmt</code>（语句）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    run_stmt!(<span class="built_in">println!</span>(<span class="string">&quot;Hello, world!&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: Hello, world!</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>ty</code>（类型）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">create_struct!(Zoran =&gt; name: <span class="type">String</span>, age: <span class="type">u32</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">person</span> = Zoran &#123; name: <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Alice&quot;</span>), age: <span class="number">30</span> &#125;;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Name: &#123;&#125;, Age: &#123;&#125;&quot;</span>, person.name, person.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: Name: Alice, Age: 30</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>ident</code>（标识符）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">create_function!(hello);</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">hello</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: Function created</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>path</code>（路径）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyStruct</span> &#123;</span><br><span class="line">    field: <span class="type">i32</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">use_struct!(MyStruct);</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;MyStruct instance created&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: MyStruct instance created</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>tt</code>（标记树）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">t</span> = tuple!(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: (1, 2, 3, 4)</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>meta</code>（元数据）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">attr!(<span class="meta">#[deprecated]</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">some_function</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: warning: use of deprecated item &#x27;some_function&#x27;: no further information</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>lifetime</code>（生命周期）</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">trait</span> <span class="title class_">MyTrait</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">do_something</span>(&amp;<span class="keyword">self</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Container</span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    value: &amp;<span class="symbol">&#x27;a</span> <span class="type">i32</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">impl_trait!(Container, <span class="symbol">&#x27;a</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span>&lt;<span class="symbol">&#x27;a</span>&gt; MyTrait <span class="keyword">for</span> <span class="title class_">Container</span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">do_something</span>(&amp;<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;Value: &#123;&#125;&quot;</span>, <span class="keyword">self</span>.value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">value</span> = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">container</span> = Container &#123; value: &amp;value &#125;;</span><br><span class="line">    container.<span class="title function_ invoke__">do_something</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: Value: 42</span></span><br></pre></td></tr></table></figure>
+
+<p>以上是使用这些匹配器的一些示例。通过这些示例，您可以了解如何在宏中使用这些匹配器来捕获和生成不同的 Rust 语法结构。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/19/GPT/Rust/attribute/" title="Rust中的属性"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Rust中的属性</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/19/GPT/Rust/Migrate_From_Cpp/" title="从C++迁移到Rust"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">从C++迁移到Rust</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">autohotkey</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/gcc/" title="gcc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">gcc</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/gdb/" title="gdb"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">gdb</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/git/" title="git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">git</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/makefile/" title="makefile的基本使用"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">makefile的基本使用</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT"><span class="toc-number">1.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-1"><span class="toc-number">2.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-2"><span class="toc-number">3.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-2"><span class="toc-number">3.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-3"><span class="toc-number">4.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-3"><span class="toc-number">4.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-4"><span class="toc-number">5.</span> <span class="toc-text">Zoran:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGPT-4"><span class="toc-number">5.1.</span> <span class="toc-text">ChatGPT:</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/memory_control/" title="Rust内存管理"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust内存管理"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/memory_control/" title="Rust内存管理">Rust内存管理</a><time datetime="2023-05-19T15:33:26.000Z" title="发表于 2023-05-19 23:33:26">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/misc/" title="Rust备忘录"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust备忘录"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/misc/" title="Rust备忘录">Rust备忘录</a><time datetime="2023-05-19T15:30:19.000Z" title="发表于 2023-05-19 23:30:19">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/attribute/" title="Rust中的属性"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust中的属性"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/attribute/" title="Rust中的属性">Rust中的属性</a><time datetime="2023-05-19T15:29:19.000Z" title="发表于 2023-05-19 23:29:19">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/macro/" title="Rust中的宏"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust中的宏"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/macro/" title="Rust中的宏">Rust中的宏</a><time datetime="2023-05-19T15:26:56.000Z" title="发表于 2023-05-19 23:26:56">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/Migrate_From_Cpp/" title="从C++迁移到Rust"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="从C++迁移到Rust"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/Migrate_From_Cpp/" title="从C++迁移到Rust">从C++迁移到Rust</a><time datetime="2023-05-19T15:26:10.000Z" title="发表于 2023-05-19 23:26:10">2023-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

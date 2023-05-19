@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Rust内存管理 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="ZoranRust 的引用借用，是由传递者决定的吗， 传递参数的时候传递&amp;value, 就是传递借用， 传递 value 就是所有权转移的引用吗 Response是的，你的理解是正确的。 在 Rust 中，函数参数的传递方式由调用者（传递者）决定。如果你在传递参数时使用了 &amp; 符号，那么你就是在借用这个值，也就是传递了一个引用，而不是值本身。在这种情况下，原始值的所有权并没有被转移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust内存管理">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/19/GPT/Rust/memory_control/index.html">
+<meta property="og:site_name" content="Zoran的个人博客">
+<meta property="og:description" content="ZoranRust 的引用借用，是由传递者决定的吗， 传递参数的时候传递&amp;value, 就是传递借用， 传递 value 就是所有权转移的引用吗 Response是的，你的理解是正确的。 在 Rust 中，函数参数的传递方式由调用者（传递者）决定。如果你在传递参数时使用了 &amp; 符号，那么你就是在借用这个值，也就是传递了一个引用，而不是值本身。在这种情况下，原始值的所有权并没有被转移">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg">
+<meta property="article:published_time" content="2023-05-19T15:33:26.000Z">
+<meta property="article:modified_time" content="2023-05-19T15:34:51.568Z">
+<meta property="article:author" content="Zoran">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/19/GPT/Rust/memory_control/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Notes/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Rust内存管理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 23:34:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#181825')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#00c4b6')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Rust内存管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-19T15:33:26.000Z" title="发表于 2023-05-19 23:33:26">2023-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T15:34:51.568Z" title="更新于 2023-05-19 23:34:51">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Rust/">Rust</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/Rust/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Rust内存管理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Zoran"><a href="#Zoran" class="headerlink" title="Zoran"></a>Zoran</h1><p>Rust 的引用借用，是由传递者决定的吗， 传递参数的时候传递&amp;value, 就是传递借用， 传递 value 就是所有权转移的引用吗</p>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。</p>
+<p>在 Rust 中，函数参数的传递方式由调用者（传递者）决定。如果你在传递参数时使用了 <code>&amp;</code> 符号，那么你就是在借用这个值，也就是传递了一个引用，而不是值本身。在这种情况下，原始值的所有权并没有被转移，而是被共享，原始值可以在函数调用后继续被使用。</p>
+<p>例如：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">takes_reference</span>(&amp;s);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 这是合法的，因为s的所有权并没有被转移</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">takes_reference</span>(s: &amp;<span class="type">String</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一方面，如果你在传递参数时没有使用 <code>&amp;</code> 符号，那么你就是在转移这个值的所有权。在这种情况下，原始值的所有权被转移给了函数，原始值不能在函数调用后继续被使用。</p>
+<p>例如：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">takes_ownership</span>(s);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s); <span class="comment">// 这是不合法的，因为s的所有权已经被转移</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">takes_ownership</span>(s: <span class="type">String</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>s</code> 的所有权被转移给了 <code>takes_ownership</code> 函数，所以我们不能在函数调用后继续使用 <code>s</code> 。</p>
+<p>总的来说，你可以根据你的需求来选择是借用值还是转移所有权。如果你只是需要读取值，而不需要修改或者丢弃它，那么通常最好使用借用。如果你需要修改或者丢弃值，那么你应该转移所有权。</p>
+<hr>
+<h1 id="Zoran-1"><a href="#Zoran-1" class="headerlink" title="Zoran"></a>Zoran</h1><p>Box 的类型是在堆上分配的， 那他的所有权和内存管理体系和直接 lef b &#x3D; 5 有什么区别， 使用的时候需要注意哪些事项</p>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><p><code>Box</code> 在 Rust 中被用于在堆上分配内存。当你创建一个 <code>Box</code> 时，你在堆上分配了一块内存，然后你可以把值放入这块内存中。 <code>Box</code> 的所有权和内存管理规则与 Rust 中的其他类型基本一致，但它有一些特殊的用途和需要注意的地方。</p>
+<p>对比直接声明变量 <code>let b = 5</code> （这会在栈上创建一个整数），使用 <code>Box</code> 会使得数据存储在堆上：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这在以下情况下可能很有用：</p>
+<ol>
+<li><p><strong>当你需要分配大量的内存或者分配一个大的数据结构时。</strong>栈空间是有限的，而堆空间相对较大。如果你需要一个大数组或者其他大的数据结构，你可能需要使用 <code>Box</code> 。</p>
+</li>
+<li><p><strong>当你需要创建一个递归的数据类型时。</strong>例如，你可以使用 <code>Box</code> 来创建一个链表或者树状结构。在这些情况下，每一个节点可能会包含一个指向其他节点的 <code>Box</code> 。</p>
+</li>
+<li><p><strong>当你需要在运行时创建一个动态大小的数据类型时。</strong>Rust 中的所有类型都需要在编译时确定其大小。但是，你可以使用 <code>Box</code> 来创建一个动态大小的数据类型。</p>
+</li>
+</ol>
+<p>然而，使用 <code>Box</code> 也需要注意以下事项：</p>
+<ul>
+<li><p><strong>所有权规则仍然适用。</strong>当 <code>Box</code> 离开其作用域时，其包含的值也会被丢弃。这意味着你需要小心处理所有权，避免在值被丢弃后仍然试图访问它。</p>
+</li>
+<li><p><strong>在堆上分配内存相比在栈上分配内存要慢一些。</strong>因此，尽管 <code>Box</code> 提供了更大的空间，但你应当谨慎使用它，避免不必要的性能开销。</p>
+</li>
+<li><p><strong>你需要负责 <code>Box</code> 中值的修改和读取。</strong>虽然 <code>Box</code> 会自动处理内存的分配和释放，但你仍然需要管理 <code>Box</code> 中值的生命周期，例如防止数据竞争和悬挂引用。</p>
+</li>
+</ul>
+<hr>
+<h1 id="Zoran-2"><a href="#Zoran-2" class="headerlink" title="Zoran"></a>Zoran</h1><p>所以在 Rust 中， Box 这样通过堆上分配的内存，和使用栈分配的内存使用基本一样， 只是在效率上， 有所不同， 管理上仍然是类似 RAII 的所有权概念来进行管理吗</p>
+<h2 id="Response-2"><a href="#Response-2" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。无论是栈上分配的内存还是堆上分配的内存，Rust 都使用类似于 RAII（Resource Acquisition Is Initialization）的所有权系统来进行管理。</p>
+<p>当你使用 <code>Box</code> 在堆上分配内存时，这个 <code>Box</code> 变量会拥有这块内存的所有权。当 <code>Box</code> 变量离开其作用域时，Rust 会自动释放这块内存，这就是 RAII 的概念。这避免了常见的内存管理错误，如忘记释放内存或者试图访问已经释放的内存。</p>
+<p>然而，使用堆内存和栈内存的确存在一些差异。堆内存通常更大，但是分配和释放堆内存的速度比栈内存慢。此外，堆内存可以动态分配，这意味着你可以在运行时决定需要多少内存，这是栈内存做不到的。</p>
+<p>总的来说，无论是使用栈内存还是堆内存，你都应当遵循 Rust 的所有权规则，小心处理变量的生命周期，以避免内存安全问题。</p>
+<hr>
+<h1 id="Zoran-3"><a href="#Zoran-3" class="headerlink" title="Zoran"></a>Zoran</h1><p>使用堆上的内存，如果试图访问已经被释放了的内存， 编译器会在编译时不通过吗</p>
+<h2 id="Response-3"><a href="#Response-3" class="headerlink" title="Response"></a>Response</h2><p>Rust 的设计目标之一就是确保内存安全，避免像空指针解引用和数据竞争这样的常见错误。Rust 使用所有权系统来跟踪内存，所有权系统在编译时会检查代码，从而可以在大多数情况下预防使用已经被释放的内存的问题。</p>
+<p>例如，以下的代码会在编译时失败，因为试图在值被释放后访问它：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">c</span> = b;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, b); <span class="comment">// 错误：b 的值已经被移动</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这段代码中， <code>b</code> 的所有权被移动到 <code>c</code> ，然后我们试图访问 <code>b</code> ，这在 Rust 中是不被允许的，因此编译器会报错。</p>
+<p>然而，有一些复杂的内存错误可能无法在编译时被检测出来，例如使用 <code>Rc</code> 和 <code>RefCell</code> 创建的循环引用。在这种情况下，你需要更谨慎地管理你的内存。</p>
+<p>总的来说，尽管 Rust 的所有权系统可以在很大程度上帮助你管理内存，但是你仍然需要理解其工作原理，以便编写安全和高效的代码。</p>
+<hr>
+<h1 id="Zoran-4"><a href="#Zoran-4" class="headerlink" title="Zoran"></a>Zoran</h1><p>为什么需要使用 cell 而不是直接创建一个 mut 引用呢, 使用 Cell 的动机和场景是什么</p>
+<h2 id="Response-4"><a href="#Response-4" class="headerlink" title="Response"></a>Response</h2><p>Rust 的引用和借用规则有一个基本原则：你可以有多个不可变引用（&amp;T）或者一个可变引用（&amp;mut T），但是两者不能同时存在。这个规则是为了防止数据竞争，从而保证内存安全。</p>
+<p>然而，在某些情况下，你可能需要在多个地方改变一个值，而这些地方并不能提供一个唯一的&amp;mut T 引用。这就是 <code>Cell</code> 和 <code>RefCell</code> 的用武之地。</p>
+<p><code>Cell&lt;T&gt;</code> 类型提供了 <code>set</code> 和 <code>get</code> 方法，允许在拥有不可变引用的情况下改变内部值。这是通过内部可变性（interior mutability）实现的，它基本上是一个安全的方式去绕过 Rust 的借用规则。但是， <code>Cell&lt;T&gt;</code> 只能用于 <code>Copy</code> 类型，因为 <code>get</code> 方法需要复制值。</p>
+<p>例如，下面的代码是合法的：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cell::Cell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">c</span> = Cell::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">d</span> = c.<span class="title function_ invoke__">get</span>();</span><br><span class="line">c.<span class="title function_ invoke__">set</span>(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>RefCell&lt;T&gt;</code> 是 <code>Cell&lt;T&gt;</code> 的一个更通用的版本，它可以用于任何类型，但是它的 <code>borrow</code> 和 <code>borrow_mut</code> 方法在运行时检查借用规则，如果违反了借用规则，就会导致程序崩溃。</p>
+<p>使用 <code>Cell</code> 和 <code>RefCell</code> 需要谨慎，因为它们的使用可能导致代码更难理解和维护。然而，在某些情况下，它们是必要的，例如在某个结构体需要改变自身的一部分，但是这个结构体的方法只能获取到 <code>&amp;self</code> 引用时。</p>
+<hr>
+<h1 id="Zoran-5"><a href="#Zoran-5" class="headerlink" title="Zoran"></a>Zoran</h1><p>请你详细解释一下:<br>Cell<T>只能用于 Copy 类型，因为 get 方法需要复制值。<br>既然是 Copy 类型, 比如 int, char, u32 这里这种类型不是没有所有权的概念吗, 我有点没有理解你这里的讲解</p>
+<h2 id="Response-5"><a href="#Response-5" class="headerlink" title="Response"></a>Response</h2><p><code>Cell&lt;T&gt;</code> 只对 <code>Copy</code> trait 的类型 <code>T</code> 有效，这是因为 <code>Cell&lt;T&gt;</code> 的 <code>get</code> 方法返回 <code>T</code> 的一个副本，而不是对 <code>T</code> 的引用。这样设计的原因是 <code>Cell&lt;T&gt;</code> 允许通过 <code>&amp;Cell&lt;T&gt;</code> （也就是一个不可变引用）修改其内部的值。如果 <code>get</code> 方法返回一个引用，那么在修改 <code>Cell&lt;T&gt;</code> 内部的值时就可能导致这个引用变得无效。</p>
+<p>所以说 <code>Cell&lt;T&gt;</code> 的 <code>get</code> 方法需要 <code>T</code> 实现 <code>Copy</code> trait，这样它就能在每次调用 <code>get</code> 方法时都返回一个新的 <code>T</code> 副本，而不是返回一个可能会在之后变得无效的引用。</p>
+<p>至于 “既然是 Copy 类型, 比如 int, char, u32 这里这种类型不是没有所有权的概念吗”，这个观点有一些误解。在 Rust 中，所有的类型，无论是 <code>Copy</code> 类型还是非 <code>Copy</code> 类型，都有所有权的概念。当我们说一个类型实现了 <code>Copy</code> trait，我们的意思是这个类型的值可以通过位复制（bitwise copy）来创建新的值，而原始值在此过程中并不会被 “消耗”（也就是说原始值之后仍然可以安全地使用）。对于那些没有实现 <code>Copy</code> trait 的类型，比如 <code>String</code> 或者 <code>Vec&lt;T&gt;</code> ，它们的值在被复制时原始值就不能再安全地使用了，除非我们显式地调用如 <code>clone</code> 方法这样的方法来创建一个新的副本。</p>
+<hr>
+<h1 id="Zoran-6"><a href="#Zoran-6" class="headerlink" title="Zoran"></a>Zoran</h1><p>那你刚刚给出的这段代码中:<br>use std::cell::Cell;</p>
+<p>let c &#x3D; Cell::new(5);<br>let d &#x3D; c.get();<br>c.set(10);</p>
+<p>d 是一个副本, 所以 c 设置了值为 10 以后, d 的值并没有改变, 仍然是 5 对吗?</p>
+<h2 id="Response-6"><a href="#Response-6" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。 <code>Cell&lt;T&gt;</code> 的 <code>get</code> 方法返回的是内部值的一个副本，而不是一个引用。所以当你改变 <code>Cell</code> 的内部值时，已经通过 <code>get</code> 方法得到的副本的值不会被改变。</p>
+<p>你可以通过以下代码来验证这一点：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cell::Cell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">c</span> = Cell::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">d</span> = c.<span class="title function_ invoke__">get</span>();</span><br><span class="line">c.<span class="title function_ invoke__">set</span>(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, d); <span class="comment">// 输出 5</span></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, c.<span class="title function_ invoke__">get</span>()); <span class="comment">// 输出 10</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>d</code> 的值仍然是 5，而 <code>c</code> 的值已经被改变为 10。这就是为什么 <code>Cell&lt;T&gt;</code> 只能用于实现了 <code>Copy</code> trait 的类型——这样可以确保 <code>get</code> 方法总是返回一个有效的值，即使 <code>Cell</code> 的内部值已经被改变。</p>
+<hr>
+<h1 id="Zoran-7"><a href="#Zoran-7" class="headerlink" title="Zoran"></a>Zoran</h1><p>那这个特性是不是意味着, Cell 的使用类型是有限制的, 他只能用于可以 Copy 的类型, 而不能用于其他拥有所有权概念的类型呢? 如果是, 请你为我梳理一下 Rust 中哪些类型是可以 Copy 的类型, 如果不是, 请你为我梳理一下 Rust 中, 哪些类型是拥有所有权的概念的, 哪些类型是没有所有权的概念的,他们的依据是什么</p>
+<h2 id="Response-7"><a href="#Response-7" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解是正确的。 <code>Cell&lt;T&gt;</code> 只能用于那些实现了 <code>Copy</code> trait 的类型。在 Rust 中，所有类型都有所有权概念，包括那些实现了 <code>Copy</code> trait 的类型。 <code>Copy</code> trait 只是表示这个类型的值可以通过位复制（bitwise copy）来创建新的值，而原始值在此过程中并不会被 “消耗”。</p>
+<p>以下是一些常见的在 Rust 中实现了 <code>Copy</code> trait 的类型：</p>
+<ul>
+<li>所有整数类型，如 <code>i32</code> , <code>u32</code> 等</li>
+<li>所有浮点数类型，如 <code>f32</code> , <code>f64</code></li>
+<li>布尔类型 <code>bool</code></li>
+<li>字符类型 <code>char</code></li>
+<li>所有整数和浮点数的数组，其长度在编译时已知，如 <code>[i32; 3]</code></li>
+<li>所有元组，如果元组中的所有类型都实现了 <code>Copy</code> ，例如 <code>(i32, f64)</code></li>
+</ul>
+<p>以下是一些常见的在 Rust 中没有实现 <code>Copy</code> trait 的类型：</p>
+<ul>
+<li>字符串 <code>String</code></li>
+<li>动态数组 <code>Vec&lt;T&gt;</code></li>
+<li>智能指针，如 <code>Box&lt;T&gt;</code> , <code>Rc&lt;T&gt;</code> , <code>RefCell&lt;T&gt;</code></li>
+<li>函数和闭包</li>
+</ul>
+<p>注意，你可以为你自定义的类型实现 <code>Copy</code> trait，但是你需要确保这样做是安全的。例如，如果你的类型包含一个 <code>String</code> 字段，那么你就不能为这个类型实现 <code>Copy</code> trait，因为 <code>String</code> 类型没有实现 <code>Copy</code> 。</p>
+<p>所有权是 Rust 中的一个核心概念，它适用于所有类型。不过，有些类型的值在被复制时可以继续被安全地使用（这些类型实现了 <code>Copy</code> trait），而有些类型的值在被复制时就不能再被安全地使用（这些类型没有实现 <code>Copy</code> trait）。</p>
+<hr>
+<h1 id="Zoran-8"><a href="#Zoran-8" class="headerlink" title="Zoran"></a>Zoran</h1><p>既然所有权的概念适用于所有的类型, 那为什么这段代码是可以正常运行的呢:<br>let a &#x3D; 10;<br>let b &#x3D; a;<br>println!(“{}”, a); &#x2F;&#x2F; 10<br>按照所有权的概念, 这里不使用应该 a 的所有权被转移了吗,那这里 a 的内存不应该被释放了吗, 这里为什么没有任何问题呢</p>
+<h2 id="Response-8"><a href="#Response-8" class="headerlink" title="Response"></a>Response</h2><p>你的疑问非常有道理。在 Rust 中，所有权的概念确实适用于所有类型。然而，对于那些实现了 <code>Copy</code> trait 的类型来说，当我们尝试复制一个值时，它不会 “移动” 所有权，而是会创建一个新的副本，这个副本的值和原始值一样。</p>
+<p>在你的例子中：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = a;</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, a);  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p><code>a</code> 和 <code>b</code> 的类型是 <code>i32</code> ，它是一个实现了 <code>Copy</code> trait 的类型。当你写 <code>let b = a;</code> 时，你实际上是在创建 <code>a</code> 的一个新副本，并将这个副本绑定到 <code>b</code> 。这个操作并不会 “消耗” <code>a</code> ，所以 <code>a</code> 之后仍然可以安全地使用。</p>
+<p>如果 <code>a</code> 的类型是一个没有实现 <code>Copy</code> trait 的类型，比如 <code>String</code> ，那么 <code>let b = a;</code> 就会移动 <code>a</code> 的所有权到 <code>b</code> ， <code>a</code> 之后就不能再被安全地使用了：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = a;</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, a);  <span class="comment">// 编译错误：value borrowed here after move</span></span><br></pre></td></tr></table></figure>
+
+<p>这段代码会在编译时报错，因为 <code>a</code> 的所有权已经被移动到 <code>b</code> ，所以 <code>a</code> 不能再被安全地使用。</p>
+<p>这就是为什么在 Rust 中，所有类型都有所有权的概念，但是 <code>Copy</code> trait 的类型和非 <code>Copy</code> trait 的类型在处理所有权时有所不同。</p>
+<hr>
+<h1 id="Zoran-9"><a href="#Zoran-9" class="headerlink" title="Zoran"></a>Zoran</h1><p>所以实际上, 使用&#x3D;赋值一个对象的时候, Rust 首先会检查该对象有没有实现 Copy trait, 如果实现了则优先调用 Copy, 如果没有实现则进行所有权移动是吗</p>
+<h2 id="Response-9"><a href="#Response-9" class="headerlink" title="Response"></a>Response</h2><p>是的，你的理解非常准确。在 Rust 中， <code>=</code> 赋值操作的行为取决于源数据类型是否实现了 <code>Copy</code> trait：</p>
+<ul>
+<li><p>如果源数据类型实现了 <code>Copy</code> trait，那么 <code>=</code> 赋值操作将会创建源数据的一个副本。源数据之后仍然可以安全地使用，因为它并没有被 “消耗”。</p>
+</li>
+<li><p>如果源数据类型没有实现 <code>Copy</code> trait，那么 <code>=</code> 赋值操作将会移动源数据的所有权。源数据之后就不能再安全地使用，除非它被再次赋予新的值。</p>
+</li>
+</ul>
+<p>这种设计使得 Rust 可以在保证内存安全的同时，还能有良好的性能。对于那些实现了 <code>Copy</code> trait 的小型数据，复制通常是更高效的选择，因为它避免了需要进行内存分配和释放的开销。而对于那些没有实现 <code>Copy</code> trait 的大型数据，移动通常是更高效的选择，因为它只涉及到指针的复制和所有权的转移，而不需要复制整个数据。</p>
+<hr>
+<h1 id="Zoran-10"><a href="#Zoran-10" class="headerlink" title="Zoran"></a>Zoran</h1><p>那如果我希望为我的自定义类型实现 Copy trait, 有哪些实现方式呢?</p>
+<h2 id="Response-10"><a href="#Response-10" class="headerlink" title="Response"></a>Response</h2><p>在 Rust 中，为你的自定义类型实现 <code>Copy</code> trait 是相当简单的。你只需在类型定义后面添加一个 <code>impl Copy for YourType &#123;&#125;</code> 的代码块即可。然而，有一些重要的限制你需要注意：</p>
+<ul>
+<li><p>你的类型必须同时实现 <code>Clone</code> trait 才能实现 <code>Copy</code> trait。这是因为 <code>Copy</code> trait 意味着你的类型可以通过字节级别的复制创建新的实例，这样的复制被认为是“克隆”操作。你可以通过添加 <code>#[derive(Clone, Copy)]</code> 注解来自动为你的类型实现 <code>Clone</code> 和 <code>Copy</code> trait。</p>
+</li>
+<li><p>你的类型中所有的字段也都必须实现 <code>Copy</code> trait。如果你的类型包含一个不实现 <code>Copy</code> trait 的字段，比如 <code>String</code> ，那么你的类型就不能实现 <code>Copy</code> trait。</p>
+</li>
+</ul>
+<p>以下是一个为自定义类型实现 <code>Copy</code> trait 的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Clone, Copy)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyType</span> &#123;</span><br><span class="line">    a: <span class="type">i32</span>,</span><br><span class="line">    b: <span class="type">f64</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>MyType</code> 类型有两个字段： <code>a</code> 和 <code>b</code> ，它们的类型分别是 <code>i32</code> 和 <code>f64</code> ，这两种类型都实现了 <code>Copy</code> trait。因此，我们可以通过 <code>#[derive(Clone, Copy)]</code> 注解为 <code>MyType</code> 类型自动实现 <code>Clone</code> 和 <code>Copy</code> trait。</p>
+<p>如果你试图为包含不实现 <code>Copy</code> trait 的字段的类型实现 <code>Copy</code> trait，你将会在编译时得到一个错误。例如，以下代码将无法编译：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Clone, Copy)]</span> <span class="comment">// 编译错误：the trait `Copy` may not be implemented for this type</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyType</span> &#123;</span><br><span class="line">    a: <span class="type">i32</span>,</span><br><span class="line">    s: <span class="type">String</span>, <span class="comment">// String 类型没有实现 `Copy` trait</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个错误告诉我们 <code>String</code> 类型没有实现 <code>Copy</code> trait，因此 <code>MyType</code> 类型也不能实现 <code>Copy</code> trait。</p>
+<hr>
+<h1 id="Zoran-11"><a href="#Zoran-11" class="headerlink" title="Zoran"></a>Zoran</h1><p>对于使用 Box::new()一个实现了 Copy 类型的变量, 在之后的&#x3D;赋值给另一个新的变量的时候, 这里是会进行所有权移动吗, 原来的变量会能继续使用吗</p>
+<h2 id="Response-11"><a href="#Response-11" class="headerlink" title="Response"></a>Response</h2><p>当你把一个实现了 <code>Copy</code> trait 的值放入 <code>Box</code> 中时，这个值会被移动到堆上，然后你得到一个指向这个堆上值的 <code>Box</code> 指针。虽然值本身实现了 <code>Copy</code> trait，但 <code>Box</code> 指针本身并没有实现 <code>Copy</code> trait。这意味着当你把 <code>Box</code> 指针赋值给另一个变量时， <code>Box</code> 指针的所有权会被移动，原来的变量就不能再使用了。</p>
+<p>以下是一个例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = <span class="type">Box</span>::<span class="title function_ invoke__">new</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span> = a;  <span class="comment">// 所有权移动</span></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, a);  <span class="comment">// 编译错误：value borrowed here after move</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>a</code> 是一个指向堆上 <code>5</code> 的 <code>Box</code> 指针。当我们写 <code>let b = a;</code> 时， <code>a</code> 的所有权被移动到 <code>b</code> ，所以 <code>a</code> 之后就不能再被安全地使用了。</p>
+<p>这是因为，尽管 <code>5</code> 是一个 <code>Copy</code> 类型，但 <code>Box::new(5)</code> 返回的是一个 <code>Box&lt;i32&gt;</code> 类型的值，而 <code>Box&lt;i32&gt;</code> 没有实现 <code>Copy</code> trait。因此，当 <code>Box&lt;i32&gt;</code> 被赋值时，它的所有权会被移动。这种行为确保了 Rust 的内存安全性，因为它防止了对已经释放的堆内存的访问。</p>
+<hr>
+<h1 id="Zoran-12"><a href="#Zoran-12" class="headerlink" title="Zoran"></a>Zoran</h1><p>实现 Copy 和 Clone, 这两者有什么区别呢, 他们在使用上要注意哪些</p>
+<h2 id="Response-12"><a href="#Response-12" class="headerlink" title="Response"></a>Response</h2><p><code>Copy</code> 和 <code>Clone</code> 都是 Rust 中的 trait，它们都用于创建对象的副本，但它们的工作方式和用途有所不同。</p>
+<ul>
+<li><p><code>Clone</code> trait： <code>Clone</code> trait 的目的是为了允许显式地创建一个对象的副本。当你调用一个对象的 <code>.clone()</code> 方法时，会创建一个新的对象，这个对象的状态与原对象相同，但占用不同的内存空间。这个过程可能包含动态内存分配或其他性能开销，因此应该显式地进行。</p>
+</li>
+<li><p><code>Copy</code> trait： <code>Copy</code> trait 是为了允许隐式地复制一个对象。当一个实现了 <code>Copy</code> trait 的对象被赋值给另一个变量时，会自动创建一个新的对象，这个对象的状态与原对象相同，但占用不同的内存空间。因为这个过程是隐式的，所以只有那些可以被安全地、低成本地复制的类型应该实现 <code>Copy</code> trait。这通常包括所有基本数据类型，如整数、浮点数和布尔值，以及由这些类型组成的复合类型。</p>
+</li>
+</ul>
+<p>注意的是，如果一个类型实现了 <code>Copy</code> ，那么在赋值时，源对象仍然有效，因为已经隐式地创建了一个新的副本。而如果一个类型只实现了 <code>Clone</code> ，那么在赋值时，你需要显式地调用 <code>.clone()</code> 方法，否则源对象的所有权会被移动。</p>
+<p>总的来说，以下是在使用 <code>Clone</code> 和 <code>Copy</code> 时需要注意的事项：</p>
+<ul>
+<li>当你创建一个可以被安全地、低成本地复制的类型时，应该同时实现 <code>Clone</code> 和 <code>Copy</code> trait。</li>
+<li>当你创建一个可能包含动态内存分配或其他性能开销的类型时，只应该实现 <code>Clone</code> trait。</li>
+<li>当你赋值一个实现了 <code>Copy</code> trait 的对象时，源对象仍然有效。</li>
+<li>当你赋值一个只实现了 <code>Clone</code> trait 的对象时，你需要显式地调用 <code>.clone()</code> 方法，否则源对象的所有权会被移动。</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/Notes/2023/05/19/GPT/Rust/misc/" title="Rust备忘录"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Rust备忘录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/03/31/Tools/autohotkey/" title="autohotkey"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">autohotkey</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/gcc/" title="gcc"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">gcc</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/gdb/" title="gdb"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">gdb</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/git/" title="git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">git</div></div></a></div><div><a href="/Notes/2023/03/31/Tools/makefile/" title="makefile的基本使用"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">makefile的基本使用</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran"><span class="toc-number">1.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response"><span class="toc-number">1.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-1"><span class="toc-number">2.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-1"><span class="toc-number">2.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-2"><span class="toc-number">3.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-2"><span class="toc-number">3.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-3"><span class="toc-number">4.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-3"><span class="toc-number">4.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-4"><span class="toc-number">5.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-4"><span class="toc-number">5.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-5"><span class="toc-number">6.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-5"><span class="toc-number">6.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-6"><span class="toc-number">7.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-6"><span class="toc-number">7.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-7"><span class="toc-number">8.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-7"><span class="toc-number">8.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-8"><span class="toc-number">9.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-8"><span class="toc-number">9.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-9"><span class="toc-number">10.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-9"><span class="toc-number">10.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-10"><span class="toc-number">11.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-10"><span class="toc-number">11.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-11"><span class="toc-number">12.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-11"><span class="toc-number">12.1.</span> <span class="toc-text">Response</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zoran-12"><span class="toc-number">13.</span> <span class="toc-text">Zoran</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-12"><span class="toc-number">13.1.</span> <span class="toc-text">Response</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/memory_control/" title="Rust内存管理"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust内存管理"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/memory_control/" title="Rust内存管理">Rust内存管理</a><time datetime="2023-05-19T15:33:26.000Z" title="发表于 2023-05-19 23:33:26">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/misc/" title="Rust备忘录"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust备忘录"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/misc/" title="Rust备忘录">Rust备忘录</a><time datetime="2023-05-19T15:30:19.000Z" title="发表于 2023-05-19 23:30:19">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/attribute/" title="Rust中的属性"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust中的属性"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/attribute/" title="Rust中的属性">Rust中的属性</a><time datetime="2023-05-19T15:29:19.000Z" title="发表于 2023-05-19 23:29:19">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/macro/" title="Rust中的宏"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Rust中的宏"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/macro/" title="Rust中的宏">Rust中的宏</a><time datetime="2023-05-19T15:26:56.000Z" title="发表于 2023-05-19 23:26:56">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/Migrate_From_Cpp/" title="从C++迁移到Rust"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="从C++迁移到Rust"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/Migrate_From_Cpp/" title="从C++迁移到Rust">从C++迁移到Rust</a><time datetime="2023-05-19T15:26:10.000Z" title="发表于 2023-05-19 23:26:10">2023-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
