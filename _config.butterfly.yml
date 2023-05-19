@@ -15,7 +15,7 @@ menu:
   关于: /about/ || fas fa-heart
 
 nav:
-  # logo: /https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/demo.gif/zoran.png
+  # logo: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/zoran.png
   display_title: true
   fixed: false # fixed navigation bar
 
@@ -91,7 +91,7 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: /https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/demo.gif/favicon.ico
+favicon: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico
 
 # Avatar (頭像)
 avatar:
