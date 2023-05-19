@@ -1,17 +1,18 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>C++独特的设计模式 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:   C++还有哪些类似于静态多态这样独有的设计模式  ChatGPT:   C++ 作为一种支持多范式编程的语言，拥有许多独特的设计模式。在 C++ 中，静态多态通常是通过模板和编译时多态实现的。除了静态多态，C++ 还有其他一些独特的设计模式：   Curiously Recurring Template Pattern (CRTP)：奇异递归模板模式是一种在编译时实现代码重用的技">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>C++独特的设计模式 | Zoran的个人博客</title><meta name="author" content="Zoran"><meta name="copyright" content="Zoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#00c4b6"><meta name="description" content="Zoran:  C++还有哪些类似于静态多态这样独有的设计模式  ChatGPT:  C++ 作为一种支持多范式编程的语言，拥有许多独特的设计模式。在 C++ 中，静态多态通常是通过模板和编译时多态实现的。除了静态多态，C++ 还有其他一些独特的设计模式：   Curiously Recurring Template Pattern (CRTP)：奇异递归模板模式是一种在编译时实现代码重用的技巧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++独特的设计模式">
-<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/03/GPT/C++_Unique_Design_Patterns/index.html">
+<meta property="og:url" content="http://juanzoran.github.io/Notes/2023/05/19/GPT/C++/Design_Pattern/index.html">
 <meta property="og:site_name" content="Zoran的个人博客">
-<meta property="og:description" content="Zoran:   C++还有哪些类似于静态多态这样独有的设计模式  ChatGPT:   C++ 作为一种支持多范式编程的语言，拥有许多独特的设计模式。在 C++ 中，静态多态通常是通过模板和编译时多态实现的。除了静态多态，C++ 还有其他一些独特的设计模式：   Curiously Recurring Template Pattern (CRTP)：奇异递归模板模式是一种在编译时实现代码重用的技">
+<meta property="og:description" content="Zoran:  C++还有哪些类似于静态多态这样独有的设计模式  ChatGPT:  C++ 作为一种支持多范式编程的语言，拥有许多独特的设计模式。在 C++ 中，静态多态通常是通过模板和编译时多态实现的。除了静态多态，C++ 还有其他一些独特的设计模式：   Curiously Recurring Template Pattern (CRTP)：奇异递归模板模式是一种在编译时实现代码重用的技巧。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg">
-<meta property="article:published_time" content="2023-05-03T09:43:59.000Z">
-<meta property="article:modified_time" content="2023-05-06T05:36:32.758Z">
+<meta property="og:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg">
+<meta property="article:published_time" content="2023-05-19T14:24:55.000Z">
+<meta property="article:modified_time" content="2023-05-19T14:25:37.020Z">
 <meta property="article:author" content="Zoran">
-<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/03/GPT/C++_Unique_Design_Patterns/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg"><link rel="shortcut icon" href="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico"><link rel="canonical" href="http://juanzoran.github.io/Notes/2023/05/19/GPT/C++/Design_Pattern/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Notes/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/Notes/',
   algolia: undefined,
   localSearch: undefined,
@@ -57,7 +58,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-05-06 13:36:32'
+  postUpdate: '2023-05-19 22:25:37'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -177,188 +178,178 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (false) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">55</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++独特的设计模式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-03T09:43:59.000Z" title="发表于 2023-05-03 17:43:59">2023-05-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-06T05:36:32.758Z" title="更新于 2023-05-06 13:36:32">2023-05-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++独特的设计模式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran: </p>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">57</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><nav id="nav"><span id="blog-info"><a href="/Notes/" title="Zoran的个人博客"><span class="site-name">Zoran的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Notes/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Notes/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++独特的设计模式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-19T14:24:55.000Z" title="发表于 2023-05-19 22:24:55">2023-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T14:25:37.020Z" title="更新于 2023-05-19 22:25:37">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/">GPT</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Notes/categories/GPT/C/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++独特的设计模式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Zoran:</p>
 <ul>
 <li>C++还有哪些类似于静态多态这样独有的设计模式</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>C++ 作为一种支持多范式编程的语言，拥有许多独特的设计模式。在 C++ 中，静态多态通常是通过模板和编译时多态实现的。除了静态多态，C++ 还有其他一些独特的设计模式：</li>
 </ul>
 <ol>
-<li>Curiously Recurring Template Pattern (CRTP)：奇异递归模板模式是一种在编译时实现代码重用的技巧。在这种模式中，派生类作为基类模板的参数。这样可以在基类中实现通用功能，而派生类则负责提供特定实现。 </li>
-<li>Policy-Based Design：策略模式是一种将算法和数据结构解耦的方法。在这种设计模式中，类的行为是通过策略类定义的，而不是在类内部硬编码。这允许用户轻松地在不同策略之间切换，以适应不同的场景。 </li>
-<li>Expression Templates：表达式模板是一种优化技巧，通过延迟计算和运算符重载来减少运行时的临时对象和中间结果。这种模式在科学计算和线性代数库中广泛应用，如 Eigen 和 Blaze。 </li>
-<li>Mixins：混入模式是一种通过多重继承实现代码重用的方法。混入类是一种特殊的基类，它为派生类提供了额外的功能。混入模式可以实现模块化设计，方便用户根据需求组合不同的功能。 </li>
-<li>Type Erasure：类型擦除是一种在 C++ 中实现运行时多态性的方法，它允许用户处理不同类型的对象，而不需要在编译时知道它们的确切类型。典型的例子是 <code>std::function</code>，它可以存储任何可调用对象。 </li>
-<li>Resource Acquisition Is Initialization (RAII)：资源获取即初始化是一种管理资源的方法，将资源的生命周期与对象的生命周期绑定。在这种模式中，资源在对象构造时获取，在对象析构时自动释放。这有助于防止资源泄露和简化资源管理。 </li>
+<li>Curiously Recurring Template Pattern (CRTP)：奇异递归模板模式是一种在编译时实现代码重用的技巧。在这种模式中，派生类作为基类模板的参数。这样可以在基类中实现通用功能，而派生类则负责提供特定实现。</li>
+<li>Policy-Based Design：策略模式是一种将算法和数据结构解耦的方法。在这种设计模式中，类的行为是通过策略类定义的，而不是在类内部硬编码。这允许用户轻松地在不同策略之间切换，以适应不同的场景。</li>
+<li>Expression Templates：表达式模板是一种优化技巧，通过延迟计算和运算符重载来减少运行时的临时对象和中间结果。这种模式在科学计算和线性代数库中广泛应用，如 Eigen 和 Blaze。</li>
+<li>Mixins：混入模式是一种通过多重继承实现代码重用的方法。混入类是一种特殊的基类，它为派生类提供了额外的功能。混入模式可以实现模块化设计，方便用户根据需求组合不同的功能。</li>
+<li>Type Erasure：类型擦除是一种在 C++ 中实现运行时多态性的方法，它允许用户处理不同类型的对象，而不需要在编译时知道它们的确切类型。典型的例子是 <code>std::function</code>，它可以存储任何可调用对象。</li>
+<li>Resource Acquisition Is Initialization (RAII)：资源获取即初始化是一种管理资源的方法，将资源的生命周期与对象的生命周期绑定。在这种模式中，资源在对象构造时获取，在对象析构时自动释放。这有助于防止资源泄露和简化资源管理。</li>
 <li>Compile-time Function Evaluation (constexpr)：在 C++11 中引入的 <code>constexpr</code> 关键字允许在编译时计算函数的结果。这可以用于在编译时生成查找表、计算常量值等，从而提高运行时性能。</li>
 </ol>
 <p>这些设计模式是 C++ 语言独特的一部分，为 C++ 程序员提供了强大的编程工具和抽象能力。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>还有吗?</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>当然还有更多的 C++ 设计模式和技巧，以下是一些额外的例子：</li>
 </ul>
 <ol>
-<li>SFINAE (Substitution Failure Is Not An Error)：SFINAE 是一种在模板元编程中处理错误的技巧。在模板实例化期间，如果发生替换失败，编译器不会报错，而是选择其他可用的模板。这种技巧常用于实现编译时函数重载、特性检测等。 </li>
-<li>Tag Dispatching：标签分派是一种根据类型标签选择不同实现的技巧。通常与 SFINAE 结合使用，它允许在编译时根据类型特征选择最佳的算法实现。 </li>
-<li>Lazy Evaluation：惰性求值是一种在需要时才计算值的技巧，可以用于优化性能和资源使用。C++ 中的惰性求值可以通过延迟加载、代理模式等实现。 </li>
-<li>Pimpl Idiom（Pointer to Implementation）：Pimpl 习语是一种实现类的封装和隐藏内部实现细节的方法。它通过在类的内部使用指向实现的指针来实现。这种方法可以降低编译依赖、提高编译速度，并允许在不破坏二进制兼容性的情况下更改类的实现。 </li>
-<li>Singleton Pattern：单例模式是一种确保类只能有一个实例的方法。在 C++ 中，可以使用静态局部变量、饿汉式初始化等方法实现单例模式。 </li>
-<li>Adapter Pattern：适配器模式是一种将不兼容接口转换为兼容接口的方法。在 C++ 中，可以使用类模板、多重继承和运算符重载来实现适配器模式。 </li>
+<li>SFINAE (Substitution Failure Is Not An Error)：SFINAE 是一种在模板元编程中处理错误的技巧。在模板实例化期间，如果发生替换失败，编译器不会报错，而是选择其他可用的模板。这种技巧常用于实现编译时函数重载、特性检测等。</li>
+<li>Tag Dispatching：标签分派是一种根据类型标签选择不同实现的技巧。通常与 SFINAE 结合使用，它允许在编译时根据类型特征选择最佳的算法实现。</li>
+<li>Lazy Evaluation：惰性求值是一种在需要时才计算值的技巧，可以用于优化性能和资源使用。C++ 中的惰性求值可以通过延迟加载、代理模式等实现。</li>
+<li>Pimpl Idiom（Pointer to Implementation）：Pimpl 习语是一种实现类的封装和隐藏内部实现细节的方法。它通过在类的内部使用指向实现的指针来实现。这种方法可以降低编译依赖、提高编译速度，并允许在不破坏二进制兼容性的情况下更改类的实现。</li>
+<li>Singleton Pattern：单例模式是一种确保类只能有一个实例的方法。在 C++ 中，可以使用静态局部变量、饿汉式初始化等方法实现单例模式。</li>
+<li>Adapter Pattern：适配器模式是一种将不兼容接口转换为兼容接口的方法。在 C++ 中，可以使用类模板、多重继承和运算符重载来实现适配器模式。</li>
 <li>Factory Pattern：工厂模式是一种创建对象的方法，它将对象的实例化过程从客户端代码中解耦。在 C++ 中，可以使用静态工厂方法、抽象工厂等实现工厂模式。</li>
 </ol>
 <p>这些设计模式和技巧只是 C++ 世界中的一部分。实际上，C++ 提供了强大的语言特性和灵活性，使得程序员可以根据需求开发出更多定制的设计模式。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>请你按照以下格式向我介绍这些模式:<br>原理说明<br>代码示例<br>代码讲解<br>注意事项<br>使用场景</li>
 </ul>
-<p>首先我需要你向我介绍一下CRTP</p>
-<p>ChatGPT: </p>
+<p>首先我需要你向我介绍一下 CRTP</p>
+<p>ChatGPT:</p>
 <ul>
 <li>奇异递归模板模式（Curiously Recurring Template Pattern，CRTP）是一种在编译时实现代码重用的技巧。在这种模式中，派生类作为基类模板的参数。这允许在基类中实现通用功能，而派生类则负责提供特定实现。CRTP 可以用于静态多态和编译时生成高效代码。</li>
 </ul>
-<p><strong>原理说明：</strong> </p>
+<p><strong>原理说明：</strong></p>
 <p>CRTP 的关键在于派生类作为基类的模板参数。这使得基类能够在编译时访问派生类的成员。因此，基类可以为派生类提供默认实现，同时允许派生类覆盖默认实现。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Derived&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">interface</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_cast</span>&lt;Derived*&gt;(<span class="keyword">this</span>)-&gt;<span class="built_in">implementation</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">implementation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Base implementation&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived1</span> : <span class="keyword">public</span> Base&lt;Derived1&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">implementation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Derived1 implementation&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived2</span> : <span class="keyword">public</span> Base&lt;Derived2&gt; &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Derived1 d1;</span><br><span class="line">    Derived2 d2;</span><br><span class="line">    d1.<span class="built_in">interface</span>(); <span class="comment">// 输出 &quot;Derived1 implementation&quot;</span></span><br><span class="line">    d2.<span class="built_in">interface</span>(); <span class="comment">// 输出 &quot;Base implementation&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在上面的示例中，<code>Base</code> 是一个模板基类，其模板参数为派生类。基类定义了一个名为 <code>interface</code> 的公共方法，该方法会调用 <code>implementation</code> 方法。</p>
 <p><code>Derived1</code> 和 <code>Derived2</code> 是从 <code>Base</code> 派生的两个类。<code>Derived1</code> 重写了 <code>implementation</code> 方法，而 <code>Derived2</code> 没有。在 <code>main</code> 函数中，我们创建了 <code>Derived1</code> 和 <code>Derived2</code> 的实例，并调用了它们的 <code>interface</code> 方法。注意，尽管 <code>Derived2</code> 没有重写 <code>implementation</code> 方法，但基类中的默认实现会被调用。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>CRTP 可能导致代码难以理解和维护，因为基类和派生类之间的关系不是很明显。</li>
 <li>当使用 CRTP 时，注意循环依赖问题。</li>
 <li>遵循编码规范，为基类和派生类提供明确的文档和注释。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>静态多态：CRTP 可以实现编译时多态，避免虚函数带来的运行时开销。</li>
 <li>代码重用：通过在基类中提供默认实现，可以减少重复代码。</li>
 <li>提高性能：CRTP 可以生成更高效的代码，因为编译器可以在编译时内联方法。</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
-<li>下面再向我介绍一下Policy-Based Design(策略模式)</li>
+<li>下面再向我介绍一下 Policy-Based Design(策略模式)</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>策略模式（Policy-Based Design）是一种将算法和数据结构解耦的设计模式。在这种设计模式中，类的行为是通过策略类定义的，而不是在类内部硬编码。这允许用户轻松地在不同策略之间切换，以适应不同的场景。策略模式可以提高代码的灵活性和可维护性，同时遵循开放封闭原则（对扩展开放，对修改封闭）。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 策略接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SortStrategy</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">sort</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体策略：快速排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">QuickSort</span> : <span class="keyword">public</span> SortStrategy &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Quick Sort&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体策略：归并排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MergeSort</span> : <span class="keyword">public</span> SortStrategy &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Merge Sort&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上下文类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SortedList</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">SortedList</span>(SortStrategy* strategy) : <span class="built_in">strategy_</span>(strategy) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_strategy</span><span class="params">(SortStrategy* strategy)</span> </span>&#123;</span><br><span class="line">        strategy_ = strategy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        strategy_-&gt;<span class="built_in">sort</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    SortStrategy* strategy_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">SortedList <span class="title">list</span><span class="params">(<span class="keyword">new</span> QuickSort())</span></span>;</span><br><span class="line">    list.<span class="built_in">sort</span>(); <span class="comment">// 输出 &quot;Quick Sort&quot;</span></span><br><span class="line"></span><br><span class="line">    list.<span class="built_in">set_strategy</span>(<span class="keyword">new</span> <span class="built_in">MergeSort</span>());</span><br><span class="line">    list.<span class="built_in">sort</span>(); <span class="comment">// 输出 &quot;Merge Sort&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在上面的示例中，我们定义了一个名为 <code>SortStrategy</code> 的策略接口，该接口有一个名为 <code>sort</code> 的纯虚函数。然后，我们实现了两个具体策略类：<code>QuickSort</code> 和 <code>MergeSort</code>，它们分别实现了 <code>sort</code> 方法。</p>
 <p>我们还定义了一个名为 <code>SortedList</code> 的上下文类。该类持有一个指向 <code>SortStrategy</code> 的指针，用户可以通过调用 <code>set_strategy</code> 方法来更改策略。当调用 <code>SortedList</code> 的 <code>sort</code> 方法时，会调用当前策略的 <code>sort</code> 方法。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>确保策略接口足够通用，以便于添加新策略。</li>
 <li>注意内存管理，尤其是在使用原始指针时。考虑使用智能指针来避免内存泄漏。</li>
 <li>避免过度设计。在某些情况下，策略模式可能会导致过度抽象和复杂性。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>当需要在运行时根据不同条件选择不同算法时，策略模式非常有用。</li>
 <li>当类的行为依赖于多个因素时，策略模式可以将这些因素解耦，使得每个因素都</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>下面请向我介绍 Expression Templates：表达式模板</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>表达式模板（Expression Templates）是一种优化技巧，通过延迟计算和运算符重载来减少运行时的临时对象和中间结果。这种模式在科学计算和线性代数库中广泛应用，如 Eigen 和 Blaze。表达式模板可以提高运行时性能，减少内存使用，并生成更高效的代码。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VecExpression</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">size_t</span> i) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;<span class="type">const</span> E&amp;&gt;(*<span class="keyword">this</span>)[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Vec</span> : <span class="keyword">public</span> VecExpression&lt;Vec&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Vec</span>(<span class="type">size_t</span> n) : <span class="built_in">data_</span>(n) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">size_t</span> i) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> data_[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span>&amp; <span class="keyword">operator</span>[](<span class="type">size_t</span> i) &#123;</span><br><span class="line">        <span class="keyword">return</span> data_[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data_.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;<span class="type">double</span>&gt; data_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E1, <span class="keyword">typename</span> E2&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VecSum</span> : <span class="keyword">public</span> VecExpression&lt;VecSum&lt;E1, E2&gt;&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">VecSum</span>(<span class="type">const</span> E1&amp; e1, <span class="type">const</span> E2&amp; e2) : <span class="built_in">e1_</span>(e1), <span class="built_in">e2_</span>(e2) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">size_t</span> i) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> e1_[i] + e2_[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> E1&amp; e1_;</span><br><span class="line">    <span class="type">const</span> E2&amp; e2_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E1, <span class="keyword">typename</span> E2&gt;</span><br><span class="line">VecSum&lt;E1, E2&gt; <span class="keyword">operator</span>+(<span class="type">const</span> VecExpression&lt;E1&gt;&amp; e1, <span class="type">const</span> VecExpression&lt;E2&gt;&amp; e2) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">VecSum</span>&lt;E1, E2&gt;(<span class="built_in">static_cast</span>&lt;<span class="type">const</span> E1&amp;&gt;(e1), <span class="built_in">static_cast</span>&lt;<span class="type">const</span> E2&amp;&gt;(e2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Vec <span class="title">v1</span><span class="params">(<span class="number">3</span>)</span>, <span class="title">v2</span><span class="params">(<span class="number">3</span>)</span>, <span class="title">v3</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    v1[<span class="number">0</span>] = <span class="number">1</span>; v1[<span class="number">1</span>] = <span class="number">2</span>; v1[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">    v2[<span class="number">0</span>] = <span class="number">4</span>; v2[<span class="number">1</span>] = <span class="number">5</span>; v2[<span class="number">2</span>] = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">    v3 = v1 + v2; <span class="comment">// 无临时对象和中间结果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; v3.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        std::cout &lt;&lt; v3[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在上面的示例中，我们首先定义了一个名为 <code>VecExpression</code> 的基类模板。<code>VecExpression</code> 类提供了运算符 <code>[]</code> 的重载。然后，我们定义了一个 <code>Vec</code> 类，它继承自 <code>VecExpression</code>。<code>Vec</code> 类存储了一个 <code>std::vector&lt;double&gt;</code>，并提供了读写元素的方法。</p>
 <p>接下来，我们定义了一个名为 <code>VecSum</code> 的模板类，它也继承自 <code>VecExpression</code>。<code>VecSum</code> 类表示两个向量之和，但不执行实际计算。当调用 <code>VecSum</code> 的运算符 <code>[]</code> 时，它会计算相应元素的和。</p>
 <p>我们还定义了一个名为 <code>operator+</code> 的模板函数，该函数接受两个 &#96;VecExpression</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续, 上面的代码无法通过编译: 56:8: error: no viable overloaded ‘&#x3D;’</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>抱歉，我的失误。我们需要修改代码，使其能够正确编译并运行。我们可以在 <code>Vec</code> 类中添加一个模板赋值运算符，以处理从 <code>VecExpression</code> 类派生的对象。下面是修改后的代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VecExpression</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">size_t</span> i) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;<span class="type">const</span> E&amp;&gt;(*<span class="keyword">this</span>)[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;<span class="type">const</span> E&amp;&gt;(*<span class="keyword">this</span>).<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Vec</span> : <span class="keyword">public</span> VecExpression&lt;Vec&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Vec</span>(<span class="type">size_t</span> n) : <span class="built_in">data_</span>(n) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">size_t</span> i) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> data_[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span>&amp; <span class="keyword">operator</span>[](<span class="type">size_t</span> i) &#123;</span><br><span class="line">        <span class="keyword">return</span> data_[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data_.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line">    Vec&amp; <span class="keyword">operator</span>=(<span class="type">const</span> VecExpression&lt;E&gt;&amp; e) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            data_[i] = e[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;<span class="type">double</span>&gt; data_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E1, <span class="keyword">typename</span> E2&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VecSum</span> : <span class="keyword">public</span> VecExpression&lt;VecSum&lt;E1, E2&gt;&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">VecSum</span>(<span class="type">const</span> E1&amp; e1, <span class="type">const</span> E2&amp; e2) : <span class="built_in">e1_</span>(e1), <span class="built_in">e2_</span>(e2) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">size_t</span> i) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> e1_[i] + e2_[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> e1_.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> E1&amp; e1_;</span><br><span class="line">    <span class="type">const</span> E2&amp; e2_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E1, <span class="keyword">typename</span> E2&gt;</span><br><span class="line">VecSum&lt;E1, E2&gt; <span class="keyword">operator</span>+(<span class="type">const</span> VecExpression&lt;E1&gt;&amp; e1, <span class="type">const</span> VecExpression&lt;E2&gt;&amp; e2) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">VecSum</span>&lt;E1, E2&gt;(<span class="built_in">static_cast</span>&lt;<span class="type">const</span> E1&amp;&gt;(e1), <span class="built_in">static_cast</span>&lt;<span class="type">const</span> E2&amp;&gt;(e2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Vec <span class="title">v1</span><span class="params">(<span class="number">3</span>)</span>, <span class="title">v2</span><span class="params">(<span class="number">3</span>)</span>, <span class="title">v3</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    v1[<span class="number">0</span>] = <span class="number">1</span>; v1[<span class="number">1</span>] = <span class="number">2</span>; v1[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">    v2[<span class="number">0</span>] = <span class="number">4</span>; v2[<span class="number">1</span>] = <span class="number">5</span>; v2[<span class="number">2</span>] = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">    v3 = v1 + v2; <span class="comment">// 无临时对象和中间结果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; v3.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        std::cout &lt;&lt; v3[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <p>上述修改在 <code>Vec</code> 类中添加了一个模板赋值运算符 <code>operator=</code>，该运算符接受一个 <code>VecExpression</code> 类型的参数。在赋值运算符内部，我们遍历向量并将 <code>e</code> 的元素赋值给 <code>data_</code>。这样，我们可以将 <code>VecExpression</code> 类型的对象（例如 <code>VecSum</code>）赋值给 <code>Vec</code> 类型的对象。现在，这段代码应该可以正常编译和运行。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>请继续代码讲解和后续的部分</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>代码讲解：</strong></li>
 </ul>
 <p>在修改后的示例中，我们首先定义了一个名为 <code>VecExpression</code> 的基类模板。<code>VecExpression</code> 类提供了运算符 <code>[]</code> 的重载和 <code>size</code> 方法。然后，我们定义了一个 <code>Vec</code> 类，它继承自 <code>VecExpression</code>。<code>Vec</code> 类存储了一个 <code>std::vector&lt;double&gt;</code>，并提供了读写元素的方法。此外，<code>Vec</code> 类中添加了一个模板赋值运算符 <code>operator=</code>，用于从 <code>VecExpression</code> 类派生的对象赋值。</p>
 <p>接下来，我们定义了一个名为 <code>VecSum</code> 的模板类，它也继承自 <code>VecExpression</code>。<code>VecSum</code> 类表示两个向量之和，但不执行实际计算。当调用 <code>VecSum</code> 的运算符 <code>[]</code> 时，它会计算相应元素的和。<code>VecSum</code> 类还实现了 <code>size</code> 方法，返回向量的大小。</p>
 <p>我们还定义了一个名为 <code>operator+</code> 的模板函数，该函数接受两个 <code>VecExpression</code> 类型的参数并返回一个 <code>VecSum</code> 类型的对象。通过这种方式，我们可以避免在计算向量和时创建临时对象和中间结果。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>表达式模板可能导致代码难以理解和维护，因为它依赖于模板元编程和运算符重载。</li>
 <li>表达式模板可能导致编译时间增加，因为编译器需要处理复杂的模板实例化。</li>
 <li>注意内存管理和性能优化，特别是在大型线性代数运算中。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>高性能计算：表达式模板可以提高运行时性能，减少内存使用，因此在高性能计算领域非常有用。</li>
 <li>线性代数库：许多线性代数库（如 Eigen 和 Blaze）使用表达式模板来优化矩阵和向量运算。</li>
 <li>延迟计算：表达式模板可以实现延迟计算，将计算推迟到实际需要结果的时候，从而避免不必要的中间计算。</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>请你再介绍一下 Mixins：混入模式</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>混入模式（Mixins）是一种实现代码复用和模块化的设计模式，它允许将一个类的行为和属性混入到另一个类中，而无需继承。在 C++ 中，我们可以使用模板类和多重继承来实现混入模式。混入模式可以提高代码的可维护性和灵活性，减少重复代码，且易于扩展。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象基类，定义接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混入类：Bark</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Base&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bark</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Woof!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混入类：Meow</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Base&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Meow</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Meow!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Dog 类，使用 Bark 混入</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Bark&lt;Animal&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cat 类，使用 Meow 混入</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> : <span class="keyword">public</span> Meow&lt;Animal&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Dog dog;</span><br><span class="line">    Cat cat;</span><br><span class="line"></span><br><span class="line">    dog.<span class="built_in">speak</span>(); <span class="comment">// 输出 &quot;Woof!&quot;</span></span><br><span class="line">    cat.<span class="built_in">speak</span>(); <span class="comment">// 输出 &quot;Meow!&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在上面的示例中，我们首先定义了一个名为 <code>Animal</code> 的抽象基类，它具有一个名为 <code>speak</code> 的纯虚函数。接下来，我们定义了两个混入类：<code>Bark</code> 和 <code>Meow</code>。这些混入类都是模板类，可以接受一个基类作为参数。它们继承自基类并实现了 <code>speak</code> 方法。</p>
 <p>然后，我们定义了 <code>Dog</code> 类，它继承自 <code>Bark&lt;Animal&gt;</code>，即将 <code>Bark</code> 混入 <code>Animal</code> 类。类似地，我们定义了 <code>Cat</code> 类，它继承自 <code>Meow&lt;Animal&gt;</code>。这样，我们可以创建 <code>Dog</code> 和 <code>Cat</code> 对象并调用它们的 <code>speak</code> 方法，分别输出 “Woof!” 和 “Meow!”。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>注意避免多重继承可能导致的菱形继承问题。虽然 C++ 支持多重继承，但在某些情况下，多重继承可能导致二义性和维护困难。</li>
 <li>混入模式可能导致编译时间增加，因为编译器需要处理模板类和多重继承。</li>
 <li>在使用混入时要小心不要引入循环依赖和歧义。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>当需要在多个类之间共享行为和属性时，混入模式是一种有效的解决方案。</li>
 <li>当需要为现有类添加新功能时，混入模</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>式可以在不修改原始类的基础上实现扩展。</li>
 </ul>
@@ -367,233 +358,221 @@ if (false) {
 <li>当需要动态地组合类的行为时，混入模式提供了一种灵活的方式来组合和扩展功能。</li>
 </ol>
 <p>总之，混入模式是一种强大的设计模式，可以帮助我们在保持代码模块化、可维护和可扩展的同时，实现代码复用。在 C++ 中，我们可以使用模板类和多重继承来实现混入模式。然而，在使用混入模式时，我们需要注意避免多重继承可能导致的问题，如菱形继承、循环依赖和歧义。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>下面为我介绍一下 Type Erasure：类型擦除</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>类型擦除是一种设计模式，用于在保留某些行为的同时，隐藏或擦除对象的实际类型。这样，我们可以将具有不同类型的对象存储在同一容器中，同时让这些对象具有相同的接口。在 C++ 中，我们通常使用多态和虚函数来实现类型擦除。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 基类，定义接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Drawable</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Drawable</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">draw</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 派生类：Circle</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> : <span class="keyword">public</span> Drawable &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">draw</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Draw a circle&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 派生类：Rectangle</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> : <span class="keyword">public</span> Drawable &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">draw</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Draw a rectangle&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;std::unique_ptr&lt;Drawable&gt;&gt; shapes;</span><br><span class="line"></span><br><span class="line">    shapes.<span class="built_in">emplace_back</span>(std::<span class="built_in">make_unique</span>&lt;Circle&gt;());</span><br><span class="line">    shapes.<span class="built_in">emplace_back</span>(std::<span class="built_in">make_unique</span>&lt;Rectangle&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; shape : shapes) &#123;</span><br><span class="line">        shape-&gt;<span class="built_in">draw</span>(); <span class="comment">// 调用相应对象的 draw 方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在这个示例中，我们首先定义了一个名为 <code>Drawable</code> 的基类，它具有一个名为 <code>draw</code> 的纯虚函数。然后，我们定义了两个派生类：<code>Circle</code> 和 <code>Rectangle</code>，它们分别继承自 <code>Drawable</code> 并重写 <code>draw</code> 方法。</p>
 <p>在 <code>main</code> 函数中，我们创建了一个 <code>Drawable</code> 指针的 <code>std::vector</code> 容器，用于存储不同类型的对象。我们使用 <code>std::unique_ptr</code> 管理对象的生命周期。接着，我们将 <code>Circle</code> 和 <code>Rectangle</code> 对象添加到容器中，并使用基类指针遍历容器，调用相应对象的 <code>draw</code> 方法。这里，<code>Drawable</code> 基类的虚函数实现了类型擦除。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>类型擦除可能导致性能损失，因为它通常需要使用虚函数和间接调用。</li>
 <li>类型擦除可能导致内存管理变得复杂，因为需要使用指针和动态分配。</li>
 <li>类型擦除可能降低代码的可读性和可维护性，因为它将类型信息隐藏在运行时。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>当需要将具有不同类型的对象存储在同一容器中时，类型擦除是一种有效的解决方案。</li>
 <li>当需要为不同类型的对象提供相同的接口时，类型擦除可以简化代码和提高可扩展性。</li>
 <li>当需要在运行时确定对象的行为时，类型擦除可以实现动态多态和灵活性。</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>再介绍一下 SFINAE (Substitution Failure Is Not An Error)</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>SFINAE（Substitution Failure Is Not An Error）是 C++ 模板元编程中的一种技术，意味着当模板替换失败时，并不会产生编译错误。相反，编译器会从可用的模板函数中选择一个合适的候选。SFINAE 通常与 <code>std::enable_if</code> 或 <code>decltype</code> 配合使用，以在编译时选择适当的函数重载，从而实现函数模板的条件编译。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 重载1：处理指针类型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">typename</span> std::enable_if&lt;std::is_pointer&lt;T&gt;::value, <span class="type">void</span>&gt;::<span class="function">type</span></span><br><span class="line"><span class="function"><span class="title">print_type</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Pointer type&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重载2：处理非指针类型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">typename</span> std::enable_if&lt;!std::is_pointer&lt;T&gt;::value, <span class="type">void</span>&gt;::<span class="function">type</span></span><br><span class="line"><span class="function"><span class="title">print_type</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Non-pointer type&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span>* b = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print_type</span>(a); <span class="comment">// 输出 &quot;Non-pointer type&quot;</span></span><br><span class="line">    <span class="built_in">print_type</span>(b); <span class="comment">// 输出 &quot;Pointer type&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在这个示例中，我们定义了一个名为 <code>print_type</code> 的函数模板，用于判断给定的参数是指针类型还是非指针类型。为了实现这一功能，我们定义了两个重载版本的 <code>print_type</code> 函数。</p>
 <p>重载 1 处理指针类型的参数，它使用 <code>std::enable_if</code> 和 <code>std::is_pointer</code> 来检查参数类型。当 <code>T</code> 是指针类型时，<code>std::is_pointer&lt;T&gt;::value</code> 为 <code>true</code>，这将使得 <code>std::enable_if</code> 的第一个参数为 <code>true</code>，从而产生一个有效的返回类型 <code>void</code>。</p>
 <p>重载 2 处理非指针类型的参数，它使用 <code>std::enable_if</code> 和 <code>std::is_pointer</code> 的相反条件来检查参数类型。当 <code>T</code> 是非指针类型时，<code>!std::is_pointer&lt;T&gt;::value</code> 为 <code>true</code>，这将使得 <code>std::enable_if</code> 的第一个参数为 <code>true</code>，从而产生一个有效的返回类型 <code>void</code>。</p>
 <p>在 <code>main</code> 函数中，我们调用 <code>print_type</code> 函数并分别传入整数和指针类型的参数。这时，编译器会根据 SFINAE 规则选择正确的重载版本。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>使用 SFINAE 时，需要注意编译器错误信息可能会变得复杂，因为模板元编程可能会导致难以理解的编译错误。</li>
 <li>SFINAE 可能导致编译时间增加，因为编译器需要处理模板元编程和多个函数重载。</li>
 <li>请确保仅在必要时使用 SFINAE，以免过度复杂化代码。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>在编译</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>时根据条件选择合适的函数重载，以实现静态多态。</li>
 </ul>
 <ol start="2">
-<li>实现编译时类型特征检查，以根据不同类型采取不同的行为。 </li>
+<li>实现编译时类型特征检查，以根据不同类型采取不同的行为。</li>
 <li>在编译时生成特定类型的元数据，例如使用 <code>std::tuple</code> 进行编译时类型操作。</li>
 <li>根据类型特征实现更加通用和可扩展的泛型代码。</li>
 </ol>
 <p>总之，SFINAE 是一种强大的 C++ 模板元编程技术，允许我们在编译时根据类型特征选择合适的函数重载。然而，在使用 SFINAE 时，我们需要注意编译器错误信息可能会变得复杂，且可能导致编译时间增加。因此，我们应该在确实需要的时候使用 SFINAE，以免过度复杂化代码。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>在介绍一下 Tag Dispatching：标签分派</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>标签分派（Tag Dispatching）是一种 C++ 泛型编程技术，它利用函数重载和类型标签实现在编译时选择合适的算法或实现。与 SFINAE 相比，标签分派更简洁且易于理解。标签分派通常与特征标签（type traits）结合使用，以根据类型特征选择不同的函数重载。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 类型标签</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">random_access_iterator_tag</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">bidirectional_iterator_tag</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 特征标签：默认情况下，为双向迭代器</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">iterator_traits</span> &#123;</span><br><span class="line">    <span class="keyword">using</span> iterator_category = bidirectional_iterator_tag;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 特化：对于指针类型，使用随机访问迭代器</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">iterator_traits</span>&lt;T*&gt; &#123;</span><br><span class="line">    <span class="keyword">using</span> iterator_category = random_access_iterator_tag;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数模板：根据迭代器类型调用合适的实现</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">do_something</span><span class="params">(Iterator it)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">using</span> category = <span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::iterator_category;</span><br><span class="line">    <span class="built_in">do_something_impl</span>(it, <span class="built_in">category</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机访问迭代器的实现</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">do_something_impl</span><span class="params">(Iterator it, random_access_iterator_tag)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Random access iterator&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 双向迭代器的实现</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">do_something_impl</span><span class="params">(Iterator it, bidirectional_iterator_tag)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Bidirectional iterator&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">do_something</span>(arr); <span class="comment">// 输出 &quot;Random access iterator&quot;</span></span><br><span class="line">    <span class="built_in">do_something</span>(vec.<span class="built_in">begin</span>()); <span class="comment">// 输出 &quot;Bidirectional iterator&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在这个示例中，我们首先定义了两个类型标签：<code>random_access_iterator_tag</code> 和 <code>bidirectional_iterator_tag</code>。接着，我们定义了一个名为 <code>iterator_traits</code> 的特征标签模板，用于为不同类型的迭代器分配相应的类型标签。默认情况下，<code>iterator_traits</code> 使用 <code>bidirectional_iterator_tag</code>，但对于指针类型，我们特化了 <code>iterator_traits</code> 以使用 <code>random_access_iterator_tag</code>。</p>
 <p>接着，我们定义了一个名为 <code>do_something</code> 的函数模板，它根据迭代器的类型特征选择合适的实现。<code>do_something</code> 函数通过调用 <code>do_something_impl</code> 并传入类型标签实现标签分派。我们为 <code>do_something_impl</code> 提供了两个重载版本，分别处理随机访问迭代器和双向迭代器。</p>
 <p>在 <code>main</code> 函数中，我们调用 <code>do_something</code> 函数并分别传入指针类型和 <code>std::vector</code> 迭代器。这时，编译器会根据标签分派选择正确</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>的重载版本。</li>
 </ul>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>标签分派依赖于类型特征和特征标签，确保为不同类型提供正确的特征标签。</li>
 <li>标签分派通常更易于理解和调试，与 SFINAE 相比，它产生的编译错误更容易识别。</li>
 <li>在实现标签分派时，可能需要编写较多的模板和特化代码，这可能导致代码冗余。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>当需要根据类型特征在编译时选择合适的算法或实现时，标签分派是一种简单有效的方法。</li>
 <li>当需要实现通用算法或库时，标签分派可以帮助我们处理不同类型的输入和输出。</li>
 <li>当需要根据类型特征实现编译时多态时，标签分派可以作为 SFINAE 的替代方法。</li>
 </ol>
 <p>总之，标签分派是一种强大的 C++ 泛型编程技术，允许我们在编译时根据类型特征选择合适的算法或实现。与 SFINAE 相比，标签分派通常更简洁且易于理解。然而，在使用标签分派时，我们需要注意为不同类型提供正确的特征标签，以免引入错误。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>再介绍一下 Lazy Evaluation：惰性求值</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>惰性求值（Lazy Evaluation）是一种编程技巧，用于延迟计算的执行直到真正需要结果的时候。在 C++ 中，惰性求值通常通过表达式模板、代理类或智能指针等技术实现。惰性求值的主要目的是提高性能，避免不必要的计算和内存分配。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Lazy</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> ValueFactory = std::function&lt;<span class="built_in">T</span>()&gt;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数接受一个工厂函数</span></span><br><span class="line">    <span class="built_in">Lazy</span>(ValueFactory factory) : <span class="built_in">factory_</span>(factory) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取值，如果需要则进行计算</span></span><br><span class="line">    <span class="function"><span class="type">const</span> T&amp; <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!value_) &#123;</span><br><span class="line">            value_ = std::<span class="built_in">make_unique</span>&lt;T&gt;(<span class="built_in">factory_</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *value_;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    ValueFactory factory_;</span><br><span class="line">    std::unique_ptr&lt;T&gt; value_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">expensive_computation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Expensive computation&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Lazy&lt;<span class="type">int</span>&gt; <span class="title">lazy_value</span><span class="params">(expensive_computation)</span></span>;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Before accessing the value&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Value: &quot;</span> &lt;&lt; lazy_value.<span class="built_in">get</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;After accessing the value&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在这个示例中，我们定义了一个名为 <code>Lazy</code> 的模板类，用于实现惰性求值。<code>Lazy</code> 类接受一个类型参数 <code>T</code>，表示需要延迟计算的值的类型。</p>
 <p><code>Lazy</code> 类内部使用 <code>std::function</code> 类型的工厂函数（<code>ValueFactory</code>）来生成值。在构造函数中，我们接受一个工厂函数，并将其存储在 <code>factory_</code> 成员变量中。</p>
 <p>我们为 <code>Lazy</code> 类定义了一个 <code>get</code> 成员函数，用于获取值。在第一次调用 <code>get</code> 函数时，我们使用工厂函数计算值，并将其存储在 <code>value_</code> 成员变量中。后续对 <code>get</code> 的调用将直接返回已计算的值，避免重复计算。</p>
 <p>在 <code>main</code> 函数中，我们定义了一个名为 <code>expensive_computation</code> 的函数，用于模拟昂贵的计算。我们创建一个 <code>Lazy&lt;int&gt;</code> 类型的对象，并将 <code>expensive_computation</code> 函数作为工厂函数传递给它。只有在调用 <code>lazy_value.get()</code> 时，<code>expensive_computation</code> 函数才会被执行。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>惰性求值可能导致代码的可读性降低，因为计算的实际执行被延迟到了访问值的时候。</li>
 <li>在实现惰性求值时，请确保在多线程环境下正确处理同步问题，避免数据竞争和不一致。</li>
 <li>请确保仅在需要时使用惰性求值，以</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>避免过度优化。</li>
 </ul>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>当计算过程昂贵且可能不需要的情况下，使用惰性求值可以提高性能。</li>
 <li>当需要缓存计算结果以避免重复计算时，惰性求值可以作为一种有效的策略。</li>
 <li>当需要实现按需加载或按需计算的功能时，惰性求值可以帮助实现这些需求。</li>
 </ol>
 <p>总之，惰性求值是一种强大的 C++ 编程技术，允许我们在需要时延迟计算的执行。惰性求值可以提高性能，避免不必要的计算和内存分配。然而，在使用惰性求值时，我们需要注意代码的可读性和多线程环境下的同步问题。请确保在确实需要的情况下使用惰性求值，以免引入不必要的复杂性。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>介绍一下 Compile-time Function Evaluation (constexpr)</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p><code>constexpr</code> 是 C++11 引入的关键字，用于表示编译时常量表达式。当使用 <code>constexpr</code> 修饰函数时，这意味着该函数可以在编译时计算结果，从而提高运行时性能。<code>constexpr</code> 函数的返回值和参数必须是字面值类型，这些类型可用于编译时计算。<code>constexpr</code> 函数在编译时和运行时都可以执行，但只有当其参数是编译时常量时，才会在编译时计算结果。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译时计算阶乘</span></span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="type">int</span> <span class="title">factorial</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n &lt;= <span class="number">1</span> ? <span class="number">1</span> : n * <span class="built_in">factorial</span>(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 编译时计算阶乘</span></span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">int</span> fact_5 = <span class="built_in">factorial</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 运行时计算阶乘</span></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="type">int</span> fact_n = <span class="built_in">factorial</span>(n);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;5! = &quot;</span> &lt;&lt; fact_5 &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; n &lt;&lt; <span class="string">&quot;! = &quot;</span> &lt;&lt; fact_n &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在这个示例中，我们定义了一个名为 <code>factorial</code> 的 <code>constexpr</code> 函数，用于计算阶乘。因为我们使用了 <code>constexpr</code> 修饰符，所以当 <code>factorial</code> 的参数是编译时常量时，它会在编译时计算结果。</p>
 <p>在 <code>main</code> 函数中，我们声明了一个 <code>constexpr</code> 变量 <code>fact_5</code>，并将其初始化为 <code>factorial(5)</code> 的结果。因为 <code>5</code> 是一个编译时常量，所以 <code>factorial(5)</code> 的计算将在编译时完成。</p>
 <p>接着，我们从用户输入中读取一个整数 <code>n</code>，并计算 <code>factorial(n)</code>。因为 <code>n</code> 是一个运行时变量，所以 <code>factorial(n)</code> 的计算将在运行时进行。</p>
-<p><strong>注意事项：</strong>  </p>
+<p><strong>注意事项：</strong></p>
 <ol>
-<li><code>constexpr</code> 函数应该足够简单，以便编译器在编译时计算结果。通常，这意味着它们应该是纯函数，不依赖于全局变量或其他运行时状态。 </li>
-<li>虽然 C++14 放宽了 <code>constexpr</code> 函数的限制（例如允许使用局部变量和循环），但在实践中，我们通常应该保持 <code>constexpr</code> 函数简单和易于理解。 </li>
+<li><code>constexpr</code> 函数应该足够简单，以便编译器在编译时计算结果。通常，这意味着它们应该是纯函数，不依赖于全局变量或其他运行时状态。</li>
+<li>虽然 C++14 放宽了 <code>constexpr</code> 函数的限制（例如允许使用局部变量和循环），但在实践中，我们通常应该保持 <code>constexpr</code> 函数简单和易于理解。</li>
 <li>只有当函数的参数和返回值是字面值类型时，才能将其声明为 <code>constexpr</code> 函数。</li>
 </ol>
-<p><strong>使用场景：</strong>  </p>
+<p><strong>使用场景：</strong></p>
 <ol>
-<li>当需要在编译时计算常量表达式时，使用 <code>constexpr</code> 函数可以提高运行时性能。 </li>
+<li>当需要在编译时计算常量表达式时，使用 <code>constexpr</code> 函数可以提高运行时性能。</li>
 <li>当需要在编译时验证或生成代码时，<code>constexpr</code> 函数可以与模板元编程结合使用。</li>
 <li>当需要提供一种</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>在编译时和运行时都可以使用的函数实现时，<code>constexpr</code> 函数可以作为一种解决方案。</li>
 </ul>
 <p>总之，<code>constexpr</code> 是 C++ 中一种强大的编译时计算功能，它可以用于在编译时计算常量表达式，从而提高运行时性能。<code>constexpr</code> 函数应该足够简单，以便编译器在编译时计算结果。在实际应用中，我们可以将 <code>constexpr</code> 函数与模板元编程等技术结合使用，以实现更高级的编译时计算和验证功能。</p>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>介绍一下 Pimpl Idiom（Pointer to Implementation）：Pimpl 习语</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li><strong>原理说明：</strong></li>
 </ul>
 <p>Pimpl Idiom（Pointer to Implementation），也称为 “Compiler Firewall Idiom” 或 “Cheshire Cat Idiom”，是一种 C++ 编程技巧，用于将类的实现细节从类的接口中分离。这种技巧通过在类中添加一个指向实现类（通常称为 “Impl”）的指针来实现。实现类的定义通常位于源文件中，而不是头文件中。这有助于降低编译时的依赖关系，提高编译速度，同时提供了更好的封装和实现的灵活性。</p>
-<p><strong>代码示例：</strong> </p>
+<p><strong>代码示例：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// header file: MyClass.h</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClassImpl</span>; <span class="comment">// 前置声明实现类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyClass</span>();</span><br><span class="line">    ~<span class="built_in">MyClass</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    MyClassImpl* pimpl; <span class="comment">// 指向实现类的指针</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// source file: MyClass.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyClass.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClassImpl</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomethingImpl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 实现细节</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">MyClass::<span class="built_in">MyClass</span>() : <span class="built_in">pimpl</span>(<span class="keyword">new</span> <span class="built_in">MyClassImpl</span>()) &#123;&#125;</span><br><span class="line"></span><br><span class="line">MyClass::~<span class="built_in">MyClass</span>() &#123;</span><br><span class="line">    <span class="keyword">delete</span> pimpl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyClass::doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    pimpl-&gt;<span class="built_in">doSomethingImpl</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>代码讲解：</strong> </p>
+<p><strong>代码讲解：</strong></p>
 <p>在这个示例中，我们定义了一个名为 <code>MyClass</code> 的类，并在类中添加了一个指向 <code>MyClassImpl</code> 的指针 <code>pimpl</code>。<code>MyClassImpl</code> 类是实现类，包含了 <code>MyClass</code> 的实现细节。</p>
 <p>在头文件中，我们只需要前置声明 <code>MyClassImpl</code> 类，而不需要提供其定义。在源文件中，我们定义了 <code>MyClassImpl</code> 类，并在 <code>MyClass</code> 的成员函数中调用了它的成员函数。</p>
 <p><code>MyClass</code> 的构造函数负责创建 <code>MyClassImpl</code> 的实例，并将其指针赋值给 <code>pimpl</code>。析构函数负责释放 <code>MyClassImpl</code> 的实例。</p>
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>Pimpl Idiom 可能导致额外的内存分配和间接调用开销，但通常这种开销可以接受。</li>
-<li>当使用 Pimpl 习语时，请确保正确处理资源分配和释放，以避免内存泄漏。 </li>
+<li>当使用 Pimpl 习语时，请确保正确处理资源分配和释放，以避免内存泄漏。</li>
 <li>如果可以使用智能指针（如 <code>std::unique_ptr</code> 或 <code>std::shared_ptr</code>），请考虑使用它们来简化资源管理。</li>
 </ol>
-<p><strong>使用场景：</strong> </p>
+<p><strong>使用场景：</strong></p>
 <ol>
 <li>当需要降低编译时依赖关系以提高编译速度时，Pimpl Idiom 可以作为一种有效的解决方案。</li>
 <li>当需要将类的实现细节封装起来以提高模块化和可维护性时，Pimpl Idiom 可以帮助实现这一目标。</li>
 <li>当需要在不破坏二进制兼容性的情况下更改类的实现细节时，Pimpl</li>
 </ol>
-<p>Zoran: </p>
+<p>Zoran:</p>
 <ul>
 <li>继续</li>
 </ul>
-<p>ChatGPT: </p>
+<p>ChatGPT:</p>
 <ul>
 <li>Idiom 可以提供更好的灵活性。</li>
 </ul>
 <p>总之，Pimpl Idiom 是一种在 C++ 编程中实现接口与实现分离的技巧，通过在类中添加一个指向实现类的指针来实现。这种方法有助于降低编译时依赖关系，提高编译速度，并提供更好的封装和实现灵活性。在使用 Pimpl Idiom 时，请注意处理资源分配和释放问题，以避免内存泄漏。此外，可以考虑使用智能指针来简化资源管理。</p>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/04/GPT/Google_test/" title="Google_test"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Google_test</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/04/23/Toss_Diary/Termux/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="zsh的基本使用"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">zsh的基本使用</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">55</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Lua/Cache/" title="Lazy.nvim的Cache机制"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Lazy.nvim的Cache机制"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Lua/Cache/" title="Lazy.nvim的Cache机制">Lazy.nvim的Cache机制</a><time datetime="2023-05-19T10:52:54.000Z" title="发表于 2023-05-19 18:52:54">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Rust/STL_Container/" title="STL_Container"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="STL_Container"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Rust/STL_Container/" title="STL_Container">STL_Container</a><time datetime="2023-05-19T07:01:51.000Z" title="发表于 2023-05-19 15:01:51">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Compiler_Design"/></a><div class="content"><a class="title" href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design">Compiler_Design</a><time datetime="2023-05-14T02:44:38.000Z" title="发表于 2023-05-14 10:44:38">2023-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/Git/" title="Git"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Git"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/Git/" title="Git">Git</a><time datetime="2023-05-13T12:01:04.000Z" title="发表于 2023-05-13 20:01:04">2023-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="WebSocket"/></a><div class="content"><a class="title" href="/Notes/2023/05/13/GPT/WebSocket/" title="WebSocket">WebSocket</a><time datetime="2023-05-13T04:21:44.000Z" title="发表于 2023-05-13 12:21:44">2023-05-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Notes/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/Notes/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></div><div class="post_share"><div class="social-share" data-image="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Notes/2023/05/19/GPT/C++/Misc/" title="C++备忘录"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++备忘录</div></div></a></div><div class="next-post pull-right"><a href="/Notes/2023/05/19/GPT/C++/QT/" title="QT 中的核心类"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="onerror=null;src='/Notes/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">QT 中的核心类</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Notes/2023/05/08/GPT/AwesomeWm_Q_A/" title="AwesomeWm_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">AwesomeWm_Q&amp;A</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/CLI_Command/" title="CLI_Command"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">CLI_Command</div></div></a></div><div><a href="/Notes/2023/05/14/GPT/Compiler_Design/" title="Compiler_Design"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-14</div><div class="title">Compiler_Design</div></div></a></div><div><a href="/Notes/2023/05/08/GPT/Gdb_tips/" title="Gdb-tips"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-08</div><div class="title">Gdb-tips</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Git/" title="Git"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Git</div></div></a></div><div><a href="/Notes/2023/05/13/GPT/Linux_Q_A/" title="Linux_Q&amp;A"><img class="cover" src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">Linux_Q&amp;A</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/107862700?v=4" onerror="this.onerror=null;this.src='/Notes/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/Notes/archives/"><div class="headline">文章</div><div class="length-num">57</div></a><a href="/Notes/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/Notes/categories/"><div class="headline">分类</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JuanZoran"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JuanZoran" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Compiler/Visualizer/" title="Visualizer"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Visualizer"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Compiler/Visualizer/" title="Visualizer">Visualizer</a><time datetime="2023-05-19T14:35:10.000Z" title="发表于 2023-05-19 22:35:10">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Compiler/Regex_Engine/" title="Regex_Engine"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Regex_Engine"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Compiler/Regex_Engine/" title="Regex_Engine">Regex_Engine</a><time datetime="2023-05-19T14:28:08.000Z" title="发表于 2023-05-19 22:28:08">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/Compiler/Lexer/" title="Lexer"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="Lexer"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/Compiler/Lexer/" title="Lexer">Lexer</a><time datetime="2023-05-19T14:27:11.000Z" title="发表于 2023-05-19 22:27:11">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/C++/Misc/" title="C++备忘录"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="C++备忘录"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/C++/Misc/" title="C++备忘录">C++备忘录</a><time datetime="2023-05-19T14:26:05.000Z" title="发表于 2023-05-19 22:26:05">2023-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Notes/2023/05/19/GPT/C++/Design_Pattern/" title="C++独特的设计模式"><img src="https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg" onerror="this.onerror=null;this.src='/Notes/img/404.jpg'" alt="C++独特的设计模式"/></a><div class="content"><a class="title" href="/Notes/2023/05/19/GPT/C++/Design_Pattern/" title="C++独特的设计模式">C++独特的设计模式</a><time datetime="2023-05-19T14:24:55.000Z" title="发表于 2023-05-19 22:24:55">2023-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zoran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">共同进步!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/Notes/js/utils.js"></script><script src="/Notes/js/main.js"></script><script src="/Notes/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="共同进步,upupup" data-fontsize="8px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
