@@ -108,3 +108,196 @@ sudo apt-mark unhold awesome
 
 
 ---
+
+# Prompt
+
+请详细介绍一下pm命令, 在安卓上有哪些用途
+
+## Response
+
+ `pm` 是 Android 平台的一个命令行工具，全称是 Package Manager。它可以用来查询、安装、卸载、启用、禁用和清除应用程序数据等。
+
+ `pm` 命令有许多选项，包括但不限于以下几种：
+
+1.  `list packages` ：列出所有的包（应用程序）。
+
+
+2.  `path` ：打印指定包的路径。
+
+
+3.  `install` ：安装一个应用程序。
+
+
+4.  `uninstall` ：卸载一个应用程序。
+
+
+5.  `clear` ：清除应用程序数据。
+
+
+6.  `enable` and `disable` ：启用和禁用应用程序。
+
+
+7.  `grant` and `revoke` ：为应用程序授予和撤销权限。
+
+
+8.  `set-install-location` ：设置应用程序的安装位置。
+
+
+
+这个工具通常在开发和调试的过程中使用，因为它提供了直接的应用程序管理功能。例如，开发者可以使用 `pm` 命令快速安装、卸载应用程序，或者更改应用程序的权限设置。
+
+需要注意的是， `pm` 命令需要在有 root 权限或 adb shell 的环境中运行。对于普通用户来说，通常不需要直接使用 `pm` 命令，除非他们正在进行一些高级的操作，比如手动安装应用程序，或者在设备上进行调试。
+
+
+
+---
+
+# Prompt
+
+请你列出20个常用的pm使用场景
+
+## Response
+
+以下是 Android `pm` 命令的20个常见使用场景：
+
+1. 列出所有已安装的应用程序： `pm list packages` 
+
+
+2. 列出所有系统应用程序： `pm list packages -s` 
+
+
+3. 列出所有第三方应用程序： `pm list packages -3` 
+
+
+4. 列出所有禁用的应用程序： `pm list packages -d` 
+
+
+5. 列出所有启用的应用程序： `pm list packages -e` 
+
+
+6. 查找具有特定名称的应用程序： `pm list packages | grep 'part-of-app-name'` 
+
+
+7. 显示应用程序的安装路径： `pm path com.example.someapp` 
+
+
+8. 安装一个应用程序： `pm install /path/to/your/app.apk` 
+
+
+9. 安装一个应用程序到内部存储： `pm install -r -f /path/to/your/app.apk` 
+
+
+10. 卸载一个应用程序： `pm uninstall com.example.someapp` 
+
+
+11. 卸载一个应用程序但保留数据和缓存文件： `pm uninstall -k com.example.someapp` 
+
+
+12. 清除应用程序的数据和缓存： `pm clear com.example.someapp` 
+
+
+13. 启用一个应用程序： `pm enable com.example.someapp` 
+
+
+14. 禁用一个应用程序： `pm disable com.example.someapp` 
+
+
+15. 授予一个应用程序一个权限： `pm grant com.example.someapp android.permission.CAMERA` 
+
+
+16. 撤销一个应用程序的一个权限： `pm revoke com.example.someapp android.permission.CAMERA` 
+
+
+17. 设置应用程序的安装位置为自动： `pm set-install-location 0` 
+
+
+18. 设置应用程序的安装位置为内部存储： `pm set-install-location 1` 
+
+
+19. 设置应用程序的安装位置为外部存储： `pm set-install-location 2` 
+
+
+20. 显示当前的应用程序安装位置： `pm get-install-location` 
+
+
+
+请注意，大部分命令都需要设备的 root 权限，或者是通过 adb shell 来运行的。如果没有足够的权限，命令可能无法成功执行。
+
+
+
+---
+
+# Prompt
+
+请你再列出20个
+
+## Response
+
+这是 Android `pm` 命令的另外20个使用场景：
+
+1. 显示包的详细信息： `pm dump com.example.someapp` 
+
+
+2. 列出某个应用程序的所有权限： `pm dump com.example.someapp | grep 'permissions'` 
+
+
+3. 列出有某个特定权限的所有应用程序： `pm list packages | while read line; do pm dump ${line:8} | grep 'permission name'; done | grep 'your.permission.name'` 
+
+
+4. 查询某个应用程序是否已安装： `pm list packages | grep 'com.example.someapp'` 
+
+
+5. 按照字典顺序排序列出的应用程序： `pm list packages | sort` 
+
+
+6. 显示所有已安装应用程序的数量： `pm list packages | wc -l` 
+
+
+7. 安装一个应用程序并允许其向后兼容： `pm install -l /path/to/your/app.apk` 
+
+
+8. 安装一个应用程序并允许其重新安装： `pm install -r /path/to/your/app.apk` 
+
+
+9. 安装一个应用程序到系统分区： `pm install -t /path/to/your/app.apk` 
+
+
+10. 安装一个测试包： `pm install -t /path/to/your/test/app.apk` 
+
+
+11. 安装一个多用户应用程序： `pm install --user 2 /path/to/your/app.apk` 
+
+
+12. 安装一个应用程序并同意所有权限： `pm install --grants=all-r /path/to/your/app.apk` 
+
+
+13. 为用户禁用应用程序： `pm disable-user --user 2 com.example.someapp` 
+
+
+14. 对用户隐藏应用程序： `pm hide com.example.someapp` 
+
+
+15. 启用/禁用应用程序组件（比如一个活动）： `pm enable com.example.someapp/.SomeActivity` 或 `pm disable com.example.someapp/.SomeActivity` 
+
+
+16. 列出所有共享库： `pm list libraries` 
+
+
+17. 列出所有特性： `pm list features` 
+
+
+18. 列出所有权限组： `pm list permission-groups` 
+
+
+19. 查询特定的权限信息： `pm list permissions -d -g` 
+
+
+20. 显示所有使用某个特定权限的应用程序： `pm list permissions -g` 
+
+
+
+同样需要注意的是，大部分命令都需要设备的 root 权限，或者是通过 adb shell 来运行的。如果没有足够的权限，命令可能无法成功执行。
+
+
+
+---
