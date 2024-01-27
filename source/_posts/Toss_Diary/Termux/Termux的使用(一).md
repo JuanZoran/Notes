@@ -31,10 +31,10 @@ tags:
 本篇文章, 主要想说明一下如何美化你的 ZeroTermux 以及 Termux 的简单使用
 
 -   美化前:
-    ![](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/before.jpg)
+    ![](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/before.jpg)
 
 -   美化后:
-    ![](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/after.jpg)
+    ![](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/after.jpg)
 
 ---
 
@@ -97,7 +97,7 @@ tags:
     ## 抄作业
 
     我的配置是`tokyonight`主题 + `JetBrains Mono Nerd Font`字体 (支持连字)
-    ![连字效果](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/overview.jpg)
+    ![连字效果](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/overview.jpg)
 
     如果你觉得我的主题配色还不错, 可以考虑直接克隆我的 Termux 主题配置:
 
@@ -220,7 +220,7 @@ tags:
         据说 Turbo Mode 可以提高 Zsh 的启动速度 50 － 80 %
 
 －终端显示效果十分友好
-![zinit彩色输出](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/zinit.jpg)
+![zinit彩色输出](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E7%BE%8E%E5%8C%96/zinit.jpg)
 
 -   方便配置同步
 

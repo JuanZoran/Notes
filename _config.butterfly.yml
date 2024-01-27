@@ -9,13 +9,14 @@ menu:
   分类: /categories/ || fas fa-folder-open
   # 清单||fa fa-heartbeat:
   #   音乐: /music/ || fas fa-music
-  #   照片: /Gallery/ || fas fa-https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/demo.gif
+  #   照片: /Gallery/ || fas fa-https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/demo.gif
   #   电影: /movies/ || fas fa-video
   # 友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
 
 nav:
-  # logo: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/zoran.png
+  logo: https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/zoran.png
+  # logo: https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/zoran.png
   display_title: true
   fixed: false # fixed navigation bar
 
@@ -91,7 +92,7 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/favicon.ico
+favicon: https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/favicon.ico
 
 # Avatar (頭像)
 avatar:
@@ -139,10 +140,10 @@ cover:
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
     - https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/cover/back1.jpg
-    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg
-    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg
-    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg
-    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg
+    - https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/cover/back2.jpg
+    - https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/cover/back3.jpg
+    - https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/cover/back4.jpg
+    - https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/cover/back5.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -153,7 +154,7 @@ error_img:
 error_404:
   enable: true
   subtitle: "页面走丢了"
-  background: /https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/error.jpg
+  background: /https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/error.jpg
 
 post_meta:
   page: # Home Page
@@ -534,7 +535,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/background.png)
+background: url(https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/background.png)
 # background: "#1E1E2E"
 
 # Footer Background
@@ -664,7 +665,7 @@ preloader:
   # 2. pace (progress bar)
   source: 1
   # pace theme (see https://codebyzach.github.io/pace/)
-  pace_css_url: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/center-atom.css
+  pace_css_url: https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/center-atom.css
 # aside (側邊欄)
 # --------------------------------------
 

@@ -137,7 +137,7 @@ tags:
 
 [ZeroTermux 的下载链接](https://blog.utermux.dev/ut/download.html "https://blog.utermux.dev/ut/download.html")
 
-![官方下载地址（直接bing搜索zerotermux也可以找到）](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux.png)  
+![官方下载地址（直接bing搜索zerotermux也可以找到）](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux.png)  
 _我这里使用了 ZeroTermux，刚刚也介绍了原因， 同时他是完全兼容 Termux 的，下载方式对于中国用户也更加友好，如果你需要下载官方 Termux, 你可以选择去 github 或者 F-Droid 上下载最新版本_
 
 下载完成之后打开， 你会看到一个弹窗告诉你一些 ZeroTermux 的帮助信息和一个终端界面
@@ -185,16 +185,16 @@ _我这里使用了 ZeroTermux，刚刚也介绍了原因， 同时他是完全�
 
 -   官方用户
 
-![](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux_ui.png)
+![](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux_ui.png)
 
 在 F-Droid 上下载 Termux:Style 并安装， 然后打开 Termux 长按空白区域选择更多， 会有样式的选项， 点击后选择即可
 
 -   ZeroTermux 用户
-    ![ZeroTermux兼容Termux](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux_sidebar.png)
+    ![ZeroTermux兼容Termux](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux_sidebar.png)
 
         双击最左边区域打开ZeroTermux的工具栏, 找到官方插件, 然后下载
 
-    ![](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux_extensions.png)
+    ![](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/zerotermux_extensions.png)
 
 ---
 

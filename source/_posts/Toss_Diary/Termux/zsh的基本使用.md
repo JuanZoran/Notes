@@ -10,7 +10,7 @@ tags:
     - 小米平板5Pro
     - Linux
     - zsh
-cover: https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg
+cover: https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg
 ---
 
 # TLDR
@@ -226,7 +226,7 @@ Powerlevel10k 是一个继承于 Powerlevel9k 的主题, 但是它比 Powerlevel
 > 简单来说, 当你输入命令的时候, 你可以看到命令的提示, 但是当你按下回车的时候, 这个提示就会消失, 这样可以让你的命令行更加的干净  
 > 当你使用双行命令的时候, 这个尤其有用, 可以减少很多的干扰信息
 
-![瞬态提示](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/trans.png)
+![瞬态提示](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/trans.png)
 
 #### 安装
 
@@ -244,7 +244,7 @@ zi ice depth=1; zinit light romkatv/powerlevel10k
 
 在命令行中运行`p10k configure`即可进入配置界面
 
- ![p10k 配置](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/p10k_conf.png)
+ ![p10k 配置](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/p10k_conf.png)
 
 运行之后会在你的家目录下生成一个`.p10k.zsh`文件, 你可以在这个文件中进行配置  
 但是由于文件内容太多, 配置起来很不方便, 所以我建议在`github`上找一个喜欢的主题再进行微调
@@ -265,7 +265,7 @@ Starship 是一个快速, 简单, 以及可配置的命令行提示符
 他由 Rust 编写, 性能相比`Powerlevel10k`要快一些, 同时感觉鲁棒性更好
 **而且有官方的中文文档, 虽然翻译的不完全**
 
- ![Starship官方](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/starship_dash.png)
+ ![Starship官方](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/starship_dash.png)
 
 [官方文档](https://starship.rs/zh-CN/config/)
 
@@ -298,11 +298,11 @@ starship 的配置文件在`~/.config/starship.toml`中, 可以先运行以下�
 mkdir -p ~/.config && touch ~/.config/starship.toml
 ```
 
-![效果展示](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg) 
+![效果展示](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/screen.jpg) 
 
 详细的介绍可以查看[官方文档](https://starship.rs/zh-CN/config/)
 
-![starship文档](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/starship_wiki.png)
+![starship文档](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/starship_wiki.png)
 
 > 也可以直接复制我的配置文件: [starship.toml](https://github.com/JuanZoran/dotfiles/blob/master/config/starship.toml)
 
@@ -335,9 +335,9 @@ zi light marlonrichert/zsh-autocomplete
     zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
     ```
 
-    ![before](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/insert_pre.png) 
+    ![before](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/insert_pre.png) 
 
-    ![after](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/insert.png) 
+    ![after](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/insert.png) 
 
     当补全内容含有公共子串时, 则按`Tab`自动插入公共子串
 
@@ -425,7 +425,7 @@ zinit light jeffreytse/zsh-vi-mode
 
         > 默认的键绑定是`vv`, 如果需要更改请参考官方文档
 
-           ![](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/vi_command_line.png) 
+           ![](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/vi_command_line.png) 
 
 -   [我的配置](https://github.com/JuanZoran/dotfiles/blob/master/config/zsh/maps.zsh)
 
@@ -450,7 +450,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 
 根据个人喜好定制的, 你也可以直接复制我的[颜色配置](https://github.com/JuanZoran/dotfiles/blob/master/config/zsh/highlight.zsh)
 
-![](https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/highlight.png) 
+![](https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/Termux%E9%85%8D%E7%BD%AE/zsh%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/highlight.png) 
 
 # 使用技巧
 
