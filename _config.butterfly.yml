@@ -138,11 +138,11 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back1.jpg
-    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg
-    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg
-    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg
-    - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg
+    - https://zoran-blog.oss-cn-wuhan-lr.aliyuncs.com/cover/back1.jpg
+    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back2.jpg
+    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back3.jpg
+    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back4.jpg
+    # - https://zoran-blog-image.oss-cn-hangzhou.aliyuncs.com/cover/back5.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
